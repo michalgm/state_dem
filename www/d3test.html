@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+
+.node {
+  stroke: #fff;
+  stroke-width: 1.5px;
+  fill: #fff;
+}
+.node.donors { stroke: cadetblue; }
+.node.D { 
+  stroke: #3333cc;
+}
+.node.R { 
+  stroke: #cc3333;
+}
+
+.link {
+  stroke: #999;
+  stroke-opacity: .6;
+}
+
+svg { background-color: white;  margin: auto; display: block;}
+body { background: #ddd; }
+
+</style>
+<body>
+	<a href='#' onclick='$(graph.nodes).each(function(n, v) { v.fixed = 0});force.resume();'>Animate!</a>Tick count: <div id='tick'></div>
+<form id="graphoptions">
+		<input type="hidden" value="StateDEM" name="setupfile">
+		<select id="state" name="state"><option selected="true" value="CA">California</option><option value="CO">Colorado</option><option value="ND">North Dakota</option><option value="OH">Ohio</option><option value="PA">Pennsylvania</option></select>
+		<!--<select name="state" id="state"><option value="AK">Alaska</option><option value="AL">Alabama</option><option value="AR">Arkansas</option><option value="AZ">Arizona</option><option value="CA" selected="true">California</option><option value="CO">Colorado</option><option value="CT">Connecticut</option><option value="DE">Delaware</option><option value="FL">Florida</option><option value="GA">Georgia</option><option value="HI">Hawaii</option><option value="IA">Iowa</option><option value="ID">Idaho</option><option value="IL">Illinois</option><option value="IN">Indiana</option><option value="KS">Kansas</option><option value="KY">Kentucky</option><option value="LA">Louisiana</option><option value="MA">Massachusetts</option><option value="MD">Maryland</option><option value="ME">Maine</option><option value="MI">Michigan</option><option value="MN">Minnesota</option><option value="MO">Missouri</option><option value="MS">Mississippi</option><option value="MT">Montana</option><option value="NC">North Carolina</option><option value="ND">North Dakota</option><option value="NE">Nebraska</option><option value="NH">New Hampshire</option><option value="NJ">New Jersey</option><option value="NM">New Mexico</option><option value="NV">Nevada</option><option value="NY">New York</option><option value="OH">Ohio</option><option value="OK">Oklahoma</option><option value="OR">Oregon</option><option value="PA">Pennsylvania</option><option value="RI">Rhode Island</option><option value="SC">South Carolina</option><option value="SD">South Dakota</option><option value="TN">Tennessee</option><option value="TX">Texas</option><option value="UT">Utah</option><option value="VA">Virginia</option><option value="VT">Vermont</option><option value="WA">Washington</option><option value="WI">Wisconsin</option><option value="WV">West Virginia</option><option value="WY">Wyoming</option></select>-->
+		<select id="chamber" name="chamber">
+			<option value="state:upper">Senate</option>
+			<option value="state:lower">Assembly/House</option>
+		</select>
+		<select id="cycle" name="cycle">
+			<option>2012</option>
+			<option selected="true">2010</option>
+			<option>2008</option>
+		</select>
+	</form>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="http://d3js.org/d3.v3.js"></script>
+<script>
+
+var width = 500,
+    height = 500;
+
+var force = d3.layout.force()
+    .charge(-130)
+    .linkDistance(80)
+    .size([width, height]);
+ 
+ var svg = d3.select("body").append("svg")
+    .attr("id", 'svg')
+    .attr("width", width)
+    .attr("height", height);
+	setupForce(force, svg);
+$('#graphoptions').on('change', setupForce);
+var foo;
+function setupForce() {
+svg.selectAll('g').remove();
+svg.selectAll('.link').remove();
+	d3.json("NodeViz/request.php?chamber="+$('#chamber').val()+"&cycle="+$('#cycle').val()+"&graphHeight="+height+"&graphWidth="+width+"&prefix=&setupfile=StateDEM&state="+$('#state').val()+"&useSVG=1", function(error, data) {
+		console.time('setup');
+		foo = data;
+	  graphdata = data.data.graph.data;
+
+	  nodes = [];
+	  var values = {companies:[], legislators:[], edges:[]};
+	  var x = 0;
+	  xes = [];
+	  yes = [];
+	  $.each(graphdata.nodes, function(k, v) {
+	  	nodes[x] = v;
+		var pos = v.pos.split(',');
+		xes.push(pos[0]);
+		yes.push(pos[1]);
+		v.x = parseFloat(pos[0]*(1/3));
+		v.y = parseFloat(pos[1]*(1/3));
+		v.fixed = true;
+	  	$.each(v.relatedNodes, function(k2, v2) {
+			var edgeId = v2[0];
+	  		if (v.company_id) {
+	  			values.companies.push(v.value);
+	  			graphdata.edges[edgeId]['source'] = x;
+	  		} else {
+	  			values.legislators.push(v.value);
+	  		  	graphdata.edges[edgeId].target = x;
+	  		}
+	  	});
+	  	x++;
+	  });
+	 
+		$.fn.max = function(prop) { 
+		    return Math.max.apply(null, this.map(function(index, el) {return el[prop]; }).get() ); 
+		}
+
+		$.fn.min = function(selector) { 
+		    return Math.min.apply(null, this.map(function(index, el) {return el[prop]; }).get() ); 
+		}
+
+			// Usage:
+
+			//maxWidth = $(nodes).max('x');
+			//maxHeight = $(nodes).max('y');
+			//maxHeight = $(nodes).max(function() {return $(this).y; });
+			//minWidth = $(nodes).min(function() {return $(this).x; });
+	 	//svg.attr('width', maxWidth).attr('height', maxHeight); 
+	  graph = {
+	  	nodes:nodes,
+	  	links:$.map(graphdata.edges, function(v) { return v; })
+	  };
+	  
+	  var cScale = createScale($.grep(nodes, function (n) { return n.company_id; }), 'value', [10, 20]);  
+	  var lScale = createScale($.grep(nodes, function (n) { return ! n.company_id; }), 'value', [10, 20]);  
+	  var eScale = createScale(d3.values(graph.links), 'value', [2, 20]);
+
+
+	  force
+	      .nodes(graph.nodes)
+	      .links(graph.links);
+	
+
+	  var link = svg.selectAll(".link")
+	      .data(graph.links)
+	    .enter().append("line")
+	      .attr("class", "link")
+	      .style("stroke-width", function(d) { return eScale(d.value); });
+
+	  node = svg.selectAll(".node")
+	      .data(graph.nodes)
+	    .enter().append('g')
+	     .call(force.drag);
+
+	  node.append("title")
+	      .text(function(d) { return d.tooltip; });
+	
+	       node.append('circle')
+	      .attr("class", function(d) { return "node "+(d.company_id ? 'donors' : 'candidates '+d.party); })
+	      .attr("r", function(d) { return d.company_id ? cScale(d.value) : lScale(d.value); })
+	
+	       node.append("image").attr("xlink:href", function(d) { return d.image; })
+	      .attr("x", function(d) { return 0 - (d.company_id ? cScale(d.value) : lScale(d.value))*.7; })
+	      .attr("y", function(d) { return 0 - (d.company_id ? cScale(d.value) : lScale(d.value))*.7})
+	      .attr("width",function(d) { return (d.company_id ? cScale(d.value) : lScale(d.value))*1.4 })
+	      .attr("height", function(d) { return (d.company_id ? cScale(d.value) : lScale(d.value))*1.4});
+
+
+		var t = 0;
+	  force.on("tick", function() {
+		 //$('#tick').html(t++);
+	    link.attr("x1", function(d) { return d.source.x; })
+		.attr("y1", function(d) { return d.source.y; })
+		.attr("x2", function(d) { return d.target.x; })
+		.attr("y2", function(d) { return d.target.y; });
+	    
+	    node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+	    //node.attr("cx", function(d) { return d.x; })
+	      //  .attr("cy", function(d) { return d.y; });
+	  });
+
+	$('#svg').hide();
+	console.timeEnd('setup');
+	console.time('render');
+  	force.start();
+	//force.alpha(0);
+	//for (var i = 0; i < 100; ++i) force.tick();
+	//force.stop();
+	console.timeEnd('render');
+	console.time('show');
+	$('#svg').show();
+	console.timeEnd('show');
+	});
+}
+
+ function createScale(data, key, range) {
+ 	var array = $.map(data, function(v, k) { return parseFloat(v[key]) > 0 ? parseFloat(v[key]) : 0; });
+ 	return d3.scale.linear().
+  	domain([d3.min(array), d3.max(array)]). // your data minimum and maximum
+  	range(range);
+ }
+  
+</script>
+
