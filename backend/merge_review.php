@@ -111,7 +111,7 @@ if (isset($_GET['remove_companies'])){
 		$review_notes = ", notes='".dbEscape($review_notes)."'";
 	}
 	if (count($selected_companies) > 0){
-		$match_query = "update $companies_table set match_contribs_on_name=1 $review_notes where id in (".arrayValuesToInString($selected_companies).")";
+		$match_query = "update $companies_table set match_contribs_on_name=1, reviewed=now() $review_notes where id in (".arrayValuesToInString($selected_companies).")";
 		dbWrite($match_query);
 		$status = "marked companies with ids ".arrayValuesToInString($selected_companies)." as match on name";
 	} else {
