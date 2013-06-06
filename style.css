@@ -47,7 +47,7 @@ select { font-family: 'Ubuntu', sans-serif; }
 #list_menu li.selected { background-color: #ddd; color: #666;}
 #lists { width: 300px; float: right; right: 0px;z-index: 1;  }
 
-#graphs { border: 1px solid; width: auto; } 
+#graphs {  width: auto; } 
 .nodelist_container { border-left: 1px solid #999; border-bottom: 1px solid #999; clear: both;  background: #ddd;}
 .nodelist .amount { float: right; font-size: 1em; font-weight:500; }
 .sublists_container { margin-right: -5px; margin-left: 15px;  font-size: .9em; background:transparent;}
