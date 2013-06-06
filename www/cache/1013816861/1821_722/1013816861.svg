@@ -1,0 +1,23 @@
+<svg width="722px" height="722px"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(1.439261875 1.439261875) rotate(0) translate(4 497.647)">
+
+<polygon id='svgscreen' style="opacity:0;" fill="#ffffff" stroke="#ffffff" points="-4,5 -4,-497.647 498.647,-497.647 498.647,5 -4,5"/>
+<g id="15345_29851" class="edge">
+<path fill="none" stroke="#999999" stroke-width="40" d="M247.122,-247.122C247.171,-247.171 247.221,-247.221 247.271,-247.271"/>
+<polygon fill="#999999" stroke="#999999" points="151.941,-300.463 247.419,-247.419 300.463,-151.941 151.941,-300.463"/>
+</g>
+<g id="29851" class="node">
+<ellipse fill="#ffffff" stroke="cadetblue" stroke-width="10" cx="145" cy="-145" rx="144" ry="144"/>
+<image xlink:href="com_images/c127.png" width="288px" height="288px" preserveAspectRatio="xMinYMin meet" x="1" y="-289"/>
+<ellipse fill="none" stroke="cadetblue" stroke-width="10" cx="145" cy="-145" rx="144" ry="144"/>
+<text text-anchor="start" x="304" y="-141" font-family="Times Roman,serif" font-size="15.00">Southern California Edison</text>
+</g>
+<g id="15345" class="node">
+<polygon fill="#ffffff" stroke="#3333cc" stroke-width="10" points="492.647,-492.647 204.647,-492.647 204.647,-204.647 492.647,-204.647 492.647,-492.647"/>
+<image xlink:href="can_images/unknownCandidate.jpg" width="288px" height="288px" preserveAspectRatio="xMinYMin meet" x="204.647" y="-492.647"/>
+<polygon fill="none" stroke="#3333cc" stroke-width="10" points="492.647,-492.647 204.647,-492.647 204.647,-204.647 492.647,-204.647 492.647,-492.647"/>
+<text text-anchor="middle" x="348.647" y="-344.647" font-family="Times Roman,serif" font-size="15.00">Hannah&#45;Beth Jackson</text>
+</g>
+</g>
+</svg>

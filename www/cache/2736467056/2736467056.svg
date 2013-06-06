@@ -1,0 +1,53 @@
+<svg width="94623px" height="96000px"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(135.902 135.902) rotate(0) translate(4 702.39)">
+
+<polygon id='svgscreen' style="opacity:0;" fill="#ffffff" stroke="#ffffff" points="-4,5 -4,-702.39 693.258,-702.39 693.258,5 -4,5"/>
+<g id="4426_29792" class="edge">
+<path fill="none" stroke="#999999" stroke-width="5" d="M264.575,-641.314C274.924,-601.355 294.631,-525.267 310.897,-462.465"/>
+<polygon fill="#999999" stroke="#999999" points="323.616,-465.704 318.432,-433.372 298.204,-459.123 323.616,-465.704"/>
+</g>
+<g id="4426_29834" class="edge">
+<path fill="none" stroke="#999999" stroke-width="5" d="M56.7997,-288.524C96.6327,-298.85 172.786,-318.592 235.677,-334.895"/>
+<polygon fill="#999999" stroke="#999999" points="232.481,-347.625 264.814,-342.448 239.068,-322.215 232.481,-347.625"/>
+</g>
+<g id="4426_29814" class="edge">
+<path fill="none" stroke="#999999" stroke-width="22.5" d="M603.906,-430.351C561.859,-419.451 494.711,-402.044 438.303,-387.422"/>
+<polygon fill="#999999" stroke="#999999" points="453,-330.217 409.139,-379.861 423.358,-444.562 453,-330.217"/>
+</g>
+<g id="4426_951" class="edge">
+<path fill="none" stroke="#999999" stroke-width="40" d="M403.671,-104.309C392.767,-146.402 376.929,-207.539 363.44,-259.612"/>
+<polygon fill="#999999" stroke="#999999" points="261.703,-233.638 355.824,-289.011 464.992,-286.3 261.703,-233.638"/>
+</g>
+<g id="29792" class="node">
+<ellipse fill="#ffffff" stroke="cadetblue" stroke-width="10" cx="257.433" cy="-668.89" rx="28" ry="28.5"/>
+<image xlink:href="com_images/c192.png" width="56px" height="56px" preserveAspectRatio="xMinYMin meet" x="229.433" y="-696.89"/>
+<ellipse fill="none" stroke="cadetblue" stroke-width="10" cx="257.433" cy="-668.89" rx="28" ry="28.5"/>
+<text text-anchor="start" x="300.433" y="-664.89" font-family="Times Roman,serif" font-size="15.00">AES Corp</text>
+</g>
+<g id="29834" class="node">
+<ellipse fill="#ffffff" stroke="cadetblue" stroke-width="10" cx="29.5" cy="-281.447" rx="28" ry="28.5"/>
+<image xlink:href="com_images/c152.png" width="56px" height="56px" preserveAspectRatio="xMinYMin meet" x="1.5" y="-309.447"/>
+<ellipse fill="none" stroke="cadetblue" stroke-width="10" cx="29.5" cy="-281.447" rx="28" ry="28.5"/>
+<text text-anchor="start" x="72.5" y="-277.447" font-family="Times Roman,serif" font-size="15.00">NRG Energy</text>
+</g>
+<g id="29814" class="node">
+<ellipse fill="#ffffff" stroke="cadetblue" stroke-width="10" cx="644.758" cy="-440.941" rx="42" ry="42.5"/>
+<image xlink:href="com_images/c148.png" width="84px" height="84px" preserveAspectRatio="xMinYMin meet" x="602.758" y="-482.941"/>
+<ellipse fill="none" stroke="cadetblue" stroke-width="10" cx="644.758" cy="-440.941" rx="42" ry="42.5"/>
+<text text-anchor="start" x="701.758" y="-436.941" font-family="Times Roman,serif" font-size="15.00">Edison International</text>
+</g>
+<g id="951" class="node">
+<ellipse fill="#ffffff" stroke="cadetblue" stroke-width="10" cx="416.833" cy="-53.5" rx="52" ry="52.5"/>
+<image xlink:href="com_images/c951.png" width="104px" height="104px" preserveAspectRatio="xMinYMin meet" x="364.833" y="-105.5"/>
+<ellipse fill="none" stroke="cadetblue" stroke-width="10" cx="416.833" cy="-53.5" rx="52" ry="52.5"/>
+<text text-anchor="start" x="483.833" y="-49.5" font-family="Times Roman,serif" font-size="15.00">Chevron Corp</text>
+</g>
+<g id="4426" class="node">
+<polygon fill="#ffffff" stroke="#3333cc" stroke-width="10" points="409.126,-433.194 265.126,-433.194 265.126,-289.194 409.126,-289.194 409.126,-433.194"/>
+<image xlink:href="can_images/4426.jpg" width="116.911px" height="144px" preserveAspectRatio="xMinYMin meet" x="278.67" y="-433.194"/>
+<polygon fill="none" stroke="#3333cc" stroke-width="10" points="409.126,-433.194 265.126,-433.194 265.126,-289.194 409.126,-289.194 409.126,-433.194"/>
+<text text-anchor="middle" x="337.126" y="-357.194" font-family="Times Roman,serif" font-size="15.00">Jenny Oropeza</text>
+</g>
+</g>
+</svg>

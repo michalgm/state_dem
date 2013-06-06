@@ -1,0 +1,38 @@
+<map id='G' name='G'>
+
+<area shape="rect" id="4144" coords="0,0,0,0"/>
+<area shape="rect" id="4140" coords="0,0,0,0"/>
+<area shape="circle" id="5460" coords="0,0,0"/>
+<area shape="circle" id="1137" coords="0,0,0"/>
+<area shape="circle" id="39514" coords="0,0,0"/>
+<area shape="circle" id="39359" coords="0,0,0"/>
+<area shape="circle" id="671" coords="0,0,0"/>
+<area shape="circle" id="39350" coords="0,0,0"/>
+<area shape="rect" id="2878" coords="0,0,0,0"/>
+<area shape="rect" id="4172" coords="0,0,0,0"/>
+<area shape="circle" id="39383" coords="0,0,0"/>
+<area shape="circle" id="39492" coords="0,0,0"/>
+<area shape="circle" id="951" coords="0,0,0"/>
+<area shape="circle" id="168" coords="0,0,0"/>
+<area shape="rect" id="2244" coords="0,0,0,0"/>
+<area shape="circle" id="31946" coords="0,0,0"/>
+<area shape="rect" id="9861" coords="0,0,0,0"/>
+<area shape="circle" id="39405" coords="0,0,0"/>
+<area shape="poly" id="4144_5460" coords="0,0 0,0 0,0 0,0"/>
+<area shape="poly" id="4140_5460" coords="0,0 0,0 0,0 0,0"/>
+<area shape="poly" id="2878_5460" coords="0,0 0,0 0,0 0,0"/>
+<area shape="poly" id="4144_1137" coords="0,0 0,0 0,0 0,0"/>
+<area shape="poly" id="4172_1137" coords="0,0 0,0 0,0 0,0"/>
+<area shape="poly" id="4144_39514" coords="0,0 0,0 0,0 0,0"/>
+<area shape="poly" id="4144_39359" coords="0,0 0,0 0,0 0,0"/>
+<area shape="poly" id="4144_671" coords="0,0 0,0 0,0 0,0"/>
+<area shape="poly" id="9861_671" coords="0,0 0,0 0,0 0,0"/>
+<area shape="poly" id="4144_39350" coords="0,0 0,0 0,0 0,0"/>
+<area shape="poly" id="4140_39350" coords="0,0 0,0 0,0 0,0"/>
+<area shape="poly" id="4144_39383" coords="0,0 0,0 0,0 0,0"/>
+<area shape="poly" id="4140_39492" coords="0,0 0,0 0,0 0,0"/>
+<area shape="poly" id="4144_951" coords="0,0 0,0 0,0 0,0"/>
+<area shape="poly" id="2244_168" coords="0,0 0,0 0,0 0,0"/>
+<area shape="poly" id="4144_31946" coords="0,0 0,0 0,0 0,0"/>
+<area shape="poly" id="4144_39405" coords="0,0 0,0 0,0 0,0"/>
+</map>

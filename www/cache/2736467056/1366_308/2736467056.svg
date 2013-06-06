@@ -1,0 +1,53 @@
+<svg width="303.59495833333px" height="308px"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(0.43633654166666 0.43633654166666) rotate(0) translate(4 701.876)">
+
+<polygon id='svgscreen' style="opacity:0;" fill="#ffffff" stroke="#ffffff" points="-4,5 -4,-701.876 692.78,-701.876 692.78,5 -4,5"/>
+<g id="4426_29792" class="edge">
+<path fill="none" stroke="#999999" stroke-width="5" d="M56.779,-263.412C96.5817,-273.859 172.677,-293.831 235.52,-310.326"/>
+<polygon fill="#999999" stroke="#999999" points="232.286,-323.047 264.636,-317.968 238.951,-297.657 232.286,-323.047"/>
+</g>
+<g id="4426_29834" class="edge">
+<path fill="none" stroke="#999999" stroke-width="5" d="M410.321,-57.0532C399.846,-96.9773 379.901,-173 363.439,-235.748"/>
+<polygon fill="#999999" stroke="#999999" points="350.73,-232.468 355.812,-264.817 376.121,-239.13 350.73,-232.468"/>
+</g>
+<g id="4426_29814" class="edge">
+<path fill="none" stroke="#999999" stroke-width="22.5" d="M603.461,-406.919C561.516,-395.907 494.573,-378.331 438.268,-363.549"/>
+<polygon fill="#999999" stroke="#999999" points="453.162,-306.395 409.147,-355.903 423.166,-420.648 453.162,-306.395"/>
+</g>
+<g id="4426_951" class="edge">
+<path fill="none" stroke="#999999" stroke-width="40" d="M269.553,-593.608C280.587,-551.55 296.614,-490.462 310.264,-438.432"/>
+<polygon fill="#999999" stroke="#999999" points="411.92,-464.721 317.97,-409.057 208.794,-411.43 411.92,-464.721"/>
+</g>
+<g id="29792" class="node">
+<ellipse fill="#ffffff" stroke="cadetblue" stroke-width="10" cx="29.5" cy="-256.252" rx="28" ry="28.5"/>
+<image xlink:href="com_images/c192.png" width="56px" height="56px" preserveAspectRatio="xMinYMin meet" x="1.5" y="-284.252"/>
+<ellipse fill="none" stroke="cadetblue" stroke-width="10" cx="29.5" cy="-256.252" rx="28" ry="28.5"/>
+<text text-anchor="start" x="72.5" y="-252.252" font-family="Times Roman,serif" font-size="15.00">AES Corp</text>
+</g>
+<g id="29834" class="node">
+<ellipse fill="#ffffff" stroke="cadetblue" stroke-width="10" cx="417.549" cy="-29.5" rx="28" ry="28.5"/>
+<image xlink:href="com_images/c152.png" width="56px" height="56px" preserveAspectRatio="xMinYMin meet" x="389.549" y="-57.5"/>
+<ellipse fill="none" stroke="cadetblue" stroke-width="10" cx="417.549" cy="-29.5" rx="28" ry="28.5"/>
+<text text-anchor="start" x="460.549" y="-25.5" font-family="Times Roman,serif" font-size="15.00">NRG Energy</text>
+</g>
+<g id="29814" class="node">
+<ellipse fill="#ffffff" stroke="cadetblue" stroke-width="10" cx="644.28" cy="-417.636" rx="42" ry="42.5"/>
+<image xlink:href="com_images/c148.png" width="84px" height="84px" preserveAspectRatio="xMinYMin meet" x="602.28" y="-459.636"/>
+<ellipse fill="none" stroke="cadetblue" stroke-width="10" cx="644.28" cy="-417.636" rx="42" ry="42.5"/>
+<text text-anchor="start" x="701.28" y="-413.636" font-family="Times Roman,serif" font-size="15.00">Edison International</text>
+</g>
+<g id="951" class="node">
+<ellipse fill="#ffffff" stroke="cadetblue" stroke-width="10" cx="256.234" cy="-644.376" rx="52" ry="52.5"/>
+<image xlink:href="com_images/c951.png" width="104px" height="104px" preserveAspectRatio="xMinYMin meet" x="204.234" y="-696.376"/>
+<ellipse fill="none" stroke="cadetblue" stroke-width="10" cx="256.234" cy="-644.376" rx="52" ry="52.5"/>
+<text text-anchor="start" x="323.234" y="-640.376" font-family="Times Roman,serif" font-size="15.00">Chevron Corp</text>
+</g>
+<g id="4426" class="node">
+<polygon fill="#ffffff" stroke="#3333cc" stroke-width="10" points="408.892,-408.933 264.892,-408.933 264.892,-264.933 408.892,-264.933 408.892,-408.933"/>
+<image xlink:href="can_images/4426.jpg" width="116.911px" height="144px" preserveAspectRatio="xMinYMin meet" x="278.437" y="-408.933"/>
+<polygon fill="none" stroke="#3333cc" stroke-width="10" points="408.892,-408.933 264.892,-408.933 264.892,-264.933 408.892,-264.933 408.892,-408.933"/>
+<text text-anchor="middle" x="336.892" y="-332.933" font-family="Times Roman,serif" font-size="15.00">Jenny Oropeza</text>
+</g>
+</g>
+</svg>

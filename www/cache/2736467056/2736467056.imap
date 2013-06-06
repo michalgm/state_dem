@@ -1,0 +1,12 @@
+<map id='G' name='G'>
+
+<area shape="rect" id="4426" coords="36575,36584,56145,56154"/>
+<area shape="circle" id="951" coords="57192,88186,7135"/>
+<area shape="circle" id="29814" coords="88168,35532,5775"/>
+<area shape="circle" id="29834" coords="4553,57207,3873"/>
+<area shape="circle" id="29792" coords="35529,4553,3874"/>
+<area shape="poly" id="4426_951" coords="52772,81962 47305,60856 52567,59493 58035,80599"/>
+<area shape="poly" id="4426_29814" coords="82999,38451 60494,44285 59726,41325 82232,35491"/>
+<area shape="poly" id="4426_29834" coords="8178,55916 32487,49615 32658,50272 8348,56574"/>
+<area shape="poly" id="4426_29792" coords="36829,8215 43124,32521 42466,32692 36171,8386"/>
+</map>

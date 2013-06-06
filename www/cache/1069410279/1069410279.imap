@@ -1,0 +1,38 @@
+<map id='G' name='G'>
+
+<area shape="rect" id="4144" coords="39394,41455,48494,50555"/>
+<area shape="rect" id="4140" coords="76308,61648,82375,67778"/>
+<area shape="circle" id="5460" coords="67800,47247,3475"/>
+<area shape="circle" id="1137" coords="37655,23083,3317"/>
+<area shape="circle" id="39514" coords="58387,32284,3001"/>
+<area shape="circle" id="39359" coords="48457,27972,2464"/>
+<area shape="circle" id="671" coords="22733,36468,2338"/>
+<area shape="circle" id="39350" coords="60064,60539,2306"/>
+<area shape="rect" id="2878" coords="83759,33179,87424,36908"/>
+<area shape="rect" id="4172" coords="35251,316,38916,4044"/>
+<area shape="circle" id="39383" coords="26474,59869,2117"/>
+<area shape="circle" id="39492" coords="93567,77978,2117"/>
+<area shape="circle" id="951" coords="26146,48174,2085"/>
+<area shape="circle" id="168" coords="71217,29858,2022"/>
+<area shape="rect" id="2244" coords="82317,15220,85855,18758"/>
+<area shape="circle" id="31946" coords="46421,65960,1990"/>
+<area shape="rect" id="9861" coords="348,32301,3760,35777"/>
+<area shape="circle" id="39405" coords="35618,67086,1801"/>
+<area shape="poly" id="4144_5460" coords="64286,47439 50411,46716 50450,45969 64325,46692"/>
+<area shape="poly" id="4140_5460" coords="70705,49499 77234,59378 75260,60682 68732,50803"/>
+<area shape="poly" id="2878_5460" coords="70467,44965 81968,37076 82391,37692 70889,45581"/>
+<area shape="poly" id="4144_1137" coords="39755,25960 43411,39284 40973,39953 37317,26629"/>
+<area shape="poly" id="4172_1137" coords="37190,19758 36814,5988 37561,5968 37937,19737"/>
+<area shape="poly" id="4144_39514" coords="57008,35225 50714,41205 49084,39490 55378,33510"/>
+<area shape="poly" id="4144_39359" coords="48482,30523 46170,39761 44922,39448 47233,30210"/>
+<area shape="poly" id="4144_671" coords="25037,37094 37789,42828 37483,43510 24731,37776"/>
+<area shape="poly" id="9861_671" coords="20370,36459 5642,34728 5704,34200 20432,35930"/>
+<area shape="poly" id="4144_39350" coords="58179,59161 49757,51568 50077,51213 58499,58806"/>
+<area shape="poly" id="4140_39350" coords="62373,60657 74502,63283 74344,64013 62215,61387"/>
+<area shape="poly" id="4144_39383" coords="27885,58272 37659,50516 38124,51101 28350,58858"/>
+<area shape="poly" id="4140_39492" coords="91763,76807 83525,69125 84034,68578 92273,76260"/>
+<area shape="poly" id="4144_951" coords="28181,47577 37435,46449 37519,47137 28264,48265"/>
+<area shape="poly" id="2244_168" coords="72461,28200 80762,19899 81176,20313 72875,28614"/>
+<area shape="poly" id="4144_31946" coords="45897,64008 44469,52499 45023,52431 46452,63939"/>
+<area shape="poly" id="4144_39405" coords="36132,65356 41288,52301 41582,52417 36425,65472"/>
+</map>

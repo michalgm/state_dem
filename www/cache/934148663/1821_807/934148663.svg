@@ -1,0 +1,43 @@
+<svg width="743.04525px" height="807px"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(1.3275654375 1.3275654375) rotate(0) translate(4 603.879)">
+
+<polygon id='svgscreen' style="opacity:0;" fill="#ffffff" stroke="#ffffff" points="-4,5 -4,-603.879 556.704,-603.879 556.704,5 -4,5"/>
+<g id="4420_29851" class="edge">
+<path fill="none" stroke="#999999" stroke-width="5" d="M362.163,-235.466C382.27,-186.561 408.036,-123.895 426.086,-79.995"/>
+<polygon fill="#999999" stroke="#999999" points="438.282,-84.846 437.551,-52.1087 414.004,-74.8639 438.282,-84.846"/>
+</g>
+<g id="8212_29851" class="edge">
+<path fill="none" stroke="#999999" stroke-width="5" d="M250.846,-320.505C197.475,-327.179 128.838,-335.763 81.6155,-341.668"/>
+<polygon fill="#999999" stroke="#999999" points="79.6786,-328.683 51.5392,-345.43 82.936,-354.73 79.6786,-328.683"/>
+</g>
+<g id="7943_29851" class="edge">
+<path fill="none" stroke="#999999" stroke-width="40" d="M378.83,-376.171C405.444,-413.005 438.492,-458.744 464.909,-495.306"/>
+<polygon fill="#999999" stroke="#999999" points="379.905,-556.945 482.584,-519.767 550.123,-433.957 379.905,-556.945"/>
+</g>
+<g id="4420" class="node">
+<polygon fill="#ffffff" stroke="#3333cc" stroke-width="10" points="473.08,-52 423.08,-52 423.08,-1 473.08,-1 473.08,-52"/>
+<image xlink:href="can_images/4420.jpg" width="41.4059px" height="51px" preserveAspectRatio="xMinYMin meet" x="427.377" y="-52"/>
+<polygon fill="none" stroke="#3333cc" stroke-width="10" points="473.08,-52 423.08,-52 423.08,-1 473.08,-1 473.08,-52"/>
+<text text-anchor="middle" x="448.08" y="-22.5" font-family="Times Roman,serif" font-size="15.00">Curren D Price</text>
+</g>
+<g id="8212" class="node">
+<polygon fill="#ffffff" stroke="#3333cc" stroke-width="10" points="51.5,-374.061 1.5,-374.061 1.5,-323.061 51.5,-323.061 51.5,-374.061"/>
+<image xlink:href="can_images/8212.jpg" width="41.4059px" height="51px" preserveAspectRatio="xMinYMin meet" x="5.79703" y="-374.061"/>
+<polygon fill="none" stroke="#3333cc" stroke-width="10" points="51.5,-374.061 1.5,-374.061 1.5,-323.061 51.5,-323.061 51.5,-374.061"/>
+<text text-anchor="middle" x="26.5" y="-344.561" font-family="Times Roman,serif" font-size="15.00">Kevin De León</text>
+</g>
+<g id="7943" class="node">
+<polygon fill="#ffffff" stroke="#cc3333" stroke-width="10" points="550.204,-598.879 472.204,-598.879 472.204,-519.879 550.204,-519.879 550.204,-598.879"/>
+<image xlink:href="can_images/7943.jpg" width="64.1386px" height="79px" preserveAspectRatio="xMinYMin meet" x="479.135" y="-598.879"/>
+<polygon fill="none" stroke="#cc3333" stroke-width="10" points="550.204,-598.879 472.204,-598.879 472.204,-519.879 550.204,-519.879 550.204,-598.879"/>
+<text text-anchor="middle" x="511.204" y="-555.379" font-family="Times Roman,serif" font-size="15.00">Jean Fuller</text>
+</g>
+<g id="29851" class="node">
+<ellipse fill="#ffffff" stroke="cadetblue" stroke-width="10" cx="331.337" cy="-310.439" rx="81" ry="81"/>
+<image xlink:href="com_images/c127.png" width="162px" height="162px" preserveAspectRatio="xMinYMin meet" x="250.337" y="-391.439"/>
+<ellipse fill="none" stroke="cadetblue" stroke-width="10" cx="331.337" cy="-310.439" rx="81" ry="81"/>
+<text text-anchor="start" x="427.337" y="-306.439" font-family="Times Roman,serif" font-size="15.00">Southern California Edison</text>
+</g>
+</g>
+</svg>

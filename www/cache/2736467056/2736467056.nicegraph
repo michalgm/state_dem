@@ -1,0 +1,388 @@
+StateDEM Object
+(
+    [data] => Array
+        (
+            [nodetypes] => Array
+                (
+                    [0] => candidates
+                    [1] => donors
+                )
+
+            [edgetypes] => Array
+                (
+                    [donations] => Array
+                        (
+                            [0] => donors
+                            [1] => candidates
+                        )
+
+                )
+
+            [properties] => Array
+                (
+                    [minSize] => Array
+                        (
+                            [donors] => .5
+                            [candidates] => .5
+                            [donations] => 5
+                        )
+
+                    [maxSize] => Array
+                        (
+                            [donors] => 4
+                            [candidates] => 4
+                            [donations] => 40
+                        )
+
+                    [log_scaling] => 0
+                    [state] => CA
+                    [cycle] => 2010
+                    [chamber] => state:upper
+                    [valueMin] => 1
+                    [edgeid] => 
+                    [candidate_ids] => 4426
+                    [company_ids] => 
+                )
+
+            [nodes] => Array
+                (
+                    [29792] => Array
+                        (
+                            [transaction_id] => 4699e0004c1ed52e7a1a0fb25b08abd0
+                            [company_id] => 29792
+                            [company_name] => AES Corp
+                            [amount] => 1000.00
+                            [recipient_ext_id] => 4426
+                            [industry] => Electric Power Utilities
+                            [image] => ../www/com_images/c192.png
+                            [sitecode] => coal
+                            [contributor_type] => C
+                            [id] => 29792
+                            [total_dollars] => 1000.00
+                            [type] => donors
+                            [label] => AES Corp
+                            [value] => 1000.00
+                            [dir] => /home/dameat/public_html/state_dem/njq/NodeViz
+                            [color] => cadetblue
+                            [shape] => circle
+                            [fillcolor] => #ffffff
+                            [tooltip] => AES Corp (Gave $1,000)
+                            [label_zoom_level] => 8
+                            [click] => this.selectNode('29792'); this.panToNode('29792');
+                            [relatedNodes] => Array
+                                (
+                                    [4426] => Array
+                                        (
+                                            [0] => 4426_29792
+                                        )
+
+                                )
+
+                            [area] => 0.5
+                            [size] => 0.79788456080287
+                        )
+
+                    [29834] => Array
+                        (
+                            [transaction_id] => c488e18cf6e0aa8be4691693320dcb75
+                            [company_id] => 29834
+                            [company_name] => NRG Energy
+                            [amount] => 1000.00
+                            [recipient_ext_id] => 4426
+                            [industry] => Independent Power Generation & Cogeneration
+                            [image] => ../www/com_images/c152.png
+                            [sitecode] => coal
+                            [contributor_type] => C
+                            [id] => 29834
+                            [total_dollars] => 1000.00
+                            [type] => donors
+                            [label] => NRG Energy
+                            [value] => 1000.00
+                            [dir] => /home/dameat/public_html/state_dem/njq/NodeViz
+                            [color] => cadetblue
+                            [shape] => circle
+                            [fillcolor] => #ffffff
+                            [tooltip] => NRG Energy (Gave $1,000)
+                            [label_zoom_level] => 8
+                            [click] => this.selectNode('29834'); this.panToNode('29834');
+                            [relatedNodes] => Array
+                                (
+                                    [4426] => Array
+                                        (
+                                            [0] => 4426_29834
+                                        )
+
+                                )
+
+                            [area] => 0.5
+                            [size] => 0.79788456080287
+                        )
+
+                    [29814] => Array
+                        (
+                            [transaction_id] => 7c12e0761c03ffc13f0a70c7f23acb8f
+                            [company_id] => 29814
+                            [company_name] => Edison International
+                            [amount] => 2000.00
+                            [recipient_ext_id] => 4426
+                            [industry] => Electric Power Utilities
+                            [image] => ../www/com_images/c148.png
+                            [sitecode] => coal
+                            [contributor_type] => C
+                            [id] => 29814
+                            [total_dollars] => 2000.00
+                            [type] => donors
+                            [label] => Edison International
+                            [value] => 2000.00
+                            [dir] => /home/dameat/public_html/state_dem/njq/NodeViz
+                            [color] => cadetblue
+                            [shape] => circle
+                            [fillcolor] => #ffffff
+                            [tooltip] => Edison International (Gave $2,000)
+                            [label_zoom_level] => 8
+                            [click] => this.selectNode('29814'); this.panToNode('29814');
+                            [relatedNodes] => Array
+                                (
+                                    [4426] => Array
+                                        (
+                                            [0] => 4426_29814
+                                        )
+
+                                )
+
+                            [area] => 1.0833333333333
+                            [size] => 1.1744542733243
+                        )
+
+                    [951] => Array
+                        (
+                            [transaction_id] => 37d1e01dcc892675469aa0187dd521a3
+                            [company_id] => 951
+                            [company_name] => Chevron Corp
+                            [amount] => 3000.00
+                            [recipient_ext_id] => 4426
+                            [industry] => Major (Multinational) Oil & Gas Producers
+                            [image] => ../www/com_images/c951.png
+                            [sitecode] => oil
+                            [contributor_type] => C
+                            [id] => 951
+                            [total_dollars] => 3000.00
+                            [type] => donors
+                            [label] => Chevron Corp
+                            [value] => 3000.00
+                            [dir] => /home/dameat/public_html/state_dem/njq/NodeViz
+                            [color] => cadetblue
+                            [shape] => circle
+                            [fillcolor] => #ffffff
+                            [tooltip] => Chevron Corp (Gave $3,000)
+                            [label_zoom_level] => 8
+                            [click] => this.selectNode('951'); this.panToNode('951');
+                            [relatedNodes] => Array
+                                (
+                                    [4426] => Array
+                                        (
+                                            [0] => 4426_951
+                                        )
+
+                                )
+
+                            [area] => 1.6666666666667
+                            [size] => 1.4567312407894
+                        )
+
+                    [4426] => Array
+                        (
+                            [id] => 4426
+                            [state] => CA
+                            [term] => 2010
+                            [district] => CA-28
+                            [party] => D
+                            [candidate_name] => Jenny Oropeza
+                            [image] => ../www/can_images/4426.jpg
+                            [total_dollars] => 7000
+                            [type] => candidates
+                            [value] => 7000
+                            [color] => #3333cc33
+                            [label] => Jenny Oropeza
+                            [fillcolor] => #ffffff
+                            [tooltip] => Jenny Oropeza (Received $7,000)
+                            [shape] => square
+                            [label_zoom_level] => 6
+                            [click] => this.selectNode('4426'); this.panToNode('4426');
+                            [relatedNodes] => Array
+                                (
+                                    [29792] => Array
+                                        (
+                                            [0] => 4426_29792
+                                        )
+
+                                    [29834] => Array
+                                        (
+                                            [0] => 4426_29834
+                                        )
+
+                                    [29814] => Array
+                                        (
+                                            [0] => 4426_29814
+                                        )
+
+                                    [951] => Array
+                                        (
+                                            [0] => 4426_951
+                                        )
+
+                                )
+
+                            [area] => 4
+                            [size] => 2
+                        )
+
+                )
+
+            [edges] => Array
+                (
+                    [4426_29792] => Array
+                        (
+                            [toId] => 4426
+                            [fromId] => 29792
+                            [value] => 1000.00
+                            [id] => 4426_29792
+                            [type] => donations
+                            [weight] => 1000.00
+                            [tooltip] => $1,000 from AES Corp to Jenny Oropeza
+                            [area] => 5
+                            [size] => 5
+                        )
+
+                    [4426_29834] => Array
+                        (
+                            [toId] => 4426
+                            [fromId] => 29834
+                            [value] => 1000.00
+                            [id] => 4426_29834
+                            [type] => donations
+                            [weight] => 1000.00
+                            [tooltip] => $1,000 from NRG Energy to Jenny Oropeza
+                            [area] => 5
+                            [size] => 5
+                        )
+
+                    [4426_29814] => Array
+                        (
+                            [toId] => 4426
+                            [fromId] => 29814
+                            [value] => 2000.00
+                            [id] => 4426_29814
+                            [type] => donations
+                            [weight] => 2000.00
+                            [tooltip] => $2,000 from Edison International to Jenny Oropeza
+                            [area] => 22.5
+                            [size] => 22.5
+                        )
+
+                    [4426_951] => Array
+                        (
+                            [toId] => 4426
+                            [fromId] => 951
+                            [value] => 3000.00
+                            [id] => 4426_951
+                            [type] => donations
+                            [weight] => 3000.00
+                            [tooltip] => $3,000 from Chevron Corp to Jenny Oropeza
+                            [area] => 40
+                            [size] => 40
+                        )
+
+                )
+
+            [subgraphs] => Array
+                (
+                )
+
+            [queries] => Array
+                (
+                )
+
+            [nodetypesindex] => Array
+                (
+                    [candidates] => Array
+                        (
+                            [0] => 4426
+                        )
+
+                    [donors] => Array
+                        (
+                            [0] => 951
+                            [1] => 29814
+                            [2] => 29834
+                            [3] => 29792
+                        )
+
+                )
+
+            [edgetypesindex] => Array
+                (
+                    [donations] => Array
+                        (
+                            [0] => 4426_29792
+                            [1] => 4426_29834
+                            [2] => 4426_29814
+                            [3] => 4426_951
+                        )
+
+                )
+
+            [graphvizProperties] => Array
+                (
+                    [graph] => Array
+                        (
+                            [bgcolor] => #FFFFFF
+                            [fontsize] => 90
+                            [splines] => curved
+                            [fontcolor] => blue
+                            [start] => self
+                            [size] => 1000,1000!
+                        )
+
+                    [node] => Array
+                        (
+                            [label] =>  
+                            [imagescale] => true
+                            [fixedsize] => 1
+                            [style] => setlinewidth(10), filled
+                            [regular] => true
+                            [fontsize] => 15
+                        )
+
+                    [edge] => Array
+                        (
+                            [arrowhead] => normal
+                            [arrowsize] => 3
+                            [color] => #99999966
+                            [fontsize] => 15
+                            [len] => 4
+                            [minlen] => 4
+                        )
+
+                )
+
+        )
+
+    [name] => 2736467056
+    [width] => 1366
+    [height] => 614
+    [prefix] => undefined
+    [input_parameters] => Array
+        (
+            [setupfile] => StateDEM
+            [state] => CA
+            [chamber] => state:upper
+            [cycle] => 2010
+            [candidate_ids] => 4426
+            [prefix] => undefined
+            [useSVG] => 1
+            [graphWidth] => 1366
+            [graphHeight] => 614
+        )
+
+)

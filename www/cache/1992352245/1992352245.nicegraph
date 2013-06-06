@@ -1,0 +1,2163 @@
+StateDEM Object
+(
+    [data] => Array
+        (
+            [nodetypes] => Array
+                (
+                    [0] => candidates
+                    [1] => donors
+                )
+
+            [edgetypes] => Array
+                (
+                    [donations] => Array
+                        (
+                            [0] => donors
+                            [1] => candidates
+                        )
+
+                )
+
+            [properties] => Array
+                (
+                    [minSize] => Array
+                        (
+                            [donors] => .5
+                            [candidates] => .5
+                            [donations] => 5
+                        )
+
+                    [maxSize] => Array
+                        (
+                            [donors] => 4
+                            [candidates] => 4
+                            [donations] => 40
+                        )
+
+                    [log_scaling] => 0
+                    [state] => AK
+                    [cycle] => 2010
+                    [chamber] => state:upper
+                    [valueMin] => 1
+                    [edgeid] => 
+                    [candidate_ids] => 
+                    [company_ids] => 
+                )
+
+            [nodes] => Array
+                (
+                    [39485] => Array
+                        (
+                            [transaction_id] => 394bd0812ec78dfb1b25d7fb8a02e92a
+                            [company_id] => 39485
+                            [company_name] => PACKIN COAL
+                            [amount] => 25.00
+                            [recipient_ext_id] => 8406
+                            [industry] => Coal Mining
+                            [image] => ../www/com_images/cunknown_coal_co.png
+                            [sitecode] => coal
+                            [contributor_type] => I
+                            [id] => 39485
+                            [total_dollars] => 25.00
+                            [type] => donors
+                            [label] => PACKIN COAL
+                            [value] => 25.00
+                            [dir] => /home/dameat/public_html/state_dem/njq/NodeViz
+                            [color] => cadetblue
+                            [shape] => circle
+                            [fillcolor] => #ffffff
+                            [tooltip] => PACKIN COAL (Gave $25)
+                            [label_zoom_level] => 8
+                            [click] => this.selectNode('39485'); this.panToNode('39485');
+                            [relatedNodes] => Array
+                                (
+                                    [8406] => Array
+                                        (
+                                            [0] => 8406_39485
+                                        )
+
+                                )
+
+                            [area] => 0.5
+                            [size] => 0.79788456080287
+                        )
+
+                    [289] => Array
+                        (
+                            [transaction_id] => 6b6bc1fdfb89ae6dbef842dcc51690ae
+                            [company_id] => 289
+                            [company_name] => Arctic Slope Regional
+                            [amount] => 50.00
+                            [recipient_ext_id] => 145304
+                            [industry] => Unknown
+                            [image] => ../www/com_images/cunknown_oil_co.png
+                            [sitecode] => oil
+                            [contributor_type] => I
+                            [id] => 289
+                            [total_dollars] => 50.00
+                            [type] => donors
+                            [label] => Arctic Slope Regional
+                            [value] => 50.00
+                            [dir] => /home/dameat/public_html/state_dem/njq/NodeViz
+                            [color] => cadetblue
+                            [shape] => circle
+                            [fillcolor] => #ffffff
+                            [tooltip] => Arctic Slope Regional (Gave $50)
+                            [label_zoom_level] => 8
+                            [click] => this.selectNode('289'); this.panToNode('289');
+                            [relatedNodes] => Array
+                                (
+                                    [145304] => Array
+                                        (
+                                            [0] => 145304_289
+                                        )
+
+                                )
+
+                            [area] => 0.51569506726457
+                            [size] => 0.81031065195153
+                        )
+
+                    [4211] => Array
+                        (
+                            [transaction_id] => 3358442206c9431f83fbf0ca4792c128
+                            [company_id] => 4211
+                            [company_name] => Peak Oilfield Service
+                            [amount] => 100.00
+                            [recipient_ext_id] => 2231
+                            [industry] => Oilfield Service, Equipment & Exploration
+                            [image] => ../www/com_images/cunknown_oil_co.png
+                            [sitecode] => oil
+                            [contributor_type] => I
+                            [id] => 4211
+                            [total_dollars] => 100.00
+                            [type] => donors
+                            [label] => Peak Oilfield Service
+                            [value] => 100.00
+                            [dir] => /home/dameat/public_html/state_dem/njq/NodeViz
+                            [color] => cadetblue
+                            [shape] => circle
+                            [fillcolor] => #ffffff
+                            [tooltip] => Peak Oilfield Service (Gave $100)
+                            [label_zoom_level] => 8
+                            [click] => this.selectNode('4211'); this.panToNode('4211');
+                            [relatedNodes] => Array
+                                (
+                                    [2231] => Array
+                                        (
+                                            [0] => 2231_4211
+                                        )
+
+                                )
+
+                            [area] => 0.54708520179372
+                            [size] => 0.83460799975988
+                        )
+
+                    [31946] => Array
+                        (
+                            [transaction_id] => 0ccdcca7ce9ca0b151ae0429340044d9
+                            [company_id] => 31946
+                            [company_name] => NANA Regional Corp
+                            [amount] => 100.00
+                            [recipient_ext_id] => 4165
+                            [industry] => Native American Tribes & Governing Units
+                            [image] => ../www/com_images/c31946.png
+                            [sitecode] => oil
+                            [contributor_type] => I
+                            [id] => 31946
+                            [total_dollars] => 100.00
+                            [type] => donors
+                            [label] => NANA Regional Corp
+                            [value] => 100.00
+                            [dir] => /home/dameat/public_html/state_dem/njq/NodeViz
+                            [color] => cadetblue
+                            [shape] => circle
+                            [fillcolor] => #ffffff
+                            [tooltip] => NANA Regional Corp (Gave $100)
+                            [label_zoom_level] => 8
+                            [click] => this.selectNode('31946'); this.panToNode('31946');
+                            [relatedNodes] => Array
+                                (
+                                    [4165] => Array
+                                        (
+                                            [0] => 4165_31946
+                                        )
+
+                                )
+
+                            [area] => 0.54708520179372
+                            [size] => 0.83460799975988
+                        )
+
+                    [38670] => Array
+                        (
+                            [transaction_id] => 2ef5423539af5a864c82412b959e1de2
+                            [company_id] => 38670
+                            [company_name] => SELF EMPLOYED
+                            [amount] => 100.00
+                            [recipient_ext_id] => 4171
+                            [industry] => Major (Multinational) Oil & Gas Producers
+                            [image] => ../www/com_images/cunknown_oil_co.png
+                            [sitecode] => oil
+                            [contributor_type] => I
+                            [id] => 38670
+                            [total_dollars] => 100.00
+                            [type] => donors
+                            [label] => SELF EMPLOYED
+                            [value] => 100.00
+                            [dir] => /home/dameat/public_html/state_dem/njq/NodeViz
+                            [color] => cadetblue
+                            [shape] => circle
+                            [fillcolor] => #ffffff
+                            [tooltip] => SELF EMPLOYED (Gave $100)
+                            [label_zoom_level] => 8
+                            [click] => this.selectNode('38670'); this.panToNode('38670');
+                            [relatedNodes] => Array
+                                (
+                                    [4171] => Array
+                                        (
+                                            [0] => 4171_38670
+                                        )
+
+                                )
+
+                            [area] => 0.54708520179372
+                            [size] => 0.83460799975988
+                        )
+
+                    [951] => Array
+                        (
+                            [transaction_id] => d207e893201167d6050b93d0e3905132
+                            [company_id] => 951
+                            [company_name] => Chevron Corp
+                            [amount] => 100.00
+                            [recipient_ext_id] => 4165
+                            [industry] => Major (Multinational) Oil & Gas Producers
+                            [image] => ../www/com_images/c951.png
+                            [sitecode] => oil
+                            [contributor_type] => I
+                            [id] => 951
+                            [total_dollars] => 100.00
+                            [type] => donors
+                            [label] => Chevron Corp
+                            [value] => 100.00
+                            [dir] => /home/dameat/public_html/state_dem/njq/NodeViz
+                            [color] => cadetblue
+                            [shape] => circle
+                            [fillcolor] => #ffffff
+                            [tooltip] => Chevron Corp (Gave $100)
+                            [label_zoom_level] => 8
+                            [click] => this.selectNode('951'); this.panToNode('951');
+                            [relatedNodes] => Array
+                                (
+                                    [4165] => Array
+                                        (
+                                            [0] => 4165_951
+                                        )
+
+                                )
+
+                            [area] => 0.54708520179372
+                            [size] => 0.83460799975988
+                        )
+
+                    [39474] => Array
+                        (
+                            [transaction_id] => 6c5da6457d7b57ac71a7b34290b4a202
+                            [company_id] => 39474
+                            [company_name] => NINESTAR ENTERPRISES
+                            [amount] => 100.00
+                            [recipient_ext_id] => 8800
+                            [industry] => Major (Multinational) Oil & Gas Producers
+                            [image] => ../www/com_images/cunknown_oil_co.png
+                            [sitecode] => oil
+                            [contributor_type] => I
+                            [id] => 39474
+                            [total_dollars] => 100.00
+                            [type] => donors
+                            [label] => NINESTAR ENTERPRISES
+                            [value] => 100.00
+                            [dir] => /home/dameat/public_html/state_dem/njq/NodeViz
+                            [color] => cadetblue
+                            [shape] => circle
+                            [fillcolor] => #ffffff
+                            [tooltip] => NINESTAR ENTERPRISES (Gave $100)
+                            [label_zoom_level] => 8
+                            [click] => this.selectNode('39474'); this.panToNode('39474');
+                            [relatedNodes] => Array
+                                (
+                                    [8800] => Array
+                                        (
+                                            [0] => 8800_39474
+                                        )
+
+                                )
+
+                            [area] => 0.54708520179372
+                            [size] => 0.83460799975988
+                        )
+
+                    [2229] => Array
+                        (
+                            [id] => 2229
+                            [state] => AK
+                            [term] => 2010
+                            [district] => 
+                            [party] => D
+                            [candidate_name] => Johnny Ellis
+                            [image] => ../www/can_images/2229.jpg
+                            [total_dollars] => 125
+                            [type] => candidates
+                            [value] => 125
+                            [color] => #3333cc33
+                            [label] => Johnny Ellis
+                            [fillcolor] => #ffffff
+                            [tooltip] => Johnny Ellis (Received $125)
+                            [shape] => square
+                            [label_zoom_level] => 6
+                            [click] => this.selectNode('2229'); this.panToNode('2229');
+                            [relatedNodes] => Array
+                                (
+                                    [168] => Array
+                                        (
+                                            [0] => 2229_168
+                                        )
+
+                                    [39472] => Array
+                                        (
+                                            [0] => 2229_39472
+                                        )
+
+                                )
+
+                            [area] => 0.5627802690583
+                            [size] => 0.75018682277037
+                        )
+
+                    [37852] => Array
+                        (
+                            [transaction_id] => c8935d99066eebd9b714f655a271435d
+                            [company_id] => 37852
+                            [company_name] => HOMEMAKER
+                            [amount] => 150.00
+                            [recipient_ext_id] => 145304
+                            [industry] => Oil & Gas
+                            [image] => ../www/com_images/cunknown_oil_co.png
+                            [sitecode] => oil
+                            [contributor_type] => I
+                            [id] => 37852
+                            [total_dollars] => 150.00
+                            [type] => donors
+                            [label] => HOMEMAKER
+                            [value] => 150.00
+                            [dir] => /home/dameat/public_html/state_dem/njq/NodeViz
+                            [color] => cadetblue
+                            [shape] => circle
+                            [fillcolor] => #ffffff
+                            [tooltip] => HOMEMAKER (Gave $150)
+                            [label_zoom_level] => 8
+                            [click] => this.selectNode('37852'); this.panToNode('37852');
+                            [relatedNodes] => Array
+                                (
+                                    [145304] => Array
+                                        (
+                                            [0] => 145304_37852
+                                        )
+
+                                )
+
+                            [area] => 0.57847533632287
+                            [size] => 0.85821773103348
+                        )
+
+                    [30934] => Array
+                        (
+                            [transaction_id] => f9542e269e2571919eba84384b4a50d7
+                            [company_id] => 30934
+                            [company_name] => Doyon Limited
+                            [amount] => 200.00
+                            [recipient_ext_id] => 8406
+                            [industry] => Electric Power Utilities
+                            [image] => ../www/com_images/cunknown_coal_co.png
+                            [sitecode] => coal
+                            [contributor_type] => I
+                            [id] => 30934
+                            [total_dollars] => 200.00
+                            [type] => donors
+                            [label] => Doyon Limited
+                            [value] => 200.00
+                            [dir] => /home/dameat/public_html/state_dem/njq/NodeViz
+                            [color] => cadetblue
+                            [shape] => circle
+                            [fillcolor] => #ffffff
+                            [tooltip] => Doyon Limited (Gave $200)
+                            [label_zoom_level] => 8
+                            [click] => this.selectNode('30934'); this.panToNode('30934');
+                            [relatedNodes] => Array
+                                (
+                                    [8406] => Array
+                                        (
+                                            [0] => 8406_30934
+                                        )
+
+                                )
+
+                            [area] => 0.60986547085202
+                            [size] => 0.88119511713202
+                        )
+
+                    [32624] => Array
+                        (
+                            [transaction_id] => b1eaaecdadb007f3ac70e965ac8bf8cb
+                            [company_id] => 32624
+                            [company_name] => Chugach Electric Assn
+                            [amount] => 200.00
+                            [recipient_ext_id] => 8800
+                            [industry] => Electric Power Utilities
+                            [image] => ../www/com_images/cunknown_oil_co.png
+                            [sitecode] => oil
+                            [contributor_type] => I
+                            [id] => 32624
+                            [total_dollars] => 200.00
+                            [type] => donors
+                            [label] => Chugach Electric Assn
+                            [value] => 200.00
+                            [dir] => /home/dameat/public_html/state_dem/njq/NodeViz
+                            [color] => cadetblue
+                            [shape] => circle
+                            [fillcolor] => #ffffff
+                            [tooltip] => Chugach Electric Assn (Gave $200)
+                            [label_zoom_level] => 8
+                            [click] => this.selectNode('32624'); this.panToNode('32624');
+                            [relatedNodes] => Array
+                                (
+                                    [8800] => Array
+                                        (
+                                            [0] => 8800_32624
+                                        )
+
+                                )
+
+                            [area] => 0.60986547085202
+                            [size] => 0.88119511713202
+                        )
+
+                    [1737] => Array
+                        (
+                            [transaction_id] => 4218c8392d64e794875a2083361b799c
+                            [company_id] => 1737
+                            [company_name] => Exxon Mobil
+                            [amount] => 250.00
+                            [recipient_ext_id] => 2245
+                            [industry] => Major (Multinational) Oil & Gas Producers
+                            [image] => ../www/com_images/c28.png
+                            [sitecode] => oil
+                            [contributor_type] => I
+                            [id] => 1737
+                            [total_dollars] => 250.00
+                            [type] => donors
+                            [label] => Exxon Mobil
+                            [value] => 250.00
+                            [dir] => /home/dameat/public_html/state_dem/njq/NodeViz
+                            [color] => cadetblue
+                            [shape] => circle
+                            [fillcolor] => #ffffff
+                            [tooltip] => Exxon Mobil (Gave $250)
+                            [label_zoom_level] => 8
+                            [click] => this.selectNode('1737'); this.panToNode('1737');
+                            [relatedNodes] => Array
+                                (
+                                    [2245] => Array
+                                        (
+                                            [0] => 2245_1737
+                                        )
+
+                                )
+
+                            [area] => 0.64125560538117
+                            [size] => 0.90358839913668
+                        )
+
+                    [2841] => Array
+                        (
+                            [transaction_id] => eb74daf3fdf317489937b61103096166
+                            [company_id] => 2841
+                            [company_name] => Koch Industries
+                            [amount] => 250.00
+                            [recipient_ext_id] => 3179
+                            [industry] => Petroleum Refining & Marketing
+                            [image] => ../www/com_images/c48.png
+                            [sitecode] => oil
+                            [contributor_type] => C
+                            [id] => 2841
+                            [total_dollars] => 250.00
+                            [type] => donors
+                            [label] => Koch Industries
+                            [value] => 250.00
+                            [dir] => /home/dameat/public_html/state_dem/njq/NodeViz
+                            [color] => cadetblue
+                            [shape] => circle
+                            [fillcolor] => #ffffff
+                            [tooltip] => Koch Industries (Gave $250)
+                            [label_zoom_level] => 8
+                            [click] => this.selectNode('2841'); this.panToNode('2841');
+                            [relatedNodes] => Array
+                                (
+                                    [3179] => Array
+                                        (
+                                            [0] => 3179_2841
+                                        )
+
+                                )
+
+                            [area] => 0.64125560538117
+                            [size] => 0.90358839913668
+                        )
+
+                    [3179] => Array
+                        (
+                            [id] => 3179
+                            [state] => AK
+                            [term] => 2010
+                            [district] => 
+                            [party] => R
+                            [candidate_name] => John Coghill
+                            [image] => ../www/can_images/3179.jpg
+                            [total_dollars] => 250
+                            [type] => candidates
+                            [value] => 250
+                            [color] => #cc333333
+                            [label] => John Coghill
+                            [fillcolor] => #ffffff
+                            [tooltip] => John Coghill (Received $250)
+                            [shape] => square
+                            [label_zoom_level] => 6
+                            [click] => this.selectNode('3179'); this.panToNode('3179');
+                            [relatedNodes] => Array
+                                (
+                                    [2841] => Array
+                                        (
+                                            [0] => 3179_2841
+                                        )
+
+                                )
+
+                            [area] => 0.64125560538117
+                            [size] => 0.80078436884168
+                        )
+
+                    [168] => Array
+                        (
+                            [transaction_id] => d4619e82d7d682541ef00aec5f1a080d
+                            [company_id] => 168
+                            [company_name] => Alyeska Pipeline Service Co
+                            [amount] => 150.00
+                            [recipient_ext_id] => 145304
+                            [industry] => Oilfield Service, Equipment & Exploration
+                            [image] => ../www/com_images/cunknown_oil_co.png
+                            [sitecode] => oil
+                            [contributor_type] => I
+                            [id] => 168
+                            [total_dollars] => 260
+                            [type] => donors
+                            [label] => Alyeska Pipeline Service Co
+                            [value] => 260
+                            [dir] => /home/dameat/public_html/state_dem/njq/NodeViz
+                            [color] => cadetblue
+                            [shape] => circle
+                            [fillcolor] => #ffffff
+                            [tooltip] => Alyeska Pipeline Service Co (Gave $260)
+                            [label_zoom_level] => 8
+                            [click] => this.selectNode('168'); this.panToNode('168');
+                            [relatedNodes] => Array
+                                (
+                                    [2229] => Array
+                                        (
+                                            [0] => 2229_168
+                                        )
+
+                                    [8800] => Array
+                                        (
+                                            [0] => 8800_168
+                                        )
+
+                                    [145304] => Array
+                                        (
+                                            [0] => 145304_168
+                                        )
+
+                                )
+
+                            [area] => 0.647533632287
+                            [size] => 0.90800078588832
+                        )
+
+                    [38177] => Array
+                        (
+                            [transaction_id] => 7c869e07bb716b6fe1b27f3301f8f19e
+                            [company_id] => 38177
+                            [company_name] => N/A
+                            [amount] => 350.00
+                            [recipient_ext_id] => 145304
+                            [industry] => Oil & Gas
+                            [image] => ../www/com_images/cunknown_oil_co.png
+                            [sitecode] => oil
+                            [contributor_type] => I
+                            [id] => 38177
+                            [total_dollars] => 350.00
+                            [type] => donors
+                            [label] => N/A
+                            [value] => 350.00
+                            [dir] => /home/dameat/public_html/state_dem/njq/NodeViz
+                            [color] => cadetblue
+                            [shape] => circle
+                            [fillcolor] => #ffffff
+                            [tooltip] => N/A (Gave $350)
+                            [label_zoom_level] => 8
+                            [click] => this.selectNode('38177'); this.panToNode('38177');
+                            [relatedNodes] => Array
+                                (
+                                    [145304] => Array
+                                        (
+                                            [0] => 145304_38177
+                                        )
+
+                                )
+
+                            [area] => 0.70403587443946
+                            [size] => 0.94678736591091
+                        )
+
+                    [1677] => Array
+                        (
+                            [transaction_id] => 459cb9ae793e14482e96419e42d9336a
+                            [company_id] => 1677
+                            [company_name] => Enstar Natural Gas
+                            [amount] => 250.00
+                            [recipient_ext_id] => 145304
+                            [industry] => Natural Gas Transmission & Distribution
+                            [image] => ../www/com_images/c1677.png
+                            [sitecode] => oil
+                            [contributor_type] => I
+                            [id] => 1677
+                            [total_dollars] => 400
+                            [type] => donors
+                            [label] => Enstar Natural Gas
+                            [value] => 400
+                            [dir] => /home/dameat/public_html/state_dem/njq/NodeViz
+                            [color] => cadetblue
+                            [shape] => circle
+                            [fillcolor] => #ffffff
+                            [tooltip] => Enstar Natural Gas (Gave $400)
+                            [label_zoom_level] => 8
+                            [click] => this.selectNode('1677'); this.panToNode('1677');
+                            [relatedNodes] => Array
+                                (
+                                    [4165] => Array
+                                        (
+                                            [0] => 4165_1677
+                                        )
+
+                                    [145304] => Array
+                                        (
+                                            [0] => 145304_1677
+                                        )
+
+                                )
+
+                            [area] => 0.73542600896861
+                            [size] => 0.96766392763479
+                        )
+
+                    [38371] => Array
+                        (
+                            [transaction_id] => f53edca91c36907446e9725eb5299598
+                            [company_id] => 38371
+                            [company_name] => OWNER
+                            [amount] => 500.00
+                            [recipient_ext_id] => 8406
+                            [industry] => Oilfield Service, Equipment & Exploration
+                            [image] => ../www/com_images/cunknown_oil_co.png
+                            [sitecode] => oil
+                            [contributor_type] => I
+                            [id] => 38371
+                            [total_dollars] => 500.00
+                            [type] => donors
+                            [label] => OWNER
+                            [value] => 500.00
+                            [dir] => /home/dameat/public_html/state_dem/njq/NodeViz
+                            [color] => cadetblue
+                            [shape] => circle
+                            [fillcolor] => #ffffff
+                            [tooltip] => OWNER (Gave $500)
+                            [label_zoom_level] => 8
+                            [click] => this.selectNode('38371'); this.panToNode('38371');
+                            [relatedNodes] => Array
+                                (
+                                    [8406] => Array
+                                        (
+                                            [0] => 8406_38371
+                                        )
+
+                                )
+
+                            [area] => 0.79820627802691
+                            [size] => 1.008120924314
+                        )
+
+                    [1991] => Array
+                        (
+                            [transaction_id] => 1e0daa0c688edf1d077ceda0a8a6cd11
+                            [company_id] => 1991
+                            [company_name] => Gas Station Operator
+                            [amount] => 500.00
+                            [recipient_ext_id] => 2245
+                            [industry] => Gasoline Service Stations
+                            [image] => ../www/com_images/cunknown_oil_co.png
+                            [sitecode] => oil
+                            [contributor_type] => I
+                            [id] => 1991
+                            [total_dollars] => 500.00
+                            [type] => donors
+                            [label] => Gas Station Operator
+                            [value] => 500.00
+                            [dir] => /home/dameat/public_html/state_dem/njq/NodeViz
+                            [color] => cadetblue
+                            [shape] => circle
+                            [fillcolor] => #ffffff
+                            [tooltip] => Gas Station Operator (Gave $500)
+                            [label_zoom_level] => 8
+                            [click] => this.selectNode('1991'); this.panToNode('1991');
+                            [relatedNodes] => Array
+                                (
+                                    [2245] => Array
+                                        (
+                                            [0] => 2245_1991
+                                        )
+
+                                )
+
+                            [area] => 0.79820627802691
+                            [size] => 1.008120924314
+                        )
+
+                    [39357] => Array
+                        (
+                            [transaction_id] => f386ce226db2974a14a7f09459ac5f28
+                            [company_id] => 39357
+                            [company_name] => HAWK CONSULTANTS
+                            [amount] => 500.00
+                            [recipient_ext_id] => 145304
+                            [industry] => Major (Multinational) Oil & Gas Producers
+                            [image] => ../www/com_images/cunknown_oil_co.png
+                            [sitecode] => oil
+                            [contributor_type] => I
+                            [id] => 39357
+                            [total_dollars] => 500.00
+                            [type] => donors
+                            [label] => HAWK CONSULTANTS
+                            [value] => 500.00
+                            [dir] => /home/dameat/public_html/state_dem/njq/NodeViz
+                            [color] => cadetblue
+                            [shape] => circle
+                            [fillcolor] => #ffffff
+                            [tooltip] => HAWK CONSULTANTS (Gave $500)
+                            [label_zoom_level] => 8
+                            [click] => this.selectNode('39357'); this.panToNode('39357');
+                            [relatedNodes] => Array
+                                (
+                                    [145304] => Array
+                                        (
+                                            [0] => 145304_39357
+                                        )
+
+                                )
+
+                            [area] => 0.79820627802691
+                            [size] => 1.008120924314
+                        )
+
+                    [39472] => Array
+                        (
+                            [transaction_id] => 913fd9aaf4043169ba7caace16301061
+                            [company_id] => 39472
+                            [company_name] => NINE STAR ENTERPRISES
+                            [amount] => 300.00
+                            [recipient_ext_id] => 8800
+                            [industry] => Major (Multinational) Oil & Gas Producers
+                            [image] => ../www/com_images/cunknown_oil_co.png
+                            [sitecode] => oil
+                            [contributor_type] => I
+                            [id] => 39472
+                            [total_dollars] => 600
+                            [type] => donors
+                            [label] => NINE STAR ENTERPRISES
+                            [value] => 600
+                            [dir] => /home/dameat/public_html/state_dem/njq/NodeViz
+                            [color] => cadetblue
+                            [shape] => circle
+                            [fillcolor] => #ffffff
+                            [tooltip] => NINE STAR ENTERPRISES (Gave $600)
+                            [label_zoom_level] => 8
+                            [click] => this.selectNode('39472'); this.panToNode('39472');
+                            [relatedNodes] => Array
+                                (
+                                    [2229] => Array
+                                        (
+                                            [0] => 2229_39472
+                                        )
+
+                                    [145304] => Array
+                                        (
+                                            [0] => 145304_39472
+                                        )
+
+                                    [8800] => Array
+                                        (
+                                            [0] => 8800_39472
+                                        )
+
+                                )
+
+                            [area] => 0.8609865470852
+                            [size] => 1.0470158161336
+                        )
+
+                    [8800] => Array
+                        (
+                            [id] => 8800
+                            [state] => AK
+                            [term] => 2010
+                            [district] => 
+                            [party] => D
+                            [candidate_name] => Bill Wielechowski
+                            [image] => ../www/can_images/8800.jpg
+                            [total_dollars] => 705
+                            [type] => candidates
+                            [value] => 705
+                            [color] => #3333cc33
+                            [label] => Bill Wielechowski
+                            [fillcolor] => #ffffff
+                            [tooltip] => Bill Wielechowski (Received $705)
+                            [shape] => square
+                            [label_zoom_level] => 6
+                            [click] => this.selectNode('8800'); this.panToNode('8800');
+                            [relatedNodes] => Array
+                                (
+                                    [671] => Array
+                                        (
+                                            [0] => 8800_671
+                                        )
+
+                                    [168] => Array
+                                        (
+                                            [0] => 8800_168
+                                        )
+
+                                    [39474] => Array
+                                        (
+                                            [0] => 8800_39474
+                                        )
+
+                                    [32624] => Array
+                                        (
+                                            [0] => 8800_32624
+                                        )
+
+                                    [39472] => Array
+                                        (
+                                            [0] => 8800_39472
+                                        )
+
+                                )
+
+                            [area] => 0.92690582959641
+                            [size] => 0.96275948688985
+                        )
+
+                    [2245] => Array
+                        (
+                            [id] => 2245
+                            [state] => AK
+                            [term] => 2010
+                            [district] => 
+                            [party] => D
+                            [candidate_name] => Dennis Egan
+                            [image] => ../www/can_images/2245.jpg
+                            [total_dollars] => 850
+                            [type] => candidates
+                            [value] => 850
+                            [color] => #3333cc33
+                            [label] => Dennis Egan
+                            [fillcolor] => #ffffff
+                            [tooltip] => Dennis Egan (Received $850)
+                            [shape] => square
+                            [label_zoom_level] => 6
+                            [click] => this.selectNode('2245'); this.panToNode('2245');
+                            [relatedNodes] => Array
+                                (
+                                    [1137] => Array
+                                        (
+                                            [0] => 2245_1137
+                                        )
+
+                                    [1737] => Array
+                                        (
+                                            [0] => 2245_1737
+                                        )
+
+                                    [1991] => Array
+                                        (
+                                            [0] => 2245_1991
+                                        )
+
+                                )
+
+                            [area] => 1.0179372197309
+                            [size] => 1.0089287485898
+                        )
+
+                    [39350] => Array
+                        (
+                            [transaction_id] => a81245bf31fd95f26b531e4b06377eb2
+                            [company_id] => 39350
+                            [company_name] => CONAM CONSTRUCTION
+                            [amount] => 500.00
+                            [recipient_ext_id] => 145304
+                            [industry] => Oilfield Service, Equipment & Exploration
+                            [image] => ../www/com_images/c39350.png
+                            [sitecode] => oil
+                            [contributor_type] => I
+                            [id] => 39350
+                            [total_dollars] => 1000
+                            [type] => donors
+                            [label] => CONAM CONSTRUCTION
+                            [value] => 1000
+                            [dir] => /home/dameat/public_html/state_dem/njq/NodeViz
+                            [color] => cadetblue
+                            [shape] => circle
+                            [fillcolor] => #ffffff
+                            [tooltip] => CONAM CONSTRUCTION (Gave $1,000)
+                            [label_zoom_level] => 8
+                            [click] => this.selectNode('39350'); this.panToNode('39350');
+                            [relatedNodes] => Array
+                                (
+                                    [145304] => Array
+                                        (
+                                            [0] => 145304_39350
+                                        )
+
+                                    [4165] => Array
+                                        (
+                                            [0] => 4165_39350
+                                        )
+
+                                )
+
+                            [area] => 1.1121076233184
+                            [size] => 1.1899493283373
+                        )
+
+                    [5460] => Array
+                        (
+                            [transaction_id] => 6df74ee290799ca96ac3d396d7baa529
+                            [company_id] => 5460
+                            [company_name] => Tesoro Petroleum
+                            [amount] => 1000.00
+                            [recipient_ext_id] => 2231
+                            [industry] => Petroleum Refining & Marketing
+                            [image] => ../www/com_images/c185.png
+                            [sitecode] => oil
+                            [contributor_type] => C
+                            [id] => 5460
+                            [total_dollars] => 1500
+                            [type] => donors
+                            [label] => Tesoro Petroleum
+                            [value] => 1500
+                            [dir] => /home/dameat/public_html/state_dem/njq/NodeViz
+                            [color] => cadetblue
+                            [shape] => circle
+                            [fillcolor] => #ffffff
+                            [tooltip] => Tesoro Petroleum (Gave $1,500)
+                            [label_zoom_level] => 8
+                            [click] => this.selectNode('5460'); this.panToNode('5460');
+                            [relatedNodes] => Array
+                                (
+                                    [145304] => Array
+                                        (
+                                            [0] => 145304_5460
+                                        )
+
+                                    [2231] => Array
+                                        (
+                                            [0] => 2231_5460
+                                        )
+
+                                )
+
+                            [area] => 1.4260089686099
+                            [size] => 1.3474609493344
+                        )
+
+                    [4171] => Array
+                        (
+                            [id] => 4171
+                            [state] => AK
+                            [term] => 2010
+                            [district] => 
+                            [party] => R
+                            [candidate_name] => Charlie Huggins
+                            [image] => ../www/can_images/4171.jpg
+                            [total_dollars] => 1650
+                            [type] => candidates
+                            [value] => 1650
+                            [color] => #cc333333
+                            [label] => Charlie Huggins
+                            [fillcolor] => #ffffff
+                            [tooltip] => Charlie Huggins (Received $1,650)
+                            [shape] => square
+                            [label_zoom_level] => 6
+                            [click] => this.selectNode('4171'); this.panToNode('4171');
+                            [relatedNodes] => Array
+                                (
+                                    [38670] => Array
+                                        (
+                                            [0] => 4171_38670
+                                        )
+
+                                    [39514] => Array
+                                        (
+                                            [0] => 4171_39514
+                                        )
+
+                                    [1137] => Array
+                                        (
+                                            [0] => 4171_1137
+                                        )
+
+                                )
+
+                            [area] => 1.5201793721973
+                            [size] => 1.2329555434797
+                        )
+
+                    [671] => Array
+                        (
+                            [transaction_id] => 5ca9b7fb60838f64badc650a5e00fc13
+                            [company_id] => 671
+                            [company_name] => BP
+                            [amount] => 1175.00
+                            [recipient_ext_id] => 8406
+                            [industry] => Major (Multinational) Oil & Gas Producers
+                            [image] => ../www/com_images/c671.png
+                            [sitecode] => oil
+                            [contributor_type] => I
+                            [id] => 671
+                            [total_dollars] => 1745
+                            [type] => donors
+                            [label] => BP
+                            [value] => 1745
+                            [dir] => /home/dameat/public_html/state_dem/njq/NodeViz
+                            [color] => cadetblue
+                            [shape] => circle
+                            [fillcolor] => #ffffff
+                            [tooltip] => BP (Gave $1,745)
+                            [label_zoom_level] => 8
+                            [click] => this.selectNode('671'); this.panToNode('671');
+                            [relatedNodes] => Array
+                                (
+                                    [8800] => Array
+                                        (
+                                            [0] => 8800_671
+                                        )
+
+                                    [145304] => Array
+                                        (
+                                            [0] => 145304_671
+                                        )
+
+                                    [8406] => Array
+                                        (
+                                            [0] => 8406_671
+                                        )
+
+                                )
+
+                            [area] => 1.5798206278027
+                            [size] => 1.4182701071752
+                        )
+
+                    [2231] => Array
+                        (
+                            [id] => 2231
+                            [state] => AK
+                            [term] => 2010
+                            [district] => 
+                            [party] => D
+                            [candidate_name] => Lyman Hoffman
+                            [image] => ../www/can_images/2231.jpg
+                            [total_dollars] => 2600
+                            [type] => candidates
+                            [value] => 2600
+                            [color] => #3333cc33
+                            [label] => Lyman Hoffman
+                            [fillcolor] => #ffffff
+                            [tooltip] => Lyman Hoffman (Received $2,600)
+                            [shape] => square
+                            [label_zoom_level] => 6
+                            [click] => this.selectNode('2231'); this.panToNode('2231');
+                            [relatedNodes] => Array
+                                (
+                                    [4211] => Array
+                                        (
+                                            [0] => 2231_4211
+                                        )
+
+                                    [1137] => Array
+                                        (
+                                            [0] => 2231_1137
+                                        )
+
+                                    [39514] => Array
+                                        (
+                                            [0] => 2231_39514
+                                        )
+
+                                    [5460] => Array
+                                        (
+                                            [0] => 2231_5460
+                                        )
+
+                                )
+
+                            [area] => 2.1165919282511
+                            [size] => 1.4548511704814
+                        )
+
+                    [8406] => Array
+                        (
+                            [id] => 8406
+                            [state] => AK
+                            [term] => 2010
+                            [district] => 
+                            [party] => D
+                            [candidate_name] => Joe Thomas
+                            [image] => ../www/can_images/8406.jpg
+                            [total_dollars] => 2850
+                            [type] => candidates
+                            [value] => 2850
+                            [color] => #3333cc33
+                            [label] => Joe Thomas
+                            [fillcolor] => #ffffff
+                            [tooltip] => Joe Thomas (Received $2,850)
+                            [shape] => square
+                            [label_zoom_level] => 6
+                            [click] => this.selectNode('8406'); this.panToNode('8406');
+                            [relatedNodes] => Array
+                                (
+                                    [39485] => Array
+                                        (
+                                            [0] => 8406_39485
+                                        )
+
+                                    [30934] => Array
+                                        (
+                                            [0] => 8406_30934
+                                        )
+
+                                    [1137] => Array
+                                        (
+                                            [0] => 8406_1137
+                                        )
+
+                                    [38371] => Array
+                                        (
+                                            [0] => 8406_38371
+                                        )
+
+                                    [39514] => Array
+                                        (
+                                            [0] => 8406_39514
+                                        )
+
+                                    [671] => Array
+                                        (
+                                            [0] => 8406_671
+                                        )
+
+                                )
+
+                            [area] => 2.2735426008969
+                            [size] => 1.5078271124028
+                        )
+
+                    [4165] => Array
+                        (
+                            [id] => 4165
+                            [state] => AK
+                            [term] => 2010
+                            [district] => 
+                            [party] => R
+                            [candidate_name] => Lesil McGuire
+                            [image] => ../www/can_images/4165.jpg
+                            [total_dollars] => 4450
+                            [type] => candidates
+                            [value] => 4450
+                            [color] => #cc333333
+                            [label] => Lesil McGuire
+                            [fillcolor] => #ffffff
+                            [tooltip] => Lesil McGuire (Received $4,450)
+                            [shape] => square
+                            [label_zoom_level] => 6
+                            [click] => this.selectNode('4165'); this.panToNode('4165');
+                            [relatedNodes] => Array
+                                (
+                                    [951] => Array
+                                        (
+                                            [0] => 4165_951
+                                        )
+
+                                    [31946] => Array
+                                        (
+                                            [0] => 4165_31946
+                                        )
+
+                                    [1677] => Array
+                                        (
+                                            [0] => 4165_1677
+                                        )
+
+                                    [39350] => Array
+                                        (
+                                            [0] => 4165_39350
+                                        )
+
+                                    [39514] => Array
+                                        (
+                                            [0] => 4165_39514
+                                        )
+
+                                    [1137] => Array
+                                        (
+                                            [0] => 4165_1137
+                                        )
+
+                                )
+
+                            [area] => 3.2780269058296
+                            [size] => 1.8105322161811
+                        )
+
+                    [39514] => Array
+                        (
+                            [transaction_id] => a55c7992e2abcf311e5bf678ad43a875
+                            [company_id] => 39514
+                            [company_name] => UDELHOVEN OIL
+                            [amount] => 1500.00
+                            [recipient_ext_id] => 4165
+                            [industry] => Oilfield Service, Equipment & Exploration
+                            [image] => ../www/com_images/c39514.png
+                            [sitecode] => oil
+                            [contributor_type] => I
+                            [id] => 39514
+                            [total_dollars] => 4700
+                            [type] => donors
+                            [label] => UDELHOVEN OIL
+                            [value] => 4700
+                            [dir] => /home/dameat/public_html/state_dem/njq/NodeViz
+                            [color] => cadetblue
+                            [shape] => circle
+                            [fillcolor] => #ffffff
+                            [tooltip] => UDELHOVEN OIL (Gave $4,700)
+                            [label_zoom_level] => 8
+                            [click] => this.selectNode('39514'); this.panToNode('39514');
+                            [relatedNodes] => Array
+                                (
+                                    [4171] => Array
+                                        (
+                                            [0] => 4171_39514
+                                        )
+
+                                    [8406] => Array
+                                        (
+                                            [0] => 8406_39514
+                                        )
+
+                                    [2231] => Array
+                                        (
+                                            [0] => 2231_39514
+                                        )
+
+                                    [145304] => Array
+                                        (
+                                            [0] => 145304_39514
+                                        )
+
+                                    [4165] => Array
+                                        (
+                                            [0] => 4165_39514
+                                        )
+
+                                )
+
+                            [area] => 3.4349775784753
+                            [size] => 2.0913032511316
+                        )
+
+                    [1137] => Array
+                        (
+                            [transaction_id] => 3c24ffa148c35e7b97efcbc8ffed90ef
+                            [company_id] => 1137
+                            [company_name] => ConocoPhillips
+                            [amount] => 2100.00
+                            [recipient_ext_id] => 4165
+                            [industry] => Major (Multinational) Oil & Gas Producers
+                            [image] => ../www/com_images/c92.png
+                            [sitecode] => oil
+                            [contributor_type] => I
+                            [id] => 1137
+                            [total_dollars] => 5400
+                            [type] => donors
+                            [label] => ConocoPhillips
+                            [value] => 5400
+                            [dir] => /home/dameat/public_html/state_dem/njq/NodeViz
+                            [color] => cadetblue
+                            [shape] => circle
+                            [fillcolor] => #ffffff
+                            [tooltip] => ConocoPhillips (Gave $5,400)
+                            [label_zoom_level] => 8
+                            [click] => this.selectNode('1137'); this.panToNode('1137');
+                            [relatedNodes] => Array
+                                (
+                                    [2245] => Array
+                                        (
+                                            [0] => 2245_1137
+                                        )
+
+                                    [8406] => Array
+                                        (
+                                            [0] => 8406_1137
+                                        )
+
+                                    [2231] => Array
+                                        (
+                                            [0] => 2231_1137
+                                        )
+
+                                    [4171] => Array
+                                        (
+                                            [0] => 4171_1137
+                                        )
+
+                                    [145304] => Array
+                                        (
+                                            [0] => 145304_1137
+                                        )
+
+                                    [4165] => Array
+                                        (
+                                            [0] => 4165_1137
+                                        )
+
+                                )
+
+                            [area] => 3.8744394618834
+                            [size] => 2.2210559507929
+                        )
+
+                    [145304] => Array
+                        (
+                            [id] => 145304
+                            [state] => AK
+                            [term] => 2010
+                            [district] => 
+                            [party] => R
+                            [candidate_name] => Cathy Giessel
+                            [image] => ../www/can_images/145304.jpg
+                            [total_dollars] => 5600
+                            [type] => candidates
+                            [value] => 5600
+                            [color] => #cc333333
+                            [label] => Cathy Giessel
+                            [fillcolor] => #ffffff
+                            [tooltip] => Cathy Giessel (Received $5,600)
+                            [shape] => square
+                            [label_zoom_level] => 6
+                            [click] => this.selectNode('145304'); this.panToNode('145304');
+                            [relatedNodes] => Array
+                                (
+                                    [289] => Array
+                                        (
+                                            [0] => 145304_289
+                                        )
+
+                                    [168] => Array
+                                        (
+                                            [0] => 145304_168
+                                        )
+
+                                    [37852] => Array
+                                        (
+                                            [0] => 145304_37852
+                                        )
+
+                                    [39472] => Array
+                                        (
+                                            [0] => 145304_39472
+                                        )
+
+                                    [1677] => Array
+                                        (
+                                            [0] => 145304_1677
+                                        )
+
+                                    [38177] => Array
+                                        (
+                                            [0] => 145304_38177
+                                        )
+
+                                    [5460] => Array
+                                        (
+                                            [0] => 145304_5460
+                                        )
+
+                                    [39350] => Array
+                                        (
+                                            [0] => 145304_39350
+                                        )
+
+                                    [39357] => Array
+                                        (
+                                            [0] => 145304_39357
+                                        )
+
+                                    [671] => Array
+                                        (
+                                            [0] => 145304_671
+                                        )
+
+                                    [39514] => Array
+                                        (
+                                            [0] => 145304_39514
+                                        )
+
+                                    [1137] => Array
+                                        (
+                                            [0] => 145304_1137
+                                        )
+
+                                )
+
+                            [area] => 4
+                            [size] => 2
+                        )
+
+                )
+
+            [edges] => Array
+                (
+                    [8800_671] => Array
+                        (
+                            [toId] => 8800
+                            [fromId] => 671
+                            [value] => 20.00
+                            [id] => 8800_671
+                            [type] => donations
+                            [weight] => 20.00
+                            [tooltip] => $20 from BP to Bill Wielechowski
+                            [area] => 5
+                            [size] => 5
+                        )
+
+                    [8406_39485] => Array
+                        (
+                            [toId] => 8406
+                            [fromId] => 39485
+                            [value] => 25.00
+                            [id] => 8406_39485
+                            [type] => donations
+                            [weight] => 25.00
+                            [tooltip] => $25 from PACKIN COAL to Joe Thomas
+                            [area] => 5.0841346153846
+                            [size] => 5.0841346153846
+                        )
+
+                    [2229_168] => Array
+                        (
+                            [toId] => 2229
+                            [fromId] => 168
+                            [value] => 25.00
+                            [id] => 2229_168
+                            [type] => donations
+                            [weight] => 25.00
+                            [tooltip] => $25 from Alyeska Pipeline Service Co to Johnny Ellis
+                            [area] => 5.0841346153846
+                            [size] => 5.0841346153846
+                        )
+
+                    [145304_289] => Array
+                        (
+                            [toId] => 145304
+                            [fromId] => 289
+                            [value] => 50.00
+                            [id] => 145304_289
+                            [type] => donations
+                            [weight] => 50.00
+                            [tooltip] => $50 from Arctic Slope Regional to Cathy Giessel
+                            [area] => 5.5048076923077
+                            [size] => 5.5048076923077
+                        )
+
+                    [8800_168] => Array
+                        (
+                            [toId] => 8800
+                            [fromId] => 168
+                            [value] => 85.00
+                            [id] => 8800_168
+                            [type] => donations
+                            [weight] => 85.00
+                            [tooltip] => $85 from Alyeska Pipeline Service Co to Bill Wielechowski
+                            [area] => 6.09375
+                            [size] => 6.09375
+                        )
+
+                    [4165_31946] => Array
+                        (
+                            [toId] => 4165
+                            [fromId] => 31946
+                            [value] => 100.00
+                            [id] => 4165_31946
+                            [type] => donations
+                            [weight] => 100.00
+                            [tooltip] => $100 from NANA Regional Corp to Lesil McGuire
+                            [area] => 6.3461538461538
+                            [size] => 6.3461538461538
+                        )
+
+                    [4165_951] => Array
+                        (
+                            [toId] => 4165
+                            [fromId] => 951
+                            [value] => 100.00
+                            [id] => 4165_951
+                            [type] => donations
+                            [weight] => 100.00
+                            [tooltip] => $100 from Chevron Corp to Lesil McGuire
+                            [area] => 6.3461538461538
+                            [size] => 6.3461538461538
+                        )
+
+                    [2245_1137] => Array
+                        (
+                            [toId] => 2245
+                            [fromId] => 1137
+                            [value] => 100.00
+                            [id] => 2245_1137
+                            [type] => donations
+                            [weight] => 100.00
+                            [tooltip] => $100 from ConocoPhillips to Dennis Egan
+                            [area] => 6.3461538461538
+                            [size] => 6.3461538461538
+                        )
+
+                    [8800_39474] => Array
+                        (
+                            [toId] => 8800
+                            [fromId] => 39474
+                            [value] => 100.00
+                            [id] => 8800_39474
+                            [type] => donations
+                            [weight] => 100.00
+                            [tooltip] => $100 from NINESTAR ENTERPRISES to Bill Wielechowski
+                            [area] => 6.3461538461538
+                            [size] => 6.3461538461538
+                        )
+
+                    [2229_39472] => Array
+                        (
+                            [toId] => 2229
+                            [fromId] => 39472
+                            [value] => 100.00
+                            [id] => 2229_39472
+                            [type] => donations
+                            [weight] => 100.00
+                            [tooltip] => $100 from NINE STAR ENTERPRISES to Johnny Ellis
+                            [area] => 6.3461538461538
+                            [size] => 6.3461538461538
+                        )
+
+                    [4171_38670] => Array
+                        (
+                            [toId] => 4171
+                            [fromId] => 38670
+                            [value] => 100.00
+                            [id] => 4171_38670
+                            [type] => donations
+                            [weight] => 100.00
+                            [tooltip] => $100 from SELF EMPLOYED to Charlie Huggins
+                            [area] => 6.3461538461538
+                            [size] => 6.3461538461538
+                        )
+
+                    [2231_4211] => Array
+                        (
+                            [toId] => 2231
+                            [fromId] => 4211
+                            [value] => 100.00
+                            [id] => 2231_4211
+                            [type] => donations
+                            [weight] => 100.00
+                            [tooltip] => $100 from Peak Oilfield Service to Lyman Hoffman
+                            [area] => 6.3461538461538
+                            [size] => 6.3461538461538
+                        )
+
+                    [4165_1677] => Array
+                        (
+                            [toId] => 4165
+                            [fromId] => 1677
+                            [value] => 150.00
+                            [id] => 4165_1677
+                            [type] => donations
+                            [weight] => 150.00
+                            [tooltip] => $150 from Enstar Natural Gas to Lesil McGuire
+                            [area] => 7.1875
+                            [size] => 7.1875
+                        )
+
+                    [145304_168] => Array
+                        (
+                            [toId] => 145304
+                            [fromId] => 168
+                            [value] => 150.00
+                            [id] => 145304_168
+                            [type] => donations
+                            [weight] => 150.00
+                            [tooltip] => $150 from Alyeska Pipeline Service Co to Cathy Giessel
+                            [area] => 7.1875
+                            [size] => 7.1875
+                        )
+
+                    [145304_37852] => Array
+                        (
+                            [toId] => 145304
+                            [fromId] => 37852
+                            [value] => 150.00
+                            [id] => 145304_37852
+                            [type] => donations
+                            [weight] => 150.00
+                            [tooltip] => $150 from HOMEMAKER to Cathy Giessel
+                            [area] => 7.1875
+                            [size] => 7.1875
+                        )
+
+                    [8406_30934] => Array
+                        (
+                            [toId] => 8406
+                            [fromId] => 30934
+                            [value] => 200.00
+                            [id] => 8406_30934
+                            [type] => donations
+                            [weight] => 200.00
+                            [tooltip] => $200 from Doyon Limited to Joe Thomas
+                            [area] => 8.0288461538462
+                            [size] => 8.0288461538462
+                        )
+
+                    [8800_32624] => Array
+                        (
+                            [toId] => 8800
+                            [fromId] => 32624
+                            [value] => 200.00
+                            [id] => 8800_32624
+                            [type] => donations
+                            [weight] => 200.00
+                            [tooltip] => $200 from Chugach Electric Assn to Bill Wielechowski
+                            [area] => 8.0288461538462
+                            [size] => 8.0288461538462
+                        )
+
+                    [145304_39472] => Array
+                        (
+                            [toId] => 145304
+                            [fromId] => 39472
+                            [value] => 200.00
+                            [id] => 145304_39472
+                            [type] => donations
+                            [weight] => 200.00
+                            [tooltip] => $200 from NINE STAR ENTERPRISES to Cathy Giessel
+                            [area] => 8.0288461538462
+                            [size] => 8.0288461538462
+                        )
+
+                    [3179_2841] => Array
+                        (
+                            [toId] => 3179
+                            [fromId] => 2841
+                            [value] => 250.00
+                            [id] => 3179_2841
+                            [type] => donations
+                            [weight] => 250.00
+                            [tooltip] => $250 from Koch Industries to John Coghill
+                            [area] => 8.8701923076923
+                            [size] => 8.8701923076923
+                        )
+
+                    [2245_1737] => Array
+                        (
+                            [toId] => 2245
+                            [fromId] => 1737
+                            [value] => 250.00
+                            [id] => 2245_1737
+                            [type] => donations
+                            [weight] => 250.00
+                            [tooltip] => $250 from Exxon Mobil to Dennis Egan
+                            [area] => 8.8701923076923
+                            [size] => 8.8701923076923
+                        )
+
+                    [8406_1137] => Array
+                        (
+                            [toId] => 8406
+                            [fromId] => 1137
+                            [value] => 250.00
+                            [id] => 8406_1137
+                            [type] => donations
+                            [weight] => 250.00
+                            [tooltip] => $250 from ConocoPhillips to Joe Thomas
+                            [area] => 8.8701923076923
+                            [size] => 8.8701923076923
+                        )
+
+                    [145304_1677] => Array
+                        (
+                            [toId] => 145304
+                            [fromId] => 1677
+                            [value] => 250.00
+                            [id] => 145304_1677
+                            [type] => donations
+                            [weight] => 250.00
+                            [tooltip] => $250 from Enstar Natural Gas to Cathy Giessel
+                            [area] => 8.8701923076923
+                            [size] => 8.8701923076923
+                        )
+
+                    [8800_39472] => Array
+                        (
+                            [toId] => 8800
+                            [fromId] => 39472
+                            [value] => 300.00
+                            [id] => 8800_39472
+                            [type] => donations
+                            [weight] => 300.00
+                            [tooltip] => $300 from NINE STAR ENTERPRISES to Bill Wielechowski
+                            [area] => 9.7115384615385
+                            [size] => 9.7115384615385
+                        )
+
+                    [145304_38177] => Array
+                        (
+                            [toId] => 145304
+                            [fromId] => 38177
+                            [value] => 350.00
+                            [id] => 145304_38177
+                            [type] => donations
+                            [weight] => 350.00
+                            [tooltip] => $350 from N/A to Cathy Giessel
+                            [area] => 10.552884615385
+                            [size] => 10.552884615385
+                        )
+
+                    [145304_5460] => Array
+                        (
+                            [toId] => 145304
+                            [fromId] => 5460
+                            [value] => 500.00
+                            [id] => 145304_5460
+                            [type] => donations
+                            [weight] => 500.00
+                            [tooltip] => $500 from Tesoro Petroleum to Cathy Giessel
+                            [area] => 13.076923076923
+                            [size] => 13.076923076923
+                        )
+
+                    [145304_39350] => Array
+                        (
+                            [toId] => 145304
+                            [fromId] => 39350
+                            [value] => 500.00
+                            [id] => 145304_39350
+                            [type] => donations
+                            [weight] => 500.00
+                            [tooltip] => $500 from CONAM CONSTRUCTION to Cathy Giessel
+                            [area] => 13.076923076923
+                            [size] => 13.076923076923
+                        )
+
+                    [2245_1991] => Array
+                        (
+                            [toId] => 2245
+                            [fromId] => 1991
+                            [value] => 500.00
+                            [id] => 2245_1991
+                            [type] => donations
+                            [weight] => 500.00
+                            [tooltip] => $500 from Gas Station Operator to Dennis Egan
+                            [area] => 13.076923076923
+                            [size] => 13.076923076923
+                        )
+
+                    [4171_39514] => Array
+                        (
+                            [toId] => 4171
+                            [fromId] => 39514
+                            [value] => 500.00
+                            [id] => 4171_39514
+                            [type] => donations
+                            [weight] => 500.00
+                            [tooltip] => $500 from UDELHOVEN OIL to Charlie Huggins
+                            [area] => 13.076923076923
+                            [size] => 13.076923076923
+                        )
+
+                    [2231_1137] => Array
+                        (
+                            [toId] => 2231
+                            [fromId] => 1137
+                            [value] => 500.00
+                            [id] => 2231_1137
+                            [type] => donations
+                            [weight] => 500.00
+                            [tooltip] => $500 from ConocoPhillips to Lyman Hoffman
+                            [area] => 13.076923076923
+                            [size] => 13.076923076923
+                        )
+
+                    [145304_39357] => Array
+                        (
+                            [toId] => 145304
+                            [fromId] => 39357
+                            [value] => 500.00
+                            [id] => 145304_39357
+                            [type] => donations
+                            [weight] => 500.00
+                            [tooltip] => $500 from HAWK CONSULTANTS to Cathy Giessel
+                            [area] => 13.076923076923
+                            [size] => 13.076923076923
+                        )
+
+                    [8406_38371] => Array
+                        (
+                            [toId] => 8406
+                            [fromId] => 38371
+                            [value] => 500.00
+                            [id] => 8406_38371
+                            [type] => donations
+                            [weight] => 500.00
+                            [tooltip] => $500 from OWNER to Joe Thomas
+                            [area] => 13.076923076923
+                            [size] => 13.076923076923
+                        )
+
+                    [4165_39350] => Array
+                        (
+                            [toId] => 4165
+                            [fromId] => 39350
+                            [value] => 500.00
+                            [id] => 4165_39350
+                            [type] => donations
+                            [weight] => 500.00
+                            [tooltip] => $500 from CONAM CONSTRUCTION to Lesil McGuire
+                            [area] => 13.076923076923
+                            [size] => 13.076923076923
+                        )
+
+                    [145304_671] => Array
+                        (
+                            [toId] => 145304
+                            [fromId] => 671
+                            [value] => 550.00
+                            [id] => 145304_671
+                            [type] => donations
+                            [weight] => 550.00
+                            [tooltip] => $550 from BP to Cathy Giessel
+                            [area] => 13.918269230769
+                            [size] => 13.918269230769
+                        )
+
+                    [8406_39514] => Array
+                        (
+                            [toId] => 8406
+                            [fromId] => 39514
+                            [value] => 700.00
+                            [id] => 8406_39514
+                            [type] => donations
+                            [weight] => 700.00
+                            [tooltip] => $700 from UDELHOVEN OIL to Joe Thomas
+                            [area] => 16.442307692308
+                            [size] => 16.442307692308
+                        )
+
+                    [2231_5460] => Array
+                        (
+                            [toId] => 2231
+                            [fromId] => 5460
+                            [value] => 1000.00
+                            [id] => 2231_5460
+                            [type] => donations
+                            [weight] => 1000.00
+                            [tooltip] => $1,000 from Tesoro Petroleum to Lyman Hoffman
+                            [area] => 21.490384615385
+                            [size] => 21.490384615385
+                        )
+
+                    [145304_39514] => Array
+                        (
+                            [toId] => 145304
+                            [fromId] => 39514
+                            [value] => 1000.00
+                            [id] => 145304_39514
+                            [type] => donations
+                            [weight] => 1000.00
+                            [tooltip] => $1,000 from UDELHOVEN OIL to Cathy Giessel
+                            [area] => 21.490384615385
+                            [size] => 21.490384615385
+                        )
+
+                    [2231_39514] => Array
+                        (
+                            [toId] => 2231
+                            [fromId] => 39514
+                            [value] => 1000.00
+                            [id] => 2231_39514
+                            [type] => donations
+                            [weight] => 1000.00
+                            [tooltip] => $1,000 from UDELHOVEN OIL to Lyman Hoffman
+                            [area] => 21.490384615385
+                            [size] => 21.490384615385
+                        )
+
+                    [4171_1137] => Array
+                        (
+                            [toId] => 4171
+                            [fromId] => 1137
+                            [value] => 1050.00
+                            [id] => 4171_1137
+                            [type] => donations
+                            [weight] => 1050.00
+                            [tooltip] => $1,050 from ConocoPhillips to Charlie Huggins
+                            [area] => 22.331730769231
+                            [size] => 22.331730769231
+                        )
+
+                    [8406_671] => Array
+                        (
+                            [toId] => 8406
+                            [fromId] => 671
+                            [value] => 1175.00
+                            [id] => 8406_671
+                            [type] => donations
+                            [weight] => 1175.00
+                            [tooltip] => $1,175 from BP to Joe Thomas
+                            [area] => 24.435096153846
+                            [size] => 24.435096153846
+                        )
+
+                    [145304_1137] => Array
+                        (
+                            [toId] => 145304
+                            [fromId] => 1137
+                            [value] => 1400.00
+                            [id] => 145304_1137
+                            [type] => donations
+                            [weight] => 1400.00
+                            [tooltip] => $1,400 from ConocoPhillips to Cathy Giessel
+                            [area] => 28.221153846154
+                            [size] => 28.221153846154
+                        )
+
+                    [4165_39514] => Array
+                        (
+                            [toId] => 4165
+                            [fromId] => 39514
+                            [value] => 1500.00
+                            [id] => 4165_39514
+                            [type] => donations
+                            [weight] => 1500.00
+                            [tooltip] => $1,500 from UDELHOVEN OIL to Lesil McGuire
+                            [area] => 29.903846153846
+                            [size] => 29.903846153846
+                        )
+
+                    [4165_1137] => Array
+                        (
+                            [toId] => 4165
+                            [fromId] => 1137
+                            [value] => 2100.00
+                            [id] => 4165_1137
+                            [type] => donations
+                            [weight] => 2100.00
+                            [tooltip] => $2,100 from ConocoPhillips to Lesil McGuire
+                            [area] => 40
+                            [size] => 40
+                        )
+
+                )
+
+            [subgraphs] => Array
+                (
+                )
+
+            [queries] => Array
+                (
+                )
+
+            [nodetypesindex] => Array
+                (
+                    [candidates] => Array
+                        (
+                            [0] => 8406
+                            [1] => 4171
+                            [2] => 145304
+                            [3] => 3179
+                            [4] => 4165
+                            [5] => 8800
+                            [6] => 2231
+                            [7] => 2229
+                            [8] => 2245
+                        )
+
+                    [donors] => Array
+                        (
+                            [0] => 1137
+                            [1] => 39514
+                            [2] => 671
+                            [3] => 5460
+                            [4] => 1991
+                            [5] => 39357
+                            [6] => 39350
+                            [7] => 38371
+                            [8] => 38177
+                            [9] => 39472
+                            [10] => 1677
+                            [11] => 1737
+                            [12] => 2841
+                            [13] => 30934
+                            [14] => 32624
+                            [15] => 168
+                            [16] => 37852
+                            [17] => 39474
+                            [18] => 951
+                            [19] => 4211
+                            [20] => 31946
+                            [21] => 38670
+                            [22] => 289
+                            [23] => 39485
+                        )
+
+                )
+
+            [edgetypesindex] => Array
+                (
+                    [donations] => Array
+                        (
+                            [0] => 8800_671
+                            [1] => 8406_39485
+                            [2] => 2229_168
+                            [3] => 145304_289
+                            [4] => 8800_168
+                            [5] => 8800_39474
+                            [6] => 2245_1137
+                            [7] => 4165_951
+                            [8] => 2229_39472
+                            [9] => 4165_31946
+                            [10] => 2231_4211
+                            [11] => 4171_38670
+                            [12] => 4165_1677
+                            [13] => 145304_168
+                            [14] => 145304_37852
+                            [15] => 8406_30934
+                            [16] => 8800_32624
+                            [17] => 145304_39472
+                            [18] => 3179_2841
+                            [19] => 2245_1737
+                            [20] => 8406_1137
+                            [21] => 145304_1677
+                            [22] => 8800_39472
+                            [23] => 145304_38177
+                            [24] => 4171_39514
+                            [25] => 145304_5460
+                            [26] => 2245_1991
+                            [27] => 145304_39350
+                            [28] => 145304_39357
+                            [29] => 8406_38371
+                            [30] => 2231_1137
+                            [31] => 4165_39350
+                            [32] => 145304_671
+                            [33] => 8406_39514
+                            [34] => 2231_39514
+                            [35] => 2231_5460
+                            [36] => 145304_39514
+                            [37] => 4171_1137
+                            [38] => 8406_671
+                            [39] => 145304_1137
+                            [40] => 4165_39514
+                            [41] => 4165_1137
+                        )
+
+                )
+
+            [graphvizProperties] => Array
+                (
+                    [graph] => Array
+                        (
+                            [bgcolor] => #FFFFFF
+                            [fontsize] => 90
+                            [splines] => curved
+                            [fontcolor] => blue
+                            [start] => self
+                            [size] => 1000,1000!
+                        )
+
+                    [node] => Array
+                        (
+                            [label] =>  
+                            [imagescale] => true
+                            [fixedsize] => 1
+                            [style] => setlinewidth(10), filled
+                            [regular] => true
+                            [fontsize] => 15
+                        )
+
+                    [edge] => Array
+                        (
+                            [arrowhead] => normal
+                            [arrowsize] => 3
+                            [color] => #99999966
+                            [fontsize] => 15
+                            [len] => 4
+                            [minlen] => 4
+                        )
+
+                )
+
+        )
+
+    [name] => 1992352245
+    [width] => 950.1666660000001
+    [height] => 323.16666599999996
+    [prefix] => undefined
+    [input_parameters] => Array
+        (
+            [setupfile] => StateDEM
+            [state] => AK
+            [chamber] => state:upper
+            [cycle] => 2010
+            [prefix] => undefined
+            [useSVG] => 1
+            [graphWidth] => 950.1666660000001
+            [graphHeight] => 323.16666599999996
+        )
+
+)

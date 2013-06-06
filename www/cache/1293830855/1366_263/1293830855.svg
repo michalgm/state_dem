@@ -1,0 +1,33 @@
+<svg width="262.96438541666px" height="263px"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(0.45514889583333 0.45514889583333) rotate(0) translate(4 573.833)">
+
+<polygon id='svgscreen' style="opacity:0;" fill="#ffffff" stroke="#ffffff" points="-4,5 -4,-573.833 574.754,-573.833 574.754,5 -4,5"/>
+<g id="4387_3716" class="edge">
+<path fill="none" stroke="#999999" stroke-width="5" d="M433.132,-136.758C401.426,-168.54 362.27,-207.791 332.3,-237.833"/>
+<polygon fill="#999999" stroke="#999999" points="322.898,-228.675 311.002,-259.183 341.481,-247.214 322.898,-228.675"/>
+</g>
+<g id="4387_38226" class="edge">
+<path fill="none" stroke="#999999" stroke-width="40" d="M139.595,-430.355C171.087,-398.927 209.59,-360.501 239.183,-330.968"/>
+<polygon fill="#999999" stroke="#999999" points="313.638,-405.006 260.702,-309.493 165.296,-256.363 313.638,-405.006"/>
+</g>
+<g id="4387" class="node">
+<polygon fill="#ffffff" stroke="#cc3333" stroke-width="10" points="310.839,-309.906 260.839,-309.906 260.839,-258.906 310.839,-258.906 310.839,-309.906"/>
+<image xlink:href="can_images/unknownCandidate.jpg" width="50px" height="50px" preserveAspectRatio="xMinYMin meet" x="260.839" y="-309.406"/>
+<polygon fill="none" stroke="#cc3333" stroke-width="10" points="310.839,-309.906 260.839,-309.906 260.839,-258.906 310.839,-258.906 310.839,-309.906"/>
+<text text-anchor="middle" x="285.839" y="-280.406" font-family="Times Roman,serif" font-size="15.00">Rick Keene</text>
+</g>
+<g id="3716" class="node">
+<ellipse fill="#ffffff" stroke="cadetblue" stroke-width="10" cx="489.254" cy="-80.5" rx="79" ry="79.5"/>
+<image xlink:href="com_images/c109.png" width="158px" height="158px" preserveAspectRatio="xMinYMin meet" x="410.254" y="-159.5"/>
+<ellipse fill="none" stroke="cadetblue" stroke-width="10" cx="489.254" cy="-80.5" rx="79" ry="79.5"/>
+<text text-anchor="start" x="583.254" y="-76.5" font-family="Times Roman,serif" font-size="15.00">Occidental Petroleum</text>
+</g>
+<g id="38226" class="node">
+<ellipse fill="#ffffff" stroke="cadetblue" stroke-width="10" cx="82" cy="-487.833" rx="81" ry="81"/>
+<image xlink:href="com_images/cunknown_oil_co.png" width="162px" height="162px" preserveAspectRatio="xMinYMin meet" x="1" y="-568.833"/>
+<ellipse fill="none" stroke="cadetblue" stroke-width="10" cx="82" cy="-487.833" rx="81" ry="81"/>
+<text text-anchor="start" x="178" y="-483.833" font-family="Times Roman,serif" font-size="15.00">NORTHGATE PETROLEUM CO</text>
+</g>
+</g>
+</svg>

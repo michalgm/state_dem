@@ -1,0 +1,324 @@
+StateDEM Object
+(
+    [data] => Array
+        (
+            [nodetypes] => Array
+                (
+                    [0] => candidates
+                    [1] => donors
+                )
+
+            [edgetypes] => Array
+                (
+                    [donations] => Array
+                        (
+                            [0] => donors
+                            [1] => candidates
+                        )
+
+                )
+
+            [properties] => Array
+                (
+                    [minSize] => Array
+                        (
+                            [donors] => .5
+                            [candidates] => .5
+                            [donations] => 5
+                        )
+
+                    [maxSize] => Array
+                        (
+                            [donors] => 4
+                            [candidates] => 4
+                            [donations] => 40
+                        )
+
+                    [log_scaling] => 0
+                    [state] => CA
+                    [cycle] => 2010
+                    [chamber] => state:upper
+                    [valueMin] => 1
+                    [edgeid] => 
+                    [candidate_ids] => 
+                    [company_ids] => 29851
+                )
+
+            [nodes] => Array
+                (
+                    [4420] => Array
+                        (
+                            [id] => 4420
+                            [state] => CA
+                            [term] => 2010
+                            [district] => CA-26
+                            [party] => D
+                            [candidate_name] => Curren D Price
+                            [image] => ../www/can_images/4420.jpg
+                            [total_dollars] => 100
+                            [type] => candidates
+                            [value] => 100
+                            [color] => #3333cc33
+                            [label] => Curren D Price
+                            [fillcolor] => #ffffff
+                            [tooltip] => Curren D Price (Received $100)
+                            [shape] => square
+                            [label_zoom_level] => 6
+                            [click] => this.selectNode('4420'); this.panToNode('4420');
+                            [relatedNodes] => Array
+                                (
+                                    [29851] => Array
+                                        (
+                                            [0] => 4420_29851
+                                        )
+
+                                )
+
+                            [area] => 0.5
+                            [size] => 0.70710678118655
+                        )
+
+                    [8212] => Array
+                        (
+                            [id] => 8212
+                            [state] => CA
+                            [term] => 2010
+                            [district] => CA-22
+                            [party] => D
+                            [candidate_name] => Kevin De León
+                            [image] => ../www/can_images/8212.jpg
+                            [total_dollars] => 100
+                            [type] => candidates
+                            [value] => 100
+                            [color] => #3333cc33
+                            [label] => Kevin De León
+                            [fillcolor] => #ffffff
+                            [tooltip] => Kevin De León (Received $100)
+                            [shape] => square
+                            [label_zoom_level] => 6
+                            [click] => this.selectNode('8212'); this.panToNode('8212');
+                            [relatedNodes] => Array
+                                (
+                                    [29851] => Array
+                                        (
+                                            [0] => 8212_29851
+                                        )
+
+                                )
+
+                            [area] => 0.5
+                            [size] => 0.70710678118655
+                        )
+
+                    [7943] => Array
+                        (
+                            [id] => 7943
+                            [state] => CA
+                            [term] => 2010
+                            [district] => CA-18
+                            [party] => R
+                            [candidate_name] => Jean Fuller
+                            [image] => ../www/can_images/7943.jpg
+                            [total_dollars] => 150
+                            [type] => candidates
+                            [value] => 150
+                            [color] => #cc333333
+                            [label] => Jean Fuller
+                            [fillcolor] => #ffffff
+                            [tooltip] => Jean Fuller (Received $150)
+                            [shape] => square
+                            [label_zoom_level] => 6
+                            [click] => this.selectNode('7943'); this.panToNode('7943');
+                            [relatedNodes] => Array
+                                (
+                                    [29851] => Array
+                                        (
+                                            [0] => 7943_29851
+                                        )
+
+                                )
+
+                            [area] => 1.2
+                            [size] => 1.0954451150103
+                        )
+
+                    [29851] => Array
+                        (
+                            [transaction_id] => efa72e5dac02e218d10577651a2de720
+                            [company_id] => 29851
+                            [company_name] => Southern California Edison
+                            [amount] => 150.00
+                            [recipient_ext_id] => 7943
+                            [industry] => Electric Power Utilities
+                            [image] => ../www/com_images/c127.png
+                            [sitecode] => coal
+                            [contributor_type] => I
+                            [id] => 29851
+                            [total_dollars] => 350
+                            [type] => donors
+                            [label] => Southern California Edison
+                            [value] => 350
+                            [dir] => /home/dameat/public_html/state_dem/njq/NodeViz
+                            [color] => cadetblue
+                            [shape] => circle
+                            [fillcolor] => #ffffff
+                            [tooltip] => Southern California Edison (Gave $350)
+                            [label_zoom_level] => 8
+                            [click] => this.selectNode('29851'); this.panToNode('29851');
+                            [relatedNodes] => Array
+                                (
+                                    [4420] => Array
+                                        (
+                                            [0] => 4420_29851
+                                        )
+
+                                    [8212] => Array
+                                        (
+                                            [0] => 8212_29851
+                                        )
+
+                                    [7943] => Array
+                                        (
+                                            [0] => 7943_29851
+                                        )
+
+                                )
+
+                            [area] => 4
+                            [size] => 2.256758334191
+                        )
+
+                )
+
+            [edges] => Array
+                (
+                    [4420_29851] => Array
+                        (
+                            [toId] => 4420
+                            [fromId] => 29851
+                            [value] => 100.00
+                            [id] => 4420_29851
+                            [type] => donations
+                            [weight] => 100.00
+                            [tooltip] => $100 from Southern California Edison to Curren D Price
+                            [area] => 5
+                            [size] => 5
+                        )
+
+                    [8212_29851] => Array
+                        (
+                            [toId] => 8212
+                            [fromId] => 29851
+                            [value] => 100.00
+                            [id] => 8212_29851
+                            [type] => donations
+                            [weight] => 100.00
+                            [tooltip] => $100 from Southern California Edison to Kevin De León
+                            [area] => 5
+                            [size] => 5
+                        )
+
+                    [7943_29851] => Array
+                        (
+                            [toId] => 7943
+                            [fromId] => 29851
+                            [value] => 150.00
+                            [id] => 7943_29851
+                            [type] => donations
+                            [weight] => 150.00
+                            [tooltip] => $150 from Southern California Edison to Jean Fuller
+                            [area] => 40
+                            [size] => 40
+                        )
+
+                )
+
+            [subgraphs] => Array
+                (
+                )
+
+            [queries] => Array
+                (
+                )
+
+            [nodetypesindex] => Array
+                (
+                    [candidates] => Array
+                        (
+                            [0] => 7943
+                            [1] => 8212
+                            [2] => 4420
+                        )
+
+                    [donors] => Array
+                        (
+                            [0] => 29851
+                        )
+
+                )
+
+            [edgetypesindex] => Array
+                (
+                    [donations] => Array
+                        (
+                            [0] => 4420_29851
+                            [1] => 8212_29851
+                            [2] => 7943_29851
+                        )
+
+                )
+
+            [graphvizProperties] => Array
+                (
+                    [graph] => Array
+                        (
+                            [bgcolor] => #FFFFFF
+                            [fontsize] => 90
+                            [splines] => curved
+                            [fontcolor] => blue
+                            [start] => self
+                            [size] => 1000,1000!
+                        )
+
+                    [node] => Array
+                        (
+                            [label] =>  
+                            [imagescale] => true
+                            [fixedsize] => 1
+                            [style] => setlinewidth(10), filled
+                            [regular] => true
+                            [fontsize] => 15
+                        )
+
+                    [edge] => Array
+                        (
+                            [arrowhead] => normal
+                            [arrowsize] => 3
+                            [color] => #99999966
+                            [fontsize] => 15
+                            [len] => 4
+                            [minlen] => 4
+                        )
+
+                )
+
+        )
+
+    [name] => 934148663
+    [width] => 1821
+    [height] => 722
+    [prefix] => undefined
+    [input_parameters] => Array
+        (
+            [setupfile] => StateDEM
+            [state] => CA
+            [chamber] => state:upper
+            [cycle] => 2010
+            [company_ids] => 29851
+            [prefix] => undefined
+            [useSVG] => 1
+            [graphWidth] => 1821
+            [graphHeight] => 722
+        )
+
+)

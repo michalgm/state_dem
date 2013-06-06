@@ -1,0 +1,23 @@
+<svg width="722px" height="722px"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(1.439261875 1.439261875) rotate(0) translate(4 497.647)">
+
+<polygon id='svgscreen' style="opacity:0;" fill="#ffffff" stroke="#ffffff" points="-4,5 -4,-497.647 498.647,-497.647 498.647,5 -4,5"/>
+<g id="142109_29851" class="edge">
+<path fill="none" stroke="#999999" stroke-width="40" d="M246.823,-246.823C246.774,-246.774 246.724,-246.724 246.674,-246.674"/>
+<polygon fill="#999999" stroke="#999999" points="342.003,-193.482 246.525,-246.525 193.482,-342.003 342.003,-193.482"/>
+</g>
+<g id="29851" class="node">
+<ellipse fill="#ffffff" stroke="cadetblue" stroke-width="10" cx="348.647" cy="-348.647" rx="144" ry="144"/>
+<image xlink:href="com_images/c127.png" width="288px" height="288px" preserveAspectRatio="xMinYMin meet" x="204.647" y="-492.647"/>
+<ellipse fill="none" stroke="cadetblue" stroke-width="10" cx="348.647" cy="-348.647" rx="144" ry="144"/>
+<text text-anchor="start" x="507.647" y="-344.647" font-family="Times Roman,serif" font-size="15.00">Southern California Edison</text>
+</g>
+<g id="142109" class="node">
+<polygon fill="#ffffff" stroke="#3333cc" stroke-width="10" points="289,-289 1,-289 1,-1 289,-1 289,-289"/>
+<image xlink:href="can_images/142109.jpg" width="191.716px" height="288px" preserveAspectRatio="xMinYMin meet" x="49.142" y="-289"/>
+<polygon fill="none" stroke="#3333cc" stroke-width="10" points="289,-289 1,-289 1,-1 289,-1 289,-289"/>
+<text text-anchor="middle" x="145" y="-141" font-family="Times Roman,serif" font-size="15.00">Das Williams</text>
+</g>
+</g>
+</svg>

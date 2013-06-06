@@ -1,0 +1,153 @@
+<svg width="359.06390625px" height="369px"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(0.4691758125 0.4691758125) rotate(0) translate(4 782.485)">
+
+<polygon id='svgscreen' style="opacity:0;" fill="#ffffff" stroke="#ffffff" points="-4,5 -4,-782.485 762.306,-782.485 762.306,5 -4,5"/>
+<g id="4410_29792" class="edge">
+<path fill="none" stroke="#999999" stroke-width="5" d="M339.765,-720.439C345.679,-672.144 357.933,-572.066 367.351,-495.153"/>
+<polygon fill="#999999" stroke="#999999" points="380.408,-496.512 371.026,-465.139 354.352,-493.321 380.408,-496.512"/>
+</g>
+<g id="4410_14648" class="edge">
+<path fill="none" stroke="#999999" stroke-width="5" d="M57.5811,-423.869C104.771,-419.321 202.218,-409.929 277.673,-402.656"/>
+<polygon fill="#999999" stroke="#999999" points="279.075,-415.707 307.677,-399.764 276.556,-389.578 279.075,-415.707"/>
+</g>
+<g id="4410_951" class="edge">
+<path fill="none" stroke="#999999" stroke-width="5" d="M86.4502,-284.877C128.334,-300.282 212.078,-331.084 279.419,-355.853"/>
+<polygon fill="#999999" stroke="#999999" points="274.889,-368.171 307.576,-366.209 283.951,-343.535 274.889,-368.171"/>
+</g>
+<g id="4410_5727" class="edge">
+<path fill="none" stroke="#999999" stroke-width="5" d="M106.267,-559.775C144.181,-536.638 219.824,-490.479 281.984,-452.546"/>
+<polygon fill="#999999" stroke="#999999" points="288.878,-463.715 307.649,-436.885 275.204,-441.308 288.878,-463.715"/>
+</g>
+<g id="4410_1737" class="edge">
+<path fill="none" stroke="#999999" stroke-width="7.57353" d="M210.245,-655.074C233.896,-618.509 278.968,-548.825 316.711,-490.472"/>
+<polygon fill="#999999" stroke="#999999" points="333.562,-501.025 333.162,-465.038 300.176,-479.43 333.562,-501.025"/>
+</g>
+<g id="4410_671" class="edge">
+<path fill="none" stroke="#999999" stroke-width="7.57353" d="M660.913,-219.227C620.935,-243.919 541.636,-292.899 477.438,-332.55"/>
+<polygon fill="#999999" stroke="#999999" points="466.982,-315.641 451.906,-348.32 487.877,-349.47 466.982,-315.641"/>
+</g>
+<g id="4410_5769" class="edge">
+<path fill="none" stroke="#999999" stroke-width="10.1471" d="M674.19,-500.068C630.823,-484.262 547.442,-453.873 480.471,-429.465"/>
+<polygon fill="#999999" stroke="#999999" points="489.308,-404.336 452.001,-419.089 471.066,-454.387 489.308,-404.336"/>
+</g>
+<g id="4410_37364" class="edge">
+<path fill="none" stroke="#999999" stroke-width="10.1471" d="M541.039,-143.669C518.56,-178.419 477.823,-241.397 442.931,-295.336"/>
+<polygon fill="#999999" stroke="#999999" points="420.564,-280.874 426.635,-320.53 465.293,-309.808 420.564,-280.874"/>
+</g>
+<g id="4410_1137" class="edge">
+<path fill="none" stroke="#999999" stroke-width="10.1471" d="M423.327,-63.8444C416.722,-113.859 403.512,-213.887 393.384,-290.577"/>
+<polygon fill="#999999" stroke="#999999" points="366.954,-287.265 389.433,-320.494 419.767,-294.24 366.954,-287.265"/>
+</g>
+<g id="4410_3716" class="edge">
+<path fill="none" stroke="#999999" stroke-width="12.7206" d="M691.759,-361.816C644.405,-366.521 553.638,-375.54 482.183,-382.64"/>
+<polygon fill="#999999" stroke="#999999" points="478.485,-349.451 451.933,-385.646 485.088,-415.907 478.485,-349.451"/>
+</g>
+<g id="4410_37368" class="edge">
+<path fill="none" stroke="#999999" stroke-width="16.5809" d="M605.454,-625.856C574.554,-593.931 519.001,-536.536 470.76,-486.695"/>
+<polygon fill="#999999" stroke="#999999" points="501.716,-456.095 449.577,-464.809 439.167,-516.636 501.716,-456.095"/>
+</g>
+<g id="4410_32446" class="edge">
+<path fill="none" stroke="#999999" stroke-width="25.5882" d="M158.075,-163.299C189.208,-195.512 242.446,-250.598 288.962,-298.728"/>
+<polygon fill="#999999" stroke="#999999" points="240.952,-345.706 310.099,-320.599 337.55,-252.348 240.952,-345.706"/>
+</g>
+<g id="4410_29814" class="edge">
+<path fill="none" stroke="#999999" stroke-width="30.7353" d="M286.833,-111.938C301.478,-156.142 326.188,-230.73 346.465,-291.935"/>
+<polygon fill="#999999" stroke="#999999" points="269.979,-317.61 356,-320.714 423.152,-266.863 269.979,-317.61"/>
+</g>
+<g id="4410_808" class="edge">
+<path fill="none" stroke="#999999" stroke-width="40" d="M471.767,-666.891C457.094,-623.122 433.352,-552.301 413.678,-493.614"/>
+<polygon fill="#999999" stroke="#999999" points="513.208,-460.166 404.118,-465.096 314.099,-526.915 513.208,-460.166"/>
+</g>
+<g id="29792" class="node">
+<ellipse fill="#ffffff" stroke="cadetblue" stroke-width="10" cx="336.27" cy="-748.985" rx="28" ry="28.5"/>
+<image xlink:href="com_images/c192.png" width="56px" height="56px" preserveAspectRatio="xMinYMin meet" x="308.27" y="-776.985"/>
+<ellipse fill="none" stroke="cadetblue" stroke-width="10" cx="336.27" cy="-748.985" rx="28" ry="28.5"/>
+<text text-anchor="start" x="379.27" y="-744.985" font-family="Times Roman,serif" font-size="15.00">AES Corp</text>
+</g>
+<g id="14648" class="node">
+<ellipse fill="#ffffff" stroke="cadetblue" stroke-width="10" cx="29.5" cy="-426.576" rx="28" ry="28.5"/>
+<image xlink:href="com_images/c14648.png" width="56px" height="56px" preserveAspectRatio="xMinYMin meet" x="1.5" y="-454.576"/>
+<ellipse fill="none" stroke="cadetblue" stroke-width="10" cx="29.5" cy="-426.576" rx="28" ry="28.5"/>
+<text text-anchor="start" x="72.5" y="-422.576" font-family="Times Roman,serif" font-size="15.00">NV Energy</text>
+</g>
+<g id="951" class="node">
+<ellipse fill="#ffffff" stroke="cadetblue" stroke-width="10" cx="60.0008" cy="-275.149" rx="28" ry="28.5"/>
+<image xlink:href="com_images/c951.png" width="56px" height="56px" preserveAspectRatio="xMinYMin meet" x="32.0008" y="-303.149"/>
+<ellipse fill="none" stroke="cadetblue" stroke-width="10" cx="60.0008" cy="-275.149" rx="28" ry="28.5"/>
+<text text-anchor="start" x="103.0008" y="-271.149" font-family="Times Roman,serif" font-size="15.00">Chevron Corp</text>
+</g>
+<g id="5727" class="node">
+<ellipse fill="#ffffff" stroke="cadetblue" stroke-width="10" cx="82.1548" cy="-574.489" rx="28" ry="28.5"/>
+<image xlink:href="com_images/c47.png" width="56px" height="56px" preserveAspectRatio="xMinYMin meet" x="54.1548" y="-602.489"/>
+<ellipse fill="none" stroke="cadetblue" stroke-width="10" cx="82.1548" cy="-574.489" rx="28" ry="28.5"/>
+<text text-anchor="start" x="125.1548" y="-570.489" font-family="Times Roman,serif" font-size="15.00">Valero Energy</text>
+</g>
+<g id="1737" class="node">
+<ellipse fill="#ffffff" stroke="cadetblue" stroke-width="10" cx="193.903" cy="-680.339" rx="30" ry="30"/>
+<image xlink:href="com_images/c28.png" width="60px" height="60px" preserveAspectRatio="xMinYMin meet" x="163.903" y="-710.339"/>
+<ellipse fill="none" stroke="cadetblue" stroke-width="10" cx="193.903" cy="-680.339" rx="30" ry="30"/>
+<text text-anchor="start" x="238.903" y="-676.339" font-family="Times Roman,serif" font-size="15.00">Exxon Mobil</text>
+</g>
+<g id="671" class="node">
+<ellipse fill="#ffffff" stroke="cadetblue" stroke-width="10" cx="686.53" cy="-203.404" rx="30" ry="30"/>
+<image xlink:href="com_images/c671.png" width="60px" height="60px" preserveAspectRatio="xMinYMin meet" x="656.53" y="-233.404"/>
+<ellipse fill="none" stroke="cadetblue" stroke-width="10" cx="686.53" cy="-203.404" rx="30" ry="30"/>
+<text text-anchor="start" x="731.53" y="-199.404" font-family="Times Roman,serif" font-size="15.00">BP</text>
+</g>
+<g id="5769" class="node">
+<ellipse fill="#ffffff" stroke="cadetblue" stroke-width="10" cx="703.478" cy="-510.742" rx="31" ry="31.5"/>
+<image xlink:href="com_images/c25.png" width="62px" height="62px" preserveAspectRatio="xMinYMin meet" x="672.478" y="-541.742"/>
+<ellipse fill="none" stroke="cadetblue" stroke-width="10" cx="703.478" cy="-510.742" rx="31" ry="31.5"/>
+<text text-anchor="start" x="749.478" y="-506.742" font-family="Times Roman,serif" font-size="15.00">Venoco Inc</text>
+</g>
+<g id="37364" class="node">
+<ellipse fill="#ffffff" stroke="cadetblue" stroke-width="10" cx="558.13" cy="-117.247" rx="31" ry="31.5"/>
+<image xlink:href="com_images/c37364.png" width="62px" height="62px" preserveAspectRatio="xMinYMin meet" x="527.13" y="-148.247"/>
+<ellipse fill="none" stroke="cadetblue" stroke-width="10" cx="558.13" cy="-117.247" rx="31" ry="31.5"/>
+<text text-anchor="start" x="604.13" y="-113.247" font-family="Times Roman,serif" font-size="15.00">CAITHNESS ENERGY</text>
+</g>
+<g id="1137" class="node">
+<ellipse fill="#ffffff" stroke="cadetblue" stroke-width="10" cx="427.466" cy="-32.5" rx="31" ry="31.5"/>
+<image xlink:href="com_images/c92.png" width="62px" height="62px" preserveAspectRatio="xMinYMin meet" x="396.466" y="-63.5"/>
+<ellipse fill="none" stroke="cadetblue" stroke-width="10" cx="427.466" cy="-32.5" rx="31" ry="31.5"/>
+<text text-anchor="start" x="473.466" y="-28.5" font-family="Times Roman,serif" font-size="15.00">ConocoPhillips</text>
+</g>
+<g id="3716" class="node">
+<ellipse fill="#ffffff" stroke="cadetblue" stroke-width="10" cx="723.806" cy="-358.632" rx="32" ry="32.5"/>
+<image xlink:href="com_images/c109.png" width="64px" height="64px" preserveAspectRatio="xMinYMin meet" x="691.806" y="-390.632"/>
+<ellipse fill="none" stroke="cadetblue" stroke-width="10" cx="723.806" cy="-358.632" rx="32" ry="32.5"/>
+<text text-anchor="start" x="770.806" y="-354.632" font-family="Times Roman,serif" font-size="15.00">Occidental Petroleum</text>
+</g>
+<g id="37368" class="node">
+<ellipse fill="#ffffff" stroke="cadetblue" stroke-width="10" cx="629.377" cy="-650.572" rx="34" ry="34.5"/>
+<image xlink:href="com_images/c37368.png" width="68px" height="68px" preserveAspectRatio="xMinYMin meet" x="595.377" y="-684.572"/>
+<ellipse fill="none" stroke="cadetblue" stroke-width="10" cx="629.377" cy="-650.572" rx="34" ry="34.5"/>
+<text text-anchor="start" x="678.377" y="-646.572" font-family="Times Roman,serif" font-size="15.00">CALIFORNIA INDEPENDENT OIL MARKETERS</text>
+</g>
+<g id="32446" class="node">
+<ellipse fill="#ffffff" stroke="cadetblue" stroke-width="10" cx="131.493" cy="-135.794" rx="38" ry="38"/>
+<image xlink:href="com_images/c217.png" width="76px" height="76px" preserveAspectRatio="xMinYMin meet" x="93.4933" y="-173.794"/>
+<ellipse fill="none" stroke="cadetblue" stroke-width="10" cx="131.493" cy="-135.794" rx="38" ry="38"/>
+<text text-anchor="start" x="184.493" y="-131.794" font-family="Times Roman,serif" font-size="15.00">US Chamber Of Commerce</text>
+</g>
+<g id="29814" class="node">
+<ellipse fill="#ffffff" stroke="cadetblue" stroke-width="10" cx="274.189" cy="-73.7725" rx="40" ry="40"/>
+<image xlink:href="com_images/c148.png" width="80px" height="80px" preserveAspectRatio="xMinYMin meet" x="234.189" y="-113.773"/>
+<ellipse fill="none" stroke="cadetblue" stroke-width="10" cx="274.189" cy="-73.7725" rx="40" ry="40"/>
+<text text-anchor="start" x="329.189" y="-69.7725" font-family="Times Roman,serif" font-size="15.00">Edison International</text>
+</g>
+<g id="808" class="node">
+<ellipse fill="#ffffff" stroke="cadetblue" stroke-width="10" cx="485.585" cy="-708.112" rx="43" ry="43.5"/>
+<image xlink:href="com_images/c808.png" width="86px" height="86px" preserveAspectRatio="xMinYMin meet" x="442.585" y="-751.112"/>
+<ellipse fill="none" stroke="cadetblue" stroke-width="10" cx="485.585" cy="-708.112" rx="43" ry="43.5"/>
+<text text-anchor="start" x="543.585" y="-704.112" font-family="Times Roman,serif" font-size="15.00">California Independent Petroleum Assn</text>
+</g>
+<g id="4410" class="node">
+<polygon fill="#ffffff" stroke="#cc3333" stroke-width="10" points="451.883,-464.805 307.883,-464.805 307.883,-320.805 451.883,-320.805 451.883,-464.805"/>
+<image xlink:href="can_images/4410.jpg" width="116.911px" height="144px" preserveAspectRatio="xMinYMin meet" x="321.428" y="-464.805"/>
+<polygon fill="none" stroke="#cc3333" stroke-width="10" points="451.883,-464.805 307.883,-464.805 307.883,-320.805 451.883,-320.805 451.883,-464.805"/>
+<text text-anchor="middle" x="379.883" y="-388.805" font-family="Times Roman,serif" font-size="15.00">Robert Dutton</text>
+</g>
+</g>
+</svg>

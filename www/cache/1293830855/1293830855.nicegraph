@@ -1,0 +1,276 @@
+StateDEM Object
+(
+    [data] => Array
+        (
+            [nodetypes] => Array
+                (
+                    [0] => candidates
+                    [1] => donors
+                )
+
+            [edgetypes] => Array
+                (
+                    [donations] => Array
+                        (
+                            [0] => donors
+                            [1] => candidates
+                        )
+
+                )
+
+            [properties] => Array
+                (
+                    [minSize] => Array
+                        (
+                            [donors] => .5
+                            [candidates] => .5
+                            [donations] => 5
+                        )
+
+                    [maxSize] => Array
+                        (
+                            [donors] => 4
+                            [candidates] => 4
+                            [donations] => 40
+                        )
+
+                    [log_scaling] => 0
+                    [state] => CA
+                    [cycle] => 2010
+                    [chamber] => state:upper
+                    [valueMin] => 1
+                    [edgeid] => 
+                    [candidate_ids] => 4387
+                    [company_ids] => 
+                )
+
+            [nodes] => Array
+                (
+                    [4387] => Array
+                        (
+                            [id] => 4387
+                            [state] => CA
+                            [term] => 2010
+                            [district] => CA-4
+                            [party] => R
+                            [candidate_name] => Rick Keene
+                            [image] => ../www/can_images/unknownCandidate.jpg
+                            [total_dollars] => -2922
+                            [type] => candidates
+                            [value] => -2922
+                            [color] => #cc333333
+                            [label] => Rick Keene
+                            [fillcolor] => #ffffff
+                            [tooltip] => Rick Keene (Received -$2,922)
+                            [shape] => square
+                            [label_zoom_level] => 6
+                            [click] => this.selectNode('4387'); this.panToNode('4387');
+                            [relatedNodes] => Array
+                                (
+                                    [3716] => Array
+                                        (
+                                            [0] => 4387_3716
+                                        )
+
+                                    [38226] => Array
+                                        (
+                                            [0] => 4387_38226
+                                        )
+
+                                )
+
+                            [area] => 0.5
+                            [size] => 0.70710678118655
+                        )
+
+                    [3716] => Array
+                        (
+                            [transaction_id] => b76a71b9adfd10d2c681f164eda9af02
+                            [company_id] => 3716
+                            [company_name] => Occidental Petroleum
+                            [amount] => 1000.00
+                            [recipient_ext_id] => 4387
+                            [industry] => Major (Multinational) Oil & Gas Producers
+                            [image] => ../www/com_images/c109.png
+                            [sitecode] => oil
+                            [contributor_type] => C
+                            [id] => 3716
+                            [total_dollars] => 1000.00
+                            [type] => donors
+                            [label] => Occidental Petroleum
+                            [value] => 1000.00
+                            [dir] => /home/dameat/public_html/state_dem/njq/NodeViz
+                            [color] => cadetblue
+                            [shape] => circle
+                            [fillcolor] => #ffffff
+                            [tooltip] => Occidental Petroleum (Gave $1,000)
+                            [label_zoom_level] => 8
+                            [click] => this.selectNode('3716'); this.panToNode('3716');
+                            [relatedNodes] => Array
+                                (
+                                    [4387] => Array
+                                        (
+                                            [0] => 4387_3716
+                                        )
+
+                                )
+
+                            [area] => 3.8301795245027
+                            [size] => 2.2083333158814
+                        )
+
+                    [38226] => Array
+                        (
+                            [transaction_id] => ec583fd629d3588cf650f37439864e1a
+                            [company_id] => 38226
+                            [company_name] => NORTHGATE PETROLEUM CO
+                            [amount] => 1200.00
+                            [recipient_ext_id] => 4387
+                            [industry] => Petroleum Refining & Marketing
+                            [image] => ../www/com_images/cunknown_oil_co.png
+                            [sitecode] => oil
+                            [contributor_type] => C
+                            [id] => 38226
+                            [total_dollars] => 1200.00
+                            [type] => donors
+                            [label] => NORTHGATE PETROLEUM CO
+                            [value] => 1200.00
+                            [dir] => /home/dameat/public_html/state_dem/njq/NodeViz
+                            [color] => cadetblue
+                            [shape] => circle
+                            [fillcolor] => #ffffff
+                            [tooltip] => NORTHGATE PETROLEUM CO (Gave $1,200)
+                            [label_zoom_level] => 8
+                            [click] => this.selectNode('38226'); this.panToNode('38226');
+                            [relatedNodes] => Array
+                                (
+                                    [4387] => Array
+                                        (
+                                            [0] => 4387_38226
+                                        )
+
+                                )
+
+                            [area] => 4
+                            [size] => 2.256758334191
+                        )
+
+                )
+
+            [edges] => Array
+                (
+                    [4387_3716] => Array
+                        (
+                            [toId] => 4387
+                            [fromId] => 3716
+                            [value] => 1000.00
+                            [id] => 4387_3716
+                            [type] => donations
+                            [weight] => 1000.00
+                            [tooltip] => $1,000 from Occidental Petroleum to Rick Keene
+                            [area] => 5
+                            [size] => 5
+                        )
+
+                    [4387_38226] => Array
+                        (
+                            [toId] => 4387
+                            [fromId] => 38226
+                            [value] => 1200.00
+                            [id] => 4387_38226
+                            [type] => donations
+                            [weight] => 1200.00
+                            [tooltip] => $1,200 from NORTHGATE PETROLEUM CO to Rick Keene
+                            [area] => 40
+                            [size] => 40
+                        )
+
+                )
+
+            [subgraphs] => Array
+                (
+                )
+
+            [queries] => Array
+                (
+                )
+
+            [nodetypesindex] => Array
+                (
+                    [candidates] => Array
+                        (
+                            [0] => 4387
+                        )
+
+                    [donors] => Array
+                        (
+                            [0] => 38226
+                            [1] => 3716
+                        )
+
+                )
+
+            [edgetypesindex] => Array
+                (
+                    [donations] => Array
+                        (
+                            [0] => 4387_3716
+                            [1] => 4387_38226
+                        )
+
+                )
+
+            [graphvizProperties] => Array
+                (
+                    [graph] => Array
+                        (
+                            [bgcolor] => #FFFFFF
+                            [fontsize] => 90
+                            [splines] => curved
+                            [fontcolor] => blue
+                            [start] => self
+                            [size] => 1000,1000!
+                        )
+
+                    [node] => Array
+                        (
+                            [label] =>  
+                            [imagescale] => true
+                            [fixedsize] => 1
+                            [style] => setlinewidth(10), filled
+                            [regular] => true
+                            [fontsize] => 15
+                        )
+
+                    [edge] => Array
+                        (
+                            [arrowhead] => normal
+                            [arrowsize] => 3
+                            [color] => #99999966
+                            [fontsize] => 15
+                            [len] => 4
+                            [minlen] => 4
+                        )
+
+                )
+
+        )
+
+    [name] => 1293830855
+    [width] => 1366
+    [height] => 614
+    [prefix] => undefined
+    [input_parameters] => Array
+        (
+            [setupfile] => StateDEM
+            [state] => CA
+            [chamber] => state:upper
+            [cycle] => 2010
+            [candidate_ids] => 4387
+            [prefix] => undefined
+            [useSVG] => 1
+            [graphWidth] => 1366
+            [graphHeight] => 614
+        )
+
+)

@@ -1,0 +1,4331 @@
+StateDEM Object
+(
+    [data] => Array
+        (
+            [nodetypes] => Array
+                (
+                    [0] => candidates
+                    [1] => donors
+                )
+
+            [edgetypes] => Array
+                (
+                    [donations] => Array
+                        (
+                            [0] => donors
+                            [1] => candidates
+                        )
+
+                )
+
+            [properties] => Array
+                (
+                    [minSize] => Array
+                        (
+                            [donors] => .5
+                            [candidates] => .5
+                            [donations] => 5
+                        )
+
+                    [maxSize] => Array
+                        (
+                            [donors] => 4
+                            [candidates] => 4
+                            [donations] => 40
+                        )
+
+                    [log_scaling] => 0
+                    [state] => ND
+                    [cycle] => 2008
+                    [chamber] => state:lower
+                    [valueMin] => 1
+                    [edgeid] => 
+                    [candidate_ids] => 
+                    [company_ids] => 
+                )
+
+            [nodes] => Array
+                (
+                    [37785] => Array
+                        (
+                            [transaction_id] => 08deacc8dad4051f77c4ab921cbd4dbd
+                            [company_id] => 37785
+                            [company_name] => GP NATURAL RESOURCES PARTNERS LLC
+                            [amount] => 250.00
+                            [recipient_ext_id] => 9682
+                            [industry] => Oil & Gas
+                            [image] => ../www/com_images/cunknown_oil_co.png
+                            [sitecode] => oil
+                            [contributor_type] => I
+                            [id] => 37785
+                            [total_dollars] => 250.00
+                            [type] => donors
+                            [label] => GP NATURAL RESOURCES PARTNERS LLC
+                            [value] => 250.00
+                            [dir] => /home/dameat/public_html/state_dem/njq/NodeViz
+                            [color] => cadetblue
+                            [shape] => circle
+                            [fillcolor] => #ffffff
+                            [tooltip] => GP NATURAL RESOURCES PARTNERS LLC (Gave $250)
+                            [label_zoom_level] => 8
+                            [click] => this.selectNode('37785'); this.panToNode('37785');
+                            [relatedNodes] => Array
+                                (
+                                    [9682] => Array
+                                        (
+                                            [0] => 9682_37785
+                                        )
+
+                                )
+
+                            [area] => 0.5
+                            [size] => 0.79788456080287
+                        )
+
+                    [9684] => Array
+                        (
+                            [id] => 9684
+                            [state] => ND
+                            [term] => 2008
+                            [district] => ND-40
+                            [party] => R
+                            [candidate_name] => Robert Frantsvog
+                            [image] => ../www/can_images/9684.jpg
+                            [total_dollars] => 350
+                            [type] => candidates
+                            [value] => 350
+                            [color] => #cc333333
+                            [label] => Robert Frantsvog
+                            [fillcolor] => #ffffff
+                            [tooltip] => Robert Frantsvog (Received $350)
+                            [shape] => square
+                            [label_zoom_level] => 6
+                            [click] => this.selectNode('9684'); this.panToNode('9684');
+                            [relatedNodes] => Array
+                                (
+                                    [31955] => Array
+                                        (
+                                            [0] => 9684_31955
+                                        )
+
+                                )
+
+                            [area] => 0.51917808219178
+                            [size] => 0.7205401322562
+                        )
+
+                    [1967] => Array
+                        (
+                            [id] => 1967
+                            [state] => ND
+                            [term] => 2008
+                            [district] => ND-10
+                            [party] => R
+                            [candidate_name] => David Monson
+                            [image] => ../www/can_images/1967.jpg
+                            [total_dollars] => 500
+                            [type] => candidates
+                            [value] => 500
+                            [color] => #cc333333
+                            [label] => David Monson
+                            [fillcolor] => #ffffff
+                            [tooltip] => David Monson (Received $500)
+                            [shape] => square
+                            [label_zoom_level] => 6
+                            [click] => this.selectNode('1967'); this.panToNode('1967');
+                            [relatedNodes] => Array
+                                (
+                                    [29563] => Array
+                                        (
+                                            [0] => 1967_29563
+                                        )
+
+                                )
+
+                            [area] => 0.54794520547945
+                            [size] => 0.74023321019761
+                        )
+
+                    [6085] => Array
+                        (
+                            [id] => 6085
+                            [state] => ND
+                            [term] => 2008
+                            [district] => ND-26
+                            [party] => D
+                            [candidate_name] => Bill Amerman
+                            [image] => ../www/can_images/6085.jpg
+                            [total_dollars] => 500
+                            [type] => candidates
+                            [value] => 500
+                            [color] => #3333cc33
+                            [label] => Bill Amerman
+                            [fillcolor] => #ffffff
+                            [tooltip] => Bill Amerman (Received $500)
+                            [shape] => square
+                            [label_zoom_level] => 6
+                            [click] => this.selectNode('6085'); this.panToNode('6085');
+                            [relatedNodes] => Array
+                                (
+                                    [29563] => Array
+                                        (
+                                            [0] => 6085_29563
+                                        )
+
+                                )
+
+                            [area] => 0.54794520547945
+                            [size] => 0.74023321019761
+                        )
+
+                    [1956] => Array
+                        (
+                            [id] => 1956
+                            [state] => ND
+                            [term] => 2008
+                            [district] => ND-18
+                            [party] => D
+                            [candidate_name] => Eliot Glassheim
+                            [image] => ../www/can_images/1956.jpg
+                            [total_dollars] => 500
+                            [type] => candidates
+                            [value] => 500
+                            [color] => #3333cc33
+                            [label] => Eliot Glassheim
+                            [fillcolor] => #ffffff
+                            [tooltip] => Eliot Glassheim (Received $500)
+                            [shape] => square
+                            [label_zoom_level] => 6
+                            [click] => this.selectNode('1956'); this.panToNode('1956');
+                            [relatedNodes] => Array
+                                (
+                                    [29563] => Array
+                                        (
+                                            [0] => 1956_29563
+                                        )
+
+                                )
+
+                            [area] => 0.54794520547945
+                            [size] => 0.74023321019761
+                        )
+
+                    [2699] => Array
+                        (
+                            [id] => 2699
+                            [state] => ND
+                            [term] => 2008
+                            [district] => ND-14
+                            [party] => R
+                            [candidate_name] => Robin Weisz
+                            [image] => ../www/can_images/2699.jpg
+                            [total_dollars] => 500
+                            [type] => candidates
+                            [value] => 500
+                            [color] => #cc333333
+                            [label] => Robin Weisz
+                            [fillcolor] => #ffffff
+                            [tooltip] => Robin Weisz (Received $500)
+                            [shape] => square
+                            [label_zoom_level] => 6
+                            [click] => this.selectNode('2699'); this.panToNode('2699');
+                            [relatedNodes] => Array
+                                (
+                                    [29563] => Array
+                                        (
+                                            [0] => 2699_29563
+                                        )
+
+                                )
+
+                            [area] => 0.54794520547945
+                            [size] => 0.74023321019761
+                        )
+
+                    [30593] => Array
+                        (
+                            [transaction_id] => 068fc1c6de7c467e3d2d691972fdeec4
+                            [company_id] => 30593
+                            [company_name] => Armstrong Corp
+                            [amount] => 500.00
+                            [recipient_ext_id] => 9682
+                            [industry] => Oil & Gas
+                            [image] => ../www/com_images/cunknown_oil_co.png
+                            [sitecode] => oil
+                            [contributor_type] => I
+                            [id] => 30593
+                            [total_dollars] => 500.00
+                            [type] => donors
+                            [label] => Armstrong Corp
+                            [value] => 500.00
+                            [dir] => /home/dameat/public_html/state_dem/njq/NodeViz
+                            [color] => cadetblue
+                            [shape] => circle
+                            [fillcolor] => #ffffff
+                            [tooltip] => Armstrong Corp (Gave $500)
+                            [label_zoom_level] => 8
+                            [click] => this.selectNode('30593'); this.panToNode('30593');
+                            [relatedNodes] => Array
+                                (
+                                    [9682] => Array
+                                        (
+                                            [0] => 9682_30593
+                                        )
+
+                                )
+
+                            [area] => 0.54794520547945
+                            [size] => 0.83526373317921
+                        )
+
+                    [3662] => Array
+                        (
+                            [id] => 3662
+                            [state] => ND
+                            [term] => 2008
+                            [district] => ND-24
+                            [party] => D
+                            [candidate_name] => Phillip Mueller
+                            [image] => ../www/can_images/3662.jpg
+                            [total_dollars] => 500
+                            [type] => candidates
+                            [value] => 500
+                            [color] => #3333cc33
+                            [label] => Phillip Mueller
+                            [fillcolor] => #ffffff
+                            [tooltip] => Phillip Mueller (Received $500)
+                            [shape] => square
+                            [label_zoom_level] => 6
+                            [click] => this.selectNode('3662'); this.panToNode('3662');
+                            [relatedNodes] => Array
+                                (
+                                    [38221] => Array
+                                        (
+                                            [0] => 3662_38221
+                                        )
+
+                                )
+
+                            [area] => 0.54794520547945
+                            [size] => 0.74023321019761
+                        )
+
+                    [3656] => Array
+                        (
+                            [id] => 3656
+                            [state] => ND
+                            [term] => 2008
+                            [district] => ND-24
+                            [party] => D
+                            [candidate_name] => Ralph Metcalf
+                            [image] => ../www/can_images/3656.jpg
+                            [total_dollars] => 500
+                            [type] => candidates
+                            [value] => 500
+                            [color] => #3333cc33
+                            [label] => Ralph Metcalf
+                            [fillcolor] => #ffffff
+                            [tooltip] => Ralph Metcalf (Received $500)
+                            [shape] => square
+                            [label_zoom_level] => 6
+                            [click] => this.selectNode('3656'); this.panToNode('3656');
+                            [relatedNodes] => Array
+                                (
+                                    [29563] => Array
+                                        (
+                                            [0] => 3656_29563
+                                        )
+
+                                )
+
+                            [area] => 0.54794520547945
+                            [size] => 0.74023321019761
+                        )
+
+                    [6079] => Array
+                        (
+                            [id] => 6079
+                            [state] => ND
+                            [term] => 2008
+                            [district] => ND-22
+                            [party] => R
+                            [candidate_name] => Vonnie Pietsch
+                            [image] => ../www/can_images/6079.jpg
+                            [total_dollars] => 500
+                            [type] => candidates
+                            [value] => 500
+                            [color] => #cc333333
+                            [label] => Vonnie Pietsch
+                            [fillcolor] => #ffffff
+                            [tooltip] => Vonnie Pietsch (Received $500)
+                            [shape] => square
+                            [label_zoom_level] => 6
+                            [click] => this.selectNode('6079'); this.panToNode('6079');
+                            [relatedNodes] => Array
+                                (
+                                    [29563] => Array
+                                        (
+                                            [0] => 6079_29563
+                                        )
+
+                                )
+
+                            [area] => 0.54794520547945
+                            [size] => 0.74023321019761
+                        )
+
+                    [1926] => Array
+                        (
+                            [id] => 1926
+                            [state] => ND
+                            [term] => 2008
+                            [district] => ND-26
+                            [party] => D
+                            [candidate_name] => Jerry Kelsh
+                            [image] => ../www/can_images/1926.jpg
+                            [total_dollars] => 500
+                            [type] => candidates
+                            [value] => 500
+                            [color] => #3333cc33
+                            [label] => Jerry Kelsh
+                            [fillcolor] => #ffffff
+                            [tooltip] => Jerry Kelsh (Received $500)
+                            [shape] => square
+                            [label_zoom_level] => 6
+                            [click] => this.selectNode('1926'); this.panToNode('1926');
+                            [relatedNodes] => Array
+                                (
+                                    [29563] => Array
+                                        (
+                                            [0] => 1926_29563
+                                        )
+
+                                )
+
+                            [area] => 0.54794520547945
+                            [size] => 0.74023321019761
+                        )
+
+                    [31956] => Array
+                        (
+                            [transaction_id] => 9b2adf2f6504b272efe93cb014a08e31
+                            [company_id] => 31956
+                            [company_name] => North Dakota Retail Petroleum Marketers
+                            [amount] => 300.00
+                            [recipient_ext_id] => 7615
+                            [industry] => Petroleum Refining & Marketing
+                            [image] => ../www/com_images/cunknown_oil_co.png
+                            [sitecode] => oil
+                            [contributor_type] => C
+                            [id] => 31956
+                            [total_dollars] => 550
+                            [type] => donors
+                            [label] => North Dakota Retail Petroleum Marketers
+                            [value] => 550
+                            [dir] => /home/dameat/public_html/state_dem/njq/NodeViz
+                            [color] => cadetblue
+                            [shape] => circle
+                            [fillcolor] => #ffffff
+                            [tooltip] => North Dakota Retail Petroleum Marketers (Gave $550)
+                            [label_zoom_level] => 8
+                            [click] => this.selectNode('31956'); this.panToNode('31956');
+                            [relatedNodes] => Array
+                                (
+                                    [1953] => Array
+                                        (
+                                            [0] => 1953_31956
+                                        )
+
+                                    [7615] => Array
+                                        (
+                                            [0] => 7615_31956
+                                        )
+
+                                )
+
+                            [area] => 0.55753424657534
+                            [size] => 0.84254059266237
+                        )
+
+                    [1964] => Array
+                        (
+                            [id] => 1964
+                            [state] => ND
+                            [term] => 2008
+                            [district] => ND-28
+                            [party] => R
+                            [candidate_name] => William E. Kretschmar
+                            [image] => ../www/can_images/1964.jpg
+                            [total_dollars] => 800
+                            [type] => candidates
+                            [value] => 800
+                            [color] => #cc333333
+                            [label] => William E. Kretschmar
+                            [fillcolor] => #ffffff
+                            [tooltip] => William E. Kretschmar (Received $800)
+                            [shape] => square
+                            [label_zoom_level] => 6
+                            [click] => this.selectNode('1964'); this.panToNode('1964');
+                            [relatedNodes] => Array
+                                (
+                                    [3125] => Array
+                                        (
+                                            [0] => 1964_3125
+                                        )
+
+                                    [38221] => Array
+                                        (
+                                            [0] => 1964_38221
+                                        )
+
+                                )
+
+                            [area] => 0.60547945205479
+                            [size] => 0.77812560172172
+                        )
+
+                    [6095] => Array
+                        (
+                            [id] => 6095
+                            [state] => ND
+                            [term] => 2008
+                            [district] => ND-6
+                            [party] => D
+                            [candidate_name] => Bob Hunskor
+                            [image] => ../www/can_images/6095.jpg
+                            [total_dollars] => 800
+                            [type] => candidates
+                            [value] => 800
+                            [color] => #3333cc33
+                            [label] => Bob Hunskor
+                            [fillcolor] => #ffffff
+                            [tooltip] => Bob Hunskor (Received $800)
+                            [shape] => square
+                            [label_zoom_level] => 6
+                            [click] => this.selectNode('6095'); this.panToNode('6095');
+                            [relatedNodes] => Array
+                                (
+                                    [3125] => Array
+                                        (
+                                            [0] => 6095_3125
+                                        )
+
+                                    [29563] => Array
+                                        (
+                                            [0] => 6095_29563
+                                        )
+
+                                )
+
+                            [area] => 0.60547945205479
+                            [size] => 0.77812560172172
+                        )
+
+                    [6081] => Array
+                        (
+                            [id] => 6081
+                            [state] => ND
+                            [term] => 2008
+                            [district] => ND-46
+                            [party] => R
+                            [candidate_name] => Jim Kasper
+                            [image] => ../www/can_images/6081.jpg
+                            [total_dollars] => 850
+                            [type] => candidates
+                            [value] => 850
+                            [color] => #cc333333
+                            [label] => Jim Kasper
+                            [fillcolor] => #ffffff
+                            [tooltip] => Jim Kasper (Received $850)
+                            [shape] => square
+                            [label_zoom_level] => 6
+                            [click] => this.selectNode('6081'); this.panToNode('6081');
+                            [relatedNodes] => Array
+                                (
+                                    [31955] => Array
+                                        (
+                                            [0] => 6081_31955
+                                        )
+
+                                    [29563] => Array
+                                        (
+                                            [0] => 6081_29563
+                                        )
+
+                                )
+
+                            [area] => 0.61506849315068
+                            [size] => 0.78426302548997
+                        )
+
+                    [9681] => Array
+                        (
+                            [id] => 9681
+                            [state] => ND
+                            [term] => 2008
+                            [district] => ND-30
+                            [party] => R
+                            [candidate_name] => Mike Nathe
+                            [image] => ../www/can_images/9681.jpg
+                            [total_dollars] => 900
+                            [type] => candidates
+                            [value] => 900
+                            [color] => #cc333333
+                            [label] => Mike Nathe
+                            [fillcolor] => #ffffff
+                            [tooltip] => Mike Nathe (Received $900)
+                            [shape] => square
+                            [label_zoom_level] => 6
+                            [click] => this.selectNode('9681'); this.panToNode('9681');
+                            [relatedNodes] => Array
+                                (
+                                    [30234] => Array
+                                        (
+                                            [0] => 9681_30234
+                                        )
+
+                                    [3125] => Array
+                                        (
+                                            [0] => 9681_3125
+                                        )
+
+                                    [31955] => Array
+                                        (
+                                            [0] => 9681_31955
+                                        )
+
+                                )
+
+                            [area] => 0.62465753424658
+                            [size] => 0.79035279100322
+                        )
+
+                    [16010] => Array
+                        (
+                            [id] => 16010
+                            [state] => ND
+                            [term] => 2008
+                            [district] => ND-12
+                            [party] => D
+                            [candidate_name] => Joe Kroeber
+                            [image] => ../www/can_images/16010.jpg
+                            [total_dollars] => 1000
+                            [type] => candidates
+                            [value] => 1000
+                            [color] => #3333cc33
+                            [label] => Joe Kroeber
+                            [fillcolor] => #ffffff
+                            [tooltip] => Joe Kroeber (Received $1,000)
+                            [shape] => square
+                            [label_zoom_level] => 6
+                            [click] => this.selectNode('16010'); this.panToNode('16010');
+                            [relatedNodes] => Array
+                                (
+                                    [29563] => Array
+                                        (
+                                            [0] => 16010_29563
+                                        )
+
+                                )
+
+                            [area] => 0.64383561643836
+                            [size] => 0.80239367921137
+                        )
+
+                    [14723] => Array
+                        (
+                            [id] => 14723
+                            [state] => ND
+                            [term] => 2008
+                            [district] => ND-12
+                            [party] => D
+                            [candidate_name] => Lyle Hanson
+                            [image] => ../www/can_images/14723.jpg
+                            [total_dollars] => 1000
+                            [type] => candidates
+                            [value] => 1000
+                            [color] => #3333cc33
+                            [label] => Lyle Hanson
+                            [fillcolor] => #ffffff
+                            [tooltip] => Lyle Hanson (Received $1,000)
+                            [shape] => square
+                            [label_zoom_level] => 6
+                            [click] => this.selectNode('14723'); this.panToNode('14723');
+                            [relatedNodes] => Array
+                                (
+                                    [38221] => Array
+                                        (
+                                            [0] => 14723_38221
+                                        )
+
+                                )
+
+                            [area] => 0.64383561643836
+                            [size] => 0.80239367921137
+                        )
+
+                    [36] => Array
+                        (
+                            [id] => 36
+                            [state] => ND
+                            [term] => 2008
+                            [district] => ND-20
+                            [party] => D
+                            [candidate_name] => Lee Kaldor
+                            [image] => ../www/can_images/36.jpg
+                            [total_dollars] => 1000
+                            [type] => candidates
+                            [value] => 1000
+                            [color] => #3333cc33
+                            [label] => Lee Kaldor
+                            [fillcolor] => #ffffff
+                            [tooltip] => Lee Kaldor (Received $1,000)
+                            [shape] => square
+                            [label_zoom_level] => 6
+                            [click] => this.selectNode('36'); this.panToNode('36');
+                            [relatedNodes] => Array
+                                (
+                                    [29563] => Array
+                                        (
+                                            [0] => 36_29563
+                                        )
+
+                                )
+
+                            [area] => 0.64383561643836
+                            [size] => 0.80239367921137
+                        )
+
+                    [9677] => Array
+                        (
+                            [id] => 9677
+                            [state] => ND
+                            [term] => 2008
+                            [district] => ND-2
+                            [party] => R
+                            [candidate_name] => David S. Rust
+                            [image] => ../www/can_images/9677.jpg
+                            [total_dollars] => 1000
+                            [type] => candidates
+                            [value] => 1000
+                            [color] => #cc333333
+                            [label] => David S. Rust
+                            [fillcolor] => #ffffff
+                            [tooltip] => David S. Rust (Received $1,000)
+                            [shape] => square
+                            [label_zoom_level] => 6
+                            [click] => this.selectNode('9677'); this.panToNode('9677');
+                            [relatedNodes] => Array
+                                (
+                                    [3125] => Array
+                                        (
+                                            [0] => 9677_3125
+                                        )
+
+                                    [31955] => Array
+                                        (
+                                            [0] => 9677_31955
+                                        )
+
+                                )
+
+                            [area] => 0.64383561643836
+                            [size] => 0.80239367921137
+                        )
+
+                    [6092] => Array
+                        (
+                            [id] => 6092
+                            [state] => ND
+                            [term] => 2008
+                            [district] => ND-16
+                            [party] => R
+                            [candidate_name] => Joyce Kingsbury
+                            [image] => ../www/can_images/6092.jpg
+                            [total_dollars] => 1000
+                            [type] => candidates
+                            [value] => 1000
+                            [color] => #cc333333
+                            [label] => Joyce Kingsbury
+                            [fillcolor] => #ffffff
+                            [tooltip] => Joyce Kingsbury (Received $1,000)
+                            [shape] => square
+                            [label_zoom_level] => 6
+                            [click] => this.selectNode('6092'); this.panToNode('6092');
+                            [relatedNodes] => Array
+                                (
+                                    [31955] => Array
+                                        (
+                                            [0] => 6092_31955
+                                        )
+
+                                    [29563] => Array
+                                        (
+                                            [0] => 6092_29563
+                                        )
+
+                                )
+
+                            [area] => 0.64383561643836
+                            [size] => 0.80239367921137
+                        )
+
+                    [9679] => Array
+                        (
+                            [id] => 9679
+                            [state] => ND
+                            [term] => 2008
+                            [district] => ND-4
+                            [party] => D
+                            [candidate_name] => Tom Conklin
+                            [image] => ../www/can_images/9679.jpg
+                            [total_dollars] => 1000
+                            [type] => candidates
+                            [value] => 1000
+                            [color] => #3333cc33
+                            [label] => Tom Conklin
+                            [fillcolor] => #ffffff
+                            [tooltip] => Tom Conklin (Received $1,000)
+                            [shape] => square
+                            [label_zoom_level] => 6
+                            [click] => this.selectNode('9679'); this.panToNode('9679');
+                            [relatedNodes] => Array
+                                (
+                                    [29802] => Array
+                                        (
+                                            [0] => 9679_29802
+                                        )
+
+                                )
+
+                            [area] => 0.64383561643836
+                            [size] => 0.80239367921137
+                        )
+
+                    [5460] => Array
+                        (
+                            [transaction_id] => c88d0e6e2c2a8669a56e122c8a08369a
+                            [company_id] => 5460
+                            [company_name] => Tesoro Petroleum
+                            [amount] => 400.00
+                            [recipient_ext_id] => 2136
+                            [industry] => Petroleum Refining & Marketing
+                            [image] => ../www/com_images/c185.png
+                            [sitecode] => oil
+                            [contributor_type] => C
+                            [id] => 5460
+                            [total_dollars] => 1100
+                            [type] => donors
+                            [label] => Tesoro Petroleum
+                            [value] => 1100
+                            [dir] => /home/dameat/public_html/state_dem/njq/NodeViz
+                            [color] => cadetblue
+                            [shape] => circle
+                            [fillcolor] => #ffffff
+                            [tooltip] => Tesoro Petroleum (Gave $1,100)
+                            [label_zoom_level] => 8
+                            [click] => this.selectNode('5460'); this.panToNode('5460');
+                            [relatedNodes] => Array
+                                (
+                                    [1945] => Array
+                                        (
+                                            [0] => 1945_5460
+                                        )
+
+                                    [3658] => Array
+                                        (
+                                            [0] => 3658_5460
+                                        )
+
+                                    [2136] => Array
+                                        (
+                                            [0] => 2136_5460
+                                        )
+
+                                )
+
+                            [area] => 0.66301369863014
+                            [size] => 0.91879010649713
+                        )
+
+                    [2704] => Array
+                        (
+                            [id] => 2704
+                            [state] => ND
+                            [term] => 2008
+                            [district] => ND-28
+                            [party] => R
+                            [candidate_name] => Mike D. Brandenburg
+                            [image] => ../www/can_images/2704.jpg
+                            [total_dollars] => 1150
+                            [type] => candidates
+                            [value] => 1150
+                            [color] => #cc333333
+                            [label] => Mike D. Brandenburg
+                            [fillcolor] => #ffffff
+                            [tooltip] => Mike D. Brandenburg (Received $1,150)
+                            [shape] => square
+                            [label_zoom_level] => 6
+                            [click] => this.selectNode('2704'); this.panToNode('2704');
+                            [relatedNodes] => Array
+                                (
+                                    [3125] => Array
+                                        (
+                                            [0] => 2704_3125
+                                        )
+
+                                    [31955] => Array
+                                        (
+                                            [0] => 2704_31955
+                                        )
+
+                                    [38221] => Array
+                                        (
+                                            [0] => 2704_38221
+                                        )
+
+                                )
+
+                            [area] => 0.67260273972603
+                            [size] => 0.82012361246706
+                        )
+
+                    [38152] => Array
+                        (
+                            [transaction_id] => 0bd38c8e29c16653f3d77f9758f856d4
+                            [company_id] => 38152
+                            [company_name] => MISSOURI BASIN OIL SERVICES
+                            [amount] => 1200.00
+                            [recipient_ext_id] => 9682
+                            [industry] => Oilfield Service, Equipment & Exploration
+                            [image] => ../www/com_images/cunknown_oil_co.png
+                            [sitecode] => oil
+                            [contributor_type] => I
+                            [id] => 38152
+                            [total_dollars] => 1200.00
+                            [type] => donors
+                            [label] => MISSOURI BASIN OIL SERVICES
+                            [value] => 1200.00
+                            [dir] => /home/dameat/public_html/state_dem/njq/NodeViz
+                            [color] => cadetblue
+                            [shape] => circle
+                            [fillcolor] => #ffffff
+                            [tooltip] => MISSOURI BASIN OIL SERVICES (Gave $1,200)
+                            [label_zoom_level] => 8
+                            [click] => this.selectNode('38152'); this.panToNode('38152');
+                            [relatedNodes] => Array
+                                (
+                                    [9682] => Array
+                                        (
+                                            [0] => 9682_38152
+                                        )
+
+                                )
+
+                            [area] => 0.68219178082192
+                            [size] => 0.93198366532669
+                        )
+
+                    [6088] => Array
+                        (
+                            [id] => 6088
+                            [state] => ND
+                            [term] => 2008
+                            [district] => ND-42
+                            [party] => R
+                            [candidate_name] => Stacey Dahl
+                            [image] => ../www/can_images/6088.jpg
+                            [total_dollars] => 1250
+                            [type] => candidates
+                            [value] => 1250
+                            [color] => #cc333333
+                            [label] => Stacey Dahl
+                            [fillcolor] => #ffffff
+                            [tooltip] => Stacey Dahl (Received $1,250)
+                            [shape] => square
+                            [label_zoom_level] => 6
+                            [click] => this.selectNode('6088'); this.panToNode('6088');
+                            [relatedNodes] => Array
+                                (
+                                    [31955] => Array
+                                        (
+                                            [0] => 6088_31955
+                                        )
+
+                                    [3125] => Array
+                                        (
+                                            [0] => 6088_3125
+                                        )
+
+                                    [29563] => Array
+                                        (
+                                            [0] => 6088_29563
+                                        )
+
+                                )
+
+                            [area] => 0.69178082191781
+                            [size] => 0.8317336243761
+                        )
+
+                    [4135] => Array
+                        (
+                            [id] => 4135
+                            [state] => ND
+                            [term] => 2008
+                            [district] => ND-10
+                            [party] => R
+                            [candidate_name] => Chuck Damschen
+                            [image] => ../www/can_images/4135.jpg
+                            [total_dollars] => 1300
+                            [type] => candidates
+                            [value] => 1300
+                            [color] => #cc333333
+                            [label] => Chuck Damschen
+                            [fillcolor] => #ffffff
+                            [tooltip] => Chuck Damschen (Received $1,300)
+                            [shape] => square
+                            [label_zoom_level] => 6
+                            [click] => this.selectNode('4135'); this.panToNode('4135');
+                            [relatedNodes] => Array
+                                (
+                                    [3125] => Array
+                                        (
+                                            [0] => 4135_3125
+                                        )
+
+                                    [31955] => Array
+                                        (
+                                            [0] => 4135_31955
+                                        )
+
+                                    [29563] => Array
+                                        (
+                                            [0] => 4135_29563
+                                        )
+
+                                )
+
+                            [area] => 0.7013698630137
+                            [size] => 0.83747827614434
+                        )
+
+                    [1951] => Array
+                        (
+                            [id] => 1951
+                            [state] => ND
+                            [term] => 2008
+                            [district] => ND-14
+                            [party] => R
+                            [candidate_name] => Duane DeKrey
+                            [image] => ../www/can_images/1951.jpg
+                            [total_dollars] => 1350
+                            [type] => candidates
+                            [value] => 1350
+                            [color] => #cc333333
+                            [label] => Duane DeKrey
+                            [fillcolor] => #ffffff
+                            [tooltip] => Duane DeKrey (Received $1,350)
+                            [shape] => square
+                            [label_zoom_level] => 6
+                            [click] => this.selectNode('1951'); this.panToNode('1951');
+                            [relatedNodes] => Array
+                                (
+                                    [31955] => Array
+                                        (
+                                            [0] => 1951_31955
+                                        )
+
+                                    [29563] => Array
+                                        (
+                                            [0] => 1951_29563
+                                        )
+
+                                )
+
+                            [area] => 0.71095890410959
+                            [size] => 0.84318379023176
+                        )
+
+                    [2712] => Array
+                        (
+                            [id] => 2712
+                            [state] => ND
+                            [term] => 2008
+                            [district] => ND-46
+                            [party] => R
+                            [candidate_name] => Kathy Hawken
+                            [image] => ../www/can_images/2712.jpg
+                            [total_dollars] => 1350
+                            [type] => candidates
+                            [value] => 1350
+                            [color] => #cc333333
+                            [label] => Kathy Hawken
+                            [fillcolor] => #ffffff
+                            [tooltip] => Kathy Hawken (Received $1,350)
+                            [shape] => square
+                            [label_zoom_level] => 6
+                            [click] => this.selectNode('2712'); this.panToNode('2712');
+                            [relatedNodes] => Array
+                                (
+                                    [31955] => Array
+                                        (
+                                            [0] => 2712_31955
+                                        )
+
+                                    [29563] => Array
+                                        (
+                                            [0] => 2712_29563
+                                        )
+
+                                )
+
+                            [area] => 0.71095890410959
+                            [size] => 0.84318379023176
+                        )
+
+                    [6086] => Array
+                        (
+                            [id] => 6086
+                            [state] => ND
+                            [term] => 2008
+                            [district] => ND-38
+                            [party] => R
+                            [candidate_name] => Larry Bellew
+                            [image] => ../www/can_images/6086.jpg
+                            [total_dollars] => 1400
+                            [type] => candidates
+                            [value] => 1400
+                            [color] => #cc333333
+                            [label] => Larry Bellew
+                            [fillcolor] => #ffffff
+                            [tooltip] => Larry Bellew (Received $1,400)
+                            [shape] => square
+                            [label_zoom_level] => 6
+                            [click] => this.selectNode('6086'); this.panToNode('6086');
+                            [relatedNodes] => Array
+                                (
+                                    [3125] => Array
+                                        (
+                                            [0] => 6086_3125
+                                        )
+
+                                    [31955] => Array
+                                        (
+                                            [0] => 6086_31955
+                                        )
+
+                                    [29563] => Array
+                                        (
+                                            [0] => 6086_29563
+                                        )
+
+                                )
+
+                            [area] => 0.72054794520548
+                            [size] => 0.84885095582527
+                        )
+
+                    [6103] => Array
+                        (
+                            [id] => 6103
+                            [state] => ND
+                            [term] => 2008
+                            [district] => ND-38
+                            [party] => R
+                            [candidate_name] => Dan Ruby
+                            [image] => ../www/can_images/6103.jpg
+                            [total_dollars] => 1400
+                            [type] => candidates
+                            [value] => 1400
+                            [color] => #cc333333
+                            [label] => Dan Ruby
+                            [fillcolor] => #ffffff
+                            [tooltip] => Dan Ruby (Received $1,400)
+                            [shape] => square
+                            [label_zoom_level] => 6
+                            [click] => this.selectNode('6103'); this.panToNode('6103');
+                            [relatedNodes] => Array
+                                (
+                                    [3125] => Array
+                                        (
+                                            [0] => 6103_3125
+                                        )
+
+                                    [31955] => Array
+                                        (
+                                            [0] => 6103_31955
+                                        )
+
+                                    [29563] => Array
+                                        (
+                                            [0] => 6103_29563
+                                        )
+
+                                )
+
+                            [area] => 0.72054794520548
+                            [size] => 0.84885095582527
+                        )
+
+                    [3657] => Array
+                        (
+                            [id] => 3657
+                            [state] => ND
+                            [term] => 2008
+                            [district] => ND-18
+                            [party] => R
+                            [candidate_name] => Mark S. Owens
+                            [image] => ../www/can_images/3657.jpg
+                            [total_dollars] => 1500
+                            [type] => candidates
+                            [value] => 1500
+                            [color] => #cc333333
+                            [label] => Mark S. Owens
+                            [fillcolor] => #ffffff
+                            [tooltip] => Mark S. Owens (Received $1,500)
+                            [shape] => square
+                            [label_zoom_level] => 6
+                            [click] => this.selectNode('3657'); this.panToNode('3657');
+                            [relatedNodes] => Array
+                                (
+                                    [29563] => Array
+                                        (
+                                            [0] => 3657_29563
+                                        )
+
+                                    [3125] => Array
+                                        (
+                                            [0] => 3657_3125
+                                        )
+
+                                    [31955] => Array
+                                        (
+                                            [0] => 3657_31955
+                                        )
+
+                                )
+
+                            [area] => 0.73972602739726
+                            [size] => 0.86007326862149
+                        )
+
+                    [3137] => Array
+                        (
+                            [id] => 3137
+                            [state] => ND
+                            [term] => 2008
+                            [district] => ND-36
+                            [party] => D
+                            [candidate_name] => Shirley Meyer
+                            [image] => ../www/can_images/3137.jpg
+                            [total_dollars] => 1500
+                            [type] => candidates
+                            [value] => 1500
+                            [color] => #3333cc33
+                            [label] => Shirley Meyer
+                            [fillcolor] => #ffffff
+                            [tooltip] => Shirley Meyer (Received $1,500)
+                            [shape] => square
+                            [label_zoom_level] => 6
+                            [click] => this.selectNode('3137'); this.panToNode('3137');
+                            [relatedNodes] => Array
+                                (
+                                    [29563] => Array
+                                        (
+                                            [0] => 3137_29563
+                                        )
+
+                                    [31955] => Array
+                                        (
+                                            [0] => 3137_31955
+                                        )
+
+                                    [3125] => Array
+                                        (
+                                            [0] => 3137_3125
+                                        )
+
+                                )
+
+                            [area] => 0.73972602739726
+                            [size] => 0.86007326862149
+                        )
+
+                    [1953] => Array
+                        (
+                            [id] => 1953
+                            [state] => ND
+                            [term] => 2008
+                            [district] => ND-8
+                            [party] => R
+                            [candidate_name] => Jeff Delzer
+                            [image] => ../www/can_images/1953.jpg
+                            [total_dollars] => 1550
+                            [type] => candidates
+                            [value] => 1550
+                            [color] => #cc333333
+                            [label] => Jeff Delzer
+                            [fillcolor] => #ffffff
+                            [tooltip] => Jeff Delzer (Received $1,550)
+                            [shape] => square
+                            [label_zoom_level] => 6
+                            [click] => this.selectNode('1953'); this.panToNode('1953');
+                            [relatedNodes] => Array
+                                (
+                                    [31956] => Array
+                                        (
+                                            [0] => 1953_31956
+                                        )
+
+                                    [3125] => Array
+                                        (
+                                            [0] => 1953_3125
+                                        )
+
+                                    [29563] => Array
+                                        (
+                                            [0] => 1953_29563
+                                        )
+
+                                    [31955] => Array
+                                        (
+                                            [0] => 1953_31955
+                                        )
+
+                                )
+
+                            [area] => 0.74931506849315
+                            [size] => 0.865629868069
+                        )
+
+                    [7615] => Array
+                        (
+                            [id] => 7615
+                            [state] => ND
+                            [term] => 2008
+                            [district] => ND-44
+                            [party] => R
+                            [candidate_name] => Donald L. Clark
+                            [image] => ../www/can_images/7615.jpg
+                            [total_dollars] => 1550
+                            [type] => candidates
+                            [value] => 1550
+                            [color] => #cc333333
+                            [label] => Donald L. Clark
+                            [fillcolor] => #ffffff
+                            [tooltip] => Donald L. Clark (Received $1,550)
+                            [shape] => square
+                            [label_zoom_level] => 6
+                            [click] => this.selectNode('7615'); this.panToNode('7615');
+                            [relatedNodes] => Array
+                                (
+                                    [31956] => Array
+                                        (
+                                            [0] => 7615_31956
+                                        )
+
+                                    [31955] => Array
+                                        (
+                                            [0] => 7615_31955
+                                        )
+
+                                    [3125] => Array
+                                        (
+                                            [0] => 7615_3125
+                                        )
+
+                                    [29563] => Array
+                                        (
+                                            [0] => 7615_29563
+                                        )
+
+                                )
+
+                            [area] => 0.74931506849315
+                            [size] => 0.865629868069
+                        )
+
+                    [6087] => Array
+                        (
+                            [id] => 6087
+                            [state] => ND
+                            [term] => 2008
+                            [district] => ND-30
+                            [party] => R
+                            [candidate_name] => Dave Weiler
+                            [image] => ../www/can_images/6087.jpg
+                            [total_dollars] => 1650
+                            [type] => candidates
+                            [value] => 1650
+                            [color] => #cc333333
+                            [label] => Dave Weiler
+                            [fillcolor] => #ffffff
+                            [tooltip] => Dave Weiler (Received $1,650)
+                            [shape] => square
+                            [label_zoom_level] => 6
+                            [click] => this.selectNode('6087'); this.panToNode('6087');
+                            [relatedNodes] => Array
+                                (
+                                    [30234] => Array
+                                        (
+                                            [0] => 6087_30234
+                                        )
+
+                                    [3125] => Array
+                                        (
+                                            [0] => 6087_3125
+                                        )
+
+                                    [29563] => Array
+                                        (
+                                            [0] => 6087_29563
+                                        )
+
+                                    [31955] => Array
+                                        (
+                                            [0] => 6087_31955
+                                        )
+
+                                )
+
+                            [area] => 0.76849315068493
+                            [size] => 0.8766374111826
+                        )
+
+                    [3663] => Array
+                        (
+                            [id] => 3663
+                            [state] => ND
+                            [term] => 2008
+                            [district] => ND-44
+                            [party] => R
+                            [candidate_name] => Blair Thoreson
+                            [image] => ../www/can_images/3663.jpg
+                            [total_dollars] => 1750
+                            [type] => candidates
+                            [value] => 1750
+                            [color] => #cc333333
+                            [label] => Blair Thoreson
+                            [fillcolor] => #ffffff
+                            [tooltip] => Blair Thoreson (Received $1,750)
+                            [shape] => square
+                            [label_zoom_level] => 6
+                            [click] => this.selectNode('3663'); this.panToNode('3663');
+                            [relatedNodes] => Array
+                                (
+                                    [31955] => Array
+                                        (
+                                            [0] => 3663_31955
+                                        )
+
+                                    [3125] => Array
+                                        (
+                                            [0] => 3663_3125
+                                        )
+
+                                    [29563] => Array
+                                        (
+                                            [0] => 3663_29563
+                                        )
+
+                                )
+
+                            [area] => 0.78767123287671
+                            [size] => 0.88750844101716
+                        )
+
+                    [30234] => Array
+                        (
+                            [transaction_id] => ab8cfee7462318a60ad908c90b5515ab
+                            [company_id] => 30234
+                            [company_name] => MDU Resources Group
+                            [amount] => 250.00
+                            [recipient_ext_id] => 1962
+                            [industry] => Petroleum Refining & Marketing
+                            [image] => ../www/com_images/cunknown_oil_co.png
+                            [sitecode] => oil
+                            [contributor_type] => C
+                            [id] => 30234
+                            [total_dollars] => 1750
+                            [type] => donors
+                            [label] => MDU Resources Group
+                            [value] => 1750
+                            [dir] => /home/dameat/public_html/state_dem/njq/NodeViz
+                            [color] => cadetblue
+                            [shape] => circle
+                            [fillcolor] => #ffffff
+                            [tooltip] => MDU Resources Group (Gave $1,750)
+                            [label_zoom_level] => 8
+                            [click] => this.selectNode('30234'); this.panToNode('30234');
+                            [relatedNodes] => Array
+                                (
+                                    [6087] => Array
+                                        (
+                                            [0] => 6087_30234
+                                        )
+
+                                    [1962] => Array
+                                        (
+                                            [0] => 1962_30234
+                                        )
+
+                                    [6073] => Array
+                                        (
+                                            [0] => 6073_30234
+                                        )
+
+                                    [2136] => Array
+                                        (
+                                            [0] => 2136_30234
+                                        )
+
+                                    [6067] => Array
+                                        (
+                                            [0] => 6067_30234
+                                        )
+
+                                    [9681] => Array
+                                        (
+                                            [0] => 9681_30234
+                                        )
+
+                                    [3658] => Array
+                                        (
+                                            [0] => 3658_30234
+                                        )
+
+                                )
+
+                            [area] => 0.78767123287671
+                            [size] => 1.0014460354652
+                        )
+
+                    [1974] => Array
+                        (
+                            [id] => 1974
+                            [state] => ND
+                            [term] => 2008
+                            [district] => ND-2
+                            [party] => R
+                            [candidate_name] => Robert J. Skarphol
+                            [image] => ../www/can_images/1974.jpg
+                            [total_dollars] => 1750
+                            [type] => candidates
+                            [value] => 1750
+                            [color] => #cc333333
+                            [label] => Robert J. Skarphol
+                            [fillcolor] => #ffffff
+                            [tooltip] => Robert J. Skarphol (Received $1,750)
+                            [shape] => square
+                            [label_zoom_level] => 6
+                            [click] => this.selectNode('1974'); this.panToNode('1974');
+                            [relatedNodes] => Array
+                                (
+                                    [29563] => Array
+                                        (
+                                            [0] => 1974_29563
+                                        )
+
+                                    [3125] => Array
+                                        (
+                                            [0] => 1974_3125
+                                        )
+
+                                    [31955] => Array
+                                        (
+                                            [0] => 1974_31955
+                                        )
+
+                                )
+
+                            [area] => 0.78767123287671
+                            [size] => 0.88750844101716
+                        )
+
+                    [6067] => Array
+                        (
+                            [id] => 6067
+                            [state] => ND
+                            [term] => 2008
+                            [district] => ND-32
+                            [party] => R
+                            [candidate_name] => Mark A. Dosch
+                            [image] => ../www/can_images/6067.jpg
+                            [total_dollars] => 1900
+                            [type] => candidates
+                            [value] => 1900
+                            [color] => #cc333333
+                            [label] => Mark A. Dosch
+                            [fillcolor] => #ffffff
+                            [tooltip] => Mark A. Dosch (Received $1,900)
+                            [shape] => square
+                            [label_zoom_level] => 6
+                            [click] => this.selectNode('6067'); this.panToNode('6067');
+                            [relatedNodes] => Array
+                                (
+                                    [30234] => Array
+                                        (
+                                            [0] => 6067_30234
+                                        )
+
+                                    [31955] => Array
+                                        (
+                                            [0] => 6067_31955
+                                        )
+
+                                    [29563] => Array
+                                        (
+                                            [0] => 6067_29563
+                                        )
+
+                                    [3125] => Array
+                                        (
+                                            [0] => 6067_3125
+                                        )
+
+                                )
+
+                            [area] => 0.81643835616438
+                            [size] => 0.90356978488902
+                        )
+
+                    [6073] => Array
+                        (
+                            [id] => 6073
+                            [state] => ND
+                            [term] => 2008
+                            [district] => ND-32
+                            [party] => R
+                            [candidate_name] => Lisa Meier
+                            [image] => ../www/can_images/6073.jpg
+                            [total_dollars] => 1900
+                            [type] => candidates
+                            [value] => 1900
+                            [color] => #cc333333
+                            [label] => Lisa Meier
+                            [fillcolor] => #ffffff
+                            [tooltip] => Lisa Meier (Received $1,900)
+                            [shape] => square
+                            [label_zoom_level] => 6
+                            [click] => this.selectNode('6073'); this.panToNode('6073');
+                            [relatedNodes] => Array
+                                (
+                                    [30234] => Array
+                                        (
+                                            [0] => 6073_30234
+                                        )
+
+                                    [31955] => Array
+                                        (
+                                            [0] => 6073_31955
+                                        )
+
+                                    [29563] => Array
+                                        (
+                                            [0] => 6073_29563
+                                        )
+
+                                    [3125] => Array
+                                        (
+                                            [0] => 6073_3125
+                                        )
+
+                                )
+
+                            [area] => 0.81643835616438
+                            [size] => 0.90356978488902
+                        )
+
+                    [6071] => Array
+                        (
+                            [id] => 6071
+                            [state] => ND
+                            [term] => 2008
+                            [district] => ND-4
+                            [party] => D
+                            [candidate_name] => Kenton Onstad
+                            [image] => ../www/can_images/6071.jpg
+                            [total_dollars] => 2000
+                            [type] => candidates
+                            [value] => 2000
+                            [color] => #3333cc33
+                            [label] => Kenton Onstad
+                            [fillcolor] => #ffffff
+                            [tooltip] => Kenton Onstad (Received $2,000)
+                            [shape] => square
+                            [label_zoom_level] => 6
+                            [click] => this.selectNode('6071'); this.panToNode('6071');
+                            [relatedNodes] => Array
+                                (
+                                    [38221] => Array
+                                        (
+                                            [0] => 6071_38221
+                                        )
+
+                                    [31955] => Array
+                                        (
+                                            [0] => 6071_31955
+                                        )
+
+                                    [3125] => Array
+                                        (
+                                            [0] => 6071_3125
+                                        )
+
+                                    [29802] => Array
+                                        (
+                                            [0] => 6071_29802
+                                        )
+
+                                )
+
+                            [area] => 0.83561643835616
+                            [size] => 0.91412058195632
+                        )
+
+                    [1955] => Array
+                        (
+                            [id] => 1955
+                            [state] => ND
+                            [term] => 2008
+                            [district] => ND-6
+                            [party] => R
+                            [candidate_name] => Glen Froseth
+                            [image] => ../www/can_images/1955.jpg
+                            [total_dollars] => 2000
+                            [type] => candidates
+                            [value] => 2000
+                            [color] => #cc333333
+                            [label] => Glen Froseth
+                            [fillcolor] => #ffffff
+                            [tooltip] => Glen Froseth (Received $2,000)
+                            [shape] => square
+                            [label_zoom_level] => 6
+                            [click] => this.selectNode('1955'); this.panToNode('1955');
+                            [relatedNodes] => Array
+                                (
+                                    [38221] => Array
+                                        (
+                                            [0] => 1955_38221
+                                        )
+
+                                    [31955] => Array
+                                        (
+                                            [0] => 1955_31955
+                                        )
+
+                                    [3125] => Array
+                                        (
+                                            [0] => 1955_3125
+                                        )
+
+                                )
+
+                            [area] => 0.83561643835616
+                            [size] => 0.91412058195632
+                        )
+
+                    [1945] => Array
+                        (
+                            [id] => 1945
+                            [state] => ND
+                            [term] => 2008
+                            [district] => ND-22
+                            [party] => R
+                            [candidate_name] => Wesley R. Belter
+                            [image] => ../www/can_images/1945.jpg
+                            [total_dollars] => 2050
+                            [type] => candidates
+                            [value] => 2050
+                            [color] => #cc333333
+                            [label] => Wesley R. Belter
+                            [fillcolor] => #ffffff
+                            [tooltip] => Wesley R. Belter (Received $2,050)
+                            [shape] => square
+                            [label_zoom_level] => 6
+                            [click] => this.selectNode('1945'); this.panToNode('1945');
+                            [relatedNodes] => Array
+                                (
+                                    [5460] => Array
+                                        (
+                                            [0] => 1945_5460
+                                        )
+
+                                    [31955] => Array
+                                        (
+                                            [0] => 1945_31955
+                                        )
+
+                                    [38221] => Array
+                                        (
+                                            [0] => 1945_38221
+                                        )
+
+                                )
+
+                            [area] => 0.84520547945205
+                            [size] => 0.91935057483642
+                        )
+
+                    [1962] => Array
+                        (
+                            [id] => 1962
+                            [state] => ND
+                            [term] => 2008
+                            [district] => ND-40
+                            [party] => R
+                            [candidate_name] => Matthew M. Klein
+                            [image] => ../www/can_images/1962.jpg
+                            [total_dollars] => 2050
+                            [type] => candidates
+                            [value] => 2050
+                            [color] => #cc333333
+                            [label] => Matthew M. Klein
+                            [fillcolor] => #ffffff
+                            [tooltip] => Matthew M. Klein (Received $2,050)
+                            [shape] => square
+                            [label_zoom_level] => 6
+                            [click] => this.selectNode('1962'); this.panToNode('1962');
+                            [relatedNodes] => Array
+                                (
+                                    [30234] => Array
+                                        (
+                                            [0] => 1962_30234
+                                        )
+
+                                    [3125] => Array
+                                        (
+                                            [0] => 1962_3125
+                                        )
+
+                                    [31955] => Array
+                                        (
+                                            [0] => 1962_31955
+                                        )
+
+                                    [29563] => Array
+                                        (
+                                            [0] => 1962_29563
+                                        )
+
+                                )
+
+                            [area] => 0.84520547945205
+                            [size] => 0.91935057483642
+                        )
+
+                    [2136] => Array
+                        (
+                            [id] => 2136
+                            [state] => ND
+                            [term] => 2008
+                            [district] => ND-34
+                            [party] => R
+                            [candidate_name] => RaeAnn G. Kelsch
+                            [image] => ../www/can_images/2136.jpg
+                            [total_dollars] => 2050
+                            [type] => candidates
+                            [value] => 2050
+                            [color] => #cc333333
+                            [label] => RaeAnn G. Kelsch
+                            [fillcolor] => #ffffff
+                            [tooltip] => RaeAnn G. Kelsch (Received $2,050)
+                            [shape] => square
+                            [label_zoom_level] => 6
+                            [click] => this.selectNode('2136'); this.panToNode('2136');
+                            [relatedNodes] => Array
+                                (
+                                    [30234] => Array
+                                        (
+                                            [0] => 2136_30234
+                                        )
+
+                                    [5460] => Array
+                                        (
+                                            [0] => 2136_5460
+                                        )
+
+                                    [3125] => Array
+                                        (
+                                            [0] => 2136_3125
+                                        )
+
+                                    [31955] => Array
+                                        (
+                                            [0] => 2136_31955
+                                        )
+
+                                    [29563] => Array
+                                        (
+                                            [0] => 2136_29563
+                                        )
+
+                                )
+
+                            [area] => 0.84520547945205
+                            [size] => 0.91935057483642
+                        )
+
+                    [3658] => Array
+                        (
+                            [id] => 3658
+                            [state] => ND
+                            [term] => 2008
+                            [district] => ND-34
+                            [party] => R
+                            [candidate_name] => Todd Porter
+                            [image] => ../www/can_images/3658.jpg
+                            [total_dollars] => 2250
+                            [type] => candidates
+                            [value] => 2250
+                            [color] => #cc333333
+                            [label] => Todd Porter
+                            [fillcolor] => #ffffff
+                            [tooltip] => Todd Porter (Received $2,250)
+                            [shape] => square
+                            [label_zoom_level] => 6
+                            [click] => this.selectNode('3658'); this.panToNode('3658');
+                            [relatedNodes] => Array
+                                (
+                                    [30234] => Array
+                                        (
+                                            [0] => 3658_30234
+                                        )
+
+                                    [5460] => Array
+                                        (
+                                            [0] => 3658_5460
+                                        )
+
+                                    [3125] => Array
+                                        (
+                                            [0] => 3658_3125
+                                        )
+
+                                    [29563] => Array
+                                        (
+                                            [0] => 3658_29563
+                                        )
+
+                                    [31955] => Array
+                                        (
+                                            [0] => 3658_31955
+                                        )
+
+                                )
+
+                            [area] => 0.88356164383562
+                            [size] => 0.93997959756349
+                        )
+
+                    [6078] => Array
+                        (
+                            [id] => 6078
+                            [state] => ND
+                            [term] => 2008
+                            [district] => ND-8
+                            [party] => R
+                            [candidate_name] => Dwight Wrangham
+                            [image] => ../www/can_images/6078.jpg
+                            [total_dollars] => 2300
+                            [type] => candidates
+                            [value] => 2300
+                            [color] => #cc333333
+                            [label] => Dwight Wrangham
+                            [fillcolor] => #ffffff
+                            [tooltip] => Dwight Wrangham (Received $2,300)
+                            [shape] => square
+                            [label_zoom_level] => 6
+                            [click] => this.selectNode('6078'); this.panToNode('6078');
+                            [relatedNodes] => Array
+                                (
+                                    [3125] => Array
+                                        (
+                                            [0] => 6078_3125
+                                        )
+
+                                    [31955] => Array
+                                        (
+                                            [0] => 6078_31955
+                                        )
+
+                                    [29563] => Array
+                                        (
+                                            [0] => 6078_29563
+                                        )
+
+                                    [29802] => Array
+                                        (
+                                            [0] => 6078_29802
+                                        )
+
+                                )
+
+                            [area] => 0.89315068493151
+                            [size] => 0.94506649762411
+                        )
+
+                    [29802] => Array
+                        (
+                            [transaction_id] => 6d946f26d178794d67a5a3776da1a814
+                            [company_id] => 29802
+                            [company_name] => Basin Electric Power Co-Op
+                            [amount] => 1000.00
+                            [recipient_ext_id] => 6078
+                            [industry] => Rural Electric Cooperatives
+                            [image] => ../www/com_images/c29802.png
+                            [sitecode] => coal
+                            [contributor_type] => C
+                            [id] => 29802
+                            [total_dollars] => 2500
+                            [type] => donors
+                            [label] => Basin Electric Power Co-Op
+                            [value] => 2500
+                            [dir] => /home/dameat/public_html/state_dem/njq/NodeViz
+                            [color] => cadetblue
+                            [shape] => circle
+                            [fillcolor] => #ffffff
+                            [tooltip] => Basin Electric Power Co-Op (Gave $2,500)
+                            [label_zoom_level] => 8
+                            [click] => this.selectNode('29802'); this.panToNode('29802');
+                            [relatedNodes] => Array
+                                (
+                                    [6071] => Array
+                                        (
+                                            [0] => 6071_29802
+                                        )
+
+                                    [9679] => Array
+                                        (
+                                            [0] => 9679_29802
+                                        )
+
+                                    [6078] => Array
+                                        (
+                                            [0] => 6078_29802
+                                        )
+
+                                )
+
+                            [area] => 0.93150684931507
+                            [size] => 1.0890506676641
+                        )
+
+                    [9682] => Array
+                        (
+                            [id] => 9682
+                            [state] => ND
+                            [term] => 2008
+                            [district] => ND-36
+                            [party] => R
+                            [candidate_name] => Mike Schatz
+                            [image] => ../www/can_images/9682.jpg
+                            [total_dollars] => 2950
+                            [type] => candidates
+                            [value] => 2950
+                            [color] => #cc333333
+                            [label] => Mike Schatz
+                            [fillcolor] => #ffffff
+                            [tooltip] => Mike Schatz (Received $2,950)
+                            [shape] => square
+                            [label_zoom_level] => 6
+                            [click] => this.selectNode('9682'); this.panToNode('9682');
+                            [relatedNodes] => Array
+                                (
+                                    [37785] => Array
+                                        (
+                                            [0] => 9682_37785
+                                        )
+
+                                    [30593] => Array
+                                        (
+                                            [0] => 9682_30593
+                                        )
+
+                                    [31955] => Array
+                                        (
+                                            [0] => 9682_31955
+                                        )
+
+                                    [3125] => Array
+                                        (
+                                            [0] => 9682_3125
+                                        )
+
+                                    [38152] => Array
+                                        (
+                                            [0] => 9682_38152
+                                        )
+
+                                )
+
+                            [area] => 1.0178082191781
+                            [size] => 1.008864817098
+                        )
+
+                    [38221] => Array
+                        (
+                            [transaction_id] => 33d3cf5716b8e8f05c16d6e35fe4df30
+                            [company_id] => 38221
+                            [company_name] => NORTH DAKOTA LIGNITE COUNCIL
+                            [amount] => 1000.00
+                            [recipient_ext_id] => 1945
+                            [industry] => Coal Mining
+                            [image] => ../www/com_images/cunknown_coal_co.png
+                            [sitecode] => coal
+                            [contributor_type] => C
+                            [id] => 38221
+                            [total_dollars] => 4500
+                            [type] => donors
+                            [label] => NORTH DAKOTA LIGNITE COUNCIL
+                            [value] => 4500
+                            [dir] => /home/dameat/public_html/state_dem/njq/NodeViz
+                            [color] => cadetblue
+                            [shape] => circle
+                            [fillcolor] => #ffffff
+                            [tooltip] => NORTH DAKOTA LIGNITE COUNCIL (Gave $4,500)
+                            [label_zoom_level] => 8
+                            [click] => this.selectNode('38221'); this.panToNode('38221');
+                            [relatedNodes] => Array
+                                (
+                                    [1955] => Array
+                                        (
+                                            [0] => 1955_38221
+                                        )
+
+                                    [6071] => Array
+                                        (
+                                            [0] => 6071_38221
+                                        )
+
+                                    [3662] => Array
+                                        (
+                                            [0] => 3662_38221
+                                        )
+
+                                    [2704] => Array
+                                        (
+                                            [0] => 2704_38221
+                                        )
+
+                                    [1964] => Array
+                                        (
+                                            [0] => 1964_38221
+                                        )
+
+                                    [1945] => Array
+                                        (
+                                            [0] => 1945_38221
+                                        )
+
+                                    [14723] => Array
+                                        (
+                                            [0] => 14723_38221
+                                        )
+
+                                )
+
+                            [area] => 1.3150684931507
+                            [size] => 1.2939850113176
+                        )
+
+                    [3125] => Array
+                        (
+                            [transaction_id] => 466c6772bdf6ce7827a61f70c99ce72b
+                            [company_id] => 3125
+                            [company_name] => Marathon Oil
+                            [amount] => 800.00
+                            [recipient_ext_id] => 6073
+                            [industry] => Oil & Gas
+                            [image] => ../www/com_images/c93.png
+                            [sitecode] => oil
+                            [contributor_type] => C
+                            [id] => 3125
+                            [total_dollars] => 10950
+                            [type] => donors
+                            [label] => Marathon Oil
+                            [value] => 10950
+                            [dir] => /home/dameat/public_html/state_dem/njq/NodeViz
+                            [color] => cadetblue
+                            [shape] => circle
+                            [fillcolor] => #ffffff
+                            [tooltip] => Marathon Oil (Gave $10,950)
+                            [label_zoom_level] => 8
+                            [click] => this.selectNode('3125'); this.panToNode('3125');
+                            [relatedNodes] => Array
+                                (
+                                    [4135] => Array
+                                        (
+                                            [0] => 4135_3125
+                                        )
+
+                                    [1962] => Array
+                                        (
+                                            [0] => 1962_3125
+                                        )
+
+                                    [9681] => Array
+                                        (
+                                            [0] => 9681_3125
+                                        )
+
+                                    [1953] => Array
+                                        (
+                                            [0] => 1953_3125
+                                        )
+
+                                    [6078] => Array
+                                        (
+                                            [0] => 6078_3125
+                                        )
+
+                                    [1964] => Array
+                                        (
+                                            [0] => 1964_3125
+                                        )
+
+                                    [6095] => Array
+                                        (
+                                            [0] => 6095_3125
+                                        )
+
+                                    [2704] => Array
+                                        (
+                                            [0] => 2704_3125
+                                        )
+
+                                    [6103] => Array
+                                        (
+                                            [0] => 6103_3125
+                                        )
+
+                                    [6087] => Array
+                                        (
+                                            [0] => 6087_3125
+                                        )
+
+                                    [6088] => Array
+                                        (
+                                            [0] => 6088_3125
+                                        )
+
+                                    [7615] => Array
+                                        (
+                                            [0] => 7615_3125
+                                        )
+
+                                    [2136] => Array
+                                        (
+                                            [0] => 2136_3125
+                                        )
+
+                                    [6086] => Array
+                                        (
+                                            [0] => 6086_3125
+                                        )
+
+                                    [3663] => Array
+                                        (
+                                            [0] => 3663_3125
+                                        )
+
+                                    [3658] => Array
+                                        (
+                                            [0] => 3658_3125
+                                        )
+
+                                    [1974] => Array
+                                        (
+                                            [0] => 1974_3125
+                                        )
+
+                                    [3657] => Array
+                                        (
+                                            [0] => 3657_3125
+                                        )
+
+                                    [6071] => Array
+                                        (
+                                            [0] => 6071_3125
+                                        )
+
+                                    [3137] => Array
+                                        (
+                                            [0] => 3137_3125
+                                        )
+
+                                    [9677] => Array
+                                        (
+                                            [0] => 9677_3125
+                                        )
+
+                                    [9682] => Array
+                                        (
+                                            [0] => 9682_3125
+                                        )
+
+                                    [1955] => Array
+                                        (
+                                            [0] => 1955_3125
+                                        )
+
+                                    [6067] => Array
+                                        (
+                                            [0] => 6067_3125
+                                        )
+
+                                    [6073] => Array
+                                        (
+                                            [0] => 6073_3125
+                                        )
+
+                                )
+
+                            [area] => 2.5520547945205
+                            [size] => 1.8026028638373
+                        )
+
+                    [31955] => Array
+                        (
+                            [transaction_id] => 16d00c32ad15f272a0218d1e712f6af9
+                            [company_id] => 31955
+                            [company_name] => North Dakota Petroleum Council
+                            [amount] => 750.00
+                            [recipient_ext_id] => 1974
+                            [industry] => Oil & Gas
+                            [image] => ../www/com_images/c31955.png
+                            [sitecode] => oil
+                            [contributor_type] => C
+                            [id] => 31955
+                            [total_dollars] => 13800
+                            [type] => donors
+                            [label] => North Dakota Petroleum Council
+                            [value] => 13800
+                            [dir] => /home/dameat/public_html/state_dem/njq/NodeViz
+                            [color] => cadetblue
+                            [shape] => circle
+                            [fillcolor] => #ffffff
+                            [tooltip] => North Dakota Petroleum Council (Gave $13,800)
+                            [label_zoom_level] => 8
+                            [click] => this.selectNode('31955'); this.panToNode('31955');
+                            [relatedNodes] => Array
+                                (
+                                    [2704] => Array
+                                        (
+                                            [0] => 2704_31955
+                                        )
+
+                                    [6073] => Array
+                                        (
+                                            [0] => 6073_31955
+                                        )
+
+                                    [6081] => Array
+                                        (
+                                            [0] => 6081_31955
+                                        )
+
+                                    [3663] => Array
+                                        (
+                                            [0] => 3663_31955
+                                        )
+
+                                    [2712] => Array
+                                        (
+                                            [0] => 2712_31955
+                                        )
+
+                                    [6088] => Array
+                                        (
+                                            [0] => 6088_31955
+                                        )
+
+                                    [7615] => Array
+                                        (
+                                            [0] => 7615_31955
+                                        )
+
+                                    [6067] => Array
+                                        (
+                                            [0] => 6067_31955
+                                        )
+
+                                    [1951] => Array
+                                        (
+                                            [0] => 1951_31955
+                                        )
+
+                                    [9681] => Array
+                                        (
+                                            [0] => 9681_31955
+                                        )
+
+                                    [9684] => Array
+                                        (
+                                            [0] => 9684_31955
+                                        )
+
+                                    [6078] => Array
+                                        (
+                                            [0] => 6078_31955
+                                        )
+
+                                    [6086] => Array
+                                        (
+                                            [0] => 6086_31955
+                                        )
+
+                                    [6071] => Array
+                                        (
+                                            [0] => 6071_31955
+                                        )
+
+                                    [2136] => Array
+                                        (
+                                            [0] => 2136_31955
+                                        )
+
+                                    [3137] => Array
+                                        (
+                                            [0] => 3137_31955
+                                        )
+
+                                    [6087] => Array
+                                        (
+                                            [0] => 6087_31955
+                                        )
+
+                                    [1962] => Array
+                                        (
+                                            [0] => 1962_31955
+                                        )
+
+                                    [4135] => Array
+                                        (
+                                            [0] => 4135_31955
+                                        )
+
+                                    [9682] => Array
+                                        (
+                                            [0] => 9682_31955
+                                        )
+
+                                    [6092] => Array
+                                        (
+                                            [0] => 6092_31955
+                                        )
+
+                                    [3657] => Array
+                                        (
+                                            [0] => 3657_31955
+                                        )
+
+                                    [6103] => Array
+                                        (
+                                            [0] => 6103_31955
+                                        )
+
+                                    [9677] => Array
+                                        (
+                                            [0] => 9677_31955
+                                        )
+
+                                    [1953] => Array
+                                        (
+                                            [0] => 1953_31955
+                                        )
+
+                                    [3658] => Array
+                                        (
+                                            [0] => 3658_31955
+                                        )
+
+                                    [1945] => Array
+                                        (
+                                            [0] => 1945_31955
+                                        )
+
+                                    [1955] => Array
+                                        (
+                                            [0] => 1955_31955
+                                        )
+
+                                    [1974] => Array
+                                        (
+                                            [0] => 1974_31955
+                                        )
+
+                                )
+
+                            [area] => 3.0986301369863
+                            [size] => 1.9862775296819
+                        )
+
+                    [29563] => Array
+                        (
+                            [transaction_id] => d1a7c356fad0b746dba4ac72e8af8fcb
+                            [company_id] => 29563
+                            [company_name] => Lignite Energy Council
+                            [amount] => 1000.00
+                            [recipient_ext_id] => 2712
+                            [industry] => Coal Mining
+                            [image] => ../www/com_images/c29563.png
+                            [sitecode] => coal
+                            [contributor_type] => C
+                            [id] => 29563
+                            [total_dollars] => 18500
+                            [type] => donors
+                            [label] => Lignite Energy Council
+                            [value] => 18500
+                            [dir] => /home/dameat/public_html/state_dem/njq/NodeViz
+                            [color] => cadetblue
+                            [shape] => circle
+                            [fillcolor] => #ffffff
+                            [tooltip] => Lignite Energy Council (Gave $18,500)
+                            [label_zoom_level] => 8
+                            [click] => this.selectNode('29563'); this.panToNode('29563');
+                            [relatedNodes] => Array
+                                (
+                                    [6095] => Array
+                                        (
+                                            [0] => 6095_29563
+                                        )
+
+                                    [3137] => Array
+                                        (
+                                            [0] => 3137_29563
+                                        )
+
+                                    [7615] => Array
+                                        (
+                                            [0] => 7615_29563
+                                        )
+
+                                    [1974] => Array
+                                        (
+                                            [0] => 1974_29563
+                                        )
+
+                                    [2699] => Array
+                                        (
+                                            [0] => 2699_29563
+                                        )
+
+                                    [6085] => Array
+                                        (
+                                            [0] => 6085_29563
+                                        )
+
+                                    [3657] => Array
+                                        (
+                                            [0] => 3657_29563
+                                        )
+
+                                    [6087] => Array
+                                        (
+                                            [0] => 6087_29563
+                                        )
+
+                                    [6073] => Array
+                                        (
+                                            [0] => 6073_29563
+                                        )
+
+                                    [2136] => Array
+                                        (
+                                            [0] => 2136_29563
+                                        )
+
+                                    [4135] => Array
+                                        (
+                                            [0] => 4135_29563
+                                        )
+
+                                    [6092] => Array
+                                        (
+                                            [0] => 6092_29563
+                                        )
+
+                                    [1953] => Array
+                                        (
+                                            [0] => 1953_29563
+                                        )
+
+                                    [6081] => Array
+                                        (
+                                            [0] => 6081_29563
+                                        )
+
+                                    [3658] => Array
+                                        (
+                                            [0] => 3658_29563
+                                        )
+
+                                    [6086] => Array
+                                        (
+                                            [0] => 6086_29563
+                                        )
+
+                                    [1956] => Array
+                                        (
+                                            [0] => 1956_29563
+                                        )
+
+                                    [1926] => Array
+                                        (
+                                            [0] => 1926_29563
+                                        )
+
+                                    [6103] => Array
+                                        (
+                                            [0] => 6103_29563
+                                        )
+
+                                    [6067] => Array
+                                        (
+                                            [0] => 6067_29563
+                                        )
+
+                                    [6078] => Array
+                                        (
+                                            [0] => 6078_29563
+                                        )
+
+                                    [1967] => Array
+                                        (
+                                            [0] => 1967_29563
+                                        )
+
+                                    [6088] => Array
+                                        (
+                                            [0] => 6088_29563
+                                        )
+
+                                    [6079] => Array
+                                        (
+                                            [0] => 6079_29563
+                                        )
+
+                                    [3656] => Array
+                                        (
+                                            [0] => 3656_29563
+                                        )
+
+                                    [2712] => Array
+                                        (
+                                            [0] => 2712_29563
+                                        )
+
+                                    [3663] => Array
+                                        (
+                                            [0] => 3663_29563
+                                        )
+
+                                    [1951] => Array
+                                        (
+                                            [0] => 1951_29563
+                                        )
+
+                                    [1962] => Array
+                                        (
+                                            [0] => 1962_29563
+                                        )
+
+                                    [36] => Array
+                                        (
+                                            [0] => 36_29563
+                                        )
+
+                                    [16010] => Array
+                                        (
+                                            [0] => 16010_29563
+                                        )
+
+                                )
+
+                            [area] => 4
+                            [size] => 2.256758334191
+                        )
+
+                )
+
+            [edges] => Array
+                (
+                    [1962_30234] => Array
+                        (
+                            [toId] => 1962
+                            [fromId] => 30234
+                            [value] => 250.00
+                            [id] => 1962_30234
+                            [type] => donations
+                            [weight] => 250.00
+                            [tooltip] => $250 from MDU Resources Group to Matthew M. Klein
+                            [area] => 5
+                            [size] => 5
+                        )
+
+                    [6073_30234] => Array
+                        (
+                            [toId] => 6073
+                            [fromId] => 30234
+                            [value] => 250.00
+                            [id] => 6073_30234
+                            [type] => donations
+                            [weight] => 250.00
+                            [tooltip] => $250 from MDU Resources Group to Lisa Meier
+                            [area] => 5
+                            [size] => 5
+                        )
+
+                    [9681_30234] => Array
+                        (
+                            [toId] => 9681
+                            [fromId] => 30234
+                            [value] => 250.00
+                            [id] => 9681_30234
+                            [type] => donations
+                            [weight] => 250.00
+                            [tooltip] => $250 from MDU Resources Group to Mike Nathe
+                            [area] => 5
+                            [size] => 5
+                        )
+
+                    [6087_30234] => Array
+                        (
+                            [toId] => 6087
+                            [fromId] => 30234
+                            [value] => 250.00
+                            [id] => 6087_30234
+                            [type] => donations
+                            [weight] => 250.00
+                            [tooltip] => $250 from MDU Resources Group to Dave Weiler
+                            [area] => 5
+                            [size] => 5
+                        )
+
+                    [1953_31956] => Array
+                        (
+                            [toId] => 1953
+                            [fromId] => 31956
+                            [value] => 250.00
+                            [id] => 1953_31956
+                            [type] => donations
+                            [weight] => 250.00
+                            [tooltip] => $250 from North Dakota Retail Petroleum Marketers to Jeff Delzer
+                            [area] => 5
+                            [size] => 5
+                        )
+
+                    [3658_30234] => Array
+                        (
+                            [toId] => 3658
+                            [fromId] => 30234
+                            [value] => 250.00
+                            [id] => 3658_30234
+                            [type] => donations
+                            [weight] => 250.00
+                            [tooltip] => $250 from MDU Resources Group to Todd Porter
+                            [area] => 5
+                            [size] => 5
+                        )
+
+                    [6067_30234] => Array
+                        (
+                            [toId] => 6067
+                            [fromId] => 30234
+                            [value] => 250.00
+                            [id] => 6067_30234
+                            [type] => donations
+                            [weight] => 250.00
+                            [tooltip] => $250 from MDU Resources Group to Mark A. Dosch
+                            [area] => 5
+                            [size] => 5
+                        )
+
+                    [9682_37785] => Array
+                        (
+                            [toId] => 9682
+                            [fromId] => 37785
+                            [value] => 250.00
+                            [id] => 9682_37785
+                            [type] => donations
+                            [weight] => 250.00
+                            [tooltip] => $250 from GP NATURAL RESOURCES PARTNERS LLC to Mike Schatz
+                            [area] => 5
+                            [size] => 5
+                        )
+
+                    [2136_30234] => Array
+                        (
+                            [toId] => 2136
+                            [fromId] => 30234
+                            [value] => 250.00
+                            [id] => 2136_30234
+                            [type] => donations
+                            [weight] => 250.00
+                            [tooltip] => $250 from MDU Resources Group to RaeAnn G. Kelsch
+                            [area] => 5
+                            [size] => 5
+                        )
+
+                    [4135_3125] => Array
+                        (
+                            [toId] => 4135
+                            [fromId] => 3125
+                            [value] => 300.00
+                            [id] => 4135_3125
+                            [type] => donations
+                            [weight] => 300.00
+                            [tooltip] => $300 from Marathon Oil to Chuck Damschen
+                            [area] => 6.8421052631579
+                            [size] => 6.8421052631579
+                        )
+
+                    [1962_3125] => Array
+                        (
+                            [toId] => 1962
+                            [fromId] => 3125
+                            [value] => 300.00
+                            [id] => 1962_3125
+                            [type] => donations
+                            [weight] => 300.00
+                            [tooltip] => $300 from Marathon Oil to Matthew M. Klein
+                            [area] => 6.8421052631579
+                            [size] => 6.8421052631579
+                        )
+
+                    [1953_3125] => Array
+                        (
+                            [toId] => 1953
+                            [fromId] => 3125
+                            [value] => 300.00
+                            [id] => 1953_3125
+                            [type] => donations
+                            [weight] => 300.00
+                            [tooltip] => $300 from Marathon Oil to Jeff Delzer
+                            [area] => 6.8421052631579
+                            [size] => 6.8421052631579
+                        )
+
+                    [1945_5460] => Array
+                        (
+                            [toId] => 1945
+                            [fromId] => 5460
+                            [value] => 300.00
+                            [id] => 1945_5460
+                            [type] => donations
+                            [weight] => 300.00
+                            [tooltip] => $300 from Tesoro Petroleum to Wesley R. Belter
+                            [area] => 6.8421052631579
+                            [size] => 6.8421052631579
+                        )
+
+                    [9681_3125] => Array
+                        (
+                            [toId] => 9681
+                            [fromId] => 3125
+                            [value] => 300.00
+                            [id] => 9681_3125
+                            [type] => donations
+                            [weight] => 300.00
+                            [tooltip] => $300 from Marathon Oil to Mike Nathe
+                            [area] => 6.8421052631579
+                            [size] => 6.8421052631579
+                        )
+
+                    [6095_3125] => Array
+                        (
+                            [toId] => 6095
+                            [fromId] => 3125
+                            [value] => 300.00
+                            [id] => 6095_3125
+                            [type] => donations
+                            [weight] => 300.00
+                            [tooltip] => $300 from Marathon Oil to Bob Hunskor
+                            [area] => 6.8421052631579
+                            [size] => 6.8421052631579
+                        )
+
+                    [1964_3125] => Array
+                        (
+                            [toId] => 1964
+                            [fromId] => 3125
+                            [value] => 300.00
+                            [id] => 1964_3125
+                            [type] => donations
+                            [weight] => 300.00
+                            [tooltip] => $300 from Marathon Oil to William E. Kretschmar
+                            [area] => 6.8421052631579
+                            [size] => 6.8421052631579
+                        )
+
+                    [7615_31956] => Array
+                        (
+                            [toId] => 7615
+                            [fromId] => 31956
+                            [value] => 300.00
+                            [id] => 7615_31956
+                            [type] => donations
+                            [weight] => 300.00
+                            [tooltip] => $300 from North Dakota Retail Petroleum Marketers to Donald L. Clark
+                            [area] => 6.8421052631579
+                            [size] => 6.8421052631579
+                        )
+
+                    [2704_3125] => Array
+                        (
+                            [toId] => 2704
+                            [fromId] => 3125
+                            [value] => 300.00
+                            [id] => 2704_3125
+                            [type] => donations
+                            [weight] => 300.00
+                            [tooltip] => $300 from Marathon Oil to Mike D. Brandenburg
+                            [area] => 6.8421052631579
+                            [size] => 6.8421052631579
+                        )
+
+                    [6078_3125] => Array
+                        (
+                            [toId] => 6078
+                            [fromId] => 3125
+                            [value] => 300.00
+                            [id] => 6078_3125
+                            [type] => donations
+                            [weight] => 300.00
+                            [tooltip] => $300 from Marathon Oil to Dwight Wrangham
+                            [area] => 6.8421052631579
+                            [size] => 6.8421052631579
+                        )
+
+                    [6073_31955] => Array
+                        (
+                            [toId] => 6073
+                            [fromId] => 31955
+                            [value] => 350.00
+                            [id] => 6073_31955
+                            [type] => donations
+                            [weight] => 350.00
+                            [tooltip] => $350 from North Dakota Petroleum Council to Lisa Meier
+                            [area] => 8.6842105263158
+                            [size] => 8.6842105263158
+                        )
+
+                    [2712_31955] => Array
+                        (
+                            [toId] => 2712
+                            [fromId] => 31955
+                            [value] => 350.00
+                            [id] => 2712_31955
+                            [type] => donations
+                            [weight] => 350.00
+                            [tooltip] => $350 from North Dakota Petroleum Council to Kathy Hawken
+                            [area] => 8.6842105263158
+                            [size] => 8.6842105263158
+                        )
+
+                    [6081_31955] => Array
+                        (
+                            [toId] => 6081
+                            [fromId] => 31955
+                            [value] => 350.00
+                            [id] => 6081_31955
+                            [type] => donations
+                            [weight] => 350.00
+                            [tooltip] => $350 from North Dakota Petroleum Council to Jim Kasper
+                            [area] => 8.6842105263158
+                            [size] => 8.6842105263158
+                        )
+
+                    [3663_31955] => Array
+                        (
+                            [toId] => 3663
+                            [fromId] => 31955
+                            [value] => 350.00
+                            [id] => 3663_31955
+                            [type] => donations
+                            [weight] => 350.00
+                            [tooltip] => $350 from North Dakota Petroleum Council to Blair Thoreson
+                            [area] => 8.6842105263158
+                            [size] => 8.6842105263158
+                        )
+
+                    [2704_31955] => Array
+                        (
+                            [toId] => 2704
+                            [fromId] => 31955
+                            [value] => 350.00
+                            [id] => 2704_31955
+                            [type] => donations
+                            [weight] => 350.00
+                            [tooltip] => $350 from North Dakota Petroleum Council to Mike D. Brandenburg
+                            [area] => 8.6842105263158
+                            [size] => 8.6842105263158
+                        )
+
+                    [6088_31955] => Array
+                        (
+                            [toId] => 6088
+                            [fromId] => 31955
+                            [value] => 350.00
+                            [id] => 6088_31955
+                            [type] => donations
+                            [weight] => 350.00
+                            [tooltip] => $350 from North Dakota Petroleum Council to Stacey Dahl
+                            [area] => 8.6842105263158
+                            [size] => 8.6842105263158
+                        )
+
+                    [1951_31955] => Array
+                        (
+                            [toId] => 1951
+                            [fromId] => 31955
+                            [value] => 350.00
+                            [id] => 1951_31955
+                            [type] => donations
+                            [weight] => 350.00
+                            [tooltip] => $350 from North Dakota Petroleum Council to Duane DeKrey
+                            [area] => 8.6842105263158
+                            [size] => 8.6842105263158
+                        )
+
+                    [7615_31955] => Array
+                        (
+                            [toId] => 7615
+                            [fromId] => 31955
+                            [value] => 350.00
+                            [id] => 7615_31955
+                            [type] => donations
+                            [weight] => 350.00
+                            [tooltip] => $350 from North Dakota Petroleum Council to Donald L. Clark
+                            [area] => 8.6842105263158
+                            [size] => 8.6842105263158
+                        )
+
+                    [6067_31955] => Array
+                        (
+                            [toId] => 6067
+                            [fromId] => 31955
+                            [value] => 350.00
+                            [id] => 6067_31955
+                            [type] => donations
+                            [weight] => 350.00
+                            [tooltip] => $350 from North Dakota Petroleum Council to Mark A. Dosch
+                            [area] => 8.6842105263158
+                            [size] => 8.6842105263158
+                        )
+
+                    [9681_31955] => Array
+                        (
+                            [toId] => 9681
+                            [fromId] => 31955
+                            [value] => 350.00
+                            [id] => 9681_31955
+                            [type] => donations
+                            [weight] => 350.00
+                            [tooltip] => $350 from North Dakota Petroleum Council to Mike Nathe
+                            [area] => 8.6842105263158
+                            [size] => 8.6842105263158
+                        )
+
+                    [9684_31955] => Array
+                        (
+                            [toId] => 9684
+                            [fromId] => 31955
+                            [value] => 350.00
+                            [id] => 9684_31955
+                            [type] => donations
+                            [weight] => 350.00
+                            [tooltip] => $350 from North Dakota Petroleum Council to Robert Frantsvog
+                            [area] => 8.6842105263158
+                            [size] => 8.6842105263158
+                        )
+
+                    [6103_3125] => Array
+                        (
+                            [toId] => 6103
+                            [fromId] => 3125
+                            [value] => 400.00
+                            [id] => 6103_3125
+                            [type] => donations
+                            [weight] => 400.00
+                            [tooltip] => $400 from Marathon Oil to Dan Ruby
+                            [area] => 10.526315789474
+                            [size] => 10.526315789474
+                        )
+
+                    [6087_3125] => Array
+                        (
+                            [toId] => 6087
+                            [fromId] => 3125
+                            [value] => 400.00
+                            [id] => 6087_3125
+                            [type] => donations
+                            [weight] => 400.00
+                            [tooltip] => $400 from Marathon Oil to Dave Weiler
+                            [area] => 10.526315789474
+                            [size] => 10.526315789474
+                        )
+
+                    [6088_3125] => Array
+                        (
+                            [toId] => 6088
+                            [fromId] => 3125
+                            [value] => 400.00
+                            [id] => 6088_3125
+                            [type] => donations
+                            [weight] => 400.00
+                            [tooltip] => $400 from Marathon Oil to Stacey Dahl
+                            [area] => 10.526315789474
+                            [size] => 10.526315789474
+                        )
+
+                    [3658_5460] => Array
+                        (
+                            [toId] => 3658
+                            [fromId] => 5460
+                            [value] => 400.00
+                            [id] => 3658_5460
+                            [type] => donations
+                            [weight] => 400.00
+                            [tooltip] => $400 from Tesoro Petroleum to Todd Porter
+                            [area] => 10.526315789474
+                            [size] => 10.526315789474
+                        )
+
+                    [7615_3125] => Array
+                        (
+                            [toId] => 7615
+                            [fromId] => 3125
+                            [value] => 400.00
+                            [id] => 7615_3125
+                            [type] => donations
+                            [weight] => 400.00
+                            [tooltip] => $400 from Marathon Oil to Donald L. Clark
+                            [area] => 10.526315789474
+                            [size] => 10.526315789474
+                        )
+
+                    [3658_3125] => Array
+                        (
+                            [toId] => 3658
+                            [fromId] => 3125
+                            [value] => 400.00
+                            [id] => 3658_3125
+                            [type] => donations
+                            [weight] => 400.00
+                            [tooltip] => $400 from Marathon Oil to Todd Porter
+                            [area] => 10.526315789474
+                            [size] => 10.526315789474
+                        )
+
+                    [2136_3125] => Array
+                        (
+                            [toId] => 2136
+                            [fromId] => 3125
+                            [value] => 400.00
+                            [id] => 2136_3125
+                            [type] => donations
+                            [weight] => 400.00
+                            [tooltip] => $400 from Marathon Oil to RaeAnn G. Kelsch
+                            [area] => 10.526315789474
+                            [size] => 10.526315789474
+                        )
+
+                    [6086_3125] => Array
+                        (
+                            [toId] => 6086
+                            [fromId] => 3125
+                            [value] => 400.00
+                            [id] => 6086_3125
+                            [type] => donations
+                            [weight] => 400.00
+                            [tooltip] => $400 from Marathon Oil to Larry Bellew
+                            [area] => 10.526315789474
+                            [size] => 10.526315789474
+                        )
+
+                    [3663_3125] => Array
+                        (
+                            [toId] => 3663
+                            [fromId] => 3125
+                            [value] => 400.00
+                            [id] => 3663_3125
+                            [type] => donations
+                            [weight] => 400.00
+                            [tooltip] => $400 from Marathon Oil to Blair Thoreson
+                            [area] => 10.526315789474
+                            [size] => 10.526315789474
+                        )
+
+                    [2136_5460] => Array
+                        (
+                            [toId] => 2136
+                            [fromId] => 5460
+                            [value] => 400.00
+                            [id] => 2136_5460
+                            [type] => donations
+                            [weight] => 400.00
+                            [tooltip] => $400 from Tesoro Petroleum to RaeAnn G. Kelsch
+                            [area] => 10.526315789474
+                            [size] => 10.526315789474
+                        )
+
+                    [6078_31955] => Array
+                        (
+                            [toId] => 6078
+                            [fromId] => 31955
+                            [value] => 500.00
+                            [id] => 6078_31955
+                            [type] => donations
+                            [weight] => 500.00
+                            [tooltip] => $500 from North Dakota Petroleum Council to Dwight Wrangham
+                            [area] => 14.210526315789
+                            [size] => 14.210526315789
+                        )
+
+                    [6095_29563] => Array
+                        (
+                            [toId] => 6095
+                            [fromId] => 29563
+                            [value] => 500.00
+                            [id] => 6095_29563
+                            [type] => donations
+                            [weight] => 500.00
+                            [tooltip] => $500 from Lignite Energy Council to Bob Hunskor
+                            [area] => 14.210526315789
+                            [size] => 14.210526315789
+                        )
+
+                    [2136_29563] => Array
+                        (
+                            [toId] => 2136
+                            [fromId] => 29563
+                            [value] => 500.00
+                            [id] => 2136_29563
+                            [type] => donations
+                            [weight] => 500.00
+                            [tooltip] => $500 from Lignite Energy Council to RaeAnn G. Kelsch
+                            [area] => 14.210526315789
+                            [size] => 14.210526315789
+                        )
+
+                    [1955_38221] => Array
+                        (
+                            [toId] => 1955
+                            [fromId] => 38221
+                            [value] => 500.00
+                            [id] => 1955_38221
+                            [type] => donations
+                            [weight] => 500.00
+                            [tooltip] => $500 from NORTH DAKOTA LIGNITE COUNCIL to Glen Froseth
+                            [area] => 14.210526315789
+                            [size] => 14.210526315789
+                        )
+
+                    [3137_29563] => Array
+                        (
+                            [toId] => 3137
+                            [fromId] => 29563
+                            [value] => 500.00
+                            [id] => 3137_29563
+                            [type] => donations
+                            [weight] => 500.00
+                            [tooltip] => $500 from Lignite Energy Council to Shirley Meyer
+                            [area] => 14.210526315789
+                            [size] => 14.210526315789
+                        )
+
+                    [2699_29563] => Array
+                        (
+                            [toId] => 2699
+                            [fromId] => 29563
+                            [value] => 500.00
+                            [id] => 2699_29563
+                            [type] => donations
+                            [weight] => 500.00
+                            [tooltip] => $500 from Lignite Energy Council to Robin Weisz
+                            [area] => 14.210526315789
+                            [size] => 14.210526315789
+                        )
+
+                    [7615_29563] => Array
+                        (
+                            [toId] => 7615
+                            [fromId] => 29563
+                            [value] => 500.00
+                            [id] => 7615_29563
+                            [type] => donations
+                            [weight] => 500.00
+                            [tooltip] => $500 from Lignite Energy Council to Donald L. Clark
+                            [area] => 14.210526315789
+                            [size] => 14.210526315789
+                        )
+
+                    [1974_29563] => Array
+                        (
+                            [toId] => 1974
+                            [fromId] => 29563
+                            [value] => 500.00
+                            [id] => 1974_29563
+                            [type] => donations
+                            [weight] => 500.00
+                            [tooltip] => $500 from Lignite Energy Council to Robert J. Skarphol
+                            [area] => 14.210526315789
+                            [size] => 14.210526315789
+                        )
+
+                    [6071_31955] => Array
+                        (
+                            [toId] => 6071
+                            [fromId] => 31955
+                            [value] => 500.00
+                            [id] => 6071_31955
+                            [type] => donations
+                            [weight] => 500.00
+                            [tooltip] => $500 from North Dakota Petroleum Council to Kenton Onstad
+                            [area] => 14.210526315789
+                            [size] => 14.210526315789
+                        )
+
+                    [2136_31955] => Array
+                        (
+                            [toId] => 2136
+                            [fromId] => 31955
+                            [value] => 500.00
+                            [id] => 2136_31955
+                            [type] => donations
+                            [weight] => 500.00
+                            [tooltip] => $500 from North Dakota Petroleum Council to RaeAnn G. Kelsch
+                            [area] => 14.210526315789
+                            [size] => 14.210526315789
+                        )
+
+                    [6085_29563] => Array
+                        (
+                            [toId] => 6085
+                            [fromId] => 29563
+                            [value] => 500.00
+                            [id] => 6085_29563
+                            [type] => donations
+                            [weight] => 500.00
+                            [tooltip] => $500 from Lignite Energy Council to Bill Amerman
+                            [area] => 14.210526315789
+                            [size] => 14.210526315789
+                        )
+
+                    [6071_38221] => Array
+                        (
+                            [toId] => 6071
+                            [fromId] => 38221
+                            [value] => 500.00
+                            [id] => 6071_38221
+                            [type] => donations
+                            [weight] => 500.00
+                            [tooltip] => $500 from NORTH DAKOTA LIGNITE COUNCIL to Kenton Onstad
+                            [area] => 14.210526315789
+                            [size] => 14.210526315789
+                        )
+
+                    [9682_31955] => Array
+                        (
+                            [toId] => 9682
+                            [fromId] => 31955
+                            [value] => 500.00
+                            [id] => 9682_31955
+                            [type] => donations
+                            [weight] => 500.00
+                            [tooltip] => $500 from North Dakota Petroleum Council to Mike Schatz
+                            [area] => 14.210526315789
+                            [size] => 14.210526315789
+                        )
+
+                    [6073_29563] => Array
+                        (
+                            [toId] => 6073
+                            [fromId] => 29563
+                            [value] => 500.00
+                            [id] => 6073_29563
+                            [type] => donations
+                            [weight] => 500.00
+                            [tooltip] => $500 from Lignite Energy Council to Lisa Meier
+                            [area] => 14.210526315789
+                            [size] => 14.210526315789
+                        )
+
+                    [9682_30593] => Array
+                        (
+                            [toId] => 9682
+                            [fromId] => 30593
+                            [value] => 500.00
+                            [id] => 9682_30593
+                            [type] => donations
+                            [weight] => 500.00
+                            [tooltip] => $500 from Armstrong Corp to Mike Schatz
+                            [area] => 14.210526315789
+                            [size] => 14.210526315789
+                        )
+
+                    [6087_31955] => Array
+                        (
+                            [toId] => 6087
+                            [fromId] => 31955
+                            [value] => 500.00
+                            [id] => 6087_31955
+                            [type] => donations
+                            [weight] => 500.00
+                            [tooltip] => $500 from North Dakota Petroleum Council to Dave Weiler
+                            [area] => 14.210526315789
+                            [size] => 14.210526315789
+                        )
+
+                    [1962_31955] => Array
+                        (
+                            [toId] => 1962
+                            [fromId] => 31955
+                            [value] => 500.00
+                            [id] => 1962_31955
+                            [type] => donations
+                            [weight] => 500.00
+                            [tooltip] => $500 from North Dakota Petroleum Council to Matthew M. Klein
+                            [area] => 14.210526315789
+                            [size] => 14.210526315789
+                        )
+
+                    [6087_29563] => Array
+                        (
+                            [toId] => 6087
+                            [fromId] => 29563
+                            [value] => 500.00
+                            [id] => 6087_29563
+                            [type] => donations
+                            [weight] => 500.00
+                            [tooltip] => $500 from Lignite Energy Council to Dave Weiler
+                            [area] => 14.210526315789
+                            [size] => 14.210526315789
+                        )
+
+                    [3657_29563] => Array
+                        (
+                            [toId] => 3657
+                            [fromId] => 29563
+                            [value] => 500.00
+                            [id] => 3657_29563
+                            [type] => donations
+                            [weight] => 500.00
+                            [tooltip] => $500 from Lignite Energy Council to Mark S. Owens
+                            [area] => 14.210526315789
+                            [size] => 14.210526315789
+                        )
+
+                    [4135_31955] => Array
+                        (
+                            [toId] => 4135
+                            [fromId] => 31955
+                            [value] => 500.00
+                            [id] => 4135_31955
+                            [type] => donations
+                            [weight] => 500.00
+                            [tooltip] => $500 from North Dakota Petroleum Council to Chuck Damschen
+                            [area] => 14.210526315789
+                            [size] => 14.210526315789
+                        )
+
+                    [6092_31955] => Array
+                        (
+                            [toId] => 6092
+                            [fromId] => 31955
+                            [value] => 500.00
+                            [id] => 6092_31955
+                            [type] => donations
+                            [weight] => 500.00
+                            [tooltip] => $500 from North Dakota Petroleum Council to Joyce Kingsbury
+                            [area] => 14.210526315789
+                            [size] => 14.210526315789
+                        )
+
+                    [3657_3125] => Array
+                        (
+                            [toId] => 3657
+                            [fromId] => 3125
+                            [value] => 500.00
+                            [id] => 3657_3125
+                            [type] => donations
+                            [weight] => 500.00
+                            [tooltip] => $500 from Marathon Oil to Mark S. Owens
+                            [area] => 14.210526315789
+                            [size] => 14.210526315789
+                        )
+
+                    [6071_3125] => Array
+                        (
+                            [toId] => 6071
+                            [fromId] => 3125
+                            [value] => 500.00
+                            [id] => 6071_3125
+                            [type] => donations
+                            [weight] => 500.00
+                            [tooltip] => $500 from Marathon Oil to Kenton Onstad
+                            [area] => 14.210526315789
+                            [size] => 14.210526315789
+                        )
+
+                    [3137_31955] => Array
+                        (
+                            [toId] => 3137
+                            [fromId] => 31955
+                            [value] => 500.00
+                            [id] => 3137_31955
+                            [type] => donations
+                            [weight] => 500.00
+                            [tooltip] => $500 from North Dakota Petroleum Council to Shirley Meyer
+                            [area] => 14.210526315789
+                            [size] => 14.210526315789
+                        )
+
+                    [1974_3125] => Array
+                        (
+                            [toId] => 1974
+                            [fromId] => 3125
+                            [value] => 500.00
+                            [id] => 1974_3125
+                            [type] => donations
+                            [weight] => 500.00
+                            [tooltip] => $500 from Marathon Oil to Robert J. Skarphol
+                            [area] => 14.210526315789
+                            [size] => 14.210526315789
+                        )
+
+                    [6086_31955] => Array
+                        (
+                            [toId] => 6086
+                            [fromId] => 31955
+                            [value] => 500.00
+                            [id] => 6086_31955
+                            [type] => donations
+                            [weight] => 500.00
+                            [tooltip] => $500 from North Dakota Petroleum Council to Larry Bellew
+                            [area] => 14.210526315789
+                            [size] => 14.210526315789
+                        )
+
+                    [1953_31955] => Array
+                        (
+                            [toId] => 1953
+                            [fromId] => 31955
+                            [value] => 500.00
+                            [id] => 1953_31955
+                            [type] => donations
+                            [weight] => 500.00
+                            [tooltip] => $500 from North Dakota Petroleum Council to Jeff Delzer
+                            [area] => 14.210526315789
+                            [size] => 14.210526315789
+                        )
+
+                    [3137_3125] => Array
+                        (
+                            [toId] => 3137
+                            [fromId] => 3125
+                            [value] => 500.00
+                            [id] => 3137_3125
+                            [type] => donations
+                            [weight] => 500.00
+                            [tooltip] => $500 from Marathon Oil to Shirley Meyer
+                            [area] => 14.210526315789
+                            [size] => 14.210526315789
+                        )
+
+                    [3662_38221] => Array
+                        (
+                            [toId] => 3662
+                            [fromId] => 38221
+                            [value] => 500.00
+                            [id] => 3662_38221
+                            [type] => donations
+                            [weight] => 500.00
+                            [tooltip] => $500 from NORTH DAKOTA LIGNITE COUNCIL to Phillip Mueller
+                            [area] => 14.210526315789
+                            [size] => 14.210526315789
+                        )
+
+                    [6092_29563] => Array
+                        (
+                            [toId] => 6092
+                            [fromId] => 29563
+                            [value] => 500.00
+                            [id] => 6092_29563
+                            [type] => donations
+                            [weight] => 500.00
+                            [tooltip] => $500 from Lignite Energy Council to Joyce Kingsbury
+                            [area] => 14.210526315789
+                            [size] => 14.210526315789
+                        )
+
+                    [1953_29563] => Array
+                        (
+                            [toId] => 1953
+                            [fromId] => 29563
+                            [value] => 500.00
+                            [id] => 1953_29563
+                            [type] => donations
+                            [weight] => 500.00
+                            [tooltip] => $500 from Lignite Energy Council to Jeff Delzer
+                            [area] => 14.210526315789
+                            [size] => 14.210526315789
+                        )
+
+                    [1926_29563] => Array
+                        (
+                            [toId] => 1926
+                            [fromId] => 29563
+                            [value] => 500.00
+                            [id] => 1926_29563
+                            [type] => donations
+                            [weight] => 500.00
+                            [tooltip] => $500 from Lignite Energy Council to Jerry Kelsh
+                            [area] => 14.210526315789
+                            [size] => 14.210526315789
+                        )
+
+                    [6081_29563] => Array
+                        (
+                            [toId] => 6081
+                            [fromId] => 29563
+                            [value] => 500.00
+                            [id] => 6081_29563
+                            [type] => donations
+                            [weight] => 500.00
+                            [tooltip] => $500 from Lignite Energy Council to Jim Kasper
+                            [area] => 14.210526315789
+                            [size] => 14.210526315789
+                        )
+
+                    [1956_29563] => Array
+                        (
+                            [toId] => 1956
+                            [fromId] => 29563
+                            [value] => 500.00
+                            [id] => 1956_29563
+                            [type] => donations
+                            [weight] => 500.00
+                            [tooltip] => $500 from Lignite Energy Council to Eliot Glassheim
+                            [area] => 14.210526315789
+                            [size] => 14.210526315789
+                        )
+
+                    [3658_29563] => Array
+                        (
+                            [toId] => 3658
+                            [fromId] => 29563
+                            [value] => 500.00
+                            [id] => 3658_29563
+                            [type] => donations
+                            [weight] => 500.00
+                            [tooltip] => $500 from Lignite Energy Council to Todd Porter
+                            [area] => 14.210526315789
+                            [size] => 14.210526315789
+                        )
+
+                    [6086_29563] => Array
+                        (
+                            [toId] => 6086
+                            [fromId] => 29563
+                            [value] => 500.00
+                            [id] => 6086_29563
+                            [type] => donations
+                            [weight] => 500.00
+                            [tooltip] => $500 from Lignite Energy Council to Larry Bellew
+                            [area] => 14.210526315789
+                            [size] => 14.210526315789
+                        )
+
+                    [6103_31955] => Array
+                        (
+                            [toId] => 6103
+                            [fromId] => 31955
+                            [value] => 500.00
+                            [id] => 6103_31955
+                            [type] => donations
+                            [weight] => 500.00
+                            [tooltip] => $500 from North Dakota Petroleum Council to Dan Ruby
+                            [area] => 14.210526315789
+                            [size] => 14.210526315789
+                        )
+
+                    [2704_38221] => Array
+                        (
+                            [toId] => 2704
+                            [fromId] => 38221
+                            [value] => 500.00
+                            [id] => 2704_38221
+                            [type] => donations
+                            [weight] => 500.00
+                            [tooltip] => $500 from NORTH DAKOTA LIGNITE COUNCIL to Mike D. Brandenburg
+                            [area] => 14.210526315789
+                            [size] => 14.210526315789
+                        )
+
+                    [3657_31955] => Array
+                        (
+                            [toId] => 3657
+                            [fromId] => 31955
+                            [value] => 500.00
+                            [id] => 3657_31955
+                            [type] => donations
+                            [weight] => 500.00
+                            [tooltip] => $500 from North Dakota Petroleum Council to Mark S. Owens
+                            [area] => 14.210526315789
+                            [size] => 14.210526315789
+                        )
+
+                    [6071_29802] => Array
+                        (
+                            [toId] => 6071
+                            [fromId] => 29802
+                            [value] => 500.00
+                            [id] => 6071_29802
+                            [type] => donations
+                            [weight] => 500.00
+                            [tooltip] => $500 from Basin Electric Power Co-Op to Kenton Onstad
+                            [area] => 14.210526315789
+                            [size] => 14.210526315789
+                        )
+
+                    [6067_29563] => Array
+                        (
+                            [toId] => 6067
+                            [fromId] => 29563
+                            [value] => 500.00
+                            [id] => 6067_29563
+                            [type] => donations
+                            [weight] => 500.00
+                            [tooltip] => $500 from Lignite Energy Council to Mark A. Dosch
+                            [area] => 14.210526315789
+                            [size] => 14.210526315789
+                        )
+
+                    [6103_29563] => Array
+                        (
+                            [toId] => 6103
+                            [fromId] => 29563
+                            [value] => 500.00
+                            [id] => 6103_29563
+                            [type] => donations
+                            [weight] => 500.00
+                            [tooltip] => $500 from Lignite Energy Council to Dan Ruby
+                            [area] => 14.210526315789
+                            [size] => 14.210526315789
+                        )
+
+                    [6078_29563] => Array
+                        (
+                            [toId] => 6078
+                            [fromId] => 29563
+                            [value] => 500.00
+                            [id] => 6078_29563
+                            [type] => donations
+                            [weight] => 500.00
+                            [tooltip] => $500 from Lignite Energy Council to Dwight Wrangham
+                            [area] => 14.210526315789
+                            [size] => 14.210526315789
+                        )
+
+                    [1967_29563] => Array
+                        (
+                            [toId] => 1967
+                            [fromId] => 29563
+                            [value] => 500.00
+                            [id] => 1967_29563
+                            [type] => donations
+                            [weight] => 500.00
+                            [tooltip] => $500 from Lignite Energy Council to David Monson
+                            [area] => 14.210526315789
+                            [size] => 14.210526315789
+                        )
+
+                    [1964_38221] => Array
+                        (
+                            [toId] => 1964
+                            [fromId] => 38221
+                            [value] => 500.00
+                            [id] => 1964_38221
+                            [type] => donations
+                            [weight] => 500.00
+                            [tooltip] => $500 from NORTH DAKOTA LIGNITE COUNCIL to William E. Kretschmar
+                            [area] => 14.210526315789
+                            [size] => 14.210526315789
+                        )
+
+                    [9677_31955] => Array
+                        (
+                            [toId] => 9677
+                            [fromId] => 31955
+                            [value] => 500.00
+                            [id] => 9677_31955
+                            [type] => donations
+                            [weight] => 500.00
+                            [tooltip] => $500 from North Dakota Petroleum Council to David S. Rust
+                            [area] => 14.210526315789
+                            [size] => 14.210526315789
+                        )
+
+                    [9677_3125] => Array
+                        (
+                            [toId] => 9677
+                            [fromId] => 3125
+                            [value] => 500.00
+                            [id] => 9677_3125
+                            [type] => donations
+                            [weight] => 500.00
+                            [tooltip] => $500 from Marathon Oil to David S. Rust
+                            [area] => 14.210526315789
+                            [size] => 14.210526315789
+                        )
+
+                    [9682_3125] => Array
+                        (
+                            [toId] => 9682
+                            [fromId] => 3125
+                            [value] => 500.00
+                            [id] => 9682_3125
+                            [type] => donations
+                            [weight] => 500.00
+                            [tooltip] => $500 from Marathon Oil to Mike Schatz
+                            [area] => 14.210526315789
+                            [size] => 14.210526315789
+                        )
+
+                    [6079_29563] => Array
+                        (
+                            [toId] => 6079
+                            [fromId] => 29563
+                            [value] => 500.00
+                            [id] => 6079_29563
+                            [type] => donations
+                            [weight] => 500.00
+                            [tooltip] => $500 from Lignite Energy Council to Vonnie Pietsch
+                            [area] => 14.210526315789
+                            [size] => 14.210526315789
+                        )
+
+                    [3656_29563] => Array
+                        (
+                            [toId] => 3656
+                            [fromId] => 29563
+                            [value] => 500.00
+                            [id] => 3656_29563
+                            [type] => donations
+                            [weight] => 500.00
+                            [tooltip] => $500 from Lignite Energy Council to Ralph Metcalf
+                            [area] => 14.210526315789
+                            [size] => 14.210526315789
+                        )
+
+                    [4135_29563] => Array
+                        (
+                            [toId] => 4135
+                            [fromId] => 29563
+                            [value] => 500.00
+                            [id] => 4135_29563
+                            [type] => donations
+                            [weight] => 500.00
+                            [tooltip] => $500 from Lignite Energy Council to Chuck Damschen
+                            [area] => 14.210526315789
+                            [size] => 14.210526315789
+                        )
+
+                    [6088_29563] => Array
+                        (
+                            [toId] => 6088
+                            [fromId] => 29563
+                            [value] => 500.00
+                            [id] => 6088_29563
+                            [type] => donations
+                            [weight] => 500.00
+                            [tooltip] => $500 from Lignite Energy Council to Stacey Dahl
+                            [area] => 14.210526315789
+                            [size] => 14.210526315789
+                        )
+
+                    [3658_31955] => Array
+                        (
+                            [toId] => 3658
+                            [fromId] => 31955
+                            [value] => 700.00
+                            [id] => 3658_31955
+                            [type] => donations
+                            [weight] => 700.00
+                            [tooltip] => $700 from North Dakota Petroleum Council to Todd Porter
+                            [area] => 21.578947368421
+                            [size] => 21.578947368421
+                        )
+
+                    [1955_31955] => Array
+                        (
+                            [toId] => 1955
+                            [fromId] => 31955
+                            [value] => 750.00
+                            [id] => 1955_31955
+                            [type] => donations
+                            [weight] => 750.00
+                            [tooltip] => $750 from North Dakota Petroleum Council to Glen Froseth
+                            [area] => 23.421052631579
+                            [size] => 23.421052631579
+                        )
+
+                    [1945_31955] => Array
+                        (
+                            [toId] => 1945
+                            [fromId] => 31955
+                            [value] => 750.00
+                            [id] => 1945_31955
+                            [type] => donations
+                            [weight] => 750.00
+                            [tooltip] => $750 from North Dakota Petroleum Council to Wesley R. Belter
+                            [area] => 23.421052631579
+                            [size] => 23.421052631579
+                        )
+
+                    [1955_3125] => Array
+                        (
+                            [toId] => 1955
+                            [fromId] => 3125
+                            [value] => 750.00
+                            [id] => 1955_3125
+                            [type] => donations
+                            [weight] => 750.00
+                            [tooltip] => $750 from Marathon Oil to Glen Froseth
+                            [area] => 23.421052631579
+                            [size] => 23.421052631579
+                        )
+
+                    [1974_31955] => Array
+                        (
+                            [toId] => 1974
+                            [fromId] => 31955
+                            [value] => 750.00
+                            [id] => 1974_31955
+                            [type] => donations
+                            [weight] => 750.00
+                            [tooltip] => $750 from North Dakota Petroleum Council to Robert J. Skarphol
+                            [area] => 23.421052631579
+                            [size] => 23.421052631579
+                        )
+
+                    [6067_3125] => Array
+                        (
+                            [toId] => 6067
+                            [fromId] => 3125
+                            [value] => 800.00
+                            [id] => 6067_3125
+                            [type] => donations
+                            [weight] => 800.00
+                            [tooltip] => $800 from Marathon Oil to Mark A. Dosch
+                            [area] => 25.263157894737
+                            [size] => 25.263157894737
+                        )
+
+                    [6073_3125] => Array
+                        (
+                            [toId] => 6073
+                            [fromId] => 3125
+                            [value] => 800.00
+                            [id] => 6073_3125
+                            [type] => donations
+                            [weight] => 800.00
+                            [tooltip] => $800 from Marathon Oil to Lisa Meier
+                            [area] => 25.263157894737
+                            [size] => 25.263157894737
+                        )
+
+                    [9679_29802] => Array
+                        (
+                            [toId] => 9679
+                            [fromId] => 29802
+                            [value] => 1000.00
+                            [id] => 9679_29802
+                            [type] => donations
+                            [weight] => 1000.00
+                            [tooltip] => $1,000 from Basin Electric Power Co-Op to Tom Conklin
+                            [area] => 32.631578947368
+                            [size] => 32.631578947368
+                        )
+
+                    [3663_29563] => Array
+                        (
+                            [toId] => 3663
+                            [fromId] => 29563
+                            [value] => 1000.00
+                            [id] => 3663_29563
+                            [type] => donations
+                            [weight] => 1000.00
+                            [tooltip] => $1,000 from Lignite Energy Council to Blair Thoreson
+                            [area] => 32.631578947368
+                            [size] => 32.631578947368
+                        )
+
+                    [2712_29563] => Array
+                        (
+                            [toId] => 2712
+                            [fromId] => 29563
+                            [value] => 1000.00
+                            [id] => 2712_29563
+                            [type] => donations
+                            [weight] => 1000.00
+                            [tooltip] => $1,000 from Lignite Energy Council to Kathy Hawken
+                            [area] => 32.631578947368
+                            [size] => 32.631578947368
+                        )
+
+                    [6078_29802] => Array
+                        (
+                            [toId] => 6078
+                            [fromId] => 29802
+                            [value] => 1000.00
+                            [id] => 6078_29802
+                            [type] => donations
+                            [weight] => 1000.00
+                            [tooltip] => $1,000 from Basin Electric Power Co-Op to Dwight Wrangham
+                            [area] => 32.631578947368
+                            [size] => 32.631578947368
+                        )
+
+                    [1945_38221] => Array
+                        (
+                            [toId] => 1945
+                            [fromId] => 38221
+                            [value] => 1000.00
+                            [id] => 1945_38221
+                            [type] => donations
+                            [weight] => 1000.00
+                            [tooltip] => $1,000 from NORTH DAKOTA LIGNITE COUNCIL to Wesley R. Belter
+                            [area] => 32.631578947368
+                            [size] => 32.631578947368
+                        )
+
+                    [1951_29563] => Array
+                        (
+                            [toId] => 1951
+                            [fromId] => 29563
+                            [value] => 1000.00
+                            [id] => 1951_29563
+                            [type] => donations
+                            [weight] => 1000.00
+                            [tooltip] => $1,000 from Lignite Energy Council to Duane DeKrey
+                            [area] => 32.631578947368
+                            [size] => 32.631578947368
+                        )
+
+                    [1962_29563] => Array
+                        (
+                            [toId] => 1962
+                            [fromId] => 29563
+                            [value] => 1000.00
+                            [id] => 1962_29563
+                            [type] => donations
+                            [weight] => 1000.00
+                            [tooltip] => $1,000 from Lignite Energy Council to Matthew M. Klein
+                            [area] => 32.631578947368
+                            [size] => 32.631578947368
+                        )
+
+                    [14723_38221] => Array
+                        (
+                            [toId] => 14723
+                            [fromId] => 38221
+                            [value] => 1000.00
+                            [id] => 14723_38221
+                            [type] => donations
+                            [weight] => 1000.00
+                            [tooltip] => $1,000 from NORTH DAKOTA LIGNITE COUNCIL to Lyle Hanson
+                            [area] => 32.631578947368
+                            [size] => 32.631578947368
+                        )
+
+                    [36_29563] => Array
+                        (
+                            [toId] => 36
+                            [fromId] => 29563
+                            [value] => 1000.00
+                            [id] => 36_29563
+                            [type] => donations
+                            [weight] => 1000.00
+                            [tooltip] => $1,000 from Lignite Energy Council to Lee Kaldor
+                            [area] => 32.631578947368
+                            [size] => 32.631578947368
+                        )
+
+                    [16010_29563] => Array
+                        (
+                            [toId] => 16010
+                            [fromId] => 29563
+                            [value] => 1000.00
+                            [id] => 16010_29563
+                            [type] => donations
+                            [weight] => 1000.00
+                            [tooltip] => $1,000 from Lignite Energy Council to Joe Kroeber
+                            [area] => 32.631578947368
+                            [size] => 32.631578947368
+                        )
+
+                    [9682_38152] => Array
+                        (
+                            [toId] => 9682
+                            [fromId] => 38152
+                            [value] => 1200.00
+                            [id] => 9682_38152
+                            [type] => donations
+                            [weight] => 1200.00
+                            [tooltip] => $1,200 from MISSOURI BASIN OIL SERVICES to Mike Schatz
+                            [area] => 40
+                            [size] => 40
+                        )
+
+                )
+
+            [subgraphs] => Array
+                (
+                )
+
+            [queries] => Array
+                (
+                )
+
+            [nodetypesindex] => Array
+                (
+                    [candidates] => Array
+                        (
+                            [0] => 6092
+                            [1] => 9679
+                            [2] => 7615
+                            [3] => 3656
+                            [4] => 6079
+                            [5] => 6087
+                            [6] => 1951
+                            [7] => 14723
+                            [8] => 3137
+                            [9] => 36
+                            [10] => 6078
+                            [11] => 16010
+                            [12] => 6067
+                            [13] => 6071
+                            [14] => 6085
+                            [15] => 9682
+                            [16] => 3658
+                            [17] => 1945
+                            [18] => 2699
+                            [19] => 6073
+                            [20] => 4135
+                            [21] => 6081
+                            [22] => 6103
+                            [23] => 3657
+                            [24] => 1926
+                            [25] => 1962
+                            [26] => 1953
+                            [27] => 1956
+                            [28] => 2704
+                            [29] => 2712
+                            [30] => 9684
+                            [31] => 6095
+                            [32] => 1974
+                            [33] => 9681
+                            [34] => 6086
+                            [35] => 9677
+                            [36] => 1967
+                            [37] => 1955
+                            [38] => 3663
+                            [39] => 1964
+                            [40] => 2136
+                            [41] => 3662
+                            [42] => 6088
+                        )
+
+                    [donors] => Array
+                        (
+                            [0] => 38152
+                            [1] => 38221
+                            [2] => 29802
+                            [3] => 29563
+                            [4] => 3125
+                            [5] => 31955
+                            [6] => 30593
+                            [7] => 5460
+                            [8] => 31956
+                            [9] => 30234
+                            [10] => 37785
+                        )
+
+                )
+
+            [edgetypesindex] => Array
+                (
+                    [donations] => Array
+                        (
+                            [0] => 9682_37785
+                            [1] => 6087_30234
+                            [2] => 1962_30234
+                            [3] => 6073_30234
+                            [4] => 1953_31956
+                            [5] => 2136_30234
+                            [6] => 6067_30234
+                            [7] => 9681_30234
+                            [8] => 3658_30234
+                            [9] => 4135_3125
+                            [10] => 1962_3125
+                            [11] => 9681_3125
+                            [12] => 1953_3125
+                            [13] => 1945_5460
+                            [14] => 6078_3125
+                            [15] => 1964_3125
+                            [16] => 7615_31956
+                            [17] => 6095_3125
+                            [18] => 2704_3125
+                            [19] => 2704_31955
+                            [20] => 6073_31955
+                            [21] => 6081_31955
+                            [22] => 3663_31955
+                            [23] => 2712_31955
+                            [24] => 6088_31955
+                            [25] => 7615_31955
+                            [26] => 6067_31955
+                            [27] => 1951_31955
+                            [28] => 9681_31955
+                            [29] => 9684_31955
+                            [30] => 6103_3125
+                            [31] => 6087_3125
+                            [32] => 3658_5460
+                            [33] => 6088_3125
+                            [34] => 7615_3125
+                            [35] => 2136_5460
+                            [36] => 2136_3125
+                            [37] => 6086_3125
+                            [38] => 3663_3125
+                            [39] => 3658_3125
+                            [40] => 6078_31955
+                            [41] => 6095_29563
+                            [42] => 3137_29563
+                            [43] => 6086_31955
+                            [44] => 1955_38221
+                            [45] => 6071_38221
+                            [46] => 7615_29563
+                            [47] => 1974_29563
+                            [48] => 6071_31955
+                            [49] => 2136_31955
+                            [50] => 2699_29563
+                            [51] => 6085_29563
+                            [52] => 3137_31955
+                            [53] => 3657_29563
+                            [54] => 6087_29563
+                            [55] => 9682_30593
+                            [56] => 6073_29563
+                            [57] => 6087_31955
+                            [58] => 1962_31955
+                            [59] => 1974_3125
+                            [60] => 4135_31955
+                            [61] => 9682_31955
+                            [62] => 3657_3125
+                            [63] => 6092_31955
+                            [64] => 6071_3125
+                            [65] => 2136_29563
+                            [66] => 4135_29563
+                            [67] => 3137_3125
+                            [68] => 3662_38221
+                            [69] => 6092_29563
+                            [70] => 1953_29563
+                            [71] => 6081_29563
+                            [72] => 3657_31955
+                            [73] => 6071_29802
+                            [74] => 3658_29563
+                            [75] => 6086_29563
+                            [76] => 1956_29563
+                            [77] => 6103_31955
+                            [78] => 1926_29563
+                            [79] => 2704_38221
+                            [80] => 6103_29563
+                            [81] => 1964_38221
+                            [82] => 9677_3125
+                            [83] => 6067_29563
+                            [84] => 6078_29563
+                            [85] => 1967_29563
+                            [86] => 9677_31955
+                            [87] => 6088_29563
+                            [88] => 1953_31955
+                            [89] => 9682_3125
+                            [90] => 6079_29563
+                            [91] => 3656_29563
+                            [92] => 3658_31955
+                            [93] => 1945_31955
+                            [94] => 1955_31955
+                            [95] => 1974_31955
+                            [96] => 1955_3125
+                            [97] => 6067_3125
+                            [98] => 6073_3125
+                            [99] => 9679_29802
+                            [100] => 1945_38221
+                            [101] => 2712_29563
+                            [102] => 6078_29802
+                            [103] => 3663_29563
+                            [104] => 1951_29563
+                            [105] => 1962_29563
+                            [106] => 36_29563
+                            [107] => 14723_38221
+                            [108] => 16010_29563
+                            [109] => 9682_38152
+                        )
+
+                )
+
+            [graphvizProperties] => Array
+                (
+                    [graph] => Array
+                        (
+                            [bgcolor] => #FFFFFF
+                            [fontsize] => 90
+                            [splines] => curved
+                            [fontcolor] => blue
+                            [start] => self
+                            [size] => 1000,1000!
+                        )
+
+                    [node] => Array
+                        (
+                            [label] =>  
+                            [imagescale] => true
+                            [fixedsize] => 1
+                            [style] => setlinewidth(10), filled
+                            [regular] => true
+                            [fontsize] => 15
+                        )
+
+                    [edge] => Array
+                        (
+                            [arrowhead] => normal
+                            [arrowsize] => 3
+                            [color] => #99999966
+                            [fontsize] => 15
+                            [len] => 4
+                            [minlen] => 4
+                        )
+
+                )
+
+        )
+
+    [name] => 4293851967
+    [width] => 1821
+    [height] => 1015
+    [prefix] => undefined
+    [input_parameters] => Array
+        (
+            [setupfile] => StateDEM
+            [state] => ND
+            [chamber] => state:lower
+            [cycle] => 2008
+            [prefix] => undefined
+            [useSVG] => 1
+            [graphWidth] => 1821
+            [graphHeight] => 1015
+        )
+
+)

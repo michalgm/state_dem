@@ -1,0 +1,217 @@
+StateDEM Object
+(
+    [data] => Array
+        (
+            [nodetypes] => Array
+                (
+                    [0] => candidates
+                    [1] => donors
+                )
+
+            [edgetypes] => Array
+                (
+                    [donations] => Array
+                        (
+                            [0] => donors
+                            [1] => candidates
+                        )
+
+                )
+
+            [properties] => Array
+                (
+                    [minSize] => Array
+                        (
+                            [donors] => .5
+                            [candidates] => .5
+                            [donations] => 5
+                        )
+
+                    [maxSize] => Array
+                        (
+                            [donors] => 4
+                            [candidates] => 4
+                            [donations] => 40
+                        )
+
+                    [log_scaling] => 0
+                    [state] => CA
+                    [cycle] => 2010
+                    [chamber] => state:lower
+                    [valueMin] => 1
+                    [edgeid] => 
+                    [candidate_ids] => 
+                    [company_ids] => 29851
+                )
+
+            [nodes] => Array
+                (
+                    [29851] => Array
+                        (
+                            [transaction_id] => 16f02c5464de6a2dc4852a22470b75f8
+                            [company_id] => 29851
+                            [company_name] => Southern California Edison
+                            [amount] => 1275.00
+                            [recipient_ext_id] => 142109
+                            [industry] => Electric Power Utilities
+                            [image] => ../www/com_images/c127.png
+                            [sitecode] => coal
+                            [contributor_type] => I
+                            [id] => 29851
+                            [total_dollars] => 1275.00
+                            [type] => donors
+                            [label] => Southern California Edison
+                            [value] => 1275.00
+                            [dir] => /home/dameat/public_html/state_dem/njq/NodeViz
+                            [color] => cadetblue
+                            [shape] => circle
+                            [fillcolor] => #ffffff
+                            [tooltip] => Southern California Edison (Gave $1,275)
+                            [label_zoom_level] => 8
+                            [click] => this.selectNode('29851'); this.panToNode('29851');
+                            [relatedNodes] => Array
+                                (
+                                    [142109] => Array
+                                        (
+                                            [0] => 142109_29851
+                                        )
+
+                                )
+
+                            [size] => 4
+                        )
+
+                    [142109] => Array
+                        (
+                            [id] => 142109
+                            [state] => CA
+                            [term] => 2010
+                            [district] => CA-35
+                            [party] => D
+                            [candidate_name] => Das Williams
+                            [image] => ../www/can_images/142109.jpg
+                            [total_dollars] => 1275
+                            [type] => candidates
+                            [value] => 1275
+                            [color] => #3333cc33
+                            [label] => Das Williams
+                            [fillcolor] => #ffffff
+                            [tooltip] => Das Williams (Received $1,275)
+                            [shape] => square
+                            [label_zoom_level] => 6
+                            [click] => this.selectNode('142109'); this.panToNode('142109');
+                            [relatedNodes] => Array
+                                (
+                                    [29851] => Array
+                                        (
+                                            [0] => 142109_29851
+                                        )
+
+                                )
+
+                            [size] => 4
+                        )
+
+                )
+
+            [edges] => Array
+                (
+                    [142109_29851] => Array
+                        (
+                            [toId] => 142109
+                            [fromId] => 29851
+                            [value] => 1275.00
+                            [id] => 142109_29851
+                            [type] => donations
+                            [weight] => 1275.00
+                            [tooltip] => $1,275 from Southern California Edison to Das Williams
+                            [size] => 40
+                        )
+
+                )
+
+            [subgraphs] => Array
+                (
+                )
+
+            [queries] => Array
+                (
+                )
+
+            [nodetypesindex] => Array
+                (
+                    [candidates] => Array
+                        (
+                            [0] => 142109
+                        )
+
+                    [donors] => Array
+                        (
+                            [0] => 29851
+                        )
+
+                )
+
+            [edgetypesindex] => Array
+                (
+                    [donations] => Array
+                        (
+                            [0] => 142109_29851
+                        )
+
+                )
+
+            [graphvizProperties] => Array
+                (
+                    [graph] => Array
+                        (
+                            [bgcolor] => #FFFFFF
+                            [fontsize] => 90
+                            [splines] => curved
+                            [fontcolor] => blue
+                            [start] => self
+                            [size] => 1000,1000!
+                        )
+
+                    [node] => Array
+                        (
+                            [label] =>  
+                            [imagescale] => true
+                            [fixedsize] => 1
+                            [style] => setlinewidth(10), filled
+                            [regular] => true
+                            [fontsize] => 15
+                        )
+
+                    [edge] => Array
+                        (
+                            [arrowhead] => normal
+                            [arrowsize] => 3
+                            [color] => #99999966
+                            [fontsize] => 15
+                            [len] => 4
+                            [minlen] => 4
+                        )
+
+                )
+
+        )
+
+    [name] => 3793043529
+    [width] => 1821
+    [height] => 722
+    [prefix] => undefined
+    [input_parameters] => Array
+        (
+            [setupfile] => StateDEM
+            [state] => CA
+            [chamber] => state:lower
+            [cycle] => 2010
+            [company_ids] => 29851
+            [prefix] => undefined
+            [useSVG] => 1
+            [graphWidth] => 1821
+            [graphHeight] => 722
+        )
+
+)

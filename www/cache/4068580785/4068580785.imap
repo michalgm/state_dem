@@ -1,0 +1,24 @@
+<map id='G' name='G'>
+
+<area shape="rect" id="3239" coords="37675,38834,56004,57164"/>
+<area shape="circle" id="951" coords="70790,84321,5155"/>
+<area shape="circle" id="1137" coords="22890,11674,5028"/>
+<area shape="circle" id="1737" coords="6041,32640,4837"/>
+<area shape="circle" id="29814" coords="19574,81920,4264"/>
+<area shape="circle" id="14648" coords="87643,63358,4200"/>
+<area shape="circle" id="32446" coords="74109,14075,4201"/>
+<area shape="circle" id="37368" coords="4773,59472,4137"/>
+<area shape="circle" id="5727" coords="48891,4582,3946"/>
+<area shape="circle" id="3716" coords="44790,91418,3946"/>
+<area shape="circle" id="671" coords="88904,36527,3628"/>
+<area shape="poly" id="3239_951" coords="65823,81413 52885,61791 57135,58988 70074,78610"/>
+<area shape="poly" id="3239_1137" coords="27617,14587 40629,34322 36716,36902 23704,17166"/>
+<area shape="poly" id="3239_1737" coords="11309,32480 34786,41318 33373,45072 9896,36234"/>
+<area shape="poly" id="3239_29814" coords="21358,77899 36185,59453 37944,60867 23117,79313"/>
+<area shape="poly" id="3239_14648" coords="83344,62801 59247,53731 59947,51872 84043,60942"/>
+<area shape="poly" id="3239_32446" coords="72219,18012 57390,36459 55842,35215 70671,16767"/>
+<area shape="poly" id="3239_37368" coords="8478,57467 33679,50594 34184,52445 8983,59318"/>
+<area shape="poly" id="3239_5727" coords="49358,8581 48109,35022 46799,34960 48048,8519"/>
+<area shape="poly" id="3239_3716" coords="44323,87418 45571,60977 46881,61039 45633,87480"/>
+<area shape="poly" id="3239_671" coords="85509,37782 59845,44782 59677,44168 85342,37168"/>
+</map>
