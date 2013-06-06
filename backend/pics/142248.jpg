@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head id="Head1"><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><title>
+	Error Occurred
+</title><link rel="shortcut icon" href="../img/favicon.ico" />
+       
+    <!-- CSS includes -->
+    <link rel="stylesheet" media="screen" href="http://arc.asm.ca.gov/member/css/mainStyle.css" type="text/css" /></head>
+<body>
+    <style type="text/css" media="screen">
+    #contentwrapper{border:0;}	
+	</style>
+	
+<form name="Form1" method="post" action="err404.aspx?404%3bhttp%3a%2f%2farc.asm.ca.gov%3a80%2fmember%2f30%2fmedia%2fphoto%2fvaladao_cmug_82510_3123_mz6e.jpg" id="Form1">
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="/wEPDwUKMTA4ODk5MTM2OA9kFgRmDxYCHgRUZXh0BXk8IURPQ1RZUEUgaHRtbCBQVUJMSUMgIi0vL1czQy8vRFREIFhIVE1MIDEuMCBUcmFuc2l0aW9uYWwvL0VOIiAiaHR0cDovL3d3dy53My5vcmcvVFIveGh0bWwxL0RURC94aHRtbDEtdHJhbnNpdGlvbmFsLmR0ZCI+ZAIED2QWAgIDDw8WAh8ABaEBPGEgaHJlZj0iaHR0cDovL2FyYy5hc20uY2EuZ292P3A9bWVtYmVycyI+U2VsZWN0IEFzc2VtYmx5IFJlcHVibGljYW4gTWVtYmVyIFdlYnNpdGU8L2E+IHwgPGEgaHJlZj0iaHR0cDovL2FyYy5hc20uY2EuZ292LyI+QXNzZW1ibHkgUmVwdWJsaWNhbiBDYXVjdXMgV2Vic2l0ZTwvYT5kZGTyetZir4/1+opqr3wZnsT6JxwmbA==" />
+ 
+    <div id="maincontainer">
+    <div id="skip"></div>
+        <!-- HEADER SECTION -->
+        <div id="top_curve"></div>
+        <div id="headersection">
+            
+        </div>
+        <!-- TOP NAVIGATION -->
+        
+    
+        <!-- CONTENT COLUMN -->
+        <div id="contentwrapper">
+        <span class="textR">Sorry, the requested page has not been found.</span><br />
+        <span class="textG"></span><br /><br /> 
+        <div class="line"></div>       
+        <span id="errNav"><a href="http://arc.asm.ca.gov?p=members">Select Assembly Republican Member Website</a> | <a href="http://arc.asm.ca.gov/">Assembly Republican Caucus Website</a></span>        
+        </div>
+        <span id="Label1"></span><br />
+        <span id="Label2"></span><br />             
+    </div>
+    
+</form>
+</body>
+</html>
