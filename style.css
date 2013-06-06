@@ -1,4 +1,4 @@
-body { font-family: 'Ubuntu', sans-serif; color: #666;  overflow: hidden; }
+body { height: 100%; font-family: 'Ubuntu', sans-serif; color: #666;  overflow: hidden; }
 select { font-family: 'Ubuntu', sans-serif; }
 #lists {  height: 99%; }
 #graphs { height: 99%; }
