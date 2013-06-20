@@ -28,7 +28,8 @@ function initGraph() {
 			//dom_element: the dom_element the event occured on
 			//graph_element: the NodeViz graph element data object that the dom_element refers to
 			//element_type: either 'node' or 'edge'
-			//renderer: the render type that triggered the event (GraphImage or GraphList)
+			//renderer: the render type that triggered the event (svg, raster, or list)
+			pre_click: "console.log('pre_click:'+element_type+' '+renderer)", //this is a lame way to do this
 			post_mouseenter: function(evt, dom_element, graph_element, element_type, renderer) { 
 				var offset = this.renderers.GraphImage.tooltip.outerWidth() /2;
 				this.renderers.GraphImage.tooltipOffsetX = -offset;
@@ -36,6 +37,8 @@ function initGraph() {
 			},
 			post_click: function(evt, dom_element, graph_element, element_type, renderer) { 
 				console.log('show the info card here');
+				console.log(graph_element);
+				console.log(dom_element);
 			}
 		}
 	};
