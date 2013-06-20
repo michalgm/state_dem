@@ -1,4 +1,3 @@
-MOUSEENTER_MOUSELEAVE_EVENTS_SUPPORTED = 0;
 $.Class("NodeViz", {}, {
 	init: function(options) { 
 		this.options = {
@@ -9,7 +8,11 @@ $.Class("NodeViz", {}, {
 			lightboxscreen : 'lightboxscreen',
 			optionsform : 'graphoptions',
 			NodeVizPath : 'NodeViz/',
-			disableAutoLoad : 0
+			disableAutoLoad : 0,
+			functions:{},
+			image: {},
+			list: {}
+
 		}
 		$.extend(this.options, options);
 		if (! this.prefix) { 
@@ -258,16 +261,19 @@ $.Class("NodeViz", {}, {
 				if (eventtype == 'mouseenter') { eventtype = 'mouseover'; }
 				else if (eventtype == 'mouseleave') { eventtype = 'mouseout'; }
 			}
-			if (action != '') {
+			if (action != '' || (this.options.functions['pre_'+eventtype] || this.options.functions['post_'+eventtype])) {
 				$(dom_element).on(eventtype, $.proxy(function(evt) { 
+					this.do_function(this.options.functions['pre_'+eventtype], evt, dom_element, graph_element, element_type, renderer);
 					if ((eventtype == 'click' || eventtype == 'mouseup') && renderer == 'svg') {
-						origin = this.renderers.GraphImage.getEventPoint(evt).matrixTransform(this.renderers.GraphImage.stateTf); 
-						state_origin = this.renderers.GraphImage.stateOrigin; 
+						var origin = this.renderers.GraphImage.getEventPoint(evt).matrixTransform(this.renderers.GraphImage.stateTf); 
+						var state_origin = this.renderers.GraphImage.stateOrigin; 
 						if (state_origin.x != origin.x || state_origin.y != origin.y) {
 							return;
 						}
 					}
-					eval(action);
+					this.do_function(action, evt, dom_element, graph_element, element_type, renderer);
+					this.do_function(this.options.functions['post_'+eventtype], evt, dom_element, graph_element, element_type, renderer);
+
 				}, this));
 			}
 		}, this));
@@ -298,6 +304,15 @@ $.Class("NodeViz", {}, {
 	},
 	appendParam: function(key, value) { 
 		this.params.push({name: key, value: value});
+	},
+	do_function: function(func, evt, dom_element, graph_element, element_type, renderer) {
+		if (func) { 
+			if ($.isFunction(func)) { 
+				func.apply(this, [ evt, dom_element, graph_element, element_type, renderer]);
+			} else {
+				eval(func);
+			}
+		}
 	}
 	
 });
