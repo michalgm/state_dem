@@ -7,7 +7,7 @@
 	
 	<title>Dirty Energy Money - States</title>
 
-	<link rel="stylesheet" href="/css/style.min.css"/>
+	<link rel="stylesheet" href="css/style.min.css"/>
 	<link rel='stylesheet' href="//ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/themes/ui-lightness/jquery-ui.css"/>
 </head>
 <body>
