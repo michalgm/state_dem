@@ -4,6 +4,14 @@ $(function(){
 
 	initGraph();
 
+	$('#pull').click(function(e){
+		$('.navlist').slideToggle();
+		e.preventDefault();
+	});
+	$(window).resize(function(){
+		if ($(window).width() > 320 && $('.navlist').is(':hidden')) { $('.navlist').removeAttr('style'); }
+	});
+
 });
 
 // Functions
