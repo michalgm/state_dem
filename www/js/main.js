@@ -16,39 +16,42 @@ $(function(){
 
 // Functions
 
-	function initGraph() {
-		var params = $.url().param();
-		$(params).keys().each(function(i, k) { 
-			$('#graphoptions').append($('<input>').attr({type:'hidden', name:k, value:params[k]}));
-		})
-		var graphoptions = {
-			setupfile: "StateDEM",
-			image: {
-				graphdiv: 'graphs',
-				zoomlevels: '8',
-				zoomSliderAxis: 'vertical',
-				//zoom_delta:  
+function initGraph() {
+	var params = $.url().param();
+	$(params).keys().each(function(i, k) { 
+		$('#graphoptions').append($('<input>').attr({type:'hidden', name:k, value:params[k]}));
+	})
+	var graphoptions = {
+		setupfile: "StateDEM",
+		image: {
+			graphdiv: 'graphs',
+			zoomlevels: '8',
+			zoomSliderAxis: 'vertical',
+			//zoom_delta:  
 
+		},
+		functions: {
+			//You can define functions that execute before or after events occuring on graph elements - name them like 'pre_eventname' or 'post_eventname'. They can either be a string to be evaled, or a true function.  The functions take the following arguments:
+			//evt: the event object of the triggered event
+			//dom_element: the dom_element the event occured on
+			//graph_element: the NodeViz graph element data object that the dom_element refers to
+			//element_type: either 'node' or 'edge'
+			//renderer: the render type that triggered the event (svg, raster, or list)
+			pre_click: "console.log('pre_click:'+element_type+' '+renderer)", //this is a lame way to do this
+			post_mouseenter: function(evt, dom_element, graph_element, element_type, renderer) { 
+				var offset = this.renderers.GraphImage.tooltip.outerWidth() /2;
+				this.renderers.GraphImage.tooltipOffsetX = -offset;
+				this.renderers.GraphImage.tooltipOffsetY = -20;
 			},
-			list: {
-				listdiv: 'lists',
-				scrollList: 1,
-				sort: {
-					candidates: [
-						{label:'Amount', sort_values:[['value', 'descending']]},
-						{label:'Name', sort_values:[function(n) { return n.candidate_name.split(' ').pop()}]},
-						{label:'Party', sort_values:['party', ['value', 'descending']]}
-					],
-					donors: [
-						{label:'Amount', sort_values:[['value', 'descending']]},
-						{label:'Name', sort_values:['company_name']},
-						{label:'Industry', sort_values:['industry', ['value', 'descending']]}
-					]
-				}
+			post_click: function(evt, dom_element, graph_element, element_type, renderer) { 
+				console.log('show the info card here');
+				console.log(graph_element);
+				console.log(dom_element);
 			}
-		};
-		gf = new NodeViz(graphoptions);
-	}	
+		}
+	};
+	gf = new NodeViz(graphoptions);
+}	
 
 // Extensions
 
