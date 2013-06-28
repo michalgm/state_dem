@@ -3,6 +3,8 @@
 $(function(){
 
 	initGraph();
+	$('#infocard').hide();
+	$('#infocard .close').click(function() { resetGraph(); });
 
 	$('#pull').click(function(e){
 		$('.navlist').slideToggle();
@@ -11,6 +13,8 @@ $(function(){
 	$(window).resize(function(){
 		if ($(window).width() > 320 && $('.navlist').is(':hidden')) { $('.navlist').removeAttr('style'); }
 	});
+
+
 
 });
 
@@ -44,9 +48,9 @@ function initGraph() {
 				this.renderers.GraphImage.tooltipOffsetY = -20;
 			},
 			post_click: function(evt, dom_element, graph_element, element_type, renderer) { 
-				console.log('show the info card here');
-				console.log(graph_element);
-				console.log(dom_element);
+				toggleInfocard(graph_element);
+				// console.log(graph_element);
+				// console.log(dom_element);
 			}
 		}
 	};
@@ -127,3 +131,157 @@ $.extend(GraphList.prototype, {
 		return "<div class='sublist_header'>"+header+"</div>"
 	}
 });
+
+function toggleInfocard(node) {
+	// console.log(node);
+
+	var card = $('#infocard'),
+		node_id = card.data('data-node');
+
+	if (card.is(':hidden') || node_id !== node.id) {
+		card.data('data-node',node.id);
+		$('#node-title').html(node.label+' <span class="district '+node.party+' ">'+node.district+'</span>');
+		var image_url = node.image.split('www');
+		$('#node-image img').attr('src',image_url[1]);
+
+		var mockContributionsByYear = [
+			{ 'year': 2008, 'contributions': 12345 },
+			{ 'year': 2009, 'contributions': 23456 },
+			{ 'year': 2010, 'contributions': 34567 },
+			{ 'year': 2011, 'contributions': 45678 },
+			{ 'year': 2012, 'contributions': 56789 }
+		];
+		var mockContributionsByIndustry = [
+			{ 'group': 'pirates', 'label': 'Pirates', 'contributions': 123456 },
+			{ 'group': 'ninja', 'label': 'Ninjas', 'contributions': 234567 },
+			{ 'group': 'robots', 'label': 'Robots', 'contributions': 345678 }
+		];
+		var mockContributionsByParty = [
+			{ 'group': 'D', 'label': 'Democrats', 'contributions': 123456 },
+			{ 'group': 'R', 'label': 'Republicans', 'contributions': 234567 }
+		];
+
+		card.slideDown();
+
+		drawPieChart(mockContributionsByIndustry,'#node-piechart1');
+		drawPieChart(mockContributionsByParty,'#node-piechart2');
+		drawBarChart(mockContributionsByYear,'#node-barchart');
+
+		$('#masthead').hide();
+		// Zoom and center graph
+	} else {
+		resetGraph();
+	}
+}
+
+function resetGraph() {
+	$('#infocard').slideUp();
+	$('#masthead').fadeIn(2000);
+	// Reset Zoom
+}
+
+/*	==========================================================================
+	BAR CHART
+	========================================================================== */
+
+function drawBarChart(data,container) {
+	var width = $(container).width(),
+		height = $(container).height();
+
+	var x = d3.scale.linear().domain([0, data.length]).range([0, width]);
+	var y = d3.scale.linear().domain([0, d3.max(data, function(datum) { return datum.contributions; })]).rangeRound([0, height]);
+
+	var svg = d3.select(container).append('svg')
+		.attr('width',width)
+		.attr('height',height);
+
+	var bars = svg.selectAll('.bar')
+		.data(data)
+		.enter().append('rect')
+			.attr('class','bar')
+			.attr('x',function(d,i) { return x(i); })
+			.attr('y',function(d) { return height - y(d.contributions); })
+			.attr('height',function(d) { return y(d.contributions); })
+			.attr('width',function() { return width / data.length * 0.9; });
+
+	svg.selectAll('.amount')
+		.data(data)
+		.enter().append('text')
+			.attr('class','amount')
+			.attr('x',function(d,i) { return x(i) + (width / data.length * 0.9) / 2; })
+			.attr('y',function(d) { return height - y(d.contributions); })
+			.attr('dy','2em')
+			.attr('width',function() { return width / data.length; })
+			.attr('text-anchor','middle')
+			.text(function(d) { return '$'+d.contributions; });
+
+	svg.selectAll('.year')
+		.data(data)
+		.enter().append('text')
+			.attr('class','year')
+			.attr('x',function(d,i) { return x(i) + (width / data.length) / 2; })
+			.attr('y',function(d) { return height; })
+			.attr('dy','-1em')
+			.attr('width',function() { return width / data.length; })
+			.attr('text-anchor','middle')
+			.text(function(d) { return d.year; });
+
+}
+
+/*	==========================================================================
+	PIE CHARTS
+	========================================================================== */
+
+function drawPieChart(data,container) {
+	var width = $(container).width(),
+		height = $(container).height(),
+		radius = Math.min(width,height) / 2;
+	var color = d3.scale.category20();
+
+	var pie = d3.layout.pie()
+		.value(function(d) { return d.contributions; })
+		.sort(null);
+
+	var arc = d3.svg.arc()
+		.innerRadius(radius * 0.25)
+		.outerRadius(radius * 1.0);
+
+	var svg = d3.select(container).append('svg')
+		.attr('width',width)
+		.attr('height',height)
+		.append('g')
+			.attr('transform','translate('+ width/2 + ',' + height/2 + ')');
+
+	var arcs = svg.datum(data).selectAll('.arc')
+		.data(pie)
+		.enter().append('g')
+			.attr('class','arc');
+
+	arcs.append('path')
+		.attr('fill',function(d,i) { return color(i); })
+		.attr('d',arc)
+		.each(function(d) { this._current = d; });
+
+	arcs.append('text')
+		.attr("transform", function(d) { return "translate(" + arc.centroid(d) + ")"; })
+		.attr("dy", ".35em")
+		.style("text-anchor", "middle")
+		.text(function(d) { return d.data.label; });
+
+	d3.selectAll('input')
+		.on('change',change);
+
+	function change() {
+		pie.value(function(d) { return d[value]; });
+		path = path.data(pie);
+		path.transition().duration(750).attrTween('d',arcTween);
+	}
+
+	function arcTween(a) {
+		var i = d3.interpolate(this._current, a);
+		this._current = i(0);
+		return function(t) {
+			return arc(i(t));
+		};
+	}
+}
