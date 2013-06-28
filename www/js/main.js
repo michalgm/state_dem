@@ -26,6 +26,8 @@ function initGraph() {
 		$('#graphoptions').append($('<input>').attr({type:'hidden', name:k, value:params[k]}));
 	})
 	var graphoptions = {
+		//FIXME later - this points to the styro backend:
+		NodeVizPath: 'http://styrotopia.net/~dameat/state_dem/ui-branch/state_dem/www/NodeViz/',
 		setupfile: "StateDEM",
 		image: {
 			graphdiv: 'graphs',
