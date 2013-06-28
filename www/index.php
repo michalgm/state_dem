@@ -23,12 +23,15 @@
 	<!-- <div id="lists"></div> -->
 	<div id="graphs"></div>
 
-	<div id="infocard">
-		<h3 id="node-title">{{TITLE}}</h3>
-		<div id="node-image"><img src=""></div>
-		<div id="node-barchart">{{BAR CHART}}</div>
-		<div id="node-piechart1">{{PIE CHART 1}}</div>
-		<div id="node-piechart2">{{PIE CHART 2}}</div>
+	<div id="infocard" data-node="null">
+		<a class="close">&times;</a>
+		<div class="container">
+			<h3 id="node-title"></h3>
+			<div id="node-image"><img src=""></div>
+			<div id="node-barchart"></div>
+			<div id="node-piechart1"></div>
+			<div id="node-piechart2"></div>
+		</div>
 	</div>
 
 <?php include 'inc/footer.inc';?>
@@ -46,6 +49,9 @@
 	<script src="NodeViz/jquery.svg/jquery.svganim.js" ></script>
 	<script src="NodeViz/jquery.mousewheel.js" ></script>
 	<script src="NodeViz/jquery.purl.js" ></script>
+
+	<script src="js/d3.v3.js"></script>
+
 	<script src="js/main.js"></script>
 </body>
 </html>
