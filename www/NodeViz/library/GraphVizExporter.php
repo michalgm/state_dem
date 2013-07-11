@@ -36,7 +36,7 @@ for list of params and dfns. Used as default values but can be overridden in Gra
 			),
 			'edge' => array(
 				'len' => '8',
-				'style'=>'setlinewidth(2)',
+				'penwidth'=>'2',
 				'labelfloat' => 'true'
 			)
 		);
@@ -143,7 +143,7 @@ for list of params and dfns. Used as default values but can be overridden in Gra
 				$dot .= 'weight="'.GraphVizExporter::getWeightGV($edge['weight']).'" ';
 			}
 			if(isset($edge['size'])) {
-				$dot .= 'style="setlinewidth('.$edge['size'].')" ';
+				$dot .= "penwidth=\"$edge[size]\" ";
 				if (isset($edge['arrowhead']) && $edge['arrowhead'] != 'none' && $this->GV_PARAMS['edge']['arrowhead'] != 'none') { 
 					$dot .= 'arrowsize="'. ($edge['size']*5).'" ';
 				}
@@ -340,13 +340,14 @@ for list of params and dfns. Used as default values but can be overridden in Gra
 			$svg = preg_replace("/id=\"graph1/", "id=\"graph0", $svg); //rename svg object
 			$svg = preg_replace("/viewBox=\"[^\"]*\"/", "", $svg); //remove viewbox
 		}
+
 		$svg = preg_replace("/^.*?<svg/s", "<svg", $svg); //Remove SVG Document header
 		$svg = str_replace("&#45;&gt;", "_", $svg); //FIXME? convert HTML -> to _?
 		$svg = str_replace("pt\"", "px\"", $svg); //convert points to pixels
 		$svg = preg_replace("/<title>.*/m", "", $svg); //remove 'title' tags
-		$svg = preg_replace("/^<\/?a.*\n/m", "", $svg); //FIXME? remove cruft after anchor tags
+		$svg = preg_replace("/<\/?a[^>]*>/m", "", $svg); //FIXME? remove cruft after anchor tags
 		$svg = preg_replace("/\.\.\/www\//", "", $svg); //FIXME change the local web path to be relative to http web path
-
+		
 		#write out the new svg
 		$svgout = fopen($this->graphFileName.".svg", 'w');
 		fwrite($svgout, $svg);
@@ -375,7 +376,9 @@ for list of params and dfns. Used as default values but can be overridden in Gra
 	}
 
 	protected function renderGraphViz() {
-		require('libgv-php5/gv.php'); //load the graphviz php bindings
+		#require('libgv-php5/gv.php'); //load the graphviz php bindings
+		#/usr/lib/php5/20100525/libgv_php.so
+		require('gv.php'); //load the graphviz php bindings
 		global $nodeViz_config;
 		$filename = $nodeViz_config['nodeViz_path'].$this->graphFileName; //Need to use absolute paths cuz we change to web dir
 
@@ -393,9 +396,12 @@ for list of params and dfns. Used as default values but can be overridden in Gra
 		
 		$data = &$this->graph->data;
 		$node = gv::firstnode($gv);
-		$data['nodes'][gv::getv($node, 'id')]['pos'] = gv::getv($node, 'pos');
-		$data['nodes'][gv::getv($node, 'id')]['height'] = gv::getv($node, 'height');
+		if (gv::getv($node, 'id')) {  //FIXME - for some reason, after updating to GV 2.30, sometimes the first node has no id?
+			$data['nodes'][gv::getv($node, 'id')]['pos'] = gv::getv($node, 'pos');
+			$data['nodes'][gv::getv($node, 'id')]['height'] = gv::getv($node, 'height');
+		}
 		while($node = gv::nextnode($gv, $node)) {
+		//if (! gv::getv($node, 'id')) { trigger_error(print_r($node, 1)); }
 			$data['nodes'][gv::getv($node, 'id')]['pos'] = gv::getv($node, 'pos');
 			$data['nodes'][gv::getv($node, 'id')]['height'] = gv::getv($node, 'height');
 		}
