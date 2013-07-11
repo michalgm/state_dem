@@ -130,4 +130,12 @@ function arrayToInString($array, $assoc=0) {
 	return "'".join("','", $array2)."'";
 }
 
-
+function arrayToUpdateString($array, $keys=[]) {
+	if (! $keys) { $keys = array_keys($array); }
+	$values = [];
+	foreach ($keys as $key) { 
+		$values[] = "$key='".dbEscape($array[$key])."'";
+	}
+	return implode(",", $values);	
+}
+?>	
