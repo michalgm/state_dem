@@ -50,7 +50,7 @@ class StateDEM extends Graph {
 				//'maxiter' => '100000', //turning this off speeds things up, but does it mean that some might not converge?
 			),
 			'node'=> array('label'=> ' ', 'imagescale'=>'true','fixedsize'=>1, 'style'=> 'setlinewidth(10), filled', 'regular'=>'true', 'fontsize'=>15),
-			'edge'=>array('arrowhead'=>'normal', 'arrowsize'=>3, 'color'=>'#99999966', 'fontsize'=>15, 'len'=>4, 'minlen'=>4)
+			'edge'=>array('arrowhead'=>'none', 'arrowsize'=>2, 'color'=>'#99999966', 'fontsize'=>15, 'len'=>4, 'minlen'=>4, 'style'=>'tapered')
 		);
 		srand(20); //Don't copy this - this just makes sure that we are generating the same 'random' values each time
 	}
@@ -148,7 +148,7 @@ class StateDEM extends Graph {
 				$node['color'] = colorize($node['party'])."33";
 				$node['label'] = $node['candidate_name'];
 			}
-			$node['fillcolor'] = '#ffffff';
+			$node['fillcolor'] = '#ffffffff';
 			$node['tooltip'] = $node['label']." (Received ".money_format('%.0n', $node['value']).")";
 			#$node['fill-opacity'] = .5;
 			$node['shape'] = 'square';
@@ -179,7 +179,7 @@ class StateDEM extends Graph {
 			//	$node['shape'] = 'triangle';
 		   	//}
 
-			$node['fillcolor'] = "#ffffff";
+			$node['fillcolor'] = "#ffffffff";
 			$node['tooltip'] = $node['label']." (Gave ".money_format('%.0n', $node['value']).")";
 			$node['label_zoom_level'] = '8';
 			$node['click'] = "this.selectNode('".$node['id']."'); this.panToNode('".$node['id']."');";
@@ -246,15 +246,15 @@ class StateDEM extends Graph {
 
 function colorize($value){
 	$colors = array(
-		"REPUBLICAN"=>"#cc3333",
-		"R"=>"#cc3333",
-		"DEMOCRAT"=>"#3333cc",
-		"D"=>"#3333cc",
-		"GREEN"=>"#33cc33",
-		"G"=>"#33cc33",
-		"LIBERTARIAN"=>"#cc33cc",
-		"L"=>"#cc33cc",
-		"PEACE & FREEDOM"=>"#33cccc",
+		"REPUBLICAN"=>"#cc3333ff",
+		"R"=>"#cc3333ff",
+		"DEMOCRAT"=>"#3333ccff",
+		"D"=>"#3333ccff",
+		"GREEN"=>"#33cc33ff",
+		"G"=>"#33cc33ff",
+		"LIBERTARIAN"=>"#cc33ccff",
+		"L"=>"#cc33ccff",
+		"PEACE & FREEDOM"=>"#33ccccff",
 	);
 	$color = isset($colors[trim($value)]) ? $colors[trim($value)] : "gray";
 	return($color);
