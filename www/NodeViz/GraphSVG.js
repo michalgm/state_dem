@@ -60,6 +60,12 @@ GraphImage("GraphSVG", {}, {
 		this._super(responseData);
 		var image = responseData.image;
 		var overlay = responseData.overlay;
+		try { 
+			$.parseXML(overlay); 
+		} catch(err) {
+			this.NodeViz.reportError(900, "The SVG image is not valid XML");
+			return;
+		}
 		overlay = overlay.replace("<div id='svg_overlay' style='display: none'>", '');
 		overlay = overlay.replace("</div>", '');
 		overlay.match(/<svg width=\"([\d\.]+)px\" height=\"([\d\.]+)px\"/);
@@ -78,14 +84,27 @@ GraphImage("GraphSVG", {}, {
 
 		//reset all the ids for the under-image
 		$('#svgscreen').attr('id', 'underlay_svgscreen');
+		$('#image>svg').svg();
+		var svg = $('#image>svg').svg('get');
 		$('#images g').each( function(index, g) { 
 			var id = $(g).attr('id');
+			if ($('#a_'+id).length) { 
+				svg.clone($('#'+id), $('#a_'+id).children());
+				svg.remove($('#a_'+id));
+			}
 			$(g).attr('id', 'underlay_'+id);
 		});
-
+		
 		//insert the svg image again as the overlay
 		$('#images').append($('<div/>').attr('id','svg_overlay'));
 		$('#svg_overlay').append($('#svg_overlay')[0].ownerDocument.importNode(svgdoc.firstChild, true));
+		$('#svg_overlay g').each( function(index, g) { 
+			var id = $(g).attr('id');
+			if ($('#a_'+id).length) { 
+				svg.clone($('#'+id), $('#a_'+id).children());
+				svg.remove($('#a_'+id));
+			}
+		});
 
 		//Center the svg images (using the original graph dimensions)
 		this.root = $('#svg_overlay')[0].childNodes[0];
