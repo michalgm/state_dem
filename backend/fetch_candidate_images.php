@@ -1,5 +1,6 @@
 <?php
 include_once('../config.php');
+$force = 1;
 $candidates = dbLookupArray("select nimsp_candidate_id,url, photo_url, photo_url2, state, votesmart_id from legislators where (photo_url != '' || votesmart_id != '') and image = '' and nimsp_candidate_id != 0");
 $bad_urls = array(); 
 print "Need to fetch ".count($candidates)." missing candidate images\n";
@@ -21,6 +22,7 @@ foreach ($candidates as $leg) {
 			if (! copyImage($leg['photo_url2'], $leg['nimsp_candidate_id'])) { 
 				if ($leg['votesmart_id']) { 
 				   	if (copyImage("http://votesmart.org/canphoto/$leg[votesmart_id].jpg", $leg['nimsp_candidate_id'])) {
+						dbwrite("update legislators set image_source = 'vs' where nimsp_candidate_id = '$leg[nimsp_candidate_id]' and '$leg[nimsp_candidate_id]' != ''");
 						print "V"; 
 					} else { 
 						$bad_urls[] = "$leg[nimsp_candidate_id], $leg[photo_url], $leg[photo_url2], $leg[votesmart_id]";
@@ -28,6 +30,7 @@ foreach ($candidates as $leg) {
 					}
 				}
 			} else { 
+				dbwrite("update legislators set image_source = 'td' where nimsp_candidate_id = '$leg[nimsp_candidate_id]' and '$leg[nimsp_candidate_id]' != ''");
 				print "2";
 			}	
 		} else {
@@ -42,6 +45,19 @@ if ($bad_urls) {
 	print_r($bad_urls);
 }
 
+print "creating thumbnails and copying to webdir\n";
+include "../oc_utils.php";
+chdir("../");
+$pics_dir = "www/can_images/";
+foreach (scandir("./backend/pics/") as $image) { 
+	if (in_array($image, array('..', '.'))) { continue; }
+	$path_info = pathinfo($image);
+	$id = $path_info['filename'];
+	if (! file_exists($pics_dir.$id.".jpg")) {
+		createThumbnails("./backend/pics/$image", 'can');
+	}
+}
+
 function getExtensionFromURL($url) {
 	$info = pathinfo($url); 
 	$info['extension'] = isset($info['extension']) ? strtolower($info['extension']) : 'jpg';
@@ -51,6 +67,7 @@ function getExtensionFromURL($url) {
 }
 
 function copyImage($url, $id) {
+	global $force_download;
 	if(!$url) { return false; }
 	$photo = "";
 	if (file_exists("pics/$id.jpg")) { 
@@ -59,7 +76,7 @@ function copyImage($url, $id) {
 		$photo = "$id.png";
 	}
 
-	if(! $photo) { 
+	if(! $photo || $force_download) { 
 		$extension = getExtensionFromURL($url);
 		if($extension == 'nsf') { print "#"; return false; }
 		if (@copy(str_replace(' ', '+', $url), "pics/$id.$extension")) { 
