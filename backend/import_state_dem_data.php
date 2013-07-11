@@ -73,3 +73,24 @@ dbwrite("update contributions_dem join companies_state_details using (company_id
 dbwrite("update companies_state_details set dem_type = if(coal_related+oil_related = 0, 'carbon', if(oil_related < coal_related, 'coal', 'oil')) where dem_type is null");
 dbwrite("update contributions_dem join companies_state_details using (company_id) set sitecode = dem_type where sitecode is null");
 
+print "Cleaning company names\n";
+$names = fetchCol("select name from oilchange.companies where cast(name as binary) rlike '^[^a-z]*$'");
+foreach ($names as $name) {
+	$new_words = [];
+	$new_name = preg_replace_callback("/\b(.+?)\b/", "fixWord", $name);
+	if ($new_name && $name) { 
+		dbwrite("update oilchange.companies set match_name = '".dbEscape($new_name)."', name='".dbEscape($new_name)."' where name = '".dbEscape($name)."'");
+	}
+}
+
+function fixWord($words) {
+	$abbreviations = array('AA','AAA','AB','ABB','ABC','ABH','AC','ACT','AEI','AEL','AEP','AEPPSO','AES','AG','AGF','AGL','AJ','AK','AL','ALLETE','AM','AMPM','AN','ANR','AR','AS','AT','ATP','AW','AZ','AZTX','BB','BBF','BC','BD','BDH','BG','BHP','BJ','BLK','BNB','BOC','BP','BPA','BTA','BTT','C','CA','CAMAC','CBI','CBS','CCS','CDX','CE','CH','CHC','CHS','CI','CIPS','CIS','CITGO','CK','CL','CMP','CMS','CNG','CNO','CNX','CONSOL','CPS','CRC','CSS','CSX','CT','DAG','DBA','DC','DE','DH','DHJ','DK','DLB','DPL','DR','DTE','DWJ','EC','ECC','EIL','EJ','ELM','EN','ENI','ENIII','ENS','EO','EONAG','EQT','ET','EXL','FH','FL','FM','FMC','FMF','FPL','FSD','FW','FX','GA','GE','GF','GFI','GIANT','GL','GM','GMX','GP','GU','GW','HC','HD','HI','HNG','HS','HT','IA','IBEX','ICC','ID','IDC','IH','IHRDC','III','IL','IMTT','IN','IPALCO','IRI','ITT','IWC','JA','JCE','JCN','JD','JEC','JF','JG','JH','JJ','JM','JMWLLC','JOB','JP','JR','JS','JT','JTOD','JW','JWW','KBC','KBR','KC','KGEN','KLT','KN','KP','KPI','KS','KY','LA','LG','LGE','LI','LLC','LLOG','LLP','LM','LMP','LNG','LO','LP','LPC','LPG','LS','LTD','MA','MAP','MB','MC','MCC','MCR','MD','MDU','ME','MFA','MGS','MH','MHA','MI','MJ','MJH','MN','MO','MOC','MP','MPG','MS','MSC','MSL','MT','MTL','MTM','MV','MVP','MWI','MWJ','NACCO','NANA','NC','ND','NE','NH','NI','NIC','NIPSCO','NJ','NL','NM','NOV','NRG','NRPLP','NV','NW','NY','OCTGLLP','OGE','OH','OK','OMI','ONEOK','OR','OSI','PA','PAC','PAMD','PBF','PBGH','PBS','PDVSA','PEBA','PECO','PES','PFE','PGE','PK','PMR','PNERC','PNM','POG','PPG','PPL','PR','PSEG','PSI','PW','QEP','RAG','RC','RCP','RI','RII','RIM','RK','RKA','RL','RLM','RLU','RP','RPC','RPM','RSA','RSI','SA','SC','SCF','SD','SDG','SDS','SER','SES','SGS','SIGECO','SJ','SK','SOCO','SP','SPT','SPY','SR','SSI','SSL','SW','TB','TC','TD','TDC','TECO','TELO','TG','TGS','TH','TN','TRB','TRT','TRZ','TSP','TSS','TU','TX','TXU','UAF','UE','UGI','UMC','UNEV','UOPLLC','URS','US','USA','USLLC','USX','UT','UTI','VA','VF','VI','VK','VL','VP','VT','VTI','WA','WB','WC','WCLIII','WCS','WE','WG','WH','WI','WL','WM','WPS','WT','WV','WW','WY','XTO','XXI');
+	$lowercase = array('OF', 'AND');
+	$word = $words[0];
+	if (in_array($word, $lowercase)) {
+		$word = strtolower($word); 
+	} else if (! in_array($word, $abbreviations)) { 
+		$word = ucfirst(strtolower($word));
+	}
+	return $word;
+}
