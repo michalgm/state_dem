@@ -1,5 +1,6 @@
 <?php
 include_once('../config.php');
+chdir('data');
 $db = dbconnect();
 if (isset($argv[1])) {
 	$url = $argv[1];
