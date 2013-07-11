@@ -12,6 +12,10 @@ $dbname = 'state_dem';
 $dbport = "3306";
 $dbsocket = "";
 
+set_include_path(get_include_path() . PATH_SEPARATOR . dirname(__FILE__).'/www/NodeViz/library/');
+
+$debug=1;
+
 require_once('dbaccess.php');
 
 $states = array(
@@ -21,9 +25,13 @@ $states = array(
 	'PA'=>'Pennsylvania',
 	'CO'=>'Colorado',
 	'AK'=>'Alaska',
+	'TX'=>'Texas',
+	'NE'=>'Nebraska',
+	'NY'=>'New York',
 );
 
 $min_cycle = 2006;
+$max_cycle = 2012;
 
 function xml2array($xml) {
         $object = new SimpleXMLElement($xml);
