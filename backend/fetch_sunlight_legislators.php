@@ -5,17 +5,17 @@ $db = dbconnect();
 
 #dbwrite("delete from legislators");
 #dbwrite("delete from legislator_terms");
-$full_update = 0;
+$full_update = 1;
 
 foreach(array_keys($states) as $state) {
-	foreach(array('false', 'true') as $active) {
+	foreach(array('true', 'false') as $active) {
 		$url = "http://openstates.org/api/v1/legislators/?apikey=$sunlightKey&state=$state&active=$active";
 		$json = file_get_contents($url);
 		$legs = json_decode($json, true);
 		print "\n$state (".($active=='true' ? 'current' : 'past')."): ".count(array_values($legs))."\n";
 		$x = 0;
 		foreach(array_values($legs) as $leg) { 
-			$fields = array('leg_id', 'full_name', 'first_name', 'last_name', 'middle_name', 'suffixes', 'url', 'email', 'photo_url', 'active', 'state', 'chamber', 'district', 'party', 'transparencydata_id');
+			$fields = array('leg_id', 'full_name', 'first_name', 'last_name', 'middle_name', 'suffixes', 'url', 'email', 'photo_url', 'active', 'state', 'chamber', 'district', 'party', 'transparencydata_id', 'image_source');
 
 			//set fields to blank if they don't exist
 			foreach($fields as $key) { 
@@ -25,10 +25,12 @@ foreach(array_keys($states) as $state) {
 					$leg[$key] = dbEscape($leg[$key]);
 				}
 			}
+			if ($leg['active'] == 0) { $leg['photo_url'] = ""; }
 
 			$candidate_exists = fetchRow("select last_name,transparencydata_id from legislators where leg_id = '$leg[leg_id]' or (transparencydata_id = '$leg[transparencydata_id]' and '$leg[transparencydata_id]' != '')");
 
-			if (! $candidate_exists && ! $full_update) { 
+			if ($leg['photo_url']) { $leg['image_source'] = 'oc'; }
+			if (! $candidate_exists || $full_update) { 
 				if (isset($leg['transparencydata_id']) && $leg['transparencydata_id']) { 
 					$ent_url = "http://transparencydata.com/api/1.0/entities/$leg[transparencydata_id].json?apikey=$sunlightKey";
 					$ent_json = file_get_contents($ent_url);
@@ -45,9 +47,10 @@ foreach(array_keys($states) as $state) {
 						if (isset($leg['nimsp_candidate_id'])) { 
 							update_terms($leg, $entity['metadata']);
 						}
-						if(isset($entity['metadata']['photo_url'])) { 
+						if(isset($entity['metadata']['photo_url']) && $entity['metadata']['photo_url']) { 
 							if (! $leg['photo_url']) { 
 								$leg['photo_url'] = $entity['metadata']['photo_url'];
+								if ($leg['photo_url']) { $leg['image_source'] = 'td'; }
 							} else { 
 								$leg['photo_url2'] = $entity['metadata']['photo_url'];
 							}
@@ -62,12 +65,10 @@ foreach(array_keys($states) as $state) {
 			} else { 
 				$leg['transparencydata_id'] = $candidate_exists[1];
 			}
-			$values = [];
-			foreach ($fields as $field) { 
-				$values[] = $leg[$field];
-			}
+			$values_string = arrayToUpdateString($leg, $fields);
 			print "\r\t".++$x;
-			dbwrite("insert ignore into legislators (".implode(",", $fields).") values ('".implode("','", $values)."')");
+
+			dbwrite("insert into legislators set $values_string on duplicate key update $values_string");
 		}
 	}
 }
@@ -77,11 +78,13 @@ print "\nUpdate ".count($missing_ids)." missing candidates from transparency dat
 foreach ($missing_ids as $id) { 
 	$entity = fetch_transparency_data($id);
 	if ($entity) { 
-		$leg = array('transparencydata_id'=>$entity['id'], 'nimsp_candidate_id'=>$id, 'leg_id'=>'', 'photo_url'=>'');
+		$leg = array('transparencydata_id'=>$entity['id'], 'nimsp_candidate_id'=>$id, 'leg_id'=>'', 'photo_url'=>'', 'image_source'=>'', 'full_name'=>$entity['name'], 'state'=>$entity['metadata']['state']);
 		if (isset($entity['metadata']['photo_url'])) { 
 			$leg['photo_url'] = $entity['metadata']['photo_url'];
+			if ($leg['photo_url']) { $leg['image_source'] = 'td'; }
 		}
-		dbwrite("insert ignore into legislators (full_name, state, transparencydata_id, nimsp_candidate_id, photo_url) values ('$entity[name]', '".$entity['metadata']['state']."', '$leg[transparencydata_id]', '$id', '$leg[photo_url]')");
+		$values_string = arrayToUpdateString($leg);
+		dbwrite("insert into legislators set $values_string on duplicate key update $values_string");
 		update_terms($leg, $entity['metadata']);
 		print "1";
 	} else { 
@@ -174,7 +177,9 @@ function update_terms($leg, $metadata) {
 		foreach(array_keys($metadata) as $key) {
 			if(preg_match("/^\d+$/", $key)) { 
 				$role = $metadata[$key];
-				dbwrite("insert ignore into legislator_terms values('$leg[nimsp_candidate_id]', '$leg[leg_id]', '$role[state]', '$key', '$role[district]', '$role[party]', '$role[seat]')");
+				$data = ['imsp_candidate_id'=>$leg['nimsp_candidate_id'], 'os_id'=>$leg['leg_id'], 'state'=>$role['state'], 'term'=>$key, 'district'=>$role['district'],'party'=>$role['party'],'seat'=>$role['seat']];
+				$values_string = arrayToUpdateString($data);
+				dbwrite("insert into legislator_terms set $values_string on duplicate key update $values_string");
 			}
 		}
 }
