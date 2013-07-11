@@ -31,7 +31,8 @@ select { font-family: 'Ubuntu', sans-serif; }
 #svg_overlay .selected .nhighlight { fill-opacity: 1 !important; }
 
 #image .selected, #image .oselected { opacity: 1; }
-#svg_overlay path, #svg_overlay .edge polygon { stroke: #999 !important; fill: #999 !important; }
+#svg_overlay path { stroke: #999 !important; }
+#svg_overlay .edge polygon { fill: #999 !important; stroke: none !important; }
 
 #lists li { list-style: none; padding: 10px 5px; color: #666;position: relative; }
 #lists .nodelist li.highlight, #lists .nodelist li.selected { border: 1px solid #85B2CC; border-left: none; border-right: none; padding: 9px 5px; }
@@ -75,7 +76,7 @@ li#donors_menu { position: absolute; right: 0px; width: 149px; }
 .node_search_list { width: 180px; margin-top: -1px; }
 .node { fill-opacity: .8; }
 #tooltip { opacity: 1; background-color: rgba(0,0,0,0.7); color: #fff; font-weight: 500; text-align: left; padding: 5px; line-height: 140%; }
-text.label { fill: #fff; font-weight: 600; font-family: 'Ubuntu', sans-serif; font-size: 20px; fill-opacity: 1; }
+text.label { fill: #fff; font-weight: 600; font-family: 'Ubuntu', sans-serif; font-size: 20px; fill-opacity: 1; stroke: #333; }
 .labelbg { fill: rgba(0,0,0,0.5); border: 1px solid #000; stroke: #000; }
 #image .donors text.label { display: none; }
 .zooming .labelbg { display: none; }

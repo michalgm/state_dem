@@ -25,7 +25,7 @@ class StateDEM extends Graph {
 		$this->data['properties'] = array(
 			//sets the scaling of the elements in the gui
 			'minSize' => array('donors'=>'.5', 'candidates' => '.5', 'donations'=>'5'),
-			'maxSize' => array('donors'=>'4', 'candidates' => '4', 'donations' =>'40'),
+			'maxSize' => array('donors'=>'4', 'candidates' => '4', 'donations' =>'60'),
 			'log_scaling' => 0,
 			'state'=>'AL',
 			'cycle'=>'2006',
@@ -49,7 +49,7 @@ class StateDEM extends Graph {
 				//'sep'=>"+10"
 				//'maxiter' => '100000', //turning this off speeds things up, but does it mean that some might not converge?
 			),
-			'node'=> array('label'=> ' ', 'imagescale'=>'true','fixedsize'=>1, 'style'=> 'setlinewidth(10), filled', 'regular'=>'true', 'fontsize'=>15),
+			'node'=> array('label'=> ' ', 'labelloc'=>'b', 'imagescale'=>'true','fixedsize'=>1, 'style'=> 'setlinewidth(10), filled', 'regular'=>'true', 'fontsize'=>15),
 			'edge'=>array('arrowhead'=>'none', 'arrowsize'=>2, 'color'=>'#99999966', 'fontsize'=>15, 'len'=>4, 'minlen'=>4, 'style'=>'tapered')
 		);
 		srand(20); //Don't copy this - this just makes sure that we are generating the same 'random' values each time
