@@ -1,2 +1,5 @@
 www/log/
 www/cache/
+backend/data/
+backend/cruft/
+old_www/
