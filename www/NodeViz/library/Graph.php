@@ -43,6 +43,7 @@ class Graph {
 		$this->width = 1;
 		$this->height = 1;
 		$this->prefix = null;
+		$this->debug = 0;
 
 		$this->data = $data;
 
@@ -83,6 +84,9 @@ class Graph {
 				$this->data['properties'][$key]  = $request_parameters[$key];
 			}
 		}	
+		if (isset($NodeViz_config['debug'])) {
+			$this->debug = $nodeViz_config['debug'];
+		}
 		if (isset($request_parameters['graphWidth'])) {
 			$this->width = $request_parameters['graphWidth'];
 		}
@@ -119,8 +123,7 @@ class Graph {
 	/** Fill in nodes and edges and their properties in the graph data structure. Works by searching for functions (implemented in a subclass) to return the appropriate data for each node type and edge type. Sets node and edge properties. Optionally trims isolate nodes.  Also calls any post processing functions if defined in a subclass. Called by setupGraph() For a more detailed explanation please see: http://code.google.com/p/nodeviz/wiki/GraphSetupFile
 	*/
 	function loadGraphData() {
-		global $debug;
-		if ($debug) { $start = microtime(1); }
+		if ($this->debug) { $start = microtime(1); }
 
 		writelog("before fetching nodes", 3);
 		foreach ($this->data['nodetypes'] as $nodetype) {
@@ -221,7 +224,7 @@ class Graph {
 		if (method_exists($this, 'getSubgraphs')) {
 			$this->getSubgraphs();
 		}	
-		if ($debug) { $this->data['properties']['time'] = microtime(1) - $start; }	
+		if ($this->debug) { $this->data['properties']['time'] = microtime(1) - $start; }	
 		if (method_exists($this, "postProcessGraph")) { 
 			$this->postProcessGraph();
 		}
@@ -346,7 +349,6 @@ class Graph {
     
     */
 	function checkGraph() {
-		global $debug;
 		$graph = $this->data;
 		if ($graph == "") {
 			 trigger_error("We're sorry. The files needed to display these options are missing. Please contact the site administrator.", E_USER_ERROR);
@@ -362,8 +364,7 @@ class Graph {
 		@param $query the query string, e.g. 'SELECT id FROM myTable ...'
 	*/
 	function addquery($name, $query) {
-		global $debug;
-		if ($debug) { $this->data['queries'][$name] = $query; }	
+		if ($this->debug) { $this->data['queries'][$name] = $query; }	
 	}
 
 
