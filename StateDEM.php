@@ -44,7 +44,8 @@ class StateDEM extends Graph {
 				'fontsize'=>90,
 				'splines'=>'curved',
 				'fontcolor'=>'blue',
-				'start'=>'self',
+				'start'=>'15',
+				'layoutEngine'=>'fdp',
 				//'sep'=>"+10"
 				//'maxiter' => '100000', //turning this off speeds things up, but does it mean that some might not converge?
 			),
@@ -94,7 +95,7 @@ class StateDEM extends Graph {
 		$contribs = dbLookupArray($basicContribQuery);
 		writelog('after donor query');
 		foreach ($contribs as $donor) { 
-			$id = 'co-'+trim($donor['company_id']);
+			$id = 'co-'.trim($donor['company_id']);
 			if (isset($nodes[$id])) {
 				$nodes[$id]['total_dollars'] += $donor['amount'];
 			} else {
@@ -153,7 +154,7 @@ class StateDEM extends Graph {
 			$node['shape'] = 'square';
 			$node['label_zoom_level'] = '6';
 			$node['click'] = "this.selectNode('".$node['id']."'); this.panToNode('".$node['id']."');";
-			$node['image'] = $node['image'] ? "../www/can_images/$node[image]" : "../www/can_images/unknownCandidate.jpg";
+			$node['image'] = $node['image'] ? "../www/can_images/$node[id].jpg" : "../www/can_images/unknownCandidate.jpg";
 			if($node['value'] == 0) { unset($nodes[$node['id']]); }
 		}
 		//$nodes = $this->scaleSizes($nodes, 'candidates', 'value');
@@ -237,6 +238,10 @@ class StateDEM extends Graph {
 		$this->data['edges'] = $edges;
 	}
 
+	function graphname() {
+		$props = $this->data['properties'];
+		return implode('_', array($props['state'], $props['cycle'], $props['chamber']));
+	}
 }
 
 function colorize($value){
