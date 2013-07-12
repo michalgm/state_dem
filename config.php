@@ -12,13 +12,10 @@ $dbpass = 'oilchange';
 $dbname = 'state_dem';
 $dbport = "3306";
 $dbsocket = "/tmp/mysql.sock";
-<<<<<<< HEAD
 
 set_include_path(get_include_path() . PATH_SEPARATOR . dirname(__FILE__).'/www/NodeViz/library/');
 
 $debug=1;
-=======
->>>>>>> 31c65b91e8ac1a9b355c8e21ea115d35b4e00a2e
 
 require_once('dbaccess.php');
 
