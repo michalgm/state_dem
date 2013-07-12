@@ -5,9 +5,12 @@
 				<option value="AK">Alaska</option>
 				<option value="CA" selected="selected">California</option>
 				<option value="CO">Colorado</option>
+				<option value="NE">Nebraska</option>
+				<option value="NY">New York</option>
 				<option value="ND">North Dakota</option>
 				<option value="OH">Ohio</option>
 				<option value="PA">Pennsylvania</option>
+				<option value="TX">Texas</option>
 			</select>
 			<select name="chamber" id="chamber" class="navitem">
 				<option value="state:upper">Senate</option>
