@@ -43,7 +43,8 @@ function initGraph() {
 			//graph_element: the NodeViz graph element data object that the dom_element refers to
 			//element_type: either 'node' or 'edge'
 			//renderer: the render type that triggered the event (svg, raster, or list)
-			pre_click: "console.log('pre_click:'+element_type+' '+renderer)", //this is a lame way to do this
+			
+			//pre_click: "console.log('pre_click:'+element_type+' '+renderer)", //this is an example using the eval method, which is lame
 			post_mouseenter: function(evt, dom_element, graph_element, element_type, renderer) { 
 				var offset = this.renderers.GraphImage.tooltip.outerWidth() /2;
 				this.renderers.GraphImage.tooltipOffsetX = -offset;
@@ -134,40 +135,30 @@ $.extend(GraphList.prototype, {
 	}
 });
 
+function updateInfocardData(node) { 
+	$.getJSON('request.php', {'type': node.type, 'id': node.id}, function(data, status, jxqhr) { 
+		console.log(data.contributionsByYear[0].contributions);
+		drawPieChart(data.contributionsByIndustry,'#node-piechart1');
+		drawPieChart(data.contributionsByParty,'#node-piechart2');
+		drawBarChart(data.contributionsByYear,'#node-barchart');
+	});
+}
+
 function toggleInfocard(node) {
 	// console.log(node);
 
 	var card = $('#infocard'),
 		node_id = card.data('data-node');
 
+	updateInfocardData(node);
+
 	if (card.is(':hidden') || node_id !== node.id) {
 		card.data('data-node',node.id);
 		$('#node-title').html(node.label+' <span class="district '+node.party+' ">'+node.district+'</span>');
-		var image_url = node.image.split('www');
+		var image_url = node.image.split('www/');
 		$('#node-image img').attr('src',image_url[1]);
 
-		var mockContributionsByYear = [
-			{ 'year': 2008, 'contributions': 12345 },
-			{ 'year': 2009, 'contributions': 23456 },
-			{ 'year': 2010, 'contributions': 34567 },
-			{ 'year': 2011, 'contributions': 45678 },
-			{ 'year': 2012, 'contributions': 56789 }
-		];
-		var mockContributionsByIndustry = [
-			{ 'group': 'pirates', 'label': 'Pirates', 'contributions': 123456 },
-			{ 'group': 'ninja', 'label': 'Ninjas', 'contributions': 234567 },
-			{ 'group': 'robots', 'label': 'Robots', 'contributions': 345678 }
-		];
-		var mockContributionsByParty = [
-			{ 'group': 'D', 'label': 'Democrats', 'contributions': 123456 },
-			{ 'group': 'R', 'label': 'Republicans', 'contributions': 234567 }
-		];
-
 		card.slideDown();
-
-		drawPieChart(mockContributionsByIndustry,'#node-piechart1');
-		drawPieChart(mockContributionsByParty,'#node-piechart2');
-		drawBarChart(mockContributionsByYear,'#node-barchart');
 
 		$('#masthead').hide();
 		// Zoom and center graph
@@ -191,42 +182,62 @@ function drawBarChart(data,container) {
 		height = $(container).height();
 
 	var x = d3.scale.linear().domain([0, data.length]).range([0, width]);
-	var y = d3.scale.linear().domain([0, d3.max(data, function(datum) { return datum.contributions; })]).rangeRound([0, height]);
-
-	var svg = d3.select(container).append('svg')
-		.attr('width',width)
-		.attr('height',height);
+	var y = d3.scale.linear().domain([0, d3.max(data, function(datum) { return parseInt(datum.contributions); })]).rangeRound([0, height]);
+	var svg = d3.select(container+' svg');
+	if (svg.empty()) { 
+		svg = d3.select(container).append('svg')
+			.attr('width',width)
+			.attr('height',height);
+	} 
 
 	var bars = svg.selectAll('.bar')
 		.data(data)
-		.enter().append('rect')
+
+	bars.enter().append('rect')
 			.attr('class','bar')
+			.attr('x',function(d,i) { return x(i); })
+			.attr('y',function(d) { return height; })
+			.attr('width',function() { return width / data.length * 0.9; })
+			.attr('height',function(d) { return 0; })
+	bars.transition()
+			.duration(1000)
 			.attr('x',function(d,i) { return x(i); })
 			.attr('y',function(d) { return height - y(d.contributions); })
 			.attr('height',function(d) { return y(d.contributions); })
-			.attr('width',function() { return width / data.length * 0.9; });
+			.attr('width',function() { return width / data.length * 0.9; })
+	bars.exit().transition()
+			.duration(1000)
+			.attr('y',function(d) { return height; })
+			//.attr('x', function(d, i) )
+			.remove();
 
-	svg.selectAll('.amount')
+	var amounts = svg.selectAll('.amount')
 		.data(data)
-		.enter().append('text')
+	amounts.enter().append('text')
 			.attr('class','amount')
+	amounts.transition()
+			.duration(1000)
 			.attr('x',function(d,i) { return x(i) + (width / data.length * 0.9) / 2; })
 			.attr('y',function(d) { return height - y(d.contributions); })
 			.attr('dy','2em')
 			.attr('width',function() { return width / data.length; })
 			.attr('text-anchor','middle')
 			.text(function(d) { return '$'+d.contributions; });
+	amounts.exit().remove();
 
-	svg.selectAll('.year')
+	var years = svg.selectAll('.year')
 		.data(data)
-		.enter().append('text')
+	years.enter().append('text')
 			.attr('class','year')
+	years.transition()
+			.duration(1000)
 			.attr('x',function(d,i) { return x(i) + (width / data.length) / 2; })
 			.attr('y',function(d) { return height; })
 			.attr('dy','-1em')
 			.attr('width',function() { return width / data.length; })
 			.attr('text-anchor','middle')
 			.text(function(d) { return d.year; });
+	years.exit().remove();
 
 }
 
