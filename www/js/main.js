@@ -157,10 +157,13 @@ function toggleInfocard(node) {
 		var image_url = node.image.split('www/');
 		$('#node-image img').attr('src',image_url[1]);
 
-		card.slideDown();
+		card.slideDown(500,function(){
+			$('#graphs').animate({
+				'top': - (card.height() / 2) - 50
+			});
+		});
 
-		$('#masthead').hide();
-		// Zoom and center graph
+		$('#masthead, #zoomcontrols').hide();
 	} else {
 		resetGraph();
 	}
@@ -168,7 +171,8 @@ function toggleInfocard(node) {
 
 function resetGraph() {
 	$('#infocard').slideUp();
-	$('#masthead').fadeIn(2000);
+	$('#masthead, #zoomcontrols').fadeIn(2000);
+	$('#graphs').css('top',0);
 	// Reset Zoom
 }
 
