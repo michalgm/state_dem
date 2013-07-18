@@ -137,9 +137,8 @@ $.extend(GraphList.prototype, {
 
 function updateInfocardData(node) { 
 	$.getJSON('request.php', {'type': node.type, 'id': node.id}, function(data, status, jxqhr) { 
-		console.log(data.contributionsByYear[0].contributions);
-		drawPieChart(data.contributionsByIndustry,'#node-piechart1');
-		drawPieChart(data.contributionsByParty,'#node-piechart2');
+		drawPieChart(data.contributionsByCategory,'#node-piechart1');
+		//drawPieChart(data.contributionsByParty,'#node-piechart2');
 		drawBarChart(data.contributionsByYear,'#node-barchart');
 	});
 }
@@ -182,7 +181,7 @@ function drawBarChart(data,container) {
 		height = $(container).height();
 
 	var x = d3.scale.linear().domain([0, data.length]).range([0, width]);
-	var y = d3.scale.linear().domain([0, d3.max(data, function(datum) { return parseInt(datum.contributions); })]).rangeRound([0, height]);
+	var y = d3.scale.linear().domain([0, d3.max(data, function(datum) { return parseInt(datum.value); })]).rangeRound([0, height]);
 	var svg = d3.select(container+' svg');
 	if (svg.empty()) { 
 		svg = d3.select(container).append('svg')
@@ -199,11 +198,12 @@ function drawBarChart(data,container) {
 			.attr('y',function(d) { return height; })
 			.attr('width',function() { return width / data.length * 0.9; })
 			.attr('height',function(d) { return 0; })
+
 	bars.transition()
 			.duration(1000)
 			.attr('x',function(d,i) { return x(i); })
-			.attr('y',function(d) { return height - y(d.contributions); })
-			.attr('height',function(d) { return y(d.contributions); })
+			.attr('y',function(d) { return height - y(d.value); })
+			.attr('height',function(d) { return y(d.value); })
 			.attr('width',function() { return width / data.length * 0.9; })
 	bars.exit().transition()
 			.duration(1000)
@@ -214,21 +214,21 @@ function drawBarChart(data,container) {
 	var amounts = svg.selectAll('.amount')
 		.data(data)
 	amounts.enter().append('text')
-			.attr('class','amount')
+			.attr('class','chart-label amount')
 	amounts.transition()
 			.duration(1000)
 			.attr('x',function(d,i) { return x(i) + (width / data.length * 0.9) / 2; })
-			.attr('y',function(d) { return height - y(d.contributions); })
+			.attr('y',function(d) { return height - y(d.value); })
 			.attr('dy','2em')
 			.attr('width',function() { return width / data.length; })
 			.attr('text-anchor','middle')
-			.text(function(d) { return '$'+d.contributions; });
+			.text(function(d) { return '$'+d.value; });
 	amounts.exit().remove();
 
 	var years = svg.selectAll('.year')
 		.data(data)
 	years.enter().append('text')
-			.attr('class','year')
+			.attr('class','year chart-label')
 	years.transition()
 			.duration(1000)
 			.attr('x',function(d,i) { return x(i) + (width / data.length) / 2; })
@@ -236,7 +236,7 @@ function drawBarChart(data,container) {
 			.attr('dy','-1em')
 			.attr('width',function() { return width / data.length; })
 			.attr('text-anchor','middle')
-			.text(function(d) { return d.year; });
+			.text(function(d) { return d.label; });
 	years.exit().remove();
 
 }
@@ -246,48 +246,77 @@ function drawBarChart(data,container) {
 	========================================================================== */
 
 function drawPieChart(data,container) {
+	var categories = {
+		'oil': ['Oil','#6D8F9D'],
+		'coal': ['Coal', '#958D63'],
+		'carbon': ['Carbon', '#6E6E6E'],
+		'R':['Republican', '#cc3333'],
+		'D':['Democrat', '#3333cc'],
+		'G':['Green', '#33cc33'],
+		'L':['Libertarian', '#cc33cc'],
+		'I':['Independant', '#cccc33'],
+		'N':['Non-Partisan', '#cccccc'],
+	}	
+
 	var width = $(container).width(),
 		height = $(container).height(),
 		radius = Math.min(width,height) / 2;
 	var color = d3.scale.category20();
 
 	var pie = d3.layout.pie()
-		.value(function(d) { return d.contributions; })
+		.value(function(d) { return d.value; })
 		.sort(null);
 
 	var arc = d3.svg.arc()
 		.innerRadius(radius * 0.25)
 		.outerRadius(radius * 1.0);
 
-	var svg = d3.select(container).append('svg')
-		.attr('width',width)
-		.attr('height',height)
-		.append('g')
-			.attr('transform','translate('+ width/2 + ',' + height/2 + ')');
+	var svg = d3.select(container+' svg>g');
+	if (svg.empty()) { 
+		svg = d3.select(container).append('svg')
+			.attr('width',width)
+			.attr('height',height)
+			.append('g')
+				.attr('transform','translate('+ width/2 + ',' + height/2 + ')');
+	} 
 
 	var arcs = svg.datum(data).selectAll('.arc')
 		.data(pie)
 		.enter().append('g')
-			.attr('class','arc');
+		.attr('class','arc')
 
-	arcs.append('path')
-		.attr('fill',function(d,i) { return color(i); })
+	arcs.append('path') 
+		.attr('fill',function(d,i) {return '#fff'; })
 		.attr('d',arc)
-		.each(function(d) { this._current = d; });
+		.each(function(d) { this._current = d; })
+		.on('mouseenter', brighten)
+		.on('mouseleave', darken);
 
 	arcs.append('text')
+		.attr('class', 'chart-label')
 		.attr("transform", function(d) { return "translate(" + arc.centroid(d) + ")"; })
 		.attr("dy", ".35em")
 		.style("text-anchor", "middle")
 		.text(function(d) { return d.data.label; });
 
-	d3.selectAll('input')
-		.on('change',change);
+	svg.datum(data).selectAll('.arc')
+		.data(pie).exit().remove();
+
+	change();
 
 	function change() {
-		pie.value(function(d) { return d[value]; });
-		path = path.data(pie);
-		path.transition().duration(750).attrTween('d',arcTween);
+		//var path = svg.datum(data).selectAll('path')
+		//pie.value(function(d) { return d.value; });
+		path = svg.datum(data).selectAll('path').data(pie);
+		path.transition().duration(750).attrTween('d',arcTween)
+		.attr('fill',function(d,i) { return categories[d.data.label][1]; })
+
+		svg.datum(data).selectAll('text').data(pie)
+		.attr("transform", function(d) { return "translate(" + arc.centroid(d) + ")"; })
+		.attr("dy", ".35em")
+		.style("text-anchor", "middle")
+		.text(function(d) { return categories[d.data.label][0]; });
+
 	}
 
 	function arcTween(a) {
@@ -297,4 +326,14 @@ function drawPieChart(data,container) {
 			return arc(i(t));
 		};
 	}
+}
+
+function brighten() {
+	var e = d3.select(this);
+	e.attr('fill', d3.rgb(e.attr('fill')).brighter(.7));
+}
+
+function darken() {
+	var e = d3.select(this);
+	e.attr('fill', d3.rgb(e.attr('fill')).darker(.7));
 }
