@@ -301,11 +301,12 @@ function drawPieChart(data,container) {
 		.style("text-anchor", "middle")
 		.text(function(d) { return d.data.label; });
 
-	svg.datum(data).selectAll('.arc')
-		.data(pie, key).exit()
+	svg.datum(data).selectAll('path').data(pie, key).exit()
 		.transition(750)
 		.attr('fill', '#fff')
-		.remove();
+
+	svg.datum(data).selectAll('.arc').data(pie,key).exit().transition(750).remove();
+
 
 	change();
 
