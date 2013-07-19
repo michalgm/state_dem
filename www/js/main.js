@@ -137,7 +137,7 @@ $.extend(GraphList.prototype, {
 });
 
 function updateInfocardData(node) { 
-	$.getJSON('request.php', {'type': node.type, 'id': node.id}, function(data, status, jxqhr) { 
+	$.getJSON('http://styrotopia.net/~dameat/state_dem/ui-branch/state_dem/www/request.php', {'type': node.type, 'id': node.id}, function(data, status, jxqhr) { 
 		drawPieChart(data.contributionsByCategory,'#node-piechart1');
 		//drawPieChart(data.contributionsByParty,'#node-piechart2');
 		drawBarChart(data.contributionsByYear,'#node-barchart');
