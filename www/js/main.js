@@ -61,8 +61,12 @@ $.extend(NodeViz.prototype, {
 	graphLoaded: function() {
 	},
 	afterInit: function() {
-	}
+	},
 });
+
+GraphImage.prototype.pre_render= function(responseData) {
+	responseData.overlay = responseData.overlay.replace(/com_images/g, 'http://styrotopia.net/~dameat/oilchange/www/com_images');
+}
 
 NodeViz.prototype.default_events.edge.click = null;
 NodeViz.prototype.default_events.node.click = function(evt, dom_element, graph_element, element_type, renderer) {
