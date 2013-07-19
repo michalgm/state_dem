@@ -155,10 +155,16 @@ $.Class("NodeViz", {}, {
 			$.proxy(function() { this.onLoading(this.options.loadingdiv); }, this)
 		);
 	},
-	panToNode: function(id,level) {
+	panToNode: function(id,level,offset) {
+		//zooms graph to node if in svg mode
+		if (this.options.useSVG ==1) {
+			this.renderers['GraphImage'].panToNode(id, level, offset);
+		}
+	},
+	zoom: function(zoomlevel) {
 		//zooms graph if in svg mode
 		if (this.options.useSVG ==1) {
-			this.renderers['GraphImage'].panToNode(id, level);
+			this.renderers['GraphImage'].zoom(zoomlevel);
 		}
 	},
 	highlightNode: function(id, noshowtooltip, renderer) {

@@ -50,11 +50,6 @@ function initGraph() {
 				this.renderers.GraphImage.tooltipOffsetX = -offset;
 				this.renderers.GraphImage.tooltipOffsetY = -20;
 			},
-			post_click: function(evt, dom_element, graph_element, element_type, renderer) { 
-				toggleInfocard(graph_element);
-				// console.log(graph_element);
-				// console.log(dom_element);
-			}
 		}
 	};
 	gf = new NodeViz(graphoptions);
@@ -68,6 +63,12 @@ $.extend(NodeViz.prototype, {
 	afterInit: function() {
 	}
 });
+
+NodeViz.prototype.default_events.node.click = function(evt, dom_element, graph_element, element_type, renderer) {
+	this.selectNode(graph_element.id);
+	this.panToNode(graph_element.id, 5, {y:-Math.round(($('body').height()/4)), x:0});
+	toggleInfocard(graph_element);
+}
 
 $.extend(GraphList.prototype, {
 	listNodeEntry: function(node) {
@@ -169,6 +170,7 @@ function toggleInfocard(node) {
 function resetGraph() {
 	$('#infocard').slideUp();
 	$('#masthead').fadeIn(2000);
+	gf.zoom('reset');
 	// Reset Zoom
 }
 

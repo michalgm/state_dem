@@ -418,18 +418,30 @@ GraphImage("GraphSVG", {}, {
 		delta.y = (center.y - node_center.y);
 		return delta;
 	},
-	panToNode: function(id, zoom) {
+	panToNode: function(id, zoom, offset) {
 		//re-center graph on center of a node, and optionally change zoom level
 
 		var delta = this.getElementCenter(id);
+		if (offset && typeof(offset.x) != 'undefined') { 
+			var point = delta.matrixTransform(this.ctm);
+			point.x += offset.x;
+			point.y += offset.y;
+			delta = point.matrixTransform(this.stateTf);
+		}
 		var k = this.matrixToTransform(this.ctm.translate(delta.x,delta.y));
 		
 		$('#graph0, #underlay_graph0').animate({svgTransform:k}, 1000, 
 			$.proxy(function() {
 				this.updateCTM();
 				if (typeof(zoom) != 'undefined') {
-					//this.zoomToNode(id, zoom);
-					this.zoom(zoom,this.calculateCenter());
+					if (offset && typeof(offset.x) != 'undefined') { 
+						var center = this.calculateCenter();
+						center.x += offset.x;
+						center.y += offset.y;
+						this.zoom(zoom,center);
+					} else {
+						this.zoom(zoom,this.calculateCenter());
+					}
 				}
 			}, this)
 		);
