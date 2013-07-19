@@ -3,6 +3,7 @@
 Called by html frontend via HTTP RPC. Returns HTML and javascript strings to be interpreted by frontend javascript
 */
 
+header('Access-Control-Allow-Origin: *');  
 header('Content-type: application/json');
 set_error_handler('handleError');
 require_once("NodeVizUtils.php");

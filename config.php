@@ -5,13 +5,13 @@ $ftmUrl = "http://api.followthemoney.org/";
 $ob_end_flush;
 $db = "";
 $dblogin = 'oilchange';
-// $dbhost = '192.168.2.2';
-$dbhost = 'localhost';
+$dbhost = '192.168.2.2';
+#$dbhost = 'localhost';
 $dblogin = 'oilchange';
 $dbpass = 'oilchange';
 $dbname = 'state_dem';
 $dbport = "3306";
-$dbsocket = "/tmp/mysql.sock";
+#$dbsocket = "/tmp/mysql.sock";
 
 set_include_path(get_include_path() . PATH_SEPARATOR . dirname(__FILE__).'/www/NodeViz/library/');
 

@@ -153,7 +153,7 @@ class StateDEM extends Graph {
 			#$node['fill-opacity'] = .5;
 			$node['shape'] = 'square';
 			$node['label_zoom_level'] = '6';
-			$node['click'] = "this.selectNode('".$node['id']."'); this.panToNode('".$node['id']."');";
+			//$node['click'] = "this.selectNode('".$node['id']."'); this.panToNode('".$node['id']."');";
 			$node['image'] = $node['image'] ? "../www/can_images/$node[id].jpg" : "../www/can_images/unknownCandidate.jpg";
 			if($node['value'] == 0) { unset($nodes[$node['id']]); }
 		}
@@ -182,7 +182,7 @@ class StateDEM extends Graph {
 			$node['fillcolor'] = "#ffffffff";
 			$node['tooltip'] = $node['label']." (Gave ".money_format('%.0n', $node['value']).")";
 			$node['label_zoom_level'] = '8';
-			$node['click'] = "this.selectNode('".$node['id']."'); this.panToNode('".$node['id']."');";
+			//$node['click'] = "this.selectNode('".$node['id']."'); this.panToNode('".$node['id']."');";
 			$nodes[$node['id']] = $node;
 			$node = null;
 		}
