@@ -3,7 +3,7 @@ header('Access-Control-Allow-Origin: *');
 header('Content-type: application/json');
 include("../config.php");
 
-$response = json_decode('{"contributionsByIndustry":[ { "group": "pirates", "label": "Pirates", "value": 123456 }, { "group": "ninja", "label": "Ninjas", "value": 234567 }, { "group": "robots", "label": "Robots", "value": 345678 } ], "value":[ { "group": "D", "label": "Democrats", "value": 123456 }, { "group": "R", "label": "Republicans", "value": 234567 } ] }', true);
+$response = array();
 $response['contributionsByYear'] = getContributionsByYear();
 $response['contributionsByCategory'] = getContributionsByCategory();
 print json_encode($response);
