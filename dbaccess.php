@@ -132,7 +132,7 @@ function arrayToInString($array, $assoc=0) {
 
 function arrayToUpdateString($array, $keys) {
 	if (! $keys) { $keys = array_keys($array); }
-	$values = [];
+	$values = Array();
 	foreach ($keys as $key) { 
 		$values[] = "$key='".dbEscape($array[$key])."'";
 	}
