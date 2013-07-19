@@ -64,6 +64,7 @@ $.extend(NodeViz.prototype, {
 	}
 });
 
+NodeViz.prototype.default_events.edge.click = null;
 NodeViz.prototype.default_events.node.click = function(evt, dom_element, graph_element, element_type, renderer) {
 	this.selectNode(graph_element.id);
 	this.panToNode(graph_element.id, 5, {y:-Math.round(($('body').height()/4)), x:0});
@@ -191,7 +192,7 @@ function drawBarChart(data,container) {
 	} 
 
 	var bars = svg.selectAll('.bar')
-		.data(data)
+		.data(data, function(d) { return d.label; })
 
 	bars.enter().append('rect')
 			.attr('class','bar')
@@ -213,7 +214,7 @@ function drawBarChart(data,container) {
 			.remove();
 
 	var amounts = svg.selectAll('.amount')
-		.data(data)
+		.data(data, function(d) { return d.label; })
 	amounts.enter().append('text')
 			.attr('class','chart-label amount')
 	amounts.transition()
@@ -227,7 +228,7 @@ function drawBarChart(data,container) {
 	amounts.exit().remove();
 
 	var years = svg.selectAll('.year')
-		.data(data)
+		.data(data, function(d) { return d.label; })
 	years.enter().append('text')
 			.attr('class','year chart-label')
 	years.transition()
@@ -266,7 +267,7 @@ function drawPieChart(data,container) {
 
 	var pie = d3.layout.pie()
 		.value(function(d) { return d.value; })
-		.sort(null);
+		.sort(key);
 
 	var arc = d3.svg.arc()
 		.innerRadius(radius * 0.25)
@@ -282,12 +283,12 @@ function drawPieChart(data,container) {
 	} 
 
 	var arcs = svg.datum(data).selectAll('.arc')
-		.data(pie)
+		.data(pie, key)
 		.enter().append('g')
 		.attr('class','arc')
 
 	arcs.append('path') 
-		.attr('fill',function(d,i) {return '#fff'; })
+		.attr('fill',function(d,i) { return categories[d.data.label][1]; })
 		.attr('d',arc)
 		.each(function(d) { this._current = d; })
 		.on('mouseenter', brighten)
@@ -301,18 +302,21 @@ function drawPieChart(data,container) {
 		.text(function(d) { return d.data.label; });
 
 	svg.datum(data).selectAll('.arc')
-		.data(pie).exit().remove();
+		.data(pie, key).exit()
+		.transition(750)
+		.attr('fill', '#fff')
+		.remove();
 
 	change();
 
 	function change() {
 		//var path = svg.datum(data).selectAll('path')
 		//pie.value(function(d) { return d.value; });
-		path = svg.datum(data).selectAll('path').data(pie);
+		path = svg.datum(data).selectAll('path').data(pie, key);
 		path.transition().duration(750).attrTween('d',arcTween)
 		.attr('fill',function(d,i) { return categories[d.data.label][1]; })
 
-		svg.datum(data).selectAll('text').data(pie)
+		svg.datum(data).selectAll('text').data(pie,key)
 		.attr("transform", function(d) { return "translate(" + arc.centroid(d) + ")"; })
 		.attr("dy", ".35em")
 		.style("text-anchor", "middle")
@@ -326,6 +330,18 @@ function drawPieChart(data,container) {
 		return function(t) {
 			return arc(i(t));
 		};
+	}
+	
+	function key(d) { 
+		//trying to maintain consistency across companies and legislators in pie chart grouping
+		var label = typeof(d.label) != 'undefined' ? d.label : d.data.label;
+		if (label == 'coal') { 
+			label= 'D';
+		} else if(label == 'oil') { 
+			label= 'R';
+		}
+		if (label != 'D' && label != 'R') { label= 'other'; }
+		return label;
 	}
 }
 
