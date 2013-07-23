@@ -31,7 +31,7 @@ select { font-family: 'Ubuntu', sans-serif; }
 #svg_overlay .selected .nhighlight { fill-opacity: 1 !important; }
 
 #image .selected, #image .oselected { opacity: 1; }
-#svg_overlay path, #svg_overlay .edge polygon { stroke: #999 !important; fill: #999 !important; }
+#svg_overlay path, #svg_overlay .edge polygon { fill: #999 !important; }
 
 #lists li { list-style: none; padding: 10px 5px; color: #666;position: relative; }
 #lists .nodelist li.highlight, #lists .nodelist li.selected { border: 1px solid #85B2CC; border-left: none; border-right: none; padding: 9px 5px; }

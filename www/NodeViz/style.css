@@ -68,9 +68,9 @@
 	
 	#svg_overlay g{opacity:0;cursor:pointer;}
 	#svg_overlay path, #svg_overlay .edge polygon {fill-opacity:.9 !important;cursor:pointer}
-	#svg_overlay ellipse, #svg_overlay polygon{fill-opacity:.8 !important;cursor:pointer}
+	#svg_overlay ellipse, #svg_overlay polygon{fill-opacity:.5 !important;cursor:pointer}
 	#svg_overlay path, #svg_overlay .edge polygon {stroke-opacity:.9 !important;stroke:#93f !important;cursor:pointer}
-	#svg_overlay .edge polygon {fill: #93f; }
+	#svg_overlay .edge polygon {fill: #93f; stroke: none !important; }
 	#svg_overlay .searchhelp{color:#666666;font-style:italic}
 	#svg_overlay .selected polygon, #svg_overlay .selected ellipse{fill:#BA8D72 !important;}
 	#svg_overlay .oselected polygon, #svg_overlay .oselected ellipse{fill:#B2B7A1;}
