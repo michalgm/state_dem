@@ -25,19 +25,18 @@
 
 	<div id="infocard" data-node="null">
 		<a class="close">&times;</a>
-		<div class="container">
-			<h3 id="node-title"></h3>
-			<div id="node-image"><img src=""></div>
-			<div id="node-barchart"></div>
-			<div id="node-piechart1"></div>
-			<div id="node-piechart2"></div>
-		</div>
+		<h3 id="node-title"></h3>
+		<!-- <div id="node-image"><img src=""></div> -->
+		<div id="node-barchart"></div>
+		<div id="node-piechart1"></div>
+		<!-- <div id="node-piechart2"></div> -->
 	</div>
 
 <?php include 'inc/footer.inc';?>
 
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.js"></script>
 	<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.js"></script>
+	
 	<script src="NodeViz/jquery.class.js" ></script>
 	<script src="NodeViz/NodeViz.js" ></script>
 	<script src="NodeViz/GraphImage.js" ></script>

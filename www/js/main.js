@@ -14,8 +14,6 @@ $(function(){
 		if ($(window).width() > 320 && $('.navlist').is(':hidden')) { $('.navlist').removeAttr('style'); }
 	});
 
-
-
 });
 
 // Functions
@@ -178,17 +176,17 @@ function resetGraph() {
 	========================================================================== */
 
 function drawBarChart(data,container) {
-	var width = $(container).width(),
-		height = $(container).height();
+	var width = $(window).width() / 2 * 0.9,
+		height = $(window).height() / 2 * .675;
 
 	var x = d3.scale.linear().domain([0, data.length]).range([0, width]);
-	var y = d3.scale.linear().domain([0, d3.max(data, function(datum) { return parseInt(datum.value); })]).rangeRound([0, height]);
+	var y = d3.scale.linear().domain([0, d3.max(data, function(datum) { return parseInt(datum.value); })]).rangeRound([0, height * 0.9]);
 	var svg = d3.select(container+' svg');
-	if (svg.empty()) { 
+	if (svg.empty()) {
 		svg = d3.select(container).append('svg')
 			.attr('width',width)
 			.attr('height',height);
-	} 
+	}
 
 	var bars = svg.selectAll('.bar')
 		.data(data)
@@ -220,21 +218,21 @@ function drawBarChart(data,container) {
 			.duration(1000)
 			.attr('x',function(d,i) { return x(i) + (width / data.length * 0.9) / 2; })
 			.attr('y',function(d) { return height - y(d.value); })
-			.attr('dy','2em')
+			.attr('dy','-2em')
 			.attr('width',function() { return width / data.length; })
 			.attr('text-anchor','middle')
-			.text(function(d) { return '$'+d.value; });
+			.text(function(d) { return '$' + Math.floor(d.value); });
 	amounts.exit().remove();
 
 	var years = svg.selectAll('.year')
 		.data(data)
 	years.enter().append('text')
-			.attr('class','year chart-label')
+			.attr('class','chart-label year')
 	years.transition()
 			.duration(1000)
-			.attr('x',function(d,i) { return x(i) + (width / data.length) / 2; })
+			.attr('x',function(d,i) { return x(i) + (width / data.length * 0.9) / 2; })
 			.attr('y',function(d) { return height; })
-			.attr('dy','-1em')
+			.attr('dy','-0.5em')
 			.attr('width',function() { return width / data.length; })
 			.attr('text-anchor','middle')
 			.text(function(d) { return d.label; });
@@ -259,8 +257,8 @@ function drawPieChart(data,container) {
 		'N':['Non-Partisan', '#cccccc'],
 	}	
 
-	var width = $(container).width(),
-		height = $(container).height(),
+	var width = $(window).width() / 2 * 0.9,
+		height = $(window).height() / 2 * 0.675,
 		radius = Math.min(width,height) / 2;
 	var color = d3.scale.category20();
 
@@ -272,21 +270,27 @@ function drawPieChart(data,container) {
 		.innerRadius(radius * 0.25)
 		.outerRadius(radius * 1.0);
 
+	var getAngle = function (d) {
+		var angle = (180 / Math.PI * (d.startAngle + d.endAngle) / 2 - 90);
+		if ( angle > 90 ) { angle -= 180; }
+		return angle;
+	};
+
 	var svg = d3.select(container+' svg>g');
-	if (svg.empty()) { 
+	if (svg.empty()) {
 		svg = d3.select(container).append('svg')
 			.attr('width',width)
 			.attr('height',height)
 			.append('g')
 				.attr('transform','translate('+ width/2 + ',' + height/2 + ')');
-	} 
+	}
 
 	var arcs = svg.datum(data).selectAll('.arc')
 		.data(pie)
 		.enter().append('g')
 		.attr('class','arc')
 
-	arcs.append('path') 
+	arcs.append('path')
 		.attr('fill',function(d,i) {return '#fff'; })
 		.attr('d',arc)
 		.each(function(d) { this._current = d; })
@@ -295,7 +299,8 @@ function drawPieChart(data,container) {
 
 	arcs.append('text')
 		.attr('class', 'chart-label')
-		.attr("transform", function(d) { return "translate(" + arc.centroid(d) + ")"; })
+		.attr("transform", function(d) { return "translate(" + arc.centroid(d) + ")" +
+			"rotate(" + getAngle(d) + ")"; })
 		.attr("dy", ".35em")
 		.style("text-anchor", "middle")
 		.text(function(d) { return d.data.label; });
@@ -310,14 +315,14 @@ function drawPieChart(data,container) {
 		//pie.value(function(d) { return d.value; });
 		path = svg.datum(data).selectAll('path').data(pie);
 		path.transition().duration(750).attrTween('d',arcTween)
-		.attr('fill',function(d,i) { return categories[d.data.label][1]; })
+			.attr('fill',function(d,i) { return categories[d.data.label][1]; })
 
 		svg.datum(data).selectAll('text').data(pie)
-		.attr("transform", function(d) { return "translate(" + arc.centroid(d) + ")"; })
-		.attr("dy", ".35em")
-		.style("text-anchor", "middle")
-		.text(function(d) { return categories[d.data.label][0]; });
-
+			.attr("transform", function(d) { return "translate(" + arc.centroid(d) + ")" +
+				"rotate(" + getAngle(d) + ")"; })
+			.attr("dy", ".35em")
+			.style("text-anchor", "middle")
+			.text(function(d) { return categories[d.data.label][0]; });
 	}
 
 	function arcTween(a) {

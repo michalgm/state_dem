@@ -40,24 +40,26 @@
 
 	#infocard {
 		position: absolute;
-		bottom: 41px; left: 0;
+		bottom: 40px; left: 0;
 		width: 100%;
-		height: 40%;
+		height: 45%;
 		background: fade(white,85%);
-		border-top: 1px solid white;
+		border-top: 1px solid #fff;
 		z-index: 99;
-		.container {
-			height: 90%;
-		}
 		.district {
 			font-size: 0.8em;
 			&.D { color: blue; }
 			&.R { color: red; }
 		}
 		#node-title {
+			position: absolute;
+			top: 15px; left: 15px;
+			margin: 0;
+			padding: 0;
 			width: 100%;
 			font-size: 2em;
 			font-family: Diavlo,"Helvetica Neue",Helvetica,sans-serif;
+			font-weight: normal;
 		}
 		#node-image {
 			position: relative;
@@ -66,6 +68,7 @@
 			width: 15.6667%;
 			margin-right: 1%;
 			overflow: hidden;
+
 			img {
 				position: absolute;
 				display: block;
@@ -76,28 +79,34 @@
 			}
 		}
 		#node-barchart {
-			float: left;
-			width: 49%;
-			height: 80%;
-			margin-right: 1%;
+			position: absolute;
+			top: 5em; left: 15px;
+			width: 48%;
+			height: 75%;
 			min-height: 250px;
 			.amount {
 				font-size: 10px;
+				fill: #999;
 			}
 			.year {
 				fill: #474;
-				font-weight: bold;
+				font-weight: lighter;
 			}
 			.bar {
 				fill: #696;
 			}
 		}
 		#node-piechart1, #node-piechart2 {
-			float: left;
-			width: 16.1667%;
-			margin-right: 1%;
-			height: 80%;
+			position: absolute;
+			top: 5em; right: 15px;
+			width: 48%;
+			height: 33%;
 			min-height: 250px;
+			.chart-label {
+				fill: #fff;
+				font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+				font-weight: lighter;
+			}
 		}
 		#node-piechart2 { margin-right: 0; }
 		.close {
@@ -139,7 +148,7 @@
 #list_menu li.selected { background-color: #f90; color: #666;}
 #lists { width: 300px; float: right; right: 0px;z-index: 1;  }
 
-#graphs { margin-top:-90px; width: auto;} 
+#graphs { margin-top:-90px; width: auto; background: #eee url('../img/paper.jpg');} 
 .nodelist_container { border-left: 1px solid #999; border-bottom: 1px solid #999; clear: both;  background: #ddd;}
 .nodelist .amount { float: right; font-size: 1em; font-weight:500; }
 .sublists_container { margin-right: -5px; margin-left: 15px;  font-size: .9em; background:transparent;}
@@ -224,7 +233,7 @@ text.label { fill: #fff; font-weight: 600; font-family: 'Ubuntu', sans-serif; fo
 .chip.contrib_C  { border-color: #563b4e; }
 .chip.contrib_U  { border-color: #4c4c4c; }
 
-#svg_overlay .node {stroke-width: 1px !important;}
+#svg_overlay .node polygon {stroke-width: 1px !important;}
 #svg_overlay .REPUBLICAN .nhighlight { fill: #661919; }
 #svg_overlay .DEMOCRAT .nhighlight { fill: #191966; }
 #svg_overlay .DEMOCRATIC-FARMER-LABOR .nhighlight { fill: #191966; }
@@ -252,6 +261,17 @@ text.label { fill: #fff; font-weight: 600; font-family: 'Ubuntu', sans-serif; fo
 #zoomcontrols #zoomSlider { width: 10px; height: 100px; float: none; background: fade(white,25%); border: none; }
 
 #help { position: absolute; }
+
+#loading {
+	padding-top: 60%;
+	background: fade(#fff,75%);
+	z-index: 999;
+	span {
+		background-color: transparent !important;
+		.message { display: none; }
+	}
+
+}
 
 // Header
 
@@ -291,6 +311,7 @@ text.label { fill: #fff; font-weight: 600; font-family: 'Ubuntu', sans-serif; fo
 @media screen and (max-width: 480px) {
 	#navbar {
 		padding: 0;
+		border-top: 1px solid #444;
 		.navlist {
 			display: none;
 			.navitem {
