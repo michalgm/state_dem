@@ -49,7 +49,7 @@ class StateDEM extends Graph {
 				//'sep'=>"+10"
 				//'maxiter' => '100000', //turning this off speeds things up, but does it mean that some might not converge?
 			),
-			'node'=> array('label'=> ' ', 'labelloc'=>'b', 'imagescale'=>'true','fixedsize'=>1, 'style'=> 'setlinewidth(10), filled', 'regular'=>'true', 'fontsize'=>15),
+			'node'=> array('label'=> ' ', 'labelloc'=>'b', 'imagescale'=>'true','fixedsize'=>1, 'style'=> 'setlinewidth(4), filled', 'regular'=>'true', 'fontsize'=>15),
 			'edge'=>array('arrowhead'=>'none', 'arrowsize'=>2, 'color'=>'#99999966', 'fontsize'=>15, 'len'=>4, 'minlen'=>4, 'style'=>'tapered')
 		);
 		srand(20); //Don't copy this - this just makes sure that we are generating the same 'random' values each time
@@ -137,23 +137,14 @@ class StateDEM extends Graph {
 		foreach ($nodes as &$node) {
 			//if ($node['total_dollars'] <= $this->data['properties']['valueMin']) { writelog($node['id']); unset($nodes[$node['id']]); continue; }
 			$node['value'] = $node['total_dollars'];
-			if ($ballot) {
-				if ($node['total_pro_dollars'] > $node['total_con_dollars']) {
-					$node['color'] = 'green';
-				} else {
-					$node['color'] = 'red';
-				}
-				$node['label'] = $node['committee_name'];
-			} else {
-				$node['color'] = colorize($node['party'])."33";
-				$node['label'] = $node['candidate_name'];
-			}
+			$node['color'] = colorize($node['party'])."33";
+			$node['label'] = $node['candidate_name'];
 			$node['fillcolor'] = '#ffffffff';
-			$node['tooltip'] = $node['label']." (Received ".money_format('%.0n', $node['value']).")";
+			$node['tooltip'] = $node['label'];
 			#$node['fill-opacity'] = .5;
 			$node['shape'] = 'square';
 			$node['label_zoom_level'] = '6';
-			$node['click'] = "this.selectNode('".$node['id']."'); this.panToNode('".$node['id']."');";
+			//$node['click'] = "this.selectNode('".$node['id']."'); this.panToNode('".$node['id']."');";
 			$node['image'] = $node['image'] ? "../www/can_images/$node[id].jpg" : "../www/can_images/unknownCandidate.jpg";
 			if($node['value'] == 0) { unset($nodes[$node['id']]); }
 		}
@@ -168,8 +159,8 @@ class StateDEM extends Graph {
 			$node['value'] = $node['total_dollars'];
 			$node['dir'] = getcwd();
 			//if ($node['contributor_type'] == 'I') { 
-				$node['color'] = 'cadetblue';
-				$node['shape'] = 'circle';
+			$node['color'] = colorize($node['sitecode'])."33";
+			$node['shape'] = 'circle';
 			//} elseif ($node['contributor_type'] == 'C') {
 			//	$node['color'] = 'purple';
 			//	$node['shape'] = 'polygon';
@@ -180,9 +171,9 @@ class StateDEM extends Graph {
 		   	//}
 
 			$node['fillcolor'] = "#ffffffff";
-			$node['tooltip'] = $node['label']." (Gave ".money_format('%.0n', $node['value']).")";
+			$node['tooltip'] = $node['label'];
 			$node['label_zoom_level'] = '8';
-			$node['click'] = "this.selectNode('".$node['id']."'); this.panToNode('".$node['id']."');";
+			//$node['click'] = "this.selectNode('".$node['id']."'); this.panToNode('".$node['id']."');";
 			$nodes[$node['id']] = $node;
 			$node = null;
 		}
@@ -245,6 +236,7 @@ class StateDEM extends Graph {
 }
 
 function colorize($value){
+	$value = strtoupper(trim($value));
 	$colors = array(
 		"REPUBLICAN"=>"#cc3333ff",
 		"R"=>"#cc3333ff",
@@ -255,7 +247,10 @@ function colorize($value){
 		"LIBERTARIAN"=>"#cc33ccff",
 		"L"=>"#cc33ccff",
 		"PEACE & FREEDOM"=>"#33ccccff",
+		'OIL'=>'#6d8f9dff',
+		'COAL'=>'#958d63ff',
+		'CARBON'=>'#666666ff'
 	);
-	$color = isset($colors[trim($value)]) ? $colors[trim($value)] : "gray";
+	$color = isset($colors[$value]) ? $colors[$value] : "gray";
 	return($color);
 }
