@@ -10,6 +10,9 @@
 	<link rel="stylesheet" href="css/style.min.css"/>
 	<link rel='stylesheet' href="//ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/themes/ui-lightness/jquery-ui.css"/>
 	<style type="text/css">
+
+		#svg_overlay path, #svg_overlay .edge polygon { stroke: none !important; }		
+
 		.REP, .R {color:#c66;}
 		.DEM, .D, .DFL {color:#69c;}
 		.IND, .I { color: #cc3; }
