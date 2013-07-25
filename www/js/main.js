@@ -92,7 +92,7 @@ $.extend(NodeViz.prototype, {
 });
 
 GraphImage.prototype.pre_render= function(responseData) {
-	responseData.overlay = responseData.overlay.replace(/com_images/g, 'http://styrotopia.net/~dameat/oilchange/www/com_images');
+	responseData.overlay = responseData.overlay.replace(/com_images/g, 'http://dirtyenergymoney.com/com_images');
 }
 
 NodeViz.prototype.default_events.edge.click = null;
