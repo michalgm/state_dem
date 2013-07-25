@@ -138,4 +138,4 @@ function arrayToUpdateString($array, $keys) {
 	}
 	return implode(",", $values);	
 }
-?>	
+?>
