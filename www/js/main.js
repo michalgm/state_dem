@@ -176,7 +176,6 @@ function updateInfocardData(node) {
 
 function selectNode(node) {
 	gf.selectNode(node.id);
-	gf.panToNode(node.id, 5, {y:-Math.round(($('body').height()/4)), x:0});
 	toggleInfocard(node);
 }
 
@@ -189,6 +188,7 @@ function toggleInfocard(node) {
 	updateInfocardData(node);
 
 	if (card.is(':hidden') || node_id !== node.id) {
+		gf.panToNode(node.id, 5, {y:-Math.round(($('body').height()/4)), x:0});
 		card.data('data-node',node.id);
 		$('#node-title').html(node.label+' <span class="district '+node.party+' ">'+node.district+'</span>');
 		var image_url = node.image.split('www/');
