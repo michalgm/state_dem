@@ -140,7 +140,7 @@ $.extend(GraphList.prototype, {
 });
 
 function updateInfocardData(node) { 
-	$.getJSON('http://styrotopia.net/~dameat/state_dem/ui-branch/state_dem/www/request.php', {'type': node.type, 'id': node.id}, function(data, status, jxqhr) { 
+	$.getJSON('http://styrotopia.net/~dameat/state_dem/ui-branch/state_dem/www/request.php', {'method': 'chartData','type': node.type, 'id': node.id}, function(data, status, jxqhr) { 
 		drawPieChart(data.contributionsByCategory,'#node-piechart1');
 		//drawPieChart(data.contributionsByParty,'#node-piechart2');
 		drawBarChart(data.contributionsByYear,'#node-barchart');
@@ -160,7 +160,7 @@ function toggleInfocard(node) {
 		$('#node-title').html(node.label+' <span class="district '+node.party+' ">'+node.district+'</span>');
 		var image_url = node.image.split('www/');
 		$('#node-image img').attr('src',image_url[1]);
-
+		$('#node-csvlink a').attr('href','http://styrotopia.net/~dameat/state_dem/ui-branch/state_dem/www/request.php?method=csv&type='+node.type+'&id='+node.id);
 		card.slideDown(500);
 
 		$('#masthead, #zoomcontrols').hide();

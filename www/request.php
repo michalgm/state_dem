@@ -1,12 +1,37 @@
 <?php
 header('Access-Control-Allow-Origin: *');  
-header('Content-type: application/json');
 include("../config.php");
 
-$response = array();
-$response['contributionsByYear'] = getContributionsByYear();
-$response['contributionsByCategory'] = getContributionsByCategory();
-print json_encode($response);
+switch($_REQUEST['method']) {
+	case 'chartData': 
+		header('Content-type: application/json');
+		$response = array();
+		$response['contributionsByYear'] = getContributionsByYear();
+		$response['contributionsByCategory'] = getContributionsByCategory();
+
+		print json_encode($response);
+		break;
+	case 'csv':
+
+		$id_field = $_REQUEST['type'] == 'candidates' ? 'recipient_ext_id' : 'company_id';
+		$id = str_replace('co-', '', dbEscape($_REQUEST['id']));
+		$csv = "";
+		$contribs = dbLookupArray("SELECT transaction_id, full_name as Legislator, concat(recipient_state, ' ', if(seat='state:lower', 'House', 'Senate'), ' (',c.District,')') as Seat, contributor_name as Contributor, name as Company, date_format(Date, '%m/%d/%Y') as Date, Amount FROM contributions_dem c join companies on company_id = id join legislators on recipient_ext_id = nimsp_candidate_id where $id_field = '$id' order by date");
+		$csv = array2CSV(array_slice(array_keys(reset($contribs)), 1));
+		foreach($contribs as $contrib) { 
+			unset($contrib['transaction_id']);
+			$csv .= array2CSV($contrib);
+		}
+		$filename = "Dirty Energy Contributions to ".reset($contribs)[($_REQUEST['type'] == 'candidates' ? 'Legislator' : 'Company')];
+		//if ($debug) { 
+		//	print '<pre>'; 
+		//} else {
+		header('Content-type: text/csv');
+		header("Content-disposition: attachment; filename=\"$filename.csv\"");
+		//}
+		print $csv;
+		break;
+}
 
 function getContributionsByYear() {
 	global $min_cycle;
@@ -23,3 +48,18 @@ function getContributionsByCategory() {
 	$category = $_REQUEST['type'] == 'candidates' ? 'sitecode' : 'party';
 	return array_values(dbLookupArray("select $category as label, sum(amount) as value from contributions_dem c join legislator_terms on recipient_ext_id = imsp_candidate_id and term = cycle where ".($_REQUEST['type'] == 'candidates' ? 'recipient_ext_id' : 'company_id')." = '".dbEscape(str_replace('co-', '', $_REQUEST['id']))."' group by $category order by $category"));
 }
+
+function array2CSV (array $fields, $delimiter = ',', $enclosure = '"') {
+    $delimiter_esc = preg_quote($delimiter, '/');
+    $enclosure_esc = preg_quote($enclosure, '/');
+
+    $output = array();
+    foreach ($fields as $field) {
+	//if (preg_match("/^[\d\.]+$/", $field)) { $field = number_format($field); } this would be nice, but it turns the nums into strings
+        $output[] = preg_match("/(?:${delimiter_esc}|${enclosure_esc}|\s)/", $field) ? (
+            $enclosure . str_replace($enclosure, $enclosure . $enclosure, $field) . $enclosure
+        ) : $field;
+    }
+    return join($delimiter, $output) . "\n";
+} 
+

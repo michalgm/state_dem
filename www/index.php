@@ -29,6 +29,7 @@
 		<!-- <div id="node-image"><img src=""></div> -->
 		<div id="node-barchart"></div>
 		<div id="node-piechart1"></div>
+		<div id='node-csvlink'><a href=''>Download CSV</a></div>
 		<!-- <div id="node-piechart2"></div> -->
 	</div>
 
