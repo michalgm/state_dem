@@ -57,8 +57,37 @@ function initGraph() {
 
 $.extend(NodeViz.prototype, {
 	graphLoaded: function() {
-	},
-	afterInit: function() {
+		gf.nodeList = $.map(gf.data.nodes, function(n) { 
+			return {label: n.label, value: n.id, search_label: n.label}
+		});
+		$('#node_search').autocomplete({
+			source: gf.nodeList, 
+			appendTo:'#node_search_list', 
+			focus: function(e, ui) {
+				$('#node_search').val(ui.item.search_label);
+				return false;
+			}, 
+			select: function(e, ui) {
+				$('#node_search').val(ui.item.search_label);
+				selectNode(gf.data.nodes[ui.item.value]);
+				return false;
+			}
+		})
+		.data("ui-autocomplete")._renderItem = function(ul, item) {
+			var n = gf.data.nodes[item.value];
+			var label;
+			var li = $("<li>");
+			if(n.type == 'candidates') {
+				li.addClass('politician');
+				label = n.label+" <span class='"+n.party+" searchdetails'>("+n.party+' '+n.district+")</span>";
+			} else {
+				li.addClass('company');
+				label = "<span>"+n.label+" <span class='"+n.sitecode+" searchdetails'>("+toWordCase(n.sitecode)+")</span></span>";
+			}
+			return li
+			.append( "<a>" + label+ "</a>" )
+			.appendTo( ul );
+		};
 	},
 });
 
@@ -68,9 +97,7 @@ GraphImage.prototype.pre_render= function(responseData) {
 
 NodeViz.prototype.default_events.edge.click = null;
 NodeViz.prototype.default_events.node.click = function(evt, dom_element, graph_element, element_type, renderer) {
-	this.selectNode(graph_element.id);
-	this.panToNode(graph_element.id, 5, {y:-Math.round(($('body').height()/4)), x:0});
-	toggleInfocard(graph_element);
+	selectNode(graph_element);
 }
 
 $.extend(GraphList.prototype, {
@@ -145,6 +172,12 @@ function updateInfocardData(node) {
 		//drawPieChart(data.contributionsByParty,'#node-piechart2');
 		drawBarChart(data.contributionsByYear,'#node-barchart');
 	});
+}
+
+function selectNode(node) {
+	gf.selectNode(node.id);
+	gf.panToNode(node.id, 5, {y:-Math.round(($('body').height()/4)), x:0});
+	toggleInfocard(node);
 }
 
 function toggleInfocard(node) {
