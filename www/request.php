@@ -22,7 +22,8 @@ switch($_REQUEST['method']) {
 			unset($contrib['transaction_id']);
 			$csv .= array2CSV($contrib);
 		}
-		$filename = "Dirty Energy Contributions to ".reset($contribs)[($_REQUEST['type'] == 'candidates' ? 'Legislator' : 'Company')];
+		$first = reset($contribs);
+		$filename = "Dirty Energy Contributions to ".$first[($_REQUEST['type'] == 'candidates' ? 'Legislator' : 'Company')];
 		//if ($debug) { 
 		//	print '<pre>'; 
 		//} else {
