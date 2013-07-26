@@ -207,7 +207,7 @@ function toggleInfocard(node) {
 		$('#node-csvlink a').attr('href','http://styrotopia.net/~dameat/state_dem/ui-branch/state_dem/www/request.php?method=csv&type='+node.type+'&id='+node.id);
 		card.slideDown(500);
 
-		$('#masthead, #zoomcontrols').hide();
+		$('#masthead').hide();
 	} else {
 		resetGraph();
 	}
@@ -215,7 +215,7 @@ function toggleInfocard(node) {
 
 function resetGraph() {
 	$('#infocard').slideUp();
-	$('#masthead, #zoomcontrols').fadeIn(2000);
+	$('#masthead').fadeIn(2000);
 	gf.zoom('reset');
 	// Reset Zoom
 }

@@ -92,7 +92,7 @@
 		<div class="node-more">
 			<div id="node-barchart"></div>
 			<div id="node-piechart"></div>
-			<div id='node-csvlink'><a href=''>Download CSV</a></div>
+			<div id="node-csvlink"><a href="">Download .CSV</a></div>
 		</div>
 	</div>
 
