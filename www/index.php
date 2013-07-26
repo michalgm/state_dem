@@ -86,12 +86,14 @@
 
 	<div id="infocard" data-node="null">
 		<a class="close">&times;</a>
+		<a class="more">&#9650;</a>
 		<h3 id="node-title"></h3>
-		<!-- <div id="node-image"><img src=""></div> -->
-		<div id="node-barchart"></div>
-		<div id="node-piechart1"></div>
-		<div id='node-csvlink'><a href=''>Download CSV</a></div>
-		<!-- <div id="node-piechart2"></div> -->
+		<h4 id="node-amount"></h4>
+		<div class="node-more">
+			<div id="node-barchart"></div>
+			<div id="node-piechart"></div>
+			<div id='node-csvlink'><a href=''>Download CSV</a></div>
+		</div>
 	</div>
 
 <?php include 'inc/footer.inc';?>

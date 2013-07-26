@@ -5,6 +5,7 @@ $(function(){
 	initGraph();
 	$('#infocard').hide();
 	$('#infocard .close').click(function() { resetGraph(); });
+	$('#infocard .more').click(function() { $(this).parent().toggleClass('open'); });
 
 	$('#pull').click(function(e){
 		$('.navlist').slideToggle();
@@ -168,8 +169,7 @@ $.extend(GraphList.prototype, {
 
 function updateInfocardData(node) { 
 	$.getJSON('http://styrotopia.net/~dameat/state_dem/ui-branch/state_dem/www/request.php', {'method': 'chartData','type': node.type, 'id': node.id}, function(data, status, jxqhr) { 
-		drawPieChart(data.contributionsByCategory,'#node-piechart1');
-		//drawPieChart(data.contributionsByParty,'#node-piechart2');
+		drawPieChart(data.contributionsByCategory,'#node-piechart');
 		drawBarChart(data.contributionsByYear,'#node-barchart');
 	});
 }
@@ -188,9 +188,20 @@ function toggleInfocard(node) {
 	updateInfocardData(node);
 
 	if (card.is(':hidden') || node_id !== node.id) {
-		gf.panToNode(node.id, 5, {y:-Math.round(($('body').height()/4)), x:0});
+		// gf.panToNode(node.id, 5, {y:-Math.round(($('body').height()/4)), x:0});
+		gf.panToNode(node.id, 4, {y:-50, x:0});
 		card.data('data-node',node.id);
-		$('#node-title').html(node.label+' <span class="district '+node.party+' ">'+node.district+'</span>');
+		console.log( node );
+		switch( node.type ) {
+			case 'candidates':
+				$('#node-title').html(node.label+' <span class="district '+node.party+'">'+node.district+'</span>');
+				$('#node-amount').html('Received $'+commas(Math.floor(node.value)));
+				break;
+			case 'donors':
+				$('#node-title').html(node.label+' <span class="sector '+node.sitecode+'">'+node.sitecode+'</span>');
+				$('#node-amount').html('Contributed $'+commas(Math.floor(node.value)));
+				break;
+		}
 		var image_url = node.image.split('www/');
 		$('#node-image img').attr('src',image_url[1]);
 		$('#node-csvlink a').attr('href','http://styrotopia.net/~dameat/state_dem/ui-branch/state_dem/www/request.php?method=csv&type='+node.type+'&id='+node.id);
@@ -259,7 +270,7 @@ function drawBarChart(data,container) {
 			.attr('dy','-2em')
 			.attr('width',function() { return width / data.length; })
 			.attr('text-anchor','middle')
-			.text(function(d) { return '$' + Math.floor(d.value); });
+			.text(function(d) { return '$' + commas(Math.floor(d.value)); });
 	amounts.exit().remove();
 
 	var years = svg.selectAll('.year')
@@ -396,4 +407,11 @@ function brighten() {
 function darken() {
 	var e = d3.select(this);
 	e.attr('fill', d3.rgb(e.attr('fill')).darker(.7));
+}
+
+function commas(val){
+	while (/(\d+)(\d{3})/.test(val.toString())){
+		val = val.toString().replace(/(\d+)(\d{3})/, '$1'+','+'$2');
+	}
+	return val;
 }

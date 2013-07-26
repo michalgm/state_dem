@@ -42,14 +42,32 @@
 		position: absolute;
 		bottom: 40px; left: 0;
 		width: 100%;
-		height: 45%;
+		height: 75px;
 		background: fade(white,85%);
 		border-top: 1px solid #fff;
 		z-index: 99;
+		.node-more {
+			display: none;
+		}
+		&.open {
+			height: 45%;
+			.node-more {
+				display: block;
+			}
+			.more {
+				-webkit-transform: rotate(180deg);
+				-moz-transform: rotate(180deg);
+				transform: rotate(180deg);
+			}
+		}
 		.district {
 			font-size: 0.8em;
 			&.D { color: blue; }
 			&.R { color: red; }
+		}
+		.sector {
+			font-size: 0.8em;
+			text-transform: uppercase;
 		}
 		#node-title {
 			position: absolute;
@@ -60,6 +78,14 @@
 			font-size: 2em;
 			font-family: Diavlo,"Helvetica Neue",Helvetica,sans-serif;
 			font-weight: normal;
+		}
+		#node-amount {
+			position: absolute;
+			top: 45px; left: 15px;
+			margin: 0;
+			padding: 0;
+			font: normal 1.2em Diavlo,"Helvetica Neue",Helvetica,sans-serif;
+			color: green;
 		}
 		#node-image {
 			position: relative;
@@ -96,7 +122,7 @@
 				fill: #696;
 			}
 		}
-		#node-piechart1, #node-piechart2 {
+		#node-piechart {
 			position: absolute;
 			top: 5em; right: 15px;
 			width: 48%;
@@ -108,8 +134,7 @@
 				font-weight: lighter;
 			}
 		}
-		#node-piechart2 { margin-right: 0; }
-		.close {
+		.close, .more {
 			position: absolute;
 			top: -18px; right: 15px;
 			height: 36px; width: 36px;
@@ -126,6 +151,14 @@
 				color: #fff;
 				background: #f90;
 			}
+		}
+		.more {
+			right: 60px;
+			font-size: 12px;
+			line-height: 38px;
+			-webkit-transition: -webkit-transform 0.5s;
+			-moz-transition: -moz-transform 0.5s;
+			transition: transform 0.5s;
 		}
 	}
 
@@ -256,7 +289,7 @@ text.label { fill: #fff; font-weight: 600; font-family: 'Ubuntu', sans-serif; fo
 #optionslist select { width: 150px; font-size: 100%; }
 #submit { margin-top: 10px; }
 
-#zoomcontrols { top: 50px; left: 50px; background: fade(black,25%); }
+#zoomcontrols { top: 50px; left: 50px; background: fade(black,25%); display:none; } // Hide for the moment
 #zoomcontrols span { float: none; }
 #zoomcontrols #zoomSlider { width: 10px; height: 100px; float: none; background: fade(white,25%); border: none; }
 
