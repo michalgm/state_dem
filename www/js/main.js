@@ -180,7 +180,6 @@ function selectNode(node) {
 }
 
 function toggleInfocard(node) {
-	// console.log(node);
 
 	var card = $('#infocard'),
 		node_id = card.data('data-node');
@@ -188,10 +187,8 @@ function toggleInfocard(node) {
 	updateInfocardData(node);
 
 	if (card.is(':hidden') || node_id !== node.id) {
-		// gf.panToNode(node.id, 5, {y:-Math.round(($('body').height()/4)), x:0});
 		gf.panToNode(node.id, 4, {y:-50, x:0});
 		card.data('data-node',node.id);
-		console.log( node );
 		switch( node.type ) {
 			case 'candidates':
 				$('#node-title').html(node.label+' <span class="district '+node.party+'">'+node.district+'</span>');
@@ -202,11 +199,8 @@ function toggleInfocard(node) {
 				$('#node-amount').html('Contributed $'+commas(Math.floor(node.value)));
 				break;
 		}
-		var image_url = node.image.split('www/');
-		$('#node-image img').attr('src',image_url[1]);
 		$('#node-csvlink a').attr('href','http://styrotopia.net/~dameat/state_dem/ui-branch/state_dem/www/request.php?method=csv&type='+node.type+'&id='+node.id);
 		card.slideDown(500);
-
 		$('#masthead').hide();
 	} else {
 		resetGraph();
@@ -217,7 +211,6 @@ function resetGraph() {
 	$('#infocard').slideUp();
 	$('#masthead').fadeIn(2000);
 	gf.zoom('reset');
-	// Reset Zoom
 }
 
 /*	==========================================================================

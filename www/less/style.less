@@ -11,7 +11,7 @@
 	Main
 	========================================================================== */
 
-	body { height: 100%; overflow: hidden; }
+	body { height: 100%; overflow: hidden; background: #eee url('../img/paper.jpg'); }
 
 	a {
 		color: #93f;
@@ -36,7 +36,7 @@
 	========================================================================== */
 
 	#lists {  height: 99%; }
-	#graphs { height: 99%; }
+	#graphs { height: 99%; width: 100%; margin-top: -75px; max-height: 80%; background: transparent;}
 
 	#infocard {
 		position: absolute;
@@ -197,7 +197,6 @@
 #list_menu li.selected { background-color: #f90; color: #666;}
 #lists { width: 300px; float: right; right: 0px;z-index: 1;  }
 
-#graphs { margin-top:-90px; width: 100%; background: #eee url('../img/paper.jpg');} 
 .nodelist_container { border-left: 1px solid #999; border-bottom: 1px solid #999; clear: both;  background: #ddd;}
 .nodelist .amount { float: right; font-size: 1em; font-weight:500; }
 .sublists_container { margin-right: -5px; margin-left: 15px;  font-size: .9em; background:transparent;}
@@ -331,7 +330,7 @@ text.label { fill: #fff; font-weight: 600; font-family: 'Ubuntu', sans-serif; fo
 
 #navbar {
 	min-height: 40px;
-	select {
+	select, .navitem {
 		float: left;
 		display: block;
 		background: transparent;
@@ -373,6 +372,7 @@ text.label { fill: #fff; font-weight: 600; font-family: 'Ubuntu', sans-serif; fo
 		}
 		#pull {
 			display: block;
+			overflow: hidden;
 		}
 	}
 }
@@ -386,4 +386,8 @@ text.label { fill: #fff; font-weight: 600; font-family: 'Ubuntu', sans-serif; fo
 	background: #eee;
 	border-top: 1px solid #ddd;
 	line-height: 40px;
+	opacity: 0.5;
+	&:hover {
+		opacity: 1;
+	}
 }

@@ -21,10 +21,10 @@
 				<option selected="selected">2010</option>
 				<option>2008</option>
 			</select>
+			<div id="searchfield" class="navitem">
+				<input class="node_search" id="node_search" autocomplete="off" size="20" type="text" value="" />
+				<div class="autocomplete node_search_list" id="node_search_list" style=""></div>
+			</div>
 		</form>
 		<a href="#" id="pull">Menu</a>
-		<div id='searchfield'>
-			<label for="node_search">Search</label> <input class="node_search" id="node_search" autocomplete="off" size="20" type="text" value="" />
-			<div class="autocomplete node_search_list" id="node_search_list" style=""></div>
-		</div>
 	</nav>
