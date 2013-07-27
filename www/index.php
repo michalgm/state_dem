@@ -118,5 +118,11 @@
 	<script src="js/d3.v3.js"></script>
 
 	<script src="js/main.js"></script>
+	<script>
+		var states = <?php 
+			require("../config.php");
+			echo json_encode(dbLookupArray("select * from states"));
+		?>;
+	</script>
 </body>
 </html>

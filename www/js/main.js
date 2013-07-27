@@ -2,6 +2,7 @@
 
 $(function(){
 
+	setupOptions();
 	initGraph();
 	$('#infocard').hide();
 	$('#infocard .close').click(function() { resetGraph(); });
@@ -371,8 +372,7 @@ function drawPieChart(data,container) {
 			.text(function(d) { return categories[d.data.label][0]; });
 	}
 
-	function arcTween(a) {
-		var i = d3.interpolate(this._current, a);
+	function arcTween(a) { var i = d3.interpolate(this._current, a);
 		this._current = i(0);
 		return function(t) {
 			return arc(i(t));
@@ -407,4 +407,34 @@ function commas(val){
 		val = val.toString().replace(/(\d+)(\d{3})/, '$1'+','+'$2');
 	}
 	return val;
+}
+
+function setupOptions() {
+	var keys = $.map(states, function(s, k) { return k; }).sort();
+	var current_state = $('#state').val();
+	$('#state').html('');
+	$(keys).each(function(i, s) { 
+		$('#state').append($('<option>').attr('value', s).html(states[s].name));
+	});
+	$('#state').val(current_state);
+
+	$('#state').on('change', function(a, e, i , o) { 
+		var state = states[a.target.value];
+		var current_year = $('#cycle').val();
+		var current_chamber = $('#chamber').val();
+
+		$('#chamber').html('');
+		$('#chamber').append($('<option>').attr('value', 'state:upper').html(state.upper_name));
+		if (state.lower_name) { 
+			$('#chamber').append($('<option>').attr('value', 'state:lower').html(state.lower_name));
+		}
+
+		$('#cycle').html('');
+		$(state.years.split(',').reverse()).each(function(i, y) {
+			$('#cycle').append($('<option>').html(y));	
+		});	
+		$('#cycle').val(current_year);
+		$('#chamber').val(current_chamber);
+	});
+	$('#state').change();
 }

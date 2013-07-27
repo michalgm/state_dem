@@ -19,17 +19,7 @@ $debug=1;
 
 require_once('dbaccess.php');
 
-$states = array(
-	'ND'=>'North Dakota',
-	'OH'=>'Ohio',
-	'CA'=>'California',
-	'PA'=>'Pennsylvania',
-	'CO'=>'Colorado',
-	'AK'=>'Alaska',
-	'TX'=>'Texas',
-	'NE'=>'Nebraska',
-	'NY'=>'New York',
-);
+$states = fetchCol("select state from states");
 
 $min_cycle = 2006;
 $max_cycle = 2012;
