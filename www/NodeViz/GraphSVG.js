@@ -87,22 +87,18 @@ GraphImage("GraphSVG", {}, {
 		$('#image>svg').svg();
 		var svg = $('#image>svg').svg('get');
 		$('#images g').each( function(index, g) { 
-			var id = $(g).attr('id');
-			if ($('#a_'+id).length) { 
-				svg.clone($('#'+id), $('#a_'+id).children());
-				svg.remove($('#a_'+id));
-			}
-			$(g).attr('id', 'underlay_'+id);
+			$(g).attr('id', 'underlay_'+$(g).attr('id'));
 		});
 		
 		//insert the svg image again as the overlay
 		$('#images').append($('<div/>').attr('id','svg_overlay'));
 		$('#svg_overlay').append($('#svg_overlay')[0].ownerDocument.importNode(svgdoc.firstChild, true));
-		$('#svg_overlay g').each( function(index, g) { 
-			var id = $(g).attr('id');
-			if ($('#a_'+id).length) { 
-				svg.clone($('#'+id), $('#a_'+id).children());
-				svg.remove($('#a_'+id));
+
+		//remove anchor groups
+		$('#image g, #svg_overlay g').each( function(index, g) { 
+			var a = $('#a_'+$(g).attr('id'));
+			if (a.length) { 
+				a.contents().unwrap();
 			}
 		});
 

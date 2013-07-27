@@ -303,7 +303,9 @@ $.Class("NodeViz", {}, {
 		$.map(this.renderers, function(o) { 
 			$(['pre_', '', 'post_']).each(function(i, prefix) { 
 				if (typeof(o[prefix+method]) == 'function') { 
+					//console.time(o.Class.fullName+prefix+method);
 					o[prefix+method].apply(o, args); 
+					//console.timeEnd(o.Class.fullName+prefix+method);
 				}
 			});
 		});
