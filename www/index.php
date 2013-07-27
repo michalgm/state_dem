@@ -70,6 +70,8 @@
 		#searchfield .autocomplete .bold { font-weight: bold; }
 		#searchfield .autocomplete .searchdetails { font-size: .8em; }
 		#searchfield .autocomplete_img  { position: absolute; margin-left: 10px; }
+	
+		#svg_error { padding: 15px; width: 60%; margin: auto; text-align: center; background: #eee; padding-top: 1;}
 
 	</style>
 </head>
@@ -83,6 +85,10 @@
 		<p class="site-tagline">is an interactive tool that tracks the flow of oil, gas and coal industry contributions to the US Congress.</p>
 	</div><!-- #masthead -->
 	
+	<div id='svg_error' style='display: none;'>
+		<h3>Unsupported Browser</h3>
+		We're sorry - this website requires SVG, and it appears your web browser does not support it. Please consider updating to a modern, standards-compliant web browser, such as <a href='http://mozilla.org/firefox'>FireFox</a> or <a href='http://google.com/chrome'>Chrome</a>	
+	</div>
 	<!-- <div id="lists"></div> -->
 	<div id="graphs"></div>
 

@@ -2,6 +2,10 @@
 
 $(function(){
 
+	if ( !document.implementation.hasFeature("http://www.w3.org/TR/SVG11/feature#BasicStructure", "1.1")) {
+		$('#svg_error').show();
+		return;
+	}
 	setupOptions();
 	initGraph();
 	$('#infocard').hide();
