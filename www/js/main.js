@@ -227,7 +227,7 @@ function drawBarChart(data,container) {
 		height = $(window).height() / 2 * .675;
 
 	var x = d3.scale.linear().domain([0, data.length]).range([0, width]);
-	var y = d3.scale.linear().domain([0, d3.max(data, function(datum) { return parseInt(datum.value); })]).rangeRound([0, height * 0.9]);
+	var y = d3.scale.linear().domain([0, d3.max(data, function(datum) { return parseInt(datum.value); })]).rangeRound([0, height * 0.8]);
 	var svg = d3.select(container+' svg');
 	if (svg.empty()) {
 		svg = d3.select(container).append('svg')
@@ -302,7 +302,7 @@ function drawPieChart(data,container) {
 		'L':['Libertarian', '#cc33cc'],
 		'I':['Independant', '#cccc33'],
 		'N':['Non-Partisan', '#cccccc'],
-	}	
+	}
 
 	var width = $(window).width() / 2 * 0.9,
 		height = $(window).height() / 2 * 0.675,
@@ -382,8 +382,8 @@ function drawPieChart(data,container) {
 			return arc(i(t));
 		};
 	}
-	
-	function key(d) { 
+
+	function key(d) {
 		//trying to maintain consistency across companies and legislators in pie chart grouping
 		var label = typeof(d.label) != 'undefined' ? d.label : d.data.label;
 		if (label == 'coal') { 
