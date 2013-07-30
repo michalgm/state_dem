@@ -390,8 +390,9 @@ function drawPieChart(data,container) {
 			label= 'D';
 		} else if(label == 'oil') { 
 			label= 'R';
+		} else if(label == 'carbon') { 
+			label= 'N';
 		}
-		if (label != 'D' && label != 'R') { label= 'other'; }
 		return label;
 	}
 }
