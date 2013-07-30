@@ -63,6 +63,9 @@ function initGraph() {
 
 $.extend(NodeViz.prototype, {
 	graphLoaded: function() {
+		$('#infocard').hide();
+		$('#masthead').fadeIn(2000);
+		
 		gf.nodeList = $.map(gf.data.nodes, function(n) { 
 			return {label: n.label, value: n.id, search_label: n.label}
 		});
@@ -390,8 +393,9 @@ function drawPieChart(data,container) {
 			label= 'D';
 		} else if(label == 'oil') { 
 			label= 'R';
+		} else if(label == 'carbon') { 
+			label= 'N';
 		}
-		if (label != 'D' && label != 'R') { label= 'other'; }
 		return label;
 	}
 }
