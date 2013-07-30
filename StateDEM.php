@@ -41,16 +41,17 @@ class StateDEM extends Graph {
 			'graph'=> array(
 				'bgcolor'=>'#FFFFFF',
 #				'size' => '6.52,6.52!',
-				'fontsize'=>90,
+				'fontsize'=>2,
 				'splines'=>'curved',
 				'fontcolor'=>'blue',
 				'start'=>'15',
-				'layoutEngine'=>'fdp',
+				'layoutEngine'=>'neato',
+				'overlap'=>'vpsc'
 				//'sep'=>"+10"
 				//'maxiter' => '100000', //turning this off speeds things up, but does it mean that some might not converge?
 			),
-			'node'=> array('label'=> ' ', 'labelloc'=>'b', 'imagescale'=>'true','fixedsize'=>1, 'style'=> 'setlinewidth(4), filled', 'regular'=>'true', 'fontsize'=>15),
-			'edge'=>array('arrowhead'=>'none', 'arrowsize'=>2, 'color'=>'#99999966', 'fontsize'=>15, 'len'=>4, 'minlen'=>4, 'style'=>'tapered')
+			'node'=> array('label'=> ' ', 'labelloc'=>'b', 'imagescale'=>'true','fixedsize'=>1, 'style'=> 'setlinewidth(4), filled', 'regular'=>'true','fontsize'=>2),
+			'edge'=>array('arrowhead'=>'none', 'color'=>'#99999966', 'len'=>4, 'minlen'=>4, 'style'=>'tapered')
 		);
 		srand(20); //Don't copy this - this just makes sure that we are generating the same 'random' values each time
 	}
@@ -137,7 +138,7 @@ class StateDEM extends Graph {
 		foreach ($nodes as &$node) {
 			//if ($node['total_dollars'] <= $this->data['properties']['valueMin']) { writelog($node['id']); unset($nodes[$node['id']]); continue; }
 			$node['value'] = $node['total_dollars'];
-			$node['color'] = colorize($node['party'])."33";
+			$node['color'] = colorize($node['party']);
 			$node['label'] = $node['candidate_name'];
 			$node['fillcolor'] = '#ffffffff';
 			$node['tooltip'] = $node['label'];
@@ -159,7 +160,7 @@ class StateDEM extends Graph {
 			$node['value'] = $node['total_dollars'];
 			$node['dir'] = getcwd();
 			//if ($node['contributor_type'] == 'I') { 
-			$node['color'] = colorize($node['sitecode'])."33";
+			$node['color'] = colorize($node['sitecode']);
 			$node['shape'] = 'circle';
 			//} elseif ($node['contributor_type'] == 'C') {
 			//	$node['color'] = 'purple';
@@ -197,6 +198,7 @@ class StateDEM extends Graph {
 			if (! isset($this->data['nodes'][$edge['toId']]) || ! isset($this->data['nodes'][$edge['fromId']])) {
 				continue;
 			}
+			if (! $edge['value']) { continue; } //we don't need $0 edges
 			$edge['weight'] = $edge['value'];
 			$edge['tooltip'] = money_format('%.0n', $edge['value'])." from ".$this->data['nodes'][$edge['fromId']]['label']." to ".$this->data['nodes'][$edge['toId']]['label'];
 			$edges[$edge['id']] = $edge;
@@ -238,10 +240,10 @@ class StateDEM extends Graph {
 function colorize($value){
 	$value = strtoupper(trim($value));
 	$colors = array(
-		"REPUBLICAN"=>"#cc3333ff",
-		"R"=>"#cc3333ff",
-		"DEMOCRAT"=>"#3333ccff",
-		"D"=>"#3333ccff",
+		"REPUBLICAN"=>"#cc6666ff",
+		"R"=>"#cc6666ff",
+		"DEMOCRAT"=>"#6699ccff",
+		"D"=>"#6699ccff",
 		"GREEN"=>"#33cc33ff",
 		"G"=>"#33cc33ff",
 		"LIBERTARIAN"=>"#cc33ccff",
@@ -251,6 +253,6 @@ function colorize($value){
 		'COAL'=>'#958d63ff',
 		'CARBON'=>'#666666ff'
 	);
-	$color = isset($colors[$value]) ? $colors[$value] : "gray";
+	$color = isset($colors[$value]) ? $colors[$value] : "#CCCC33ff";
 	return($color);
 }
