@@ -16,7 +16,7 @@ switch($_REQUEST['method']) {
 		$id_field = $_REQUEST['type'] == 'candidates' ? 'recipient_ext_id' : 'company_id';
 		$id = str_replace('co-', '', dbEscape($_REQUEST['id']));
 		$csv = "";
-		$contribs = dbLookupArray("SELECT transaction_id, full_name as Legislator, concat(recipient_state, ' ', if(seat='state:lower', 'House', 'Senate'), ' (',c.District,')') as Seat, contributor_name as Contributor, name as Company, date_format(Date, '%m/%d/%Y') as Date, Amount FROM contributions_dem c join companies on company_id = id join legislators on recipient_ext_id = nimsp_candidate_id where $id_field = '$id' order by date");
+		$contribs = dbLookupArray("SELECT transaction_id, full_name as Legislator, recipient_state as State, concat(if(c.seat='state:lower', s.lower_name, 'Senate'), ' (',c.District,')') as Seat, t.Party, contributor_name as Contributor, companies.name as Company, date_format(Date, '%m/%d/%Y') as Date, Amount FROM contributions_dem c join companies on company_id = id join legislators l on recipient_ext_id = nimsp_candidate_id join legislator_terms t on recipient_ext_id = imsp_candidate_id and cycle = term join states s on recipient_state = s.state where $id_field = '$id' order by c.date asc");
 		$csv = array2CSV(array_slice(array_keys(reset($contribs)), 1));
 		foreach($contribs as $contrib) { 
 			unset($contrib['transaction_id']);
