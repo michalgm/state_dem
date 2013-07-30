@@ -69,17 +69,28 @@ $.extend(NodeViz.prototype, {
 		gf.nodeList = $.map(gf.data.nodes, function(n) { 
 			return {label: n.label, value: n.id, search_label: n.label}
 		});
+		$("#node_search").keypress(function(e) { //don't submit the form when someone hits enter in search field
+			var code = (e.keyCode ? e.keyCode : e.which);
+		    if(code == 13) { //Enter keycode
+				$('#node_search').autocomplete('search');
+				return false;
+			}
+		});
 		$('#node_search').autocomplete({
 			source: gf.nodeList, 
+			autoFocus: true, 
 			appendTo:'#node_search_list', 
-			focus: function(e, ui) {
-				$('#node_search').val(ui.item.search_label);
-				return false;
-			}, 
 			select: function(e, ui) {
 				$('#node_search').val(ui.item.search_label);
 				selectNode(gf.data.nodes[ui.item.value]);
 				return false;
+			},
+			response: function(e, ui) { 
+				if (ui.content.length == 0) {
+					$('#no_results_found').show();
+				} else {
+					$('#no_results_found').hide();
+				}	
 			}
 		})
 		.data("ui-autocomplete")._renderItem = function(ul, item) {
