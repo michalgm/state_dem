@@ -71,7 +71,11 @@
 		#searchfield .autocomplete .searchdetails { font-size: .8em; }
 		#searchfield .autocomplete_img  { position: absolute; margin-left: 10px; }
 	
-		#svg_error { padding: 15px; width: 60%; margin: auto; text-align: center; background: #eee; padding-top: 1;}
+		#error { padding: 15px; margin-top: 170px; text-align: center; background: #eee; padding-top: 1; color: #c33; box-shadow: 0 0 1em rgba(0, 0, 0, 0.5); border: 1px solid #666; border-radius: 10px;}
+		.errordetails { display: none; }
+		#close_error { position: absolute; right: 5px; top: 5px; cursor: pointer;}
+		.errorstring { background: transparent !important; }
+
 
 	</style>
 </head>
@@ -85,9 +89,8 @@
 		<p class="site-tagline">is an interactive tool that tracks the flow of oil, gas and coal industry contributions to the US Congress.</p>
 	</div><!-- #masthead -->
 	
-	<div id='svg_error' style='display: none;'>
-		<h3>Unsupported Browser</h3>
-		We're sorry - this website requires SVG, and it appears your web browser does not support it. Please consider updating to a modern, standards-compliant web browser, such as <a href='http://mozilla.org/firefox'>FireFox</a> or <a href='http://google.com/chrome'>Chrome</a>	
+	<div id='error' style='display: none;'>
+		<img id='close_error' src='images/close.png'/>
 	</div>
 	<!-- <div id="lists"></div> -->
 	<div id="graphs"></div>

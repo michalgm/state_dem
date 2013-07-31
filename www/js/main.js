@@ -2,8 +2,9 @@
 
 $(function(){
 
+	$('#close_error').click(function() { $('#error').hide(); });
 	if ( !document.implementation.hasFeature("http://www.w3.org/TR/SVG11/feature#BasicStructure", "1.1")) {
-		$('#svg_error').show();
+		$('#error').html("<h3>Unsupported Browser</h3> We're sorry - this website requires SVG, and it appears your web browser does not support it. Please consider updating to a modern, standards-compliant web browser, such as <a href='http://mozilla.org/firefox'>FireFox</a> or <a href='http://google.com/chrome'>Chrome</a>").show();
 		return;
 	}
 	setupOptions();

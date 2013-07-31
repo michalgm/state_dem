@@ -89,10 +89,14 @@ $.Class("NodeViz", {}, {
 			error += "<li><a href='"+data['dot']+"'>Dot File</a></li>";
 		}
 		error += "</span>";
-		$('#'+this.options.errordiv).html(error).show();
+		if(! $('#'+this.options.errordiv + '#errormsg').length) { 
+			$('#'+this.options.errordiv).append($("<div/>").attr('id', 'errormsg'));
+		}
+		$('#'+this.options.errordiv + ' #errormsg').html(error);
+		$('#'+this.options.errordiv).show();
 	},
 	clearError: function() {
-		$('#'+this.options.errordiv).empty();
+		$('#'+this.options.errordiv + ' #errormsg').empty();
 		$('#'+this.options.errordiv).hide();
 	},
 	timeOutExceeded: function(request) {
