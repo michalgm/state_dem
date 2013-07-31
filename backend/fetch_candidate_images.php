@@ -1,6 +1,6 @@
 <?php
 include_once('../config.php');
-$force = 1;
+$force = $argv[1];
 $candidates = dbLookupArray("select nimsp_candidate_id,url, photo_url, photo_url2, state, votesmart_id from legislators where (photo_url != '' || votesmart_id != '') and image = '' and nimsp_candidate_id != 0");
 $bad_urls = array(); 
 print "Need to fetch ".count($candidates)." missing candidate images\n";
