@@ -242,7 +242,7 @@ for list of params and dfns. Used as default values but can be overridden in Gra
 			$this->processGraphData();
 			$this->renderSVG();
 			$this->renderImap();
-			$this->renderRaster();
+			// $this->renderRaster();
 			foreach (array('.svg', '.imap', ".".$this->rasterFormat) as $ext) {
 				$this->setPermissions($this->renderFileName.$ext);
 			}	
