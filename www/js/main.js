@@ -67,7 +67,7 @@ $.extend(NodeViz.prototype, {
 		$('#masthead').fadeIn(2000);
 		
 		gf.nodeList = $.map(gf.data.nodes, function(n) { 
-			return {label: n.label, value: n.id, search_label: n.label}
+			return {label: n.title, value: n.id, search_label: n.title}
 		});
 		$("#node_search").keypress(function(e) { //don't submit the form when someone hits enter in search field
 			var code = (e.keyCode ? e.keyCode : e.which);
@@ -99,10 +99,10 @@ $.extend(NodeViz.prototype, {
 			var li = $("<li>");
 			if(n.type == 'candidates') {
 				li.addClass('politician');
-				label = n.label+" <span class='"+n.party+" searchdetails'>("+n.party+' '+n.district+")</span>";
+				label = n.title+" <span class='"+n.party+" searchdetails'>("+n.party+' '+n.district+")</span>";
 			} else {
 				li.addClass('company');
-				label = "<span>"+n.label+" <span class='"+n.sitecode+" searchdetails'>("+toWordCase(n.sitecode)+")</span></span>";
+				label = "<span>"+n.title+" <span class='"+n.sitecode+" searchdetails'>("+toWordCase(n.sitecode)+")</span></span>";
 			}
 			return li
 			.append( "<a>" + label+ "</a>" )
@@ -124,8 +124,8 @@ $.extend(GraphList.prototype, {
 	listNodeEntry: function(node) {
 		var label;
 		var content = "";
-		if (node.label) { 
-			label = node.label;
+		if (node.title) { 
+			label = node.title;
 		} else { 
 			label = node.id;
 		}
@@ -159,8 +159,8 @@ $.extend(GraphList.prototype, {
 	listSubNodeEntry: function(node, parentNode, edgetype, direction) { 
 		var label;
 		var node_class = direction == 'to' ? 'to_node_item' : 'from_node_item'; 
-		if (node.label) { 
-			label = node.label;
+		if (node.title) { 
+			label = node.title;
 		} else { 
 			label = node.id;
 		}
@@ -210,11 +210,11 @@ function toggleInfocard(node) {
 		card.data('data-node',node.id);
 		switch( node.type ) {
 			case 'candidates':
-				$('#node-title').html(node.label+' <span class="district '+node.party+'">'+node.district+'</span>');
+				$('#node-title').html(node.title+' <span class="district '+node.party+'">'+node.district+'</span>');
 				$('#node-amount').html('Received $'+commas(Math.floor(node.value)));
 				break;
 			case 'donors':
-				$('#node-title').html(node.label+' <span class="sector '+node.sitecode+'">'+node.sitecode+'</span>');
+				$('#node-title').html(node.title+' <span class="sector '+node.sitecode+'">'+node.sitecode+'</span>');
 				$('#node-amount').html('Contributed $'+commas(Math.floor(node.value)));
 				break;
 		}
