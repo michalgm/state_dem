@@ -11,7 +11,7 @@
 	Main
 	========================================================================== */
 
-	body { height: 100%; overflow: hidden; }
+	body { height: 100%; overflow: hidden; background: #eee url('../img/paper.jpg'); }
 
 	a {
 		color: #93f;
@@ -36,28 +36,56 @@
 	========================================================================== */
 
 	#lists {  height: 99%; }
-	#graphs { height: 99%; }
+	#graphs { height: 99%; width: 100%; margin-top: -75px; max-height: 80%; background: transparent;}
 
 	#infocard {
 		position: absolute;
-		bottom: 41px; left: 0;
+		bottom: 40px; left: 0;
 		width: 100%;
-		height: 40%;
+		height: 75px;
 		background: fade(white,85%);
-		border-top: 1px solid white;
+		border-top: 1px solid #fff;
 		z-index: 99;
-		.container {
-			height: 90%;
+		.node-more {
+			display: none;
+		}
+		&.open {
+			height: 45%;
+			.node-more {
+				display: block;
+			}
+			.more {
+				-webkit-transform: rotate(180deg);
+				-moz-transform: rotate(180deg);
+				transform: rotate(180deg);
+			}
 		}
 		.district {
 			font-size: 0.8em;
 			&.D { color: blue; }
 			&.R { color: red; }
 		}
+		.sector {
+			font-size: 0.8em;
+			text-transform: uppercase;
+		}
 		#node-title {
+			position: absolute;
+			top: 15px; left: 15px;
+			margin: 0;
+			padding: 0;
 			width: 100%;
 			font-size: 2em;
-			font-family: Diavlo,"Helvetica Neue",Helvetica,sans-serif;
+			font-family: "Diavlo","Helvetica Neue",Helvetica,sans-serif;
+			font-weight: normal;
+		}
+		#node-amount {
+			position: absolute;
+			top: 45px; left: 15px;
+			margin: 0;
+			padding: 0;
+			font: normal 1.2em "Diavlo","Helvetica Neue",Helvetica,sans-serif;
+			color: green;
 		}
 		#node-image {
 			position: relative;
@@ -66,6 +94,7 @@
 			width: 15.6667%;
 			margin-right: 1%;
 			overflow: hidden;
+
 			img {
 				position: absolute;
 				display: block;
@@ -76,36 +105,58 @@
 			}
 		}
 		#node-barchart {
-			float: left;
-			width: 49%;
-			height: 80%;
-			margin-right: 1%;
+			position: absolute;
+			top: 5em; left: 15px;
+			width: 47.5%;
+			height: 75%;
 			min-height: 250px;
 			.amount {
 				font-size: 10px;
+				fill: #999;
 			}
 			.year {
 				fill: #474;
-				font-weight: bold;
+				font-weight: lighter;
 			}
 			.bar {
 				fill: #696;
 			}
 		}
-		#node-piechart1, #node-piechart2 {
-			float: left;
-			width: 16.1667%;
-			margin-right: 1%;
-			height: 80%;
+		#node-piechart {
+			position: absolute;
+			top: 5em; right: 15px;
+			width: 47.5%;
+			height: 33%;
 			min-height: 250px;
+			text-align: right;
+			.chart-label {
+				fill: #fff;
+				font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+				font-weight: lighter;
+			}
 		}
-		#node-piechart2 { margin-right: 0; }
-		.close {
+		#node-csvlink {
+			position: absolute;
+			bottom: 15px; right: 15px;
+			a {
+				display: block;
+				padding: 5px;
+				color: #999;
+				background: #eee;
+				border: 1px solid #ddd;
+				border-radius: 5px;
+				font-size: 0.8em;
+				&:hover {
+					color: #666;
+				}
+			}
+		}
+		.close, .more {
 			position: absolute;
 			top: -18px; right: 15px;
 			height: 36px; width: 36px;
 			font-size: 18px;
-			line-height: 32px;
+			line-height: 36px;
 			text-align: center;
 			font-weight: bold;
 			color: #666;
@@ -117,6 +168,14 @@
 				color: #fff;
 				background: #f90;
 			}
+		}
+		.more {
+			right: 60px;
+			font-size: 12px;
+			line-height: 38px;
+			-webkit-transition: -webkit-transform 0.5s;
+			-moz-transition: -moz-transform 0.5s;
+			transition: transform 0.5s;
 		}
 	}
 
@@ -139,7 +198,6 @@
 #list_menu li.selected { background-color: #f90; color: #666;}
 #lists { width: 300px; float: right; right: 0px;z-index: 1;  }
 
-#graphs { margin-top:-90px; width: auto;} 
 .nodelist_container { border-left: 1px solid #999; border-bottom: 1px solid #999; clear: both;  background: #ddd;}
 .nodelist .amount { float: right; font-size: 1em; font-weight:500; }
 .sublists_container { margin-right: -5px; margin-left: 15px;  font-size: .9em; background:transparent;}
@@ -186,6 +244,7 @@ li#donors_menu { position: absolute; right: 0px; width: 149px; }
 	position: absolute;
 	top: 35px;
 	left: 50%;
+	margin-left: -10px;
 	content: "";
 	border: 10px solid;
 	border-color: fade(#000,85%) transparent transparent transparent;
@@ -224,7 +283,7 @@ text.label { fill: #fff; font-weight: 600; font-family: 'Ubuntu', sans-serif; fo
 .chip.contrib_C  { border-color: #563b4e; }
 .chip.contrib_U  { border-color: #4c4c4c; }
 
-#svg_overlay .node {stroke-width: 1px !important;}
+#svg_overlay .node polygon {stroke-width: 1px !important;}
 #svg_overlay .REPUBLICAN .nhighlight { fill: #661919; }
 #svg_overlay .DEMOCRAT .nhighlight { fill: #191966; }
 #svg_overlay .DEMOCRATIC-FARMER-LABOR .nhighlight { fill: #191966; }
@@ -247,11 +306,22 @@ text.label { fill: #fff; font-weight: 600; font-family: 'Ubuntu', sans-serif; fo
 #optionslist select { width: 150px; font-size: 100%; }
 #submit { margin-top: 10px; }
 
-#zoomcontrols { top: 50px; left: 50px; background: fade(black,25%); }
+#zoomcontrols { top: 50px; left: 50px; background: fade(black,25%); display:none; } // Hide for the moment
 #zoomcontrols span { float: none; }
 #zoomcontrols #zoomSlider { width: 10px; height: 100px; float: none; background: fade(white,25%); border: none; }
 
 #help { position: absolute; }
+
+#loading {
+	padding-top: 60%;
+	background: fade(#fff,75%);
+	z-index: 999;
+	span {
+		background-color: transparent !important;
+		.message { display: none; }
+	}
+
+}
 
 // Header
 
@@ -261,7 +331,7 @@ text.label { fill: #fff; font-weight: 600; font-family: 'Ubuntu', sans-serif; fo
 
 #navbar {
 	min-height: 40px;
-	select {
+	select, .navitem {
 		float: left;
 		display: block;
 		background: transparent;
@@ -291,6 +361,7 @@ text.label { fill: #fff; font-weight: 600; font-family: 'Ubuntu', sans-serif; fo
 @media screen and (max-width: 480px) {
 	#navbar {
 		padding: 0;
+		border-top: 1px solid #444;
 		.navlist {
 			display: none;
 			.navitem {
@@ -302,6 +373,7 @@ text.label { fill: #fff; font-weight: 600; font-family: 'Ubuntu', sans-serif; fo
 		}
 		#pull {
 			display: block;
+			overflow: hidden;
 		}
 	}
 }
@@ -315,4 +387,8 @@ text.label { fill: #fff; font-weight: 600; font-family: 'Ubuntu', sans-serif; fo
 	background: #eee;
 	border-top: 1px solid #ddd;
 	line-height: 40px;
+	opacity: 0.5;
+	&:hover {
+		opacity: 1;
+	}
 }

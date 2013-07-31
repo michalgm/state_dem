@@ -89,10 +89,14 @@ $.Class("NodeViz", {}, {
 			error += "<li><a href='"+data['dot']+"'>Dot File</a></li>";
 		}
 		error += "</span>";
-		$('#'+this.options.errordiv).html(error).show();
+		if(! $('#'+this.options.errordiv + '#errormsg').length) { 
+			$('#'+this.options.errordiv).append($("<div/>").attr('id', 'errormsg'));
+		}
+		$('#'+this.options.errordiv + ' #errormsg').html(error);
+		$('#'+this.options.errordiv).show();
 	},
 	clearError: function() {
-		$('#'+this.options.errordiv).empty();
+		$('#'+this.options.errordiv + ' #errormsg').empty();
 		$('#'+this.options.errordiv).hide();
 	},
 	timeOutExceeded: function(request) {
@@ -155,10 +159,16 @@ $.Class("NodeViz", {}, {
 			$.proxy(function() { this.onLoading(this.options.loadingdiv); }, this)
 		);
 	},
-	panToNode: function(id,level) {
+	panToNode: function(id,level,offset) {
+		//zooms graph to node if in svg mode
+		if (this.options.useSVG ==1) {
+			this.renderers['GraphImage'].panToNode(id, level, offset);
+		}
+	},
+	zoom: function(zoomlevel) {
 		//zooms graph if in svg mode
 		if (this.options.useSVG ==1) {
-			this.renderers['GraphImage'].panToNode(id, level);
+			this.renderers['GraphImage'].zoom(zoomlevel);
 		}
 	},
 	highlightNode: function(id, noshowtooltip, renderer) {
@@ -297,7 +307,9 @@ $.Class("NodeViz", {}, {
 		$.map(this.renderers, function(o) { 
 			$(['pre_', '', 'post_']).each(function(i, prefix) { 
 				if (typeof(o[prefix+method]) == 'function') { 
+					//console.time(o.Class.fullName+prefix+method);
 					o[prefix+method].apply(o, args); 
+					//console.timeEnd(o.Class.fullName+prefix+method);
 				}
 			});
 		});

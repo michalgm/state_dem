@@ -87,22 +87,18 @@ GraphImage("GraphSVG", {}, {
 		$('#image>svg').svg();
 		var svg = $('#image>svg').svg('get');
 		$('#images g').each( function(index, g) { 
-			var id = $(g).attr('id');
-			if ($('#a_'+id).length) { 
-				svg.clone($('#'+id), $('#a_'+id).children());
-				svg.remove($('#a_'+id));
-			}
-			$(g).attr('id', 'underlay_'+id);
+			$(g).attr('id', 'underlay_'+$(g).attr('id'));
 		});
 		
 		//insert the svg image again as the overlay
 		$('#images').append($('<div/>').attr('id','svg_overlay'));
 		$('#svg_overlay').append($('#svg_overlay')[0].ownerDocument.importNode(svgdoc.firstChild, true));
-		$('#svg_overlay g').each( function(index, g) { 
-			var id = $(g).attr('id');
-			if ($('#a_'+id).length) { 
-				svg.clone($('#'+id), $('#a_'+id).children());
-				svg.remove($('#a_'+id));
+
+		//remove anchor groups
+		$('#image g, #svg_overlay g').each( function(index, g) { 
+			var a = $('#a_'+$(g).attr('id'));
+			if (a.length) { 
+				a.contents().unwrap();
 			}
 		});
 
@@ -418,18 +414,30 @@ GraphImage("GraphSVG", {}, {
 		delta.y = (center.y - node_center.y);
 		return delta;
 	},
-	panToNode: function(id, zoom) {
+	panToNode: function(id, zoom, offset) {
 		//re-center graph on center of a node, and optionally change zoom level
 
 		var delta = this.getElementCenter(id);
+		if (offset && typeof(offset.x) != 'undefined') { 
+			var point = delta.matrixTransform(this.ctm);
+			point.x += offset.x;
+			point.y += offset.y;
+			delta = point.matrixTransform(this.stateTf);
+		}
 		var k = this.matrixToTransform(this.ctm.translate(delta.x,delta.y));
 		
 		$('#graph0, #underlay_graph0').animate({svgTransform:k}, 1000, 
 			$.proxy(function() {
 				this.updateCTM();
 				if (typeof(zoom) != 'undefined') {
-					//this.zoomToNode(id, zoom);
-					this.zoom(zoom,this.calculateCenter());
+					if (offset && typeof(offset.x) != 'undefined') { 
+						var center = this.calculateCenter();
+						center.x += offset.x;
+						center.y += offset.y;
+						this.zoom(zoom,center);
+					} else {
+						this.zoom(zoom,this.calculateCenter());
+					}
 				}
 			}, this)
 		);
