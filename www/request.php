@@ -40,7 +40,6 @@ function getContributionsByYear() {
 	$where = " and cycle >= $min_cycle ";
 	if ($_REQUEST['type'] == 'candidates') {
 		$field = 'recipient_ext_id';
-		$where = "";
 	}
 	return array_values(dbLookupArray("select cycle as label, sum(amount) as value from contributions_dem where $field = '".dbEscape(str_replace('co-', '', $_REQUEST['id']))."' $where group by cycle order by cycle"));
 }
