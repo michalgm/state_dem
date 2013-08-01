@@ -24,6 +24,7 @@ $states = fetchCol("select state from states");
 $min_cycle = 2006;
 $max_cycle = 2012;
 
+#$remotecache = "http://states.styrotopia.net/NodeViz/";
 $remotecache = "";
 
 function xml2array($xml) {
