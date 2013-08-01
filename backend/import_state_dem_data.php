@@ -7,27 +7,19 @@ $fields = "cycle,transaction_id,is_amendment,amount,date,contributor_name,contri
 dbwrite("delete from contributions_dem");
 dbwrite("ALTER TABLE contributions_dem DISABLE KEYS");
 
-print "matching on parent_org\n";
-dbwrite("insert ignore into contributions_dem ($fields, company_name, company_id, sitecode) select a.*, name, match_id, dem_type from contributions a join $companies_table b on parent_organization_name = name where contributor_category not like 'e11%' and  contributor_category != 'e1210'  and match_contribs_on_name = 1 and ignore_all_contribs = 0 and recipient_ext_id in (select nimsp_candidate_id from legislators)");
-
-print "matching on org\n";
-dbwrite("insert ignore into contributions_dem ($fields, company_name, company_id, sitecode) select a.*, name, match_id, dem_type from contributions a join $companies_table b on organization_name = name where contributor_category not like 'e11%' and  contributor_category != 'e1210'  and match_contribs_on_name = 1 and ignore_all_contribs = 0 and recipient_ext_id in (select nimsp_candidate_id from legislators)");
-
-print "matching on employer\n";
-dbwrite("insert ignore into contributions_dem ($fields, company_name, company_id, sitecode) select a.*, name, match_id, dem_type from contributions a join $companies_table b on contributor_employer = name where contributor_category not like 'e11%' and  contributor_category != 'e1210'  and match_contribs_on_name = 1 and ignore_all_contribs = 0 and recipient_ext_id in (select nimsp_candidate_id from legislators)");
-
-print "matching on occupation\n";
-dbwrite("insert ignore into contributions_dem ($fields, company_name, company_id, sitecode) select a.*, name, match_id, dem_type from contributions a join $companies_table b on contributor_occupation = name where contributor_category not like 'e11%' and  contributor_category != 'e1210'  and match_contribs_on_name = 1 and ignore_all_contribs = 0 and recipient_ext_id in (select nimsp_candidate_id from legislators)");
+foreach(array('parent_organization_name', 'organization_name', 'contributor_employer', 'contributor_occupation') as $type) { 
+	print "matching on $type\n";
+	dbwrite("insert ignore into contributions_dem ($fields, company_name, company_id, sitecode) select a.*, name, match_id, dem_type from contributions a join $companies_table b on $type = name where contributor_category not like 'e11%' and  contributor_category != 'e1210' and recipient_type = 'P' and match_contribs_on_name = 1 and ignore_all_contribs = 0 and non_company_name = 0 and recipient_ext_id in (select nimsp_candidate_id from legislators)");
+}
 
 print "matching on code\n";
 dbwrite("insert ignore into contributions_dem ($fields, sitecode) select a.*, if(contributor_category = 'E1210', 'coal', 'oil') from contributions a where (contributor_category like 'e11%' or contributor_category = 'e1210') and recipient_ext_id in (select nimsp_candidate_id from legislators)");
 dbwrite("ALTER TABLE contributions_dem ENABLE KEYS");
 
 print "filling in company_ids and names for contribs coded as DEM\n";
-dbwrite("update contributions_dem a join $companies_table on parent_organization_name = name  set a.company_name = name, a.company_id = match_id where company_id is null and ignore_all_contribs = 0");
-dbwrite("update contributions_dem a join $companies_table on organization_name = name  set a.company_name = name, a.company_id = match_id where company_id is null and ignore_all_contribs = 0");
-dbwrite("update contributions_dem a join $companies_table on contributor_employer = name  set a.company_name = name, a.company_id = match_id where company_id is null and ignore_all_contribs = 0");
-dbwrite("update contributions_dem a join $companies_table on contributor_occupation = name  set a.company_name = name, a.company_id = match_id where company_id is null and ignore_all_contribs = 0");
+foreach(array('parent_organization_name', 'organization_name', 'contributor_employer', 'contributor_occupation') as $type) { 
+	dbwrite("update contributions_dem a join $companies_table on $type = name  set a.company_name = name, a.company_id = match_id where company_id is null and non_company_name = 0 and $type != ''");
+}
 dbwrite("update contributions_dem set company_name = if(parent_organization_name != '', parent_organization_name, if(organization_name != '', organization_name, if(contributor_employer != '', contributor_employer, contributor_occupation))) where company_name = ''");
 
 print "Filling in missing company names based on contributor_name\n";
@@ -37,8 +29,8 @@ dbwrite("update contributions_dem a join (select contributor_name, contributor_z
 dbwrite("update contributions_dem a join $companies_table b on name = company_name set a.company_id = b.match_id where a.company_id is null and company_name != ''");
 
 print "Removing contributions for unknown candidates, or old contribs to non-current legislators\n";
-dbwrite("delete from contributions_dem where recipient_ext_id not in (select imsp_candidate_id from legislator_terms where term >= 2008) or (recipient_ext_id not in (select imsp_candidate_id from legislator_terms where term = 2012) and cycle < 2008)");
-#dbwrite("delete from contributions_dem where company_id in (select company_id from oilchange.companies where ignore_all_contribs = 1)");
+dbwrite("delete from contributions_dem where recipient_ext_id not in (select imsp_candidate_id from legislator_terms where term >= 2008) or (recipient_ext_id not in (select imsp_candidate_id from legislator_terms where term = 2012) and cycle < 2008) or recipient_type != 'P' or company_id = 1");
+dbwrite("delete from contributions_dem where company_id in (select id from companies where ignore_all_contribs = 1)");
 dbwrite("delete from contributions_dem where company_name = ''");
 
 print "Creating temporary tables to handle new companies\n";
@@ -60,6 +52,10 @@ dbwrite("insert into companies (name, match_name, source, dem_type, match_contri
 print "--Filling in company ids\n";
 dbwrite("update companies set match_id = id where match_id is null");
 dbwrite("update contributions_dem a join companies b on company_name = match_name set a.company_id = b.match_id where a.company_id is null");
+print "--Deleting records for bad company names\n";
+#dbwrite("delete from contributions_dem where company_id = 1");
+#dbwrite("delete from contributions_dem where company_name in (select name from companies where ignore_all_contribs = 1)");
+
 dbwrite("drop table if exists companies_crp");
 dbwrite("drop table if exists companies_nimsp");
 //exit;
@@ -82,6 +78,9 @@ foreach ($names as $name) {
 		dbwrite("update oilchange.companies set match_name = '".dbEscape($new_name)."', name='".dbEscape($new_name)."' where name = '".dbEscape($name)."'");
 	}
 }
+
+print "Updating State Years\n";
+dbwrite("update states a join (select recipient_state as state, group_concat(distinct cycle order by cycle) as years from contributions_dem where cycle >= $min_cycle and cycle <= $max_cycle and cycle %2 = 0 group by recipient_state) b on a.state = b.state set a.years = b.years");
 
 function fixWord($words) {
 	$abbreviations = array('AA','AAA','AB','ABB','ABC','ABH','AC','ACT','AEI','AEL','AEP','AEPPSO','AES','AG','AGF','AGL','AJ','AK','AL','ALLETE','AM','AMPM','AN','ANR','AR','AS','AT','ATP','AW','AZ','AZTX','BB','BBF','BC','BD','BDH','BG','BHP','BJ','BLK','BNB','BOC','BP','BPA','BTA','BTT','C','CA','CAMAC','CBI','CBS','CCS','CDX','CE','CH','CHC','CHS','CI','CIPS','CIS','CITGO','CK','CL','CMP','CMS','CNG','CNO','CNX','CONSOL','CPS','CRC','CSS','CSX','CT','DAG','DBA','DC','DE','DH','DHJ','DK','DLB','DPL','DR','DTE','DWJ','EC','ECC','EIL','EJ','ELM','EN','ENI','ENIII','ENS','EO','EONAG','EQT','ET','EXL','FH','FL','FM','FMC','FMF','FPL','FSD','FW','FX','GA','GE','GF','GFI','GIANT','GL','GM','GMX','GP','GU','GW','HC','HD','HI','HNG','HS','HT','IA','IBEX','ICC','ID','IDC','IH','IHRDC','III','IL','IMTT','IN','IPALCO','IRI','ITT','IWC','JA','JCE','JCN','JD','JEC','JF','JG','JH','JJ','JM','JMWLLC','JOB','JP','JR','JS','JT','JTOD','JW','JWW','KBC','KBR','KC','KGEN','KLT','KN','KP','KPI','KS','KY','LA','LG','LGE','LI','LLC','LLOG','LLP','LM','LMP','LNG','LO','LP','LPC','LPG','LS','LTD','MA','MAP','MB','MC','MCC','MCR','MD','MDU','ME','MFA','MGS','MH','MHA','MI','MJ','MJH','MN','MO','MOC','MP','MPG','MS','MSC','MSL','MT','MTL','MTM','MV','MVP','MWI','MWJ','NACCO','NANA','NC','ND','NE','NH','NI','NIC','NIPSCO','NJ','NL','NM','NOV','NRG','NRPLP','NV','NW','NY','OCTGLLP','OGE','OH','OK','OMI','ONEOK','OR','OSI','PA','PAC','PAMD','PBF','PBGH','PBS','PDVSA','PEBA','PECO','PES','PFE','PGE','PK','PMR','PNERC','PNM','POG','PPG','PPL','PR','PSEG','PSI','PW','QEP','RAG','RC','RCP','RI','RII','RIM','RK','RKA','RL','RLM','RLU','RP','RPC','RPM','RSA','RSI','SA','SC','SCF','SD','SDG','SDS','SER','SES','SGS','SIGECO','SJ','SK','SOCO','SP','SPT','SPY','SR','SSI','SSL','SW','TB','TC','TD','TDC','TECO','TELO','TG','TGS','TH','TN','TRB','TRT','TRZ','TSP','TSS','TU','TX','TXU','UAF','UE','UGI','UMC','UNEV','UOPLLC','URS','US','USA','USLLC','USX','UT','UTI','VA','VF','VI','VK','VL','VP','VT','VTI','WA','WB','WC','WCLIII','WCS','WE','WG','WH','WI','WL','WM','WPS','WT','WV','WW','WY','XTO','XXI');
