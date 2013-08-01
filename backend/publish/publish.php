@@ -11,11 +11,10 @@ system("git tag 'Publish_from_$date'");
 system("git push");
 system("git push --tags");
 
-print "Loading DB into Remote\n";
-#rsync("./db.sql", "$login:$staging_dir/");
-ssh_cmd("mysql -h db -u priceofoil $remote_staging_db < $staging_dir/backend/publish/db.sql;");
 print "Update git repo\n";
 ssh_cmd("cd $staging_dir;git fetch origin; git checkout master; git reset --hard origin/master");
+print "Loading DB into Remote\n";
+ssh_cmd("mysql -h db $remote_staging_db < $staging_dir/backend/publish/db.sql;");
 print "Update cache\n";
 rsync("../../www/cache", "$login:$staging_dir/www/");
 update_config('staging');
