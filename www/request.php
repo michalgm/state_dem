@@ -2,6 +2,13 @@
 header('Access-Control-Allow-Origin: *');  
 include("../config.php");
 
+$id = str_replace('co-', '', dbEscape($_REQUEST['id']));
+$id_field = $_REQUEST['type'] == 'candidates' ? 'recipient_ext_id' : 'company_id';
+$state = dbEscape($_REQUEST['state']);
+$chamber = dbEscape($_REQUEST['chamber']);
+$where = " $id_field = '$id' and cycle >= $min_cycle and c.seat = '$chamber' and recipient_state = '$state' ";
+
+
 switch($_REQUEST['method']) {
 	case 'chartData': 
 		header('Content-type: application/json');
@@ -12,11 +19,9 @@ switch($_REQUEST['method']) {
 		print json_encode($response);
 		break;
 	case 'csv':
-
-		$id_field = $_REQUEST['type'] == 'candidates' ? 'recipient_ext_id' : 'company_id';
-		$id = str_replace('co-', '', dbEscape($_REQUEST['id']));
 		$csv = "";
-		$contribs = dbLookupArray("SELECT transaction_id, full_name as Legislator, recipient_state as State, concat(if(c.seat='state:lower', s.lower_name, 'Senate'), ' (',c.District,')') as Seat, t.Party, contributor_name as Contributor, companies.name as Company, date_format(Date, '%m/%d/%Y') as Date, Amount FROM contributions_dem c join companies on company_id = id join legislators l on recipient_ext_id = nimsp_candidate_id join legislator_terms t on recipient_ext_id = imsp_candidate_id and cycle = term join states s on recipient_state = s.state where $id_field = '$id' order by c.date asc");
+
+		$contribs = dbLookupArray("SELECT transaction_id, full_name as Legislator, recipient_state as State, if(c.seat='state:lower', s.lower_name, 'Senate') as Chamber, c.District as District, t.Party, contributor_name as Contributor, if(Contributor_type = 'C', 'PAC', 'Individual') as 'Contributor Type', companies.name as Company, date_format(Date, '%m/%d/%Y') as Date, Cycle, Amount FROM contributions_dem c join companies on company_id = id join legislators l on recipient_ext_id = nimsp_candidate_id join legislator_terms t on recipient_ext_id = imsp_candidate_id and cycle = term join states s on recipient_state = s.state where $where order by c.date asc");
 		$csv = array2CSV(array_slice(array_keys(reset($contribs)), 1));
 		foreach($contribs as $contrib) { 
 			unset($contrib['transaction_id']);
@@ -35,18 +40,14 @@ switch($_REQUEST['method']) {
 }
 
 function getContributionsByYear() {
-	global $min_cycle;
-	$field = 'company_id';
-	$where = " and cycle >= $min_cycle ";
-	if ($_REQUEST['type'] == 'candidates') {
-		$field = 'recipient_ext_id';
-	}
-	return array_values(dbLookupArray("select cycle as label, sum(amount) as value from contributions_dem where $field = '".dbEscape(str_replace('co-', '', $_REQUEST['id']))."' $where group by cycle order by cycle"));
+	global $where;
+	return array_values(dbLookupArray("select cycle as label, sum(amount) as value from contributions_dem c where $where group by cycle order by cycle"));
 }
 
 function getContributionsByCategory() {
+	global $where;
 	$category = $_REQUEST['type'] == 'candidates' ? 'sitecode' : 'party';
-	return array_values(dbLookupArray("select $category as label, sum(amount) as value from contributions_dem c join legislator_terms on recipient_ext_id = imsp_candidate_id and term = cycle where ".($_REQUEST['type'] == 'candidates' ? 'recipient_ext_id' : 'company_id')." = '".dbEscape(str_replace('co-', '', $_REQUEST['id']))."' group by $category order by $category"));
+	return array_values(dbLookupArray("select $category as label, sum(amount) as value from contributions_dem c join legislator_terms on recipient_ext_id = imsp_candidate_id and term = cycle where $where group by $category order by $category"));
 }
 
 function array2CSV (array $fields, $delimiter = ',', $enclosure = '"') {
