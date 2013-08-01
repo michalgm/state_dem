@@ -39,7 +39,7 @@ function ssh_cmd($cmd) {
 
 function rsync($source, $destination) { 
 	global $port;
-	system("rsync -a --rsh=\"ssh -p$port\" --port $port $source $destination");
+	system("rsync -az --rsh=\"ssh -p$port\" --port $port $source $destination");
 }
 
 function update_config($type='live') {
