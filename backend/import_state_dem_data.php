@@ -29,7 +29,7 @@ dbwrite("update contributions_dem a join (select contributor_name, contributor_z
 dbwrite("update contributions_dem a join $companies_table b on name = company_name set a.company_id = b.match_id where a.company_id is null and company_name != ''");
 
 print "Removing contributions for unknown candidates, or old contribs to non-current legislators\n";
-dbwrite("delete from contributions_dem where recipient_ext_id not in (select imsp_candidate_id from legislator_terms where term >= 2008) or (recipient_ext_id not in (select imsp_candidate_id from legislator_terms where term = 2012) and cycle < 2008) or recipient_type != 'P' or company_id = 1");
+dbwrite("delete from contributions_dem where transaction_id in (select * from (select transaction_id from contributions_dem a left join legislator_terms b on recipient_ext_id = imsp_candidate_id and cycle = term and recipient_state = state where imsp_candidate_id is null) a ) or (recipient_ext_id not in (select imsp_candidate_id from legislator_terms where term = $max_cycle) and cycle < $min_cycle) or recipient_type != 'P' or company_id = 1");
 dbwrite("delete from contributions_dem where company_id in (select id from companies where ignore_all_contribs = 1)");
 dbwrite("delete from contributions_dem where company_name = ''");
 
