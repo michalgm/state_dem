@@ -9,7 +9,7 @@ dbwrite("ALTER TABLE contributions_dem DISABLE KEYS");
 
 foreach(array('parent_organization_name', 'organization_name', 'contributor_employer', 'contributor_occupation') as $type) { 
 	print "matching on $type\n";
-	dbwrite("insert ignore into contributions_dem ($fields, company_name, company_id, sitecode) select a.*, name, match_id, dem_type from contributions a join $companies_table b on $type = name where contributor_category not like 'e11%' and  contributor_category != 'e1210' and recipient_type = 'P' and match_contribs_on_name = 1 and ignore_all_contribs = 0 and non_company_name = 0 and recipient_ext_id in (select nimsp_candidate_id from legislators)");
+	dbwrite("insert ignore into contributions_dem ($fields, company_name, company_id, sitecode) select a.*, name, match_id, dem_type from contributions a join $companies_table b on $type = name where $type != '' and contributor_category not like 'e11%' and  contributor_category != 'e1210' and recipient_type = 'P' and match_contribs_on_name = 1 and ignore_all_contribs = 0 and non_company_name = 0 and recipient_ext_id in (select nimsp_candidate_id from legislators)");
 }
 
 print "matching on code\n";
@@ -20,7 +20,9 @@ print "filling in company_ids and names for contribs coded as DEM\n";
 foreach(array('parent_organization_name', 'organization_name', 'contributor_employer', 'contributor_occupation') as $type) { 
 	dbwrite("update contributions_dem a join $companies_table on $type = name  set a.company_name = name, a.company_id = match_id where company_id is null and non_company_name = 0 and $type != ''");
 }
-dbwrite("update contributions_dem set company_name = if(parent_organization_name != '', parent_organization_name, if(organization_name != '', organization_name, if(contributor_employer != '', contributor_employer, contributor_occupation))) where company_name = ''");
+foreach(array('parent_organization_name', 'organization_name', 'contributor_employer', 'contributor_occupation') as $type) { 
+	dbwrite("update contributions_dem set company_name = $type where $type != '' and $type not in (select name from $companies_table where non_company_name = 1) and company_name = ''");
+}
 
 print "Filling in missing company names based on contributor_name\n";
 #dbwrite("update contributions_dem a join (select contributor_name, contributor_zipcode,  SUBSTRING_INDEX(GROUP_CONCAT(company_name ORDER BY num DESC SEPARATOR ':::'), ':::', 1) AS company_name from (select contributor_name, contributor_zipcode,company_name, count(*) as num from contributions_dem where company_name != '' and (contributor_category = 'e1210' or contributor_category like 'e11%') group by contributor_name, contributor_zipcode, company_name) a group by contributor_name ) b using (contributor_name, contributor_zipcode) set a.company_name = b.company_name where a.company_name = ''");
