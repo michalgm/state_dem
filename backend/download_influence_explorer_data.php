@@ -6,7 +6,7 @@ if (isset($argv[1])) {
 	$url = $argv[1];
 	$size_cmd = 'unzip -l contributions.nimsp.csv.zip | grep -e "^[0-9]" -m1 | cut -f1 -d " "';
 #	system("wget '$url'");
-	system("unzip -p contributions.nimsp.csv.zip | pv -s `$size_cmd`  | ./csvfix find -f 30 -e ".implode(' -e ', array_keys($states))." |  sed -e 's/,,/,\\N,/g' -e 's/,,/,\\N,/g' > contributions.nimsp.csv");
+	passthru("unzip -p contributions.nimsp.csv.zip | pv -s `$size_cmd`  | ./csvfix find -f 30 -e ".implode(' -e ', array_keys($states))." |  sed -e 's/,,/,\\N,/g' -e 's/,,/,\\N,/g' > contributions.nimsp.csv");
 	dbwrite("delete from contributions");
 	dbwrite("load data local infile 'contributions.nimsp.csv' into table contributions  FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '\"' (@x, @x, cycle, @x, transaction_id, @x, @x, is_amendment, amount, date, contributor_name, contributor_ext_id, contributor_type, contributor_occupation, contributor_employer, @x, contributor_address, contributor_city, contributor_state, contributor_zipcode, contributor_category, organization_name, organization_ext_id, parent_organization_name, parent_organization_ext_id, recipient_name, recipient_ext_id, @x, recipient_type, recipient_state, recipient_state_held, @x, committee_name, committee_ext_id, committee_party, candidacy_status, district, district_held, seat, seat_held, seat_status, seat_result);");
 }

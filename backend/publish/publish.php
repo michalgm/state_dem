@@ -1,6 +1,17 @@
 <?php
-
 require_once("./publish_config.php");
+if (! isset($argv[1])) { 
+	print "Usage: php publish.php <check | skipcheck | rollback>\n"; exit;
+}
+
+$command = $argv[1];
+
+if ($command == 'rollback') { 
+	print "Rolling back live site to previous state\n";
+	toggleSite();
+	exit;
+}
+
 $date  = date('Y.m.d-h.i');
 
 print "Dumping Local DB\n";
@@ -11,11 +22,11 @@ system("git tag 'Publish_from_$date'");
 system("git push");
 system("git push --tags");
 
-print "Update git repo\n";
+print "Update git repo\n\n";
 ssh_cmd("cd $staging_dir;git fetch origin; git checkout master; git reset --hard origin/master");
-print "Loading DB into Remote\n";
+print "Loading DB into Remote\n\n";
 ssh_cmd("mysql -h db $remote_staging_db < $staging_dir/backend/publish/db.sql;");
-print "Update cache\n";
+print "Update cache\n\n";
 rsync("../../www/cache", "$login:$staging_dir/www/");
 update_config('staging');
 
@@ -23,9 +34,13 @@ update_config('staging');
 #ssh_cmd("mysql -h db -u priceofoil $remotedb < $staging_dir/db.sql;");
 #update_config('staging');
 
-$toggle = readline("Check http://dev.states.dirtyenergymoney.com - does it look okay? (Y/N)");
-
-if (strtolower($toggle) == 'y') {
+if ($command == 'check') { 
+	$toggle = readline("Check http://dev.states.dirtyenergymoney.com - does it look okay? (Y/N)");
+	if (strtolower($toggle) == 'y') {
+		toggleSite();
+	}
+} else {
+	print "Skipping site verification\n\n";
 	toggleSite();
 }
 
@@ -48,7 +63,7 @@ function update_config($type='live') {
 	$dir = $type == 'live' ? $live_dir : $staging_dir;
 	$db = $type == 'live' ? $remotedb : $remote_staging_db;
 
-	print "Updating Config\n";
+	print "Updating Config\n\n";
 	ssh_cmd("sed -i -E \"s/NodeVizPath.*//\" ./$dir/www/js/main.js; 
 	sed -i -E \"s/http:\/\/styrotopia.net.*request.php/request.php/\" ./$dir/www/js/main.js;
 	sed -i -E \"s/cache = .*$/cache = 2;/\" ./$dir/config.php;
@@ -61,6 +76,7 @@ function update_config($type='live') {
 
 function toggleSite() {
 	global $live_dir, $temp_dir, $staging_dir, $remote_staging_db, $remotedb;
+	print "Transposig staging and live sites\n\n";
 	print "\tTransposing staging dir and live dir\n";
 	ssh_cmd("mv $live_dir $temp_dir; mv $staging_dir $live_dir; mv $temp_dir $staging_dir;");
 
