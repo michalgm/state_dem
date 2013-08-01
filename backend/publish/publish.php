@@ -30,14 +30,13 @@ print "Update cache\n\n";
 rsync("../../www/cache", "$login:$staging_dir/www/");
 update_config('staging');
 
-#ssh_cmd("rsync --delete -a -q -r -P $live_dir/ $staging_dir;")
-#ssh_cmd("mysql -h db -u priceofoil $remotedb < $staging_dir/db.sql;");
-#update_config('staging');
-
 if ($command == 'check') { 
-	$toggle = readline("Check http://dev.states.dirtyenergymoney.com - does it look okay? (Y/N)");
+	print "\nCheck http://dev.states.dirtyenergymoney.com - does it look okay? (Y/N): ";
+	$toggle = readline("");
 	if (strtolower($toggle) == 'y') {
 		toggleSite();
+	} else {
+		print "Leaving live site alone. Current code remains on  http://dev.states.dirtyenergymoney.com\n\n";
 	}
 } else {
 	print "Skipping site verification\n\n";
@@ -64,14 +63,16 @@ function update_config($type='live') {
 	$db = $type == 'live' ? $remotedb : $remote_staging_db;
 
 	print "Updating Config\n\n";
-	ssh_cmd("sed -i -E \"s/NodeVizPath.*//\" ./$dir/www/js/main.js; 
-	sed -i -E \"s/http:\/\/styrotopia.net.*request.php/request.php/\" ./$dir/www/js/main.js;
-	sed -i -E \"s/cache = .*$/cache = 2;/\" ./$dir/config.php;
-	sed -i -E \"s/debug = .*$/debug = 0;/\" ./$dir/config.php;
-	sed -i -E \"s/dbname = .*$/dbname = '$db';/\" ./$dir/config.php;
-	sed -i -E \"s/dblogin = .*$/dblogin = 'priceofoil';/\" ./$dir/config.php;
-	sed -i -E \"s/dbpass = .*$/dbpass = 'eakViabAv0';/\" ./$dir/config.php;
-	sed -i -E \"s/dbhost = .*$/dbhost = 'db';/\" ./$dir/config.php;");
+	ssh_cmd("
+		sed -i -E \"s/cache' => .*$/cache' => 2,/\" ./$dir/www/NodeViz/config.php;
+		sed -i -E \"s/debug' => .*$/debug' => 0,/\" ./$dir/www/NodeViz/config.php;
+		sed -i -E \"s/\\\\\\$"."cache = .*$/\\\\\\$"."cache = 2;/\" ./$dir/config.php;
+		sed -i -E \"s/\\\\\\$"."debug = .*$/\\\\\\$"."debug = 0;/\" ./$dir/config.php;
+		sed -i -E \"s/\\\\\\$"."dbname = .*$/\\\\\\$"."dbname = '$db';/\" ./$dir/config.php;
+		sed -i -E \"s/\\\\\\$"."dblogin = .*$/\\\\\\$"."dblogin = 'priceofoil';/\" ./$dir/config.php;
+		sed -i -E \"s/\\\\\\$"."dbpass = .*$/\\\\\\$"."dbpass = 'eakViabAv0';/\" ./$dir/config.php;
+		sed -i -E \"s/\\\\\\$"."dbhost = .*$/\\\\\\$"."dbhost = 'db';/\" ./$dir/config.php;
+	");
 }
 
 function toggleSite() {
