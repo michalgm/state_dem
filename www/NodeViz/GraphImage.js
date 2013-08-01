@@ -44,6 +44,11 @@ $.Class("GraphImage", {}, {
 		$('#image').mousemove($.proxy(this.mousemove, this));
 		this.tooltip.mousemove($.proxy(this.mousemove, this));
 		this.tooltip.mouseout($.proxy(this.hideTooltip, this));
+		this.tooltip.click($.proxy(function(e) { 
+			var node = $('#'+this.current.node);
+			e.currentTarget = node; 
+			e.delegateTarget = node; 
+			node.trigger(e); }, this.NodeViz));
 	},
 	resize: function() {
 		this.graphDimensions = this.getDimensions();

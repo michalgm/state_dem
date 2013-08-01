@@ -274,13 +274,14 @@ $.Class("NodeViz", {}, {
 			if (action != '' || (this.options.functions['pre_'+eventtype] || this.options.functions['post_'+eventtype])) {
 				$(dom_element).on(eventtype, $.proxy(function(evt) { 
 					this.do_function(this.options.functions['pre_'+eventtype], evt, dom_element, graph_element, element_type, renderer);
-					if ((eventtype == 'click' || eventtype == 'mouseup') && renderer == 'svg') {
+					//This is supposed to prevent triggering networks on drag, but doesn't seem to work? disabling
+					/*if ((eventtype == 'click' || eventtype == 'mouseup') && renderer == 'svg') { //I can't remember what this is for
 						var origin = this.renderers.GraphImage.getEventPoint(evt).matrixTransform(this.renderers.GraphImage.stateTf); 
 						var state_origin = this.renderers.GraphImage.stateOrigin; 
 						if (state_origin.x != origin.x || state_origin.y != origin.y) {
 							return;
 						}
-					}
+					}*/
 					this.do_function(action, evt, dom_element, graph_element, element_type, renderer);
 					this.do_function(this.options.functions['post_'+eventtype], evt, dom_element, graph_element, element_type, renderer);
 
