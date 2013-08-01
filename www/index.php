@@ -132,6 +132,7 @@
 			require("../config.php");
 			echo json_encode(dbLookupArray("select * from states"));
 		?>;
+		<?= "var remotecache='$remotecache';" ?>
 	</script>
 </body>
 </html>
