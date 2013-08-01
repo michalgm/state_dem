@@ -16,6 +16,10 @@ $nodeViz_config['debug'] = 9;
 
 $worktypes = array('graph'=>'buildCache', 'cansummary'=>'canPlots', 'comsummary'=>'comPlots', 'congsummary'=>'congPlots', 'dollars'=>'generateDollar');
 
+$edgestore_tag = date('Y-m-d H:i');
+dbwrite("delete from edgestore where tag = '$edgestore_tag'");
+
+
 if (! isset($argv[2]) || $argv[2] == 'all') {
 	foreach($sections as $section) { 
 		$function = 'cache_'.$section;
@@ -51,9 +55,9 @@ function cache_races() {
 		system("rm -rf $nodeViz_config[cache_path]/*;");
 	}
 	$_REQUEST = array('candidateLimit' => 250, 'companyLimit'=>250, 'graphWidth'=>600, 'graphHeight'=>600);
-	$count = (((($max_cycle - $min_cycle) /2)+1) *2 *(count(array_keys($states))));
+	$count = (((($max_cycle - $min_cycle) /2)+1) *2 *(count($states)));
 	$x = 0;
-	foreach (array_keys($states) as $_REQUEST['state']) {
+	foreach ($states as $_REQUEST['state']) {
 		foreach (array('state:upper', 'state:lower') as $_REQUEST['chamber']) {
 			$_REQUEST['cycle'] = $min_cycle;
 			while ($_REQUEST['cycle'] <= $max_cycle) {

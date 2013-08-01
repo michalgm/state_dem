@@ -229,6 +229,17 @@ class StateDEM extends Graph {
 		$edges = $this->scaleSizes($edges, 'donations', 'value');
 		uasort($edges, function($a, $b) { return $a['value'] > $b['value']; }) ;
 		$this->data['edges'] = $edges;
+
+		global $edgestore_tag;
+		if($edgestore_tag != '') { 
+			$name = $this->graphname();
+			foreach(array_keys($this->data['edges']) as $edgeid) {
+				$edge = $this->data['edges'][$edgeid];
+				$setstring = "tag='$edgestore_tag', graphname='$name', type='$edge[type]', toid='$edge[toId]', fromid='$edge[fromId]', value=$edge[value]";
+				dbwrite("insert into edgestore set $setstring on duplicate key update $setstring" );
+			}
+		}
+
 	}
 
 	function graphname() {
