@@ -96,7 +96,7 @@
 	<!-- <div id="lists"></div> -->
 	<div id="graphs"></div>
 
-	<div id="infocard" data-node="null">
+	<div id="infocard" data-node="null" class="hide">
 		<a class="close">&times;</a>
 		<a class="more">&#9650;</a>
 		<h3 id="node-title"></h3>
