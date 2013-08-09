@@ -70,6 +70,7 @@
 		#searchfield .autocomplete .bold { font-weight: bold; }
 		#searchfield .autocomplete .searchdetails { font-size: .8em; }
 		#searchfield .autocomplete_img  { position: absolute; margin-left: 10px; }
+		#searchfield #no_results_found { font-size: 0.8em; color: #600; background: #933; text-shadow: 1px 1px #a44; border-radius: 5px; padding: 1em 0.5em;}
 	
 		#error { padding: 15px; margin-top: 170px; text-align: center; background: #eee; padding-top: 1; color: #c33; box-shadow: 0 0 1em rgba(0, 0, 0, 0.5); border: 1px solid #666; border-radius: 10px;}
 		.errordetails { display: none; }
@@ -95,7 +96,7 @@
 	<!-- <div id="lists"></div> -->
 	<div id="graphs"></div>
 
-	<div id="infocard" data-node="null">
+	<div id="infocard" data-node="null" class="hide">
 		<a class="close">&times;</a>
 		<a class="more">&#9650;</a>
 		<h3 id="node-title"></h3>

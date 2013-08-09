@@ -208,17 +208,19 @@ function toggleInfocard(node) {
 
 	updateInfocardData(node);
 
+	console.log( gf.data.properties );
+
 	if (card.is(':hidden') || node_id !== node.id) {
 		gf.panToNode(node.id, 4, {y:-50, x:0});
 		card.data('data-node',node.id);
 		switch( node.type ) {
 			case 'candidates':
 				$('#node-title').html(node.title+' <span class="district '+node.party+'">'+node.district+'</span>');
-				$('#node-amount').html('Received $'+commas(Math.floor(node.value)));
+				$('#node-amount').html('Received $'+commas(Math.floor(node.value))+' in '+ gf.data.properties.cycle);
 				break;
 			case 'donors':
 				$('#node-title').html(node.title+' <span class="sector '+node.sitecode+'">'+node.sitecode+'</span>');
-				$('#node-amount').html('Contributed $'+commas(Math.floor(node.value)));
+				$('#node-amount').html('Contributed $'+commas(Math.floor(node.value))+' to the '+gf.data.properties.state+' '+ $('#chamber :selected').text() +' in '+gf.data.properties.cycle);
 				break;
 		}
 		var url = (remotecache ? remotecache + '../' : '')+'request.php';
