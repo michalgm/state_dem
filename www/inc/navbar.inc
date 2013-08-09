@@ -11,7 +11,7 @@
 			<select name="cycle" id="cycle" class="navitem"> </select>
 			<div id="searchfield" class="navitem">
 				<input class="node_search" id="node_search" autocomplete="off" size="20" type="text" value="" />
-				<div id='no_results_found'>No Results Found</div>
+				<div id="no_results_found" class="hide">No Results Found</div>
 				<div class="autocomplete node_search_list" id="node_search_list" style=""></div>
 			</div>
 		</form>
