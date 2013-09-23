@@ -9,11 +9,11 @@ dbwrite("ALTER TABLE contributions_dem DISABLE KEYS");
 
 foreach(array('parent_organization_name', 'organization_name', 'contributor_employer', 'contributor_occupation') as $type) { 
 	print "matching on $type\n";
-	dbwrite("insert ignore into contributions_dem ($fields, company_name, company_id, sitecode) select a.*, name, match_id, dem_type from contributions a join $companies_table b on $type = name where $type != '' and contributor_category not like 'e11%' and  contributor_category != 'e1210' and recipient_type = 'P' and match_contribs_on_name = 1 and ignore_all_contribs = 0 and non_company_name = 0 and recipient_ext_id in (select nimsp_candidate_id from legislators)");
+	dbwrite("insert ignore into contributions_dem ($fields, company_name, company_id, sitecode) select a.*, name, match_id, dem_type from contributions a join $companies_table b on $type = name where $type != '' and contributor_category not like 'e11%' and  contributor_category != 'e1210' and recipient_type = 'P' and match_contribs_on_name = 1 and ignore_all_contribs = 0 and non_company_name = 0 and (recipient_ext_id in (select nimsp_candidate_id from legislators) or (seat = 'state:governor'))");
 }
 
 print "matching on code\n";
-dbwrite("insert ignore into contributions_dem ($fields, sitecode) select a.*, if(contributor_category = 'E1210', 'coal', 'oil') from contributions a where (contributor_category like 'e11%' or contributor_category = 'e1210') and recipient_ext_id in (select nimsp_candidate_id from legislators)");
+dbwrite("insert ignore into contributions_dem ($fields, sitecode) select a.*, if(contributor_category = 'E1210', 'coal', 'oil') from contributions a where (contributor_category like 'e11%' or contributor_category = 'e1210') and (recipient_ext_id in (select nimsp_candidate_id from legislators)  or (seat = 'state:governor'))");
 dbwrite("ALTER TABLE contributions_dem ENABLE KEYS");
 
 print "filling in company_ids and names for contribs coded as DEM\n";
@@ -30,10 +30,15 @@ dbwrite("update contributions_dem a join (select contributor_name, contributor_z
 dbwrite("update contributions_dem a join (select contributor_name, contributor_zipcode,  SUBSTRING_INDEX(GROUP_CONCAT(organization_name ORDER BY num DESC SEPARATOR ':::'), ':::', 1) AS company_name from (select contributor_name, contributor_zipcode, b.organization_name, count(*) as num  from contributions_dem a join contributions b using(contributor_name, contributor_zipcode) where a.company_name = '' and b.organization_name != '' group by contributor_name, contributor_zipcode, b.organization_name ) a group by contributor_name) b using (contributor_name, contributor_zipcode) set a.company_name = b.company_name where a.company_name = ''");
 dbwrite("update contributions_dem a join $companies_table b on name = company_name set a.company_id = b.match_id where a.company_id is null and company_name != ''");
 
-print "Removing contributions for unknown candidates, or old contribs to non-current legislators\n";
-dbwrite("delete from contributions_dem where transaction_id in (select * from (select transaction_id from contributions_dem a left join legislator_terms b on recipient_ext_id = imsp_candidate_id and cycle = term and recipient_state = state where imsp_candidate_id is null) a ) or (recipient_ext_id not in (select imsp_candidate_id from legislator_terms where term = $max_cycle) and cycle < $min_cycle) or recipient_type != 'P' or company_id = 1");
+print "Removing contributions for bad or missing companies\n";
 dbwrite("delete from contributions_dem where company_id in (select id from companies where ignore_all_contribs = 1)");
 dbwrite("delete from contributions_dem where company_name = ''");
+dbwrite("drop table if exists contributions_dem_all_candidates");
+print "Copying records for all candidates into new table before deleteing losers/non-legislators\n";
+dbwrite("create table contributions_dem_all_candidates like contributions_dem");
+dbwrite("insert into contributions_dem_all_candidates select * from contributions_dem");
+print "Removing contributions for unknown candidates, or old contribs to non-current legislators\n";
+dbwrite("delete from contributions_dem where transaction_id in (select * from (select transaction_id from contributions_dem a left join legislator_terms b on recipient_ext_id = imsp_candidate_id and cycle = term and recipient_state = state where imsp_candidate_id is null) a ) or (recipient_ext_id not in (select imsp_candidate_id from legislator_terms where term = $max_cycle) and cycle < $min_cycle) or recipient_type != 'P' or company_id = 1");
 
 print "Creating temporary tables to handle new companies\n";
 dbwrite("drop table if exists companies_crp");
