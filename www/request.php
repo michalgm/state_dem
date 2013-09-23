@@ -6,7 +6,7 @@ $id = str_replace('co-', '', dbEscape($_REQUEST['id']));
 $id_field = $_REQUEST['type'] == 'candidates' ? 'recipient_ext_id' : 'company_id';
 $state = dbEscape($_REQUEST['state']);
 $chamber = dbEscape($_REQUEST['chamber']);
-$where = " $id_field = '$id' and cycle >= $min_cycle and c.seat = '$chamber' and recipient_state = '$state' ";
+$where = " $id_field = '$id' and cycle >= $min_cycle and t.seat = '$chamber' and recipient_state = '$state' ";
 
 
 switch($_REQUEST['method']) {
@@ -41,13 +41,13 @@ switch($_REQUEST['method']) {
 
 function getContributionsByYear() {
 	global $where;
-	return array_values(dbLookupArray("select cycle as label, sum(amount) as value from contributions_dem c where $where group by cycle order by cycle"));
+	return array_values(dbLookupArray("select cycle as label, sum(amount) as value from contributions_dem c join legislator_terms t on recipient_ext_id = imsp_candidate_id and term = cycle where $where group by cycle order by cycle"));
 }
 
 function getContributionsByCategory() {
 	global $where;
 	$category = $_REQUEST['type'] == 'candidates' ? 'sitecode' : 'party';
-	return array_values(dbLookupArray("select $category as label, sum(amount) as value from contributions_dem c join legislator_terms on recipient_ext_id = imsp_candidate_id and term = cycle where $where group by $category order by $category"));
+	return array_values(dbLookupArray("select $category as label, sum(amount) as value from contributions_dem c join legislator_terms t on recipient_ext_id = imsp_candidate_id and term = cycle where $where group by $category order by $category"));
 }
 
 function array2CSV (array $fields, $delimiter = ',', $enclosure = '"') {
