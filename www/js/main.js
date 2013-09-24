@@ -31,8 +31,6 @@ function initGraph() {
 		$('#graphoptions').append($('<input>').attr({type:'hidden', name:k, value:params[k]}));
 	})
 	var graphoptions = {
-		//FIXME later - this points to the styro backend:
-		NodeVizPath: 'http://styrotopia.net/~dameat/state_dem/www/NodeViz/',
 		setupfile: "StateDEM",
 		image: {
 			graphdiv: 'graphs',
@@ -58,6 +56,9 @@ function initGraph() {
 			},
 		}
 	};
+	if (remotecache) { 
+		graphoptions['NodeVizPath'] = remotecache;
+	}
 	gf = new NodeViz(graphoptions);
 }	
 
@@ -189,7 +190,8 @@ $.extend(GraphList.prototype, {
 });
 
 function updateInfocardData(node) { 
-	$.getJSON('http://styrotopia.net/~dameat/state_dem/www/request.php', {'method': 'chartData','type': node.type, 'id': node.id, 'state': gf.data.properties.state, 'chamber': gf.data.properties.chamber}, function(data, status, jxqhr) { 
+	var url = (remotecache ? remotecache + '../' : '')+'request.php';
+	$.getJSON(url, {'method': 'chartData','type': node.type, 'id': node.id, 'state': gf.data.properties.state, 'chamber': gf.data.properties.chamber}, function(data, status, jxqhr) { 
 		drawPieChart(data.contributionsByCategory,'#node-piechart');
 		drawBarChart(data.contributionsByYear,'#node-barchart');
 	});
@@ -207,20 +209,23 @@ function toggleInfocard(node) {
 
 	updateInfocardData(node);
 
+	console.log( gf.data.properties );
+
 	if (card.is(':hidden') || node_id !== node.id) {
 		gf.panToNode(node.id, 4, {y:-50, x:0});
 		card.data('data-node',node.id);
 		switch( node.type ) {
 			case 'candidates':
 				$('#node-title').html(node.title+' <span class="district '+node.party+'">'+node.district+'</span>');
-				$('#node-amount').html('Received $'+commas(Math.floor(node.value)));
+				$('#node-amount').html('Received $'+commas(Math.floor(node.value))+' in '+ gf.data.properties.cycle);
 				break;
 			case 'donors':
 				$('#node-title').html(node.title+' <span class="sector '+node.sitecode+'">'+node.sitecode+'</span>');
-				$('#node-amount').html('Contributed $'+commas(Math.floor(node.value)));
+				$('#node-amount').html('Contributed $'+commas(Math.floor(node.value))+' to the '+gf.data.properties.state+' '+ $('#chamber :selected').text() +' in '+gf.data.properties.cycle);
 				break;
 		}
-		$('#node-csvlink a').attr('href','http://styrotopia.net/~dameat/state_dem/www/request.php?method=csv&type='+node.type+'&id='+node.id+'&state='+gf.data.properties.state+'&chamber='+gf.data.properties.chamber);
+		var url = (remotecache ? remotecache + '../' : '')+'request.php';
+		$('#node-csvlink a').attr('href',url+'?method=csv&type='+node.type+'&id='+node.id+'&state='+gf.data.properties.state+'&chamber='+gf.data.properties.chamber);
 		card.slideDown(500);
 		$('#masthead').hide();
 	} else {
