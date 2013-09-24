@@ -72,11 +72,22 @@ $.extend(NodeViz.prototype, {
 		gf.nodeList = $.map(gf.data.nodes, function(n) { 
 			return {label: n.title, value: n.id, search_label: n.title}
 		});
+		$("#node_search").keyup(function(e) { //don't submit the form when someone hits enter in search field
+			if ($("#node_search").val() == '') { 
+				$('#no_results_found').hide();
+			}
+		});
 		$("#node_search").keypress(function(e) { //don't submit the form when someone hits enter in search field
 			var code = (e.keyCode ? e.keyCode : e.which);
 		    if(code == 13) { //Enter keycode
-				$('#node_search').autocomplete('search');
+				if ($("#node_search").val().length) { 
+					$('#node_search').autocomplete('search');
+					$('#node_search').autocomplete('close');
+				}
 				return false;
+			}
+			if ($("#node_search").val() == '') { 
+				$('#no_results_found').hide();
 			}
 		});
 		$('#node_search').autocomplete({
@@ -86,10 +97,11 @@ $.extend(NodeViz.prototype, {
 			select: function(e, ui) {
 				$('#node_search').val(ui.item.search_label);
 				selectNode(gf.data.nodes[ui.item.value]);
+				$('#node_search').autocomplete('close');
 				return false;
 			},
 			response: function(e, ui) { 
-				if (ui.content.length == 0) {
+				if (ui.content.length == 0 && $("#node_search").val().length ) {
 					$('#no_results_found').show();
 				} else {
 					$('#no_results_found').hide();
@@ -208,8 +220,6 @@ function toggleInfocard(node) {
 		node_id = card.data('data-node');
 
 	updateInfocardData(node);
-
-	console.log( gf.data.properties );
 
 	if (card.is(':hidden') || node_id !== node.id) {
 		gf.panToNode(node.id, 4, {y:-50, x:0});
