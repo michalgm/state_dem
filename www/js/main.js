@@ -32,8 +32,21 @@ $(function(){
 		if (url_state[3]) { 
 			current_network = url_state[3];
 		}
-	}
+		$('#intro_screen').hide();
+		$('#state').change();
+	} else {$('#intro_screen').show(); }
 
+	$('#intro_state').change(function(e) {
+		$('#state').val($('#intro_state').val());
+
+		var style = $('#intro_screen').offset();
+		style.margin = 0;
+		$('#intro_screen').css(style)
+			.animate({height: 0, width: '20px', top: $('#navbar').position().top, left: 0}, 800, function() { 
+				$(this).hide(); 
+				$('#state').change();
+			});
+	});
 });
 
 // Functions
@@ -47,6 +60,7 @@ function initGraph() {
 
 	var graphoptions = {
 		setupfile: "StateDEM",
+		disableAutoLoad : 1,
 		image: {
 			graphdiv: 'graphs',
 			zoomlevels: '8',
@@ -75,6 +89,7 @@ function initGraph() {
 		graphoptions['NodeVizPath'] = remotecache;
 	}
 	gf = new NodeViz(graphoptions);
+	$('#graphoptions').change($.proxy(gf.reloadGraph,gf));
 }	
 
 // Extensions
@@ -221,6 +236,7 @@ function writeHash(network) {
 		current_network = '';
 	}
 	History.pushState(hash_state, 'Dirty Energy Money - States - '+$('#state option:selected').text(),  '?'+(states).join('/'));
+	console.log('written');
 }
 
 function setState() {
@@ -448,6 +464,7 @@ function setupOptions() {
 	$('#state').html('');
 	$(keys).each(function(i, s) { 
 		$('#state').append($('<option>').attr('value', s).html(states[s].name));
+		$('#intro_state').append($('<option>').attr('value', s).html(states[s].name));
 	});
 	$('#state').val(current_state);
 
@@ -469,5 +486,5 @@ function setupOptions() {
 		$('#cycle').val(current_year);
 		$('#chamber').val(current_chamber);
 	});
-	$('#state').change();
+	//$('#state').change();
 }
