@@ -14,10 +14,7 @@ if ($command == 'rollback') {
 
 $date  = date('Y.m.d-h.i');
 
-print "Dumping Local DB\n";
-system("mysqldump -u oilchange -poilchange $localdb $live_db_tables > db.sql;");
-system("mysqldump -u oilchange -poilchange oilchange companies >> db.sql;");
-system("git commit db.sql -m 'Frontend database dump from $date'");
+print "Tagging State\n";
 system("git tag 'Publish_from_$date'");
 system("git push");
 system("git push --tags");

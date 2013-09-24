@@ -10,6 +10,7 @@ Valid Commands:
   		Options: 
   		  [url=<TRANSPARENCY_DATA_URL>]	Download new transparency data & process
 		  [reprocess]			Don't download data, but reprocess last download
+		  No options re-imports existing transparency data db
   cache		Generate the cache files
   publish	Publish code, cache, and db to staging site, and optionally to live site
   		Options:
@@ -26,6 +27,10 @@ if (isset($args['update'])) {
 	passthru("php update_all_data.php $option");
 }
 if (isset($args['cache'])) { 
+	print "Dumping Local DB\n";
+	passthru("mysqldump -u oilchange -poilchange $localdb $live_db_tables > publish/db.sql;");
+	passthru("mysqldump -u oilchange -poilchange oilchange companies >> publish/db.sql;");
+	passthru("git commit db.sql -m 'Frontend database dump from $date'");
 	passthru("php generateCache.php 1 races");
 }
 if (isset($args['publish'])) { 
