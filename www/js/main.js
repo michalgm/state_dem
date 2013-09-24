@@ -227,11 +227,11 @@ function toggleInfocard(node) {
 		switch( node.type ) {
 			case 'candidates':
 				$('#node-title').html(node.title+' <span class="district '+node.party+'">'+node.district+'</span>');
-				$('#node-amount').html('Received $'+commas(Math.floor(node.value))+' in '+ gf.data.properties.cycle);
+				$('#node-amount').html('Received $'+commas(Math.floor(node.value))+' in '+ gf.data.properties.cycle + ' Ugly lifetime total: '+node.lifetime_total);
 				break;
 			case 'donors':
 				$('#node-title').html(node.title+' <span class="sector '+node.sitecode+'">'+node.sitecode+'</span>');
-				$('#node-amount').html('Contributed $'+commas(Math.floor(node.value))+' to the '+gf.data.properties.state+' '+ $('#chamber :selected').text() +' in '+gf.data.properties.cycle);
+				$('#node-amount').html('Contributed $'+commas(Math.floor(node.value))+' to the '+gf.data.properties.state+' '+ $('#chamber :selected').text() +' in '+gf.data.properties.cycle+ ' Ugly lifetime total: '+node.lifetime_total);
 				break;
 		}
 		var url = (remotecache ? remotecache + '../' : '')+'request.php';
