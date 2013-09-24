@@ -15,6 +15,7 @@ if ($command == 'rollback') {
 $date  = date('Y.m.d-h.i');
 
 print "Tagging State\n";
+passthru("git commit db.sql -m 'Frontend database dump from $date'");
 system("git tag 'Publish_from_$date'");
 system("git push");
 system("git push --tags");

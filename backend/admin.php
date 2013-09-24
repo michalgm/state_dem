@@ -27,10 +27,10 @@ if (isset($args['update'])) {
 	passthru("php update_all_data.php $option");
 }
 if (isset($args['cache'])) { 
+	require_once("./publish/publish_config.php");
 	print "Dumping Local DB\n";
 	passthru("mysqldump -u oilchange -poilchange $localdb $live_db_tables > publish/db.sql;");
 	passthru("mysqldump -u oilchange -poilchange oilchange companies >> publish/db.sql;");
-	passthru("git commit db.sql -m 'Frontend database dump from $date'");
 	passthru("php generateCache.php 1 races");
 }
 if (isset($args['publish'])) { 
