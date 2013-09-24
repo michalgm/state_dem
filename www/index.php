@@ -125,6 +125,7 @@
 	<script src="NodeViz/jquery.mousewheel.js" ></script>
 	<script src="NodeViz/jquery.purl.js" ></script>
 
+	<script src="js/jquery.history.js"></script>
 	<script src="js/d3.v3.js"></script>
 
 	<script src="js/main.js"></script>

@@ -2,13 +2,16 @@
 
 $(function(){
 
+	current_network = '';
 	$('#close_error').click(function() { $('#error').hide(); });
 	if ( !document.implementation.hasFeature("http://www.w3.org/TR/SVG11/feature#BasicStructure", "1.1")) {
 		$('#error').html("<h3>Unsupported Browser</h3> We're sorry - this website requires SVG, and it appears your web browser does not support it. Please consider updating to a modern, standards-compliant web browser, such as <a href='http://mozilla.org/firefox'>FireFox</a> or <a href='http://google.com/chrome'>Chrome</a>").show();
 		return;
 	}
 	setupOptions();
+	History.Adapter.bind(window,'statechange',setState);
 	initGraph();
+	
 	$('#infocard').hide();
 	$('#infocard .close').click(function() { resetGraph(); });
 	$('#infocard .more').click(function() { $(this).parent().toggleClass('open'); });
@@ -20,6 +23,16 @@ $(function(){
 	$(window).resize(function(){
 		if ($(window).width() > 320 && $('.navlist').is(':hidden')) { $('.navlist').removeAttr('style'); }
 	});
+	
+	var url_state = (window.location.search.substr(1)).split('/');
+	if (url_state[0]) { 
+		$('#state').val(url_state[0]);
+		$('#chamber').val('state:'+url_state[1].toLowerCase());
+		$('#cycle').val(url_state[2]);
+		if (url_state[3]) { 
+			current_network = url_state[3];
+		}
+	}
 
 });
 
@@ -30,6 +43,8 @@ function initGraph() {
 	$(params).keys().each(function(i, k) { 
 		$('#graphoptions').append($('<input>').attr({type:'hidden', name:k, value:params[k]}));
 	})
+	$('#graphoptions').change(writeHash);
+
 	var graphoptions = {
 		setupfile: "StateDEM",
 		image: {
@@ -123,6 +138,9 @@ $.extend(NodeViz.prototype, {
 			.append( "<a>" + label+ "</a>" )
 			.appendTo( ul );
 		};
+		if (current_network && gf.data.nodes[current_network]) { 
+			$('#'+current_network).click();
+		}
 	},
 });
 
@@ -135,72 +153,6 @@ NodeViz.prototype.default_events.node.click = function(evt, dom_element, graph_e
 	selectNode(graph_element);
 }
 
-$.extend(GraphList.prototype, {
-	listNodeEntry: function(node) {
-		var label;
-		var content = "";
-		if (node.title) { 
-			label = node.title;
-		} else { 
-			label = node.id;
-		}
-		var info = '';
-		var chip = "<span class='chip "+ (typeof(node.party) != 'undefined' ? node.party : ('contrib_'+node.contributor_type))+"'></span>";
-		var image = (typeof(node.image) != 'undefined' && node.image != 'null') ?  "<img src='"+node.image+"' style='width: 20px; border: 1px solid #666;'/>" : "";
-
-		if (node.type == 'candidates') {
-			if (node.party) { 
-				info = "<span class='info'>"+node.party+"</span>";
-				info += "<div class='details'>\
-					<a class='profile_link' href='?candidate_ids="+node['id']+"'><img class='link_icon' src='images/go-next.png'/>Profile</a>\
-					<a class='nimsp_link' href='http://www.followthemoney.org/database/uniquecandidate.phtml?uc="+node['unique_candidate_id']+"' target='_new'><img class='link_icon' src='images/go-next.png'/>NIMSP Profile</a>\
-				</div>";
-
-			}
-		} else {
-			//if (node.contributor_type == 'I') { info = 'Individual'; }
-			//else if (node.contributor_type == 'C') { info = 'PAC'; }
-			//else { info = 'Uncategorized'; }
-			//info = "<span class='info'>"+info+"</span>";
-			var industry = 'Unknown';
-			if (node.industry != '--') { 
-				industry = node.industry;
-			}
-			info += "<a class='profile_link' href='?company_ids="+node['id']+"'><img class='link_icon' src='images/go-next.png'/>Profile</a>";
-			info += "<span class='industry'>"+industry+"</span><br style='clear:both'/>";
-		}
-		return image+"<span class='label'>"+label+"</span><span class='amount'>$"+format(Math.round(node['total_dollars']))+'</span><br/>'+chip+info;
-	},
-	listSubNodeEntry: function(node, parentNode, edgetype, direction) { 
-		var label;
-		var node_class = direction == 'to' ? 'to_node_item' : 'from_node_item'; 
-		if (node.title) { 
-			label = node.title;
-		} else { 
-			label = node.id;
-		}
-		var info = 'Uncategorized';
-		var edge = this.NodeViz.data.edges[node.relatedNodes[parentNode.id][0]];
-		if (node.type == 'candidates') {
-			if (node.party) { info = node.party; }
-		} else if (node.contributor_type) {
-			if (node.contributor_type == 'I') { info = 'Individual'; }
-			else if (node.contributor_type == 'C') { info = 'PAC'; }
-		}
-		info = "<span class='info'>"+info+"</span>";
-		var chip = "<span class='chip "+ (typeof(node.party) != 'undefined' ? node.party : ('contrib_'+node.contributor_type))+"'></span>";
-		var link = "<span class='details_link'><img src='NodeViz/icons/magnifier.png' alt='View Details' title='View Details'/></span>";
-		return "<span class='"+node_class+" label' onclick=\"gf.selectNode('"+node.id+"'); gf.panToNode('"+node.id+"');\">"+label+"</span><span class='amount'>$"+format(Math.round(edge['value']))+'</span><br/>'+chip+info+link;
-	},
-	sublistHeader: function(node, edgetype, direction) {
-		var header = 'Recipients';
-		if(direction == 'to') {
-			header =  "Donors";
-		}
-		return "<div class='sublist_header'>"+header+"</div>"
-	}
-});
-
 function updateInfocardData(node) { 
 	var url = (remotecache ? remotecache + '../' : '')+'request.php';
 	$.getJSON(url, {'method': 'chartData','type': node.type, 'id': node.id, 'state': gf.data.properties.state, 'chamber': gf.data.properties.chamber}, function(data, status, jxqhr) { 
@@ -211,6 +163,8 @@ function updateInfocardData(node) {
 
 function selectNode(node) {
 	gf.selectNode(node.id);
+	current_network = node.id;
+	writeHash(1);
 	toggleInfocard(node);
 }
 
@@ -244,10 +198,53 @@ function toggleInfocard(node) {
 }
 
 function resetGraph() {
+	current_network = '';
+	if (gf.current.network) { 
+		gf.unselectNode(1);
+	}
 	$('#infocard').slideUp();
 	$('#masthead').fadeIn(2000);
 	gf.zoom('reset');
 }
+
+function writeHash(network) {
+	var hash_state = {
+		state: $('#state').val(),
+		chamber: toWordCase($('#chamber').val().replace('state:', '')),
+		cycle: $('#cycle').val(),
+	}
+	var states = [hash_state.state, hash_state.chamber, hash_state.cycle];
+	if (network == 1) { 
+		hash_state.network = gf.current.network;
+		states.push(hash_state.network);
+	} else {
+		current_network = '';
+	}
+	History.pushState(hash_state, 'Dirty Energy Money - States - '+$('#state option:selected').text(),  '?'+(states).join('/'));
+}
+
+function setState() {
+	var state = History.getState().data;
+	if (! state.state) { 
+		resetGraph();
+	} else {
+		state.chamber = 'state:'+state.chamber.toLowerCase();
+		if ($('#state').val() != state.state || $('#chamber').val() != state.chamber || $('#cycle').val() != state.cycle) { 
+			$('#state').val(state.state);
+			$('#chamber').val(state.chamber);
+			$('#cycle').val(state.cycle);
+			$('#state').change();
+		} else if (current_network != state.network || ! state.network) { 
+			if (! state.network && current_network) { 
+				resetGraph();
+			} else if (state.network && gf.data.nodes[state.network]) { 
+				current_network = state.network;
+				$('#'+state.network).click();
+			}
+		}
+	}
+}
+
 
 /*	==========================================================================
 	BAR CHART
