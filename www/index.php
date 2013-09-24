@@ -13,7 +13,7 @@
 
 		#svg_overlay .oselected polygon, #svg_overlay .oselected ellipse { fill: none; }
 		#svg_overlay .selected polygon, #svg_overlay .selected ellipse { fill: none !important; }
-		#svg_overlay path, #svg_overlay .edge polygon { stroke: none !important; fill: #9933ff; !important; }		
+		#svg_overlay path, #svg_overlay .edge polygon { stroke: none !important; fill: #9933ff !important; }		
 		#svg_overlay .nhighlight, #svg_overlay .selected polygon.nhighlight, #svg_overlay .selected ellipse.nhighlight { fill: #ccbbdd !important; fill-opacity: 0.5 !important; }
 
 		.REP, .R {color:#c66;}
