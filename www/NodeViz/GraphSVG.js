@@ -5,6 +5,7 @@ GraphImage("GraphSVG", {}, {
 		this.default_zoom = 1;
 		this.current_zoom = this.default_zoom;
 		this.zoomSliderAxis = 'horizontal';
+		this.fadeTo = .3
 		this._super(NodeViz);
 		if (this.NodeViz.options.useSVG != 1 ) { return; } 
 
@@ -215,7 +216,7 @@ GraphImage("GraphSVG", {}, {
 			this.hideNetwork(1);
 		}
 		if ($('image').getOpacity() == 1) {
-			new Effect.Opacity('image', { from: 1, to: .3, duration: .5});
+			new Effect.Opacity('image', { from: 1, to: this.fadeTo, duration: .5});
 		}
 		this.showSVGElement(node);
 		$H(nodelookup[node.id]['edges']).keys().each(function(index, e) {
@@ -245,7 +246,7 @@ GraphImage("GraphSVG", {}, {
 		$('#'+id).addClass('selected');
 		$('#underlay_'+id).addClass('selected');
 		if ($('#image').css('opacity') == 1) {
-			$('#image').fadeTo(500, .3);
+			$('#image').fadeTo(500, this.fadeTo);
 		}
 		$(Object.keys(this.NodeViz.data.nodes[id].relatedNodes)).each($.proxy(function(index, e) {
 			this.showSVGElement($('#'+e));
