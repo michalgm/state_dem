@@ -38,6 +38,7 @@ function initGraph() {
 			graphdiv: 'graphs',
 			zoomlevels: '8',
 			zoomSliderAxis: 'vertical',
+			fadeTo: .2
 			//zoom_delta:  
 
 		},
