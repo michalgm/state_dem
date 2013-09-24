@@ -66,7 +66,7 @@ print "--Deleting records for bad company names\n";
 dbwrite("drop table if exists companies_crp");
 dbwrite("drop table if exists companies_nimsp");
 //exit;
-print "Setting up State Companies metadata";
+print "Setting up State Companies metadata\n";
 dbwrite("delete from companies_state_details");
 dbwrite("insert into companies_state_details (company_id, name) select company_id, name from contributions_dem a join companies on company_id = id group by company_id"); 
 dbwrite("update companies_state_details join (select sum(amount) as amount, company_id from contributions_dem where sitecode='oil' group by company_id) b using(company_id) set oil_related = amount");
@@ -75,6 +75,10 @@ dbwrite("update companies_state_details join (select sum(amount) as amount, comp
 dbwrite("update contributions_dem join companies_state_details using (company_id) set sitecode = dem_type where sitecode is null and dem_type is not null");
 dbwrite("update companies_state_details set dem_type = if(coal_related+oil_related = 0, 'carbon', if(oil_related < coal_related, 'coal', 'oil')) where dem_type is null");
 dbwrite("update contributions_dem join companies_state_details using (company_id) set sitecode = dem_type where sitecode is null");
+
+print "Setting up Legislator Totals\n";
+dbwrite("update legislators set lifetime_total = 0");
+dbwrite("update legislators a join (select recipient_ext_id, sum(amount) as total from contributions_dem b  group by recipient_ext_id) b on recipient_ext_id = nimsp_candidate_id set lifetime_total = total");
 
 print "Cleaning company names\n";
 $names = fetchCol("select name from oilchange.companies where cast(name as binary) rlike '^[^a-z]*$'");

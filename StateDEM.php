@@ -71,7 +71,7 @@ class StateDEM extends Graph {
 			$canids = arrayToInString(explode(',', $props['candidate_ids']));
 			$where = "a.imsp_candidate_id in ($canids)";
 		}
-		$query = "select imsp_candidate_id as id, a.state, a.term, a.district, a.party, full_name candidate_name, image from legislator_terms a join legislators b on imsp_candidate_id = nimsp_candidate_id where $where";
+		$query = "select imsp_candidate_id as id, a.state, a.term, a.district, a.party, full_name candidate_name, image, lifetime_total from legislator_terms a join legislators b on imsp_candidate_id = nimsp_candidate_id where $where";
 		writelog($query);
 		foreach(dbLookupArray($query) as $can) {
 			$can['total_dollars'] = 0;
@@ -89,7 +89,7 @@ class StateDEM extends Graph {
 		$cycle = $props['candidate_ids'] ? "" : "cycle='$props[cycle]' and";
 		$companies = $props['company_ids'] ?  "company_id in (".arrayToInString(explode(',', $props['company_ids'])).") and" : "";
 		$basicContribQuery = "
-			select transaction_id, company_id, c.name as company_name, sum(amount) as amount, recipient_ext_id, b.name as industry,  c.image_name as image, d.dem_type as sitecode, contributor_type from contributions_dem a join catcodes b on code = contributor_category join companies c on c.id = a.company_id join companies_state_details d using(company_id) where $cycle $companies recipient_ext_id in (".arrayToInString($cans, 1).") and  company_name != '' group by a.company_id, recipient_name order by sum(amount) desc 
+			select transaction_id, company_id, c.name as company_name, sum(amount) as amount, recipient_ext_id, b.name as industry,  c.image_name as image, d.dem_type as sitecode, contributor_type, (d.coal_related + d.oil_related + d.carbon_related) as lifetime_total from contributions_dem a join catcodes b on code = contributor_category join companies c on c.id = a.company_id join companies_state_details d using(company_id) where $cycle $companies recipient_ext_id in (".arrayToInString($cans, 1).") and  company_name != '' group by a.company_id, recipient_name order by sum(amount) desc 
 			";
 		writelog($basicContribQuery);
 		writelog('before donor query');
