@@ -306,8 +306,6 @@ function drawBarChart(data,container) {
 	var width = $(window).width(),
 		height = $(window).height() / 2 - 150;
 
-	console.log('width: ' + width );
-
 	var x = d3.scale.ordinal().rangeRoundBands([0,width], .05);
 	var y = d3.scale.linear().range([0, height-(padding*2)]);
 
@@ -321,7 +319,7 @@ function drawBarChart(data,container) {
 	}
 	
 	if (typeof(data[0]) == 'undefined') { // If there's no data, delete the svg and exit function
-		svg.remove();
+		$(container+ ' svg').remove();
 		return;
 	}
 	var cats = $(data[0]).keys().map(function(i, d) { if (d != 'value' && d != 'label') { return d; }}).toArray();
