@@ -108,7 +108,7 @@
 
 	<div id="masthead" class="container">
 		<h1 class="site-title"><a href="/">Dirty Energy Money</a></h1>
-		<p class="site-tagline">is an interactive tool that tracks the flow of oil, gas and coal industry contributions to the US Congress.</p>
+		<p class="site-tagline">is an interactive tool that tracks the flow of oil, gas and coal industry contributions to your state congress.</p>
 	</div><!-- #masthead -->
 	
 	<div id='error' style='display: none;'>
