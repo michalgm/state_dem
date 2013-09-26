@@ -149,10 +149,10 @@ GraphImage("GraphSVG", {}, {
 				$('#underlay_'+nodeid).addClass('zoom_'+node['zoom']);
 			}
 			if (node['class']) { 
-				node['class'].split(' ').each( function(index, c) { 
+				$(node.class.split(' ')).each(function(i, c) { 
 					$('#'+nodeid).addClass(c);
 					$('#underlay_'+nodeid).addClass(c);	
-				}, this);
+				});
 			}
 			this.formatLabels(n, node);	
 			if (n.childNodes[1]) {

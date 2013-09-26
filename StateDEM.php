@@ -19,7 +19,7 @@ class StateDEM extends Graph {
 		$this->data['nodetypes'] = array('candidates', 'donors'); //FIXME - add properties for types
 		
 	  	// gives the classes of edges, and which nodes types they will connect
-		$this->data['edgetypes'] = array( 'donations' => array('donors', 'candidates'));
+		$this->data['edgetypes'] = array( 'donations' => array('donors', 'candidates'), 'zeroes'=>array('donors', 'donors'));
 		
 		// graph level properties
 		$this->data['properties'] = array(
@@ -50,7 +50,7 @@ class StateDEM extends Graph {
 				//'sep'=>"+10"
 				//'maxiter' => '100000', //turning this off speeds things up, but does it mean that some might not converge?
 			),
-			'node'=> array('label'=> ' ', 'labelloc'=>'b', 'imagescale'=>'true','fixedsize'=>1, 'style'=> 'setlinewidth(4), filled', 'regular'=>'true','fontsize'=>2),
+			'node'=> array('imagescale'=>'true','fixedsize'=>1, 'style'=> 'setlinewidth(4), filled', 'regular'=>'true','fontsize'=>2),
 			'edge'=>array('arrowhead'=>'none', 'color'=>'#99999966', 'len'=>4, 'minlen'=>4, 'style'=>'tapered', 'tailclip'=>'false')
 		);
 		srand(20); //Don't copy this - this just makes sure that we are generating the same 'random' values each time
@@ -147,7 +147,7 @@ class StateDEM extends Graph {
 			#$node['label_zoom_level'] = '10';
 			//$node['click'] = "this.selectNode('".$node['id']."'); this.panToNode('".$node['id']."');";
 			$node['image'] = $node['image'] ? "../www/can_images/$node[id].jpg" : "../www/can_images/unknownCandidate.jpg";
-			if($node['value'] == 0) { unset($nodes[$node['id']]); }
+			if($node['value'] == 0) { $node['class'] = 'zero'; }
 		}
 		//$nodes = $this->scaleSizes($nodes, 'candidates', 'value');
 		return $nodes;	
@@ -179,6 +179,8 @@ class StateDEM extends Graph {
 			$node = null;
 		}
 		//$nodes = $this->scaleSizes($nodes, 'donors', 'value');
+		#$nodes['zerocontribs'] = array('id'=>'zerocontribs', 'value'=>0, 'shape'=>'circle', 'title'=>'Accepted $0', 'tooltip'=>'Accepted $0', 'type'=>'companies');
+
 		return $nodes;	
 	}
 
@@ -187,6 +189,37 @@ class StateDEM extends Graph {
 		global $global_edges;
 		$edges = $global_edges;
 		$global_edges = null;
+		return $edges;
+	}
+
+	function zeroes_fetchEdges() { 
+		return array();
+	}
+
+	function zeroes_edgeProperties() {
+		$nodes = array();
+		foreach ($this->data['nodes'] as $node) { 
+			if ($node['value'] ==0) { $nodes[] = $node; }
+		}
+		$edges = array();
+		foreach($nodes as $node) {
+			foreach($nodes as $onode) {
+				if ($node['id'] < $onode['id']) {
+					$id = "$onode[id]_$node[id]";
+					$edge = array(
+						'id'=>$id,
+						'toId'=>$node['id'],
+						'fromId'=>$onode['id'],
+						'len'=>3,
+						'value'=>0,
+						'weight'=>0,
+						'style'=>'invis',
+						'type'=>'zeroes'
+					);
+					$edges[$id] = $edge;
+				}
+			}
+		}
 		return $edges;
 	}
 
@@ -240,6 +273,24 @@ class StateDEM extends Graph {
 			}
 		}
 
+	}
+
+	function getSubgraphs() {
+		$nodes = &$this->data['nodes'];
+		$subnodes = array();
+		foreach ($nodes as $node) {
+			if ($node['value'] == 0) {
+				$subnodes[] = $node['id'];
+			}
+		}
+		$this->data['subgraphs']['cluster_zerocontribs'] = array();
+		$this->data['subgraphs']['cluster_zerocontribs']['properties'] = array(
+			'pad'=>'500',
+			'rank'=>'min',
+			'style'=>'rounded',
+			//'label'=>"Accepted No DEM"
+		);
+		$this->data['subgraphs']['cluster_zerocontribs']['nodes'] = $subnodes;
 	}
 
 	function graphname() {

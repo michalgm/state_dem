@@ -103,10 +103,16 @@ function initGraph() {
 
 $.extend(NodeViz.prototype, {
 	graphLoaded: function() {
+		$('.cluster').remove();
+		$.each($('.zero'), function(i, e) {
+			if (gf.data.nodes[e.id]) {
+				gf.data.nodes[e.id].relatedNodes = {};
+			}
+		});
+		$('#infocard').hide();
 		$('#masthead').fadeOut(2000);
 		$('#about, #methodology').slideUp();
 
-		
 		gf.nodeList = $.map(gf.data.nodes, function(n) { 
 			return {label: n.title, value: n.id, search_label: n.title}
 		});
@@ -391,8 +397,9 @@ function drawBarChart(data,container) {
 		.tween('text', function(d) { 
 			var i = d3.interpolate(this.textContent.replace(/[^0-9]+/g, ''), d.y);
 			return function(t) { 
-				if (y(d.y) > padding-2) { 
-					this.textContent = toWordCase(d.label)+': $' + commas(Math.floor(i(t)));
+				if (y(d.y) > padding-2) {
+					var label = d.label == 'carbon' ? 'misc.' : d.label;
+					this.textContent = toWordCase(label)+': $' + commas(Math.floor(i(t)));
 				} else {
 					this.textContent = "";
 				}
