@@ -84,6 +84,7 @@
 		#close_error { position: absolute; right: 5px; top: 5px; cursor: pointer;}
 		.errorstring { background: transparent !important; }
 
+		.zero { opacity: .5; }
 	</style>
 </head>
 <body>
