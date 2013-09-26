@@ -84,19 +84,6 @@
 		#close_error { position: absolute; right: 5px; top: 5px; cursor: pointer;}
 		.errorstring { background: transparent !important; }
 
-		#intro_screen {
-			z-index: 10000;
-			height: 100px;
-			width: 300px;
-			margin: auto;	
-			position: absolute;
-			top: 0px; left: 0px; bottom: 0px; right: 0px; 
-			background: #fff;
-			border: 3px solid #999;
-			border-radius: 10px;
-			padding: 20px;
-			text-align: center;
-		}
 		#intro_state { font-size: 1.5em; }
 
 	</style>
@@ -128,9 +115,10 @@
 			<div id="node-csvlink"><a href="">Download .CSV</a></div>
 		</div>
 	</div>
-	<div id='intro_screen' style='display: none;'>
-		<h2>Choose a state to begin</h2>
-		<select id='intro_state'></select>
+	<div id="intro_screen" class="container" style='display: none;'>
+		<select id='intro_state'>
+			<option disabled="disabled">Select a state to begin</option>
+		</select>
 	</div>
 
 <?php include 'inc/footer.inc';?>

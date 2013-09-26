@@ -34,7 +34,10 @@ $(function(){
 		if (url_state[3]) {  //have to set this after change() because it gets cleared if you do it before
 			current_network = url_state[3];
 		}
-	} else {$('#intro_screen').show(); }
+	} else {
+		$('#intro_screen').show();
+		$('#graphoptions select').hide();
+	}
 
 	$('#intro_state').change(function(e) {
 		$('#state').val($('#intro_state').val());
@@ -42,10 +45,12 @@ $(function(){
 		var style = $('#intro_screen').offset();
 		style.margin = 0;
 		$('#intro_screen').css(style)
-			.animate({height: 0, width: '20px', top: $('#navbar').position().top, left: 0}, 800, function() { 
+			.animate({height: 0, width: '20px', top: $('#navbar').position().top, left: 0}, 250, function() { 
 				$(this).hide(); 
 				$('#state').change();
 			});
+		$('#graphoptions select').fadeIn();
+		$('#masthead').fadeOut();
 	});
 });
 
@@ -97,7 +102,7 @@ function initGraph() {
 $.extend(NodeViz.prototype, {
 	graphLoaded: function() {
 		$('#infocard').hide();
-		$('#masthead').fadeIn(2000);
+		// $('#masthead').fadeIn(2000);
 		
 		gf.nodeList = $.map(gf.data.nodes, function(n) { 
 			return {label: n.title, value: n.id, search_label: n.title}
@@ -218,7 +223,7 @@ function resetGraph() {
 		gf.unselectNode(1);
 	}
 	$('#infocard').slideUp();
-	$('#masthead').fadeIn(2000);
+	// $('#masthead').fadeIn(2000);
 	gf.zoom('reset');
 }
 
