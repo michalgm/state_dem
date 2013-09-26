@@ -22,7 +22,14 @@
 		.coal { color: rgb(149,141,99);}
 		.oil { color: rgb(109,143,157); }
 		.carbon { color: rgb(110,110,110); }
-
+	
+		svg .REP, svg .R {fill:#c66;}
+		svg .DEM, svg .D, .DFL {fill:#69c;}
+		svg .IND, svg .I { fill: #cc3; }
+		svg .coal { fill: rgb(149,141,99);}
+		svg .oil { fill: rgb(109,143,157); }
+		svg .carbon { fill: rgb(110,110,110); }
+			
 		#masthead { z-index: 99; }
 		
 		#navbar #searchfield { position: relative; float: right; padding: 8px; border: none; }

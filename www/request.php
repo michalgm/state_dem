@@ -41,7 +41,16 @@ switch($_REQUEST['method']) {
 
 function getContributionsByYear() {
 	global $where;
-	return array_values(dbLookupArray("select cycle as label, sum(amount) as value from contributions_dem c join legislator_terms t on recipient_ext_id = imsp_candidate_id and term = cycle where $where group by cycle order by cycle"));
+	$category = $_REQUEST['type'] == 'candidates' ? 'sitecode' : 'party';
+	$categories = $_REQUEST['type'] == 'candidates' ? array('oil', 'coal', 'carbon') : array('D', 'R', 'I');
+	$category_lookup = array();
+	$aliases = array('D'=> 'DEM', 'R'=>'REP', 'I'=> 'IND');
+	foreach($categories as $cat) {
+		$label = $_REQUEST['type'] == 'candidates' ? $cat : $aliases[$cat];
+		$category_lookup[] = "sum(if($category = '$cat', amount, 0)) as $label";
+	}
+
+	return array_values(dbLookupArray("select cycle as label, sum(amount) as value, ".join(', ', $category_lookup)." from contributions_dem c join legislator_terms t on recipient_ext_id = imsp_candidate_id and term = cycle where $where group by cycle order by cycle"));
 }
 
 function getContributionsByCategory() {

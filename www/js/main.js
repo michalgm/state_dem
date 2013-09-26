@@ -29,11 +29,11 @@ $(function(){
 		$('#state').val(url_state[0]);
 		$('#chamber').val('state:'+url_state[1].toLowerCase());
 		$('#cycle').val(url_state[2]);
-		if (url_state[3]) { 
-			current_network = url_state[3];
-		}
 		$('#intro_screen').hide();
 		$('#state').change();
+		if (url_state[3]) {  //have to set this after change() because it gets cleared if you do it before
+			current_network = url_state[3];
+		}
 	} else {$('#intro_screen').show(); }
 
 	$('#intro_state').change(function(e) {
@@ -236,7 +236,6 @@ function writeHash(network) {
 		current_network = '';
 	}
 	History.pushState(hash_state, 'Dirty Energy Money - States - '+$('#state option:selected').text(),  '?'+(states).join('/'));
-	console.log('written');
 }
 
 function setState() {
@@ -268,66 +267,143 @@ function setState() {
 
 function drawBarChart(data,container) {
 	var width = $(window).width() / 2 * 0.9,
-		height = $(window).height() / 2 * .675;
+		height = $(window).height() / 2 * .675,
+		padding = 18
 
-	var x = d3.scale.linear().domain([0, data.length]).range([0, width]);
-	var y = d3.scale.linear().domain([0, d3.max(data, function(datum) { return parseInt(datum.value); })]).rangeRound([0, height * 0.8]);
+	var x = d3.scale.ordinal().rangeRoundBands([0,width], .05);
+	var y = d3.scale.linear().range([0, height-(padding*2)]);
+
 	var svg = d3.select(container+' svg');
 	if (svg.empty()) {
 		svg = d3.select(container).append('svg')
 			.attr('width',width)
-			.attr('height',height);
+			.attr('height',height)
+			.attr('transform', "translate(0, "+(height-padding)+")");
 	}
+	
+	if (typeof(data[0]) == 'undefined') {
+		svg.remove();
+		return;
+	}
+	var cats = $(data[0]).keys().map(function(i, d) { if (d != 'value' && d != 'label') { return d; }}).toArray();
+	var categories = d3.layout.stack().offset('zero')(cats.map(function(cat) {
+		return data.map(function(d) { 
+			return {x: d.label, y: +d[cat], label: cat};
+		});
+	}));
 
-	var bars = svg.selectAll('.bar')
-		.data(data, function(d) { return d.label; })
+	x.domain(categories[0].map(function(d) { return d.x; }));
+	y.domain([0, d3.max(data, function(d) { return parseInt(d.value); })]);
 
-	bars.enter().append('rect')
-			.attr('class','bar')
-			.attr('x',function(d,i) { return x(i); })
-			.attr('y',function(d) { return height; })
-			.attr('width',function() { return width / data.length * 0.9; })
-			.attr('height',function(d) { return 0; })
+	var category = svg.selectAll("g.category")
+		.data(categories) 
 
-	bars.transition()
+	category.enter().append('svg:g')
+		.attr('class', function(d) { return 'category '+d[0].label;})
+
+	category.transition()
+		.attr('class', function(d) { return 'category '+d[0].label;})
+
+	var rect = category.selectAll("rect")
+		.data(function(d) { return d; })
+
+	rect.enter().append("svg:rect")
+		.attr("x", function(d) { return x(d.x); })
+		.attr("y", 0)
+		.attr("height", 0)
+		.attr("width", x.rangeBand())
+
+	rect.transition()
 			.duration(1000)
-			.attr('x',function(d,i) { return x(i); })
-			.attr('y',function(d) { return height - y(d.value); })
-			.attr('height',function(d) { return y(d.value); })
-			.attr('width',function() { return width / data.length * 0.9; })
-	bars.exit().transition()
+			.attr("x", function(d) { return x(d.x); })
+			.attr("y", function(d) { return - y(d.y0) - y(d.y); })
+			.attr("height", function(d) { return y(d.y); })
+			.attr("width", x.rangeBand())
+
+	rect.exit().transition()
 			.duration(1000)
-			.attr('y',function(d) { return height; })
-			//.attr('x', function(d, i) )
+			.attr('height', 0)
+			.attr('y', 0)
+			.style('opacity','0')
 			.remove();
 
-	var amounts = svg.selectAll('.amount')
-		.data(data, function(d) { return d.label; })
+	var amounts_group = svg.selectAll('g.amounts')
+		.data(categories)
+
+	amounts_group.enter().append('svg:g')
+		.attr('class', 'amounts')
+
+	var amounts = amounts_group.selectAll('.amount')
+		.data(function(d) { return d; });
+
 	amounts.enter().append('text')
 			.attr('class','chart-label amount')
-	amounts.transition()
-			.duration(1000)
-			.attr('x',function(d,i) { return x(i) + (width / data.length * 0.9) / 2; })
-			.attr('y',function(d) { return height - y(d.value); })
-			.attr('dy','-2em')
-			.attr('width',function() { return width / data.length; })
+			.attr('dominant-baseline', 'middle')
 			.attr('text-anchor','middle')
-			.text(function(d) { return '$' + commas(Math.floor(d.value)); });
-	amounts.exit().remove();
+			.attr('y', function(d) { return 0+(y(d.y)/2); } )
+			.style('fill','#fff')
+			.style('opacity','0')
+
+	amounts.transition()
+		.duration(1000)
+		.style('opacity','1')
+		.attr('x',function(d) { return x(d.x) + (x.rangeBand() / 2); })
+		.attr('y',function(d) { return - y(d.y0) - y(d.y) + (y(d.y)/2); })
+		.attr('width',function() { return x.rangeBand(); })
+		.text(function(d,i) {if (y(d.y) > padding-2) { return toWordCase(d.label)+': $' + commas(Math.floor(d.y)); }});
+
+	amounts.exit().transition()
+		.duration(1000)
+		.attr('y', function(d) { return 0+(y(d.y)/2); } )
+		.style('opacity','0')
+		.remove();
 
 	var years = svg.selectAll('.year')
 		.data(data, function(d) { return d.label; })
+
 	years.enter().append('text')
-			.attr('class','chart-label year')
+		.attr('x',function(d, i) { return x(d.label) + x.rangeBand()/2; })
+		.attr('class','chart-label year')
+		.attr('y',padding)
+		.text(function(d, i) { return d.label; })
+		.attr('width',function() { return x.rangeBand(); })
+		.attr('text-anchor','middle')
+		.style('opacity','0')
+		.attr('dominant-baseline', 'text-after-edge')
+
 	years.transition()
 			.duration(1000)
-			.attr('x',function(d,i) { return x(i) + (width / data.length * 0.9) / 2; })
-			.attr('y',function(d) { return height; })
-			.attr('dy','-0.5em')
-			.attr('width',function() { return width / data.length; })
-			.attr('text-anchor','middle')
-			.text(function(d) { return d.label; });
-	years.exit().remove();
+			.attr('x',function(d, i) { return x(d.label) + x.rangeBand()/2; })
+			.style('opacity','1')
+
+	years.exit().transition()
+		.duration(1000)
+		.style('opacity','0')
+		.remove();
+
+	var totals = svg.selectAll('.total')
+		.data(data)
+
+	totals.enter().append('text')
+		.attr('x',function(d, i) { return x(d.label) + x.rangeBand()/2; })
+		.attr('class','chart-label total')
+		.attr('y', function(d) { return -y(d.value) -(padding); })
+		.attr('dominant-baseline', 'text-before-edge')
+		.attr('width',function() { return x.rangeBand(); })
+		.attr('text-anchor','middle')
+		.style('opacity','0')
+
+	totals.transition()
+			.duration(1000)
+			.attr('x',function(d, i) { return x(d.label) + x.rangeBand()/2; })
+			.attr('y', function(d) { return -y(d.value) -(padding); })
+			.text(function(d, i) { return '$'+commas(Math.floor(d.value)); })
+			.style('opacity','1')
+
+	totals.exit().transition()
+		.duration(1000)
+		.style('opacity','0')
+	
 
 }
 
