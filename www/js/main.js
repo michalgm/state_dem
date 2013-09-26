@@ -381,8 +381,9 @@ function drawBarChart(data,container) {
 		.tween('text', function(d) { 
 			var i = d3.interpolate(this.textContent.replace(/[^0-9]+/g, ''), d.y);
 			return function(t) { 
-				if (y(d.y) > padding-2) { 
-					this.textContent = toWordCase(d.label)+': $' + commas(Math.floor(i(t)));
+				if (y(d.y) > padding-2) {
+					var label = d.label == 'carbon' ? 'misc.' : d.label;
+					this.textContent = toWordCase(label)+': $' + commas(Math.floor(i(t)));
 				} else {
 					this.textContent = "";
 				}
