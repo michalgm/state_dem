@@ -455,7 +455,11 @@ GraphImage("GraphSVG", {}, {
 		//Event.observe($('svgscreen'), 'mouseup', function(e) { this.handleMouseUp(e); }.bind(this));
 		$('#images').mouseleave($.proxy(function(e) { this.handleMouseUp(e); }, this));
 		$(root).mousewheel($.proxy(function(e, delta) { this.handleMouseWheel(e, delta); }, this));
-		$(root).dblclick($.proxy(function(e) { this.zoom('in', this.getEventPoint(e)); }, this));
+		$(root).dblclick($.proxy(function(e) {  // Ignore zoom events on graph elements to avoid conflicts
+			if(! $(e.target).closest('#graph0').length || e.target.id == 'svgscreen') { 
+				this.zoom('in', this.getEventPoint(e)); 
+			} 
+		}, this));
 		this.center = this.calculateCenter();
 	},
 /**

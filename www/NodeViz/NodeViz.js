@@ -32,6 +32,7 @@ $.Class("NodeViz", {}, {
 		}
 		this.renderers = {};
 		this.requests = [];
+		this.previous_event = {};
 		if (this.options.image.graphdiv) { 
 			if ((typeof this.options.useSVG === 'undefined' && document.implementation.hasFeature("http://www.w3.org/TR/SVG11/feature#BasicStructure", "1.1")) || this.options.useSVG == 1) { 
 				this.options.useSVG = 1;
@@ -273,7 +274,15 @@ $.Class("NodeViz", {}, {
 			}
 			if (action != '' || (this.options.functions['pre_'+eventtype] || this.options.functions['post_'+eventtype])) {
 				$(dom_element).on(eventtype, $.proxy(function(evt) { 
-					this.do_function(this.options.functions['pre_'+eventtype], evt, dom_element, graph_element, element_type, renderer);
+					//don't do the action if is immediately after the same action on the same graph element
+					if(eventtype == 'click' || eventtype == 'dblclick' || eventtype == 'mousedown' || eventtype == 'mouseup') {
+						if (this.previous_event[eventtype] && graph_element && graph_element.id == this.previous_event[eventtype].target) { 
+								return false; 
+						} else {
+							this.previous_event[eventtype] = {'target': graph_element.id, 'action': eventtype};
+							window.setTimeout($.proxy(function() { this.previous_event[eventtype] = {}; }, this), 200);
+						}
+					}
 					//This is supposed to prevent triggering networks on drag, but doesn't seem to work? disabling
 					/*if ((eventtype == 'click' || eventtype == 'mouseup') && renderer == 'svg') { //I can't remember what this is for
 						var origin = this.renderers.GraphImage.getEventPoint(evt).matrixTransform(this.renderers.GraphImage.stateTf); 
@@ -282,6 +291,7 @@ $.Class("NodeViz", {}, {
 							return;
 						}
 					}*/
+					this.do_function(this.options.functions['pre_'+eventtype], evt, dom_element, graph_element, element_type, renderer);
 					this.do_function(action, evt, dom_element, graph_element, element_type, renderer);
 					this.do_function(this.options.functions['post_'+eventtype], evt, dom_element, graph_element, element_type, renderer);
 
