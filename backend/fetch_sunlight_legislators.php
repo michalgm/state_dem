@@ -5,7 +5,7 @@ $db = dbconnect();
 
 #dbwrite("delete from legislators");
 #dbwrite("delete from legislator_terms");
-$full_update = 1;
+$full_update = 0;
 
 foreach(array_keys($states) as $state) {
 	foreach(array('true', 'false') as $active) {
@@ -94,6 +94,7 @@ foreach ($missing_ids as $id) {
 print "\nCleaning up names\n";
 dbwrite("update legislators set full_name = replace(full_name, 'Representative ', '')  where full_name like 'representative %'");
 dbwrite("update legislators set full_name = replace(full_name, 'Senator ', '')  where full_name like 'Senator %'");
+dbwrite("update legislators set full_name = replace(full_name, '\', '')  where full_name like '%\%'");
 dbwrite("update legislators set last_name = name_case(substring_index(full_name, ', ', 1)), first_name = name_case(substring_index(full_name, ', ', -1)) where full_name like '%, %' and full_name not rlike '[SJ]r\.?$' and last_name = ''");
 dbwrite("update legislators set full_name = concat(first_name, ' ', last_name) where full_name like '%, %' and full_name not rlike '[SJ]r\.?$'");
 
