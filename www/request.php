@@ -47,7 +47,11 @@ function getContributionsByYear() {
 	$aliases = array('D'=> 'DEM', 'R'=>'REP', 'I'=> 'IND');
 	foreach($categories as $cat) {
 		$label = $_REQUEST['type'] == 'candidates' ? $cat : $aliases[$cat];
-		$category_lookup[] = "sum(if($category = '$cat', amount, 0)) as $label";
+		if ($cat == 'I') {  //Include blank as independant
+			$category_lookup[] = "sum(if(($category = '$cat' or $category = '' or $category = 'N'), amount, 0)) as $label";
+		} else {
+			$category_lookup[] = "sum(if($category = '$cat', amount, 0)) as $label";
+		}
 	}
 
 	return array_values(dbLookupArray("select cycle as label, sum(amount) as value, ".join(', ', $category_lookup)." from contributions_dem c join legislator_terms t on recipient_ext_id = imsp_candidate_id and term = cycle where $where group by cycle order by cycle"));
