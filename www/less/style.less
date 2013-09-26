@@ -47,14 +47,12 @@
 		background: fade(white,85%);
 		border-top: 1px solid #eee;
 		z-index: 99;
+		transition: height 0.5s;
 		.node-more {
 			display: none;
 		}
 		&.open {
 			height: 45%;
-			.node-more {
-				display: block;
-			}
 			.more {
 				-webkit-transform: rotate(180deg);
 				-moz-transform: rotate(180deg);
@@ -110,10 +108,12 @@
 		}
 		#node-barchart {
 			position: absolute;
-			top: 5em; left: 15px;
-			width: 47.5%;
-			height: 75%;
-			min-height: 250px;
+			top: 0; left: 0;
+			padding: 5em 0 40px;
+			width: 100%;
+			height: 100%;
+			overflow: hidden;
+			box-sizing: border-box;
 			.amount {
 				font-size: 10px;
 				fill: #999;
@@ -138,6 +138,12 @@
 				font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
 				font-weight: lighter;
 			}
+		}
+		#node-total {
+			position: absolute;
+			bottom: 15px; left: 15px;
+			font: normal 1em "Diavlo","Helvetica Neue",Helvetica,sans-serif;
+			color: #999;
 		}
 		#node-csvlink {
 			position: absolute;

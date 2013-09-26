@@ -14,7 +14,7 @@ $(function(){
 	
 	// $('#infocard').hide();
 	$('#infocard .close').click(function() { resetGraph(); });
-	$('#infocard .more').click(function() { $(this).parent().toggleClass('open'); });
+	$('#infocard .more').click(function() { toggleMore(); });
 
 	$('.aboutLink, .methodologyLink').click(function() { togglePage(this); });
 
@@ -179,7 +179,7 @@ NodeViz.prototype.default_events.node.click = function(evt, dom_element, graph_e
 function updateInfocardData(node) { 
 	var url = (remotecache ? remotecache + '../' : '')+'request.php';
 	$.getJSON(url, {'method': 'chartData','type': node.type, 'id': node.id, 'state': gf.data.properties.state, 'chamber': gf.data.properties.chamber}, function(data, status, jxqhr) { 
-		drawPieChart(data.contributionsByCategory,'#node-piechart');
+		// drawPieChart(data.contributionsByCategory,'#node-piechart');
 		drawBarChart(data.contributionsByYear,'#node-barchart');
 	});
 }
@@ -199,25 +199,32 @@ function toggleInfocard(node) {
 	updateInfocardData(node);
 
 	if (card.is(':hidden') || node_id !== node.id) {
-		gf.panToNode(node.id, 4, {y:-50, x:0});
 		card.data('data-node',node.id);
 		switch( node.type ) {
 			case 'candidates':
 				$('#node-title').html(node.title+' <span class="district '+node.party+'">'+node.district+'</span>');
-				$('#node-amount').html('Received $'+commas(Math.floor(node.value))+' in '+ gf.data.properties.cycle + ' Ugly lifetime total: '+node.lifetime_total);
+				$('#node-amount').html('Received $'+commas(Math.floor(node.value))+' in '+ gf.data.properties.cycle);
 				break;
 			case 'donors':
 				$('#node-title').html(node.title+' <span class="sector '+node.sitecode+'">'+node.sitecode+'</span>');
-				$('#node-amount').html('Contributed $'+commas(Math.floor(node.value))+' to the '+gf.data.properties.state+' '+ $('#chamber :selected').text() +' in '+gf.data.properties.cycle+ ' Ugly lifetime total: '+node.lifetime_total);
+				$('#node-amount').html('Contributed $'+commas(Math.floor(node.value))+' to the '+gf.data.properties.state+' '+ $('#chamber :selected').text() +' in '+gf.data.properties.cycle);
 				break;
 		}
+		$('#node-total').html('Total: $' + commas(node.lifetime_total));
 		var url = (remotecache ? remotecache + '../' : '')+'request.php';
 		$('#node-csvlink a').attr('href',url+'?method=csv&type='+node.type+'&id='+node.id+'&state='+gf.data.properties.state+'&chamber='+gf.data.properties.chamber);
 		card.slideDown(500);
-		$('#masthead').hide();
+		gf.panToNode(node.id, 4, {y:-50, x:0});
+
+		// $('#masthead').hide();
 	} else {
 		resetGraph();
 	}
+}
+
+function toggleMore() {
+	$('#infocard').toggleClass('open');
+	$('#node-amount, .node-more').fadeToggle();
 }
 
 function togglePage(el) {
@@ -227,13 +234,20 @@ function togglePage(el) {
 }
 
 function resetGraph() {
-	current_network = '';
-	if (gf.current.network) {
-		gf.unselectNode(1);
-	}
-	$('#infocard').slideUp();
-	// $('#masthead').fadeIn(2000);
-	gf.zoom('reset');
+
+	// Reset infocard
+	$('#infocard').removeClass('open').slideUp(500,function(){
+		$('#node-amount').show();
+		$('.node-more').hide();
+
+		current_network = '';
+		if (gf.current.network) {
+			gf.unselectNode(1);
+		}
+		gf.zoom('reset');		
+
+	});
+
 }
 
 function writeHash(network) {
@@ -280,9 +294,11 @@ function setState() {
 	========================================================================== */
 
 function drawBarChart(data,container) {
-	var width = $(window).width() / 2 * 0.9,
-		height = $(window).height() / 2 * .675,
-		padding = 18
+	var padding = 15;
+	var width = $(window).width(),
+		height = $(window).height() / 2 - 150;
+
+	console.log('width: ' + width );
 
 	var x = d3.scale.ordinal().rangeRoundBands([0,width], .05);
 	var y = d3.scale.linear().range([0, height-(padding*2)]);
@@ -296,7 +312,7 @@ function drawBarChart(data,container) {
 			.attr('transform', "translate(0, "+(height-padding)+")");
 	}
 	
-	if (typeof(data[0]) == 'undefined') { //If there's no data, delete the svg and exit function
+	if (typeof(data[0]) == 'undefined') { // If there's no data, delete the svg and exit function
 		svg.remove();
 		return;
 	}

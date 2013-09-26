@@ -107,9 +107,9 @@
 		<a class="more">&#9650;</a>
 		<h3 id="node-title"></h3>
 		<h4 id="node-amount"></h4>
-		<div class="node-more">
+		<div class="node-more hide">
 			<div id="node-barchart"></div>
-			<div id="node-piechart"></div>
+			<div id="node-total"></div>
 			<div id="node-csvlink"><a href="">Download .CSV</a></div>
 		</div>
 	</div>
