@@ -281,7 +281,7 @@ function drawBarChart(data,container) {
 			.attr('transform', "translate(0, "+(height-padding)+")");
 	}
 	
-	if (typeof(data[0]) == 'undefined') {
+	if (typeof(data[0]) == 'undefined') { //If there's no data, delete the svg and exit function
 		svg.remove();
 		return;
 	}
@@ -318,6 +318,7 @@ function drawBarChart(data,container) {
 
 	rect.transition()
 		.duration(1000)
+		.delay(!rect.exit().empty()*200)
 		.attr("x", function(d) { return x(d.x); })
 		.attr("y", function(d) { return - y(d.y0) - y(d.y); })
 		.attr("height", function(d) { return y(d.y); })
@@ -325,7 +326,7 @@ function drawBarChart(data,container) {
 		.style('opacity','1')
 
 	rect.exit().transition()
-		.duration(1000)
+		.duration(200)
 		.attr('height', 0)
 		.attr('y', 0)
 		.style('opacity','0')
@@ -350,15 +351,25 @@ function drawBarChart(data,container) {
 		.style('opacity','0')
 
 	amounts.transition()
+		.delay(!rect.exit().empty()*200)
 		.duration(1000)
 		.style('opacity','1')
 		.attr('x',function(d) { return x(d.x) + (x.rangeBand() / 2); })
 		.attr('y',function(d) { return - y(d.y0) - y(d.y) + (y(d.y)/2); })
 		.attr('width',function() { return x.rangeBand(); })
-		.text(function(d) {if (y(d.y) > padding-2) { return toWordCase(d.label)+': $' + commas(Math.floor(d.y)); }});
+		.tween('text', function(d) { 
+			var i = d3.interpolate(this.textContent.replace(/[^0-9]+/g, ''), d.y);
+			return function(t) { 
+				if (y(d.y) > padding-2) { 
+					this.textContent = toWordCase(d.label)+': $' + commas(Math.floor(i(t)));
+				} else {
+					this.textContent = "";
+				}
+			}
+		});
 
 	amounts.exit().transition()
-		.duration(1000)
+		.duration(200)
 		.attr('y', function(d) { return 0+(y(d.y)/2); } )
 		.style('opacity','0')
 		.remove();
@@ -378,12 +389,13 @@ function drawBarChart(data,container) {
 		.attr('dominant-baseline', 'text-after-edge')
 
 	years.transition()
+		.delay(!rect.exit().empty()*200)
 		.duration(1000)
 		.attr('x',function(d, i) { return x(d.label) + x.rangeBand()/2; })
 		.style('opacity','1')
 
 	years.exit().transition()
-		.duration(1000)
+		.duration(200)
 		.style('opacity','0')
 		.remove();
 
@@ -401,17 +413,20 @@ function drawBarChart(data,container) {
 		.style('opacity','0')
 
 	totals.transition()
+		.delay(!rect.exit().empty()*200)
 		.duration(1000)
 		.attr('x',function(d, i) { return x(d.label) + x.rangeBand()/2; })
 		.attr('y', function(d) { return -y(d.value) -(padding); })
-		.text(function(d, i) { return '$'+commas(Math.floor(d.value)); })
 		.style('opacity','1')
-
+		.tween('text', function(d) { 
+			var i = d3.interpolate(this.textContent.replace(/[^0-9]+/g, ''), d.value);
+			return function(t) { 
+				this.textContent = '$' + commas(Math.floor(i(t)));
+			}
+		});
 	totals.exit().transition()
-		.duration(1000)
+		.duration(200)
 		.style('opacity','0')
-	
-
 }
 
 /*	==========================================================================
