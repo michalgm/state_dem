@@ -295,6 +295,7 @@ function drawBarChart(data,container) {
 	x.domain(categories[0].map(function(d) { return d.x; }));
 	y.domain([0, d3.max(data, function(d) { return parseInt(d.value); })]);
 
+	//The category groups
 	var category = svg.selectAll("g.category")
 		.data(categories) 
 
@@ -304,29 +305,33 @@ function drawBarChart(data,container) {
 	category.transition()
 		.attr('class', function(d) { return 'category '+d[0].label;})
 
+	//The filled rectangles
 	var rect = category.selectAll("rect")
-		.data(function(d) { return d; })
+		.data(function(d) { return d; }, function(d) { return d.x; })
 
 	rect.enter().append("svg:rect")
 		.attr("x", function(d) { return x(d.x); })
 		.attr("y", 0)
 		.attr("height", 0)
 		.attr("width", x.rangeBand())
+		.style('opacity','0')
 
 	rect.transition()
-			.duration(1000)
-			.attr("x", function(d) { return x(d.x); })
-			.attr("y", function(d) { return - y(d.y0) - y(d.y); })
-			.attr("height", function(d) { return y(d.y); })
-			.attr("width", x.rangeBand())
+		.duration(1000)
+		.attr("x", function(d) { return x(d.x); })
+		.attr("y", function(d) { return - y(d.y0) - y(d.y); })
+		.attr("height", function(d) { return y(d.y); })
+		.attr("width", x.rangeBand())
+		.style('opacity','1')
 
 	rect.exit().transition()
-			.duration(1000)
-			.attr('height', 0)
-			.attr('y', 0)
-			.style('opacity','0')
-			.remove();
+		.duration(1000)
+		.attr('height', 0)
+		.attr('y', 0)
+		.style('opacity','0')
+		.remove();
 
+	//The amount labels centered inside the bars (unless the associated band is < padding)
 	var amounts_group = svg.selectAll('g.amounts')
 		.data(categories)
 
@@ -334,15 +339,15 @@ function drawBarChart(data,container) {
 		.attr('class', 'amounts')
 
 	var amounts = amounts_group.selectAll('.amount')
-		.data(function(d) { return d; });
+		.data(function(d) { return d; }, function(d) { return d.x; });
 
 	amounts.enter().append('text')
-			.attr('class','chart-label amount')
-			.attr('dominant-baseline', 'middle')
-			.attr('text-anchor','middle')
-			.attr('y', function(d) { return 0+(y(d.y)/2); } )
-			.style('fill','#fff')
-			.style('opacity','0')
+		.attr('class','chart-label amount')
+		.attr('dominant-baseline', 'middle')
+		.attr('text-anchor','middle')
+		.attr('y', function(d) { return 0+(y(d.y)/2); } )
+		.style('fill','#fff')
+		.style('opacity','0')
 
 	amounts.transition()
 		.duration(1000)
@@ -350,7 +355,7 @@ function drawBarChart(data,container) {
 		.attr('x',function(d) { return x(d.x) + (x.rangeBand() / 2); })
 		.attr('y',function(d) { return - y(d.y0) - y(d.y) + (y(d.y)/2); })
 		.attr('width',function() { return x.rangeBand(); })
-		.text(function(d,i) {if (y(d.y) > padding-2) { return toWordCase(d.label)+': $' + commas(Math.floor(d.y)); }});
+		.text(function(d) {if (y(d.y) > padding-2) { return toWordCase(d.label)+': $' + commas(Math.floor(d.y)); }});
 
 	amounts.exit().transition()
 		.duration(1000)
@@ -358,6 +363,7 @@ function drawBarChart(data,container) {
 		.style('opacity','0')
 		.remove();
 
+	//The year labels below the bars
 	var years = svg.selectAll('.year')
 		.data(data, function(d) { return d.label; })
 
@@ -372,17 +378,18 @@ function drawBarChart(data,container) {
 		.attr('dominant-baseline', 'text-after-edge')
 
 	years.transition()
-			.duration(1000)
-			.attr('x',function(d, i) { return x(d.label) + x.rangeBand()/2; })
-			.style('opacity','1')
+		.duration(1000)
+		.attr('x',function(d, i) { return x(d.label) + x.rangeBand()/2; })
+		.style('opacity','1')
 
 	years.exit().transition()
 		.duration(1000)
 		.style('opacity','0')
 		.remove();
 
+	//The total labels above the bars
 	var totals = svg.selectAll('.total')
-		.data(data)
+		.data(data, function(d) { return d.label; })
 
 	totals.enter().append('text')
 		.attr('x',function(d, i) { return x(d.label) + x.rangeBand()/2; })
@@ -394,11 +401,11 @@ function drawBarChart(data,container) {
 		.style('opacity','0')
 
 	totals.transition()
-			.duration(1000)
-			.attr('x',function(d, i) { return x(d.label) + x.rangeBand()/2; })
-			.attr('y', function(d) { return -y(d.value) -(padding); })
-			.text(function(d, i) { return '$'+commas(Math.floor(d.value)); })
-			.style('opacity','1')
+		.duration(1000)
+		.attr('x',function(d, i) { return x(d.label) + x.rangeBand()/2; })
+		.attr('y', function(d) { return -y(d.value) -(padding); })
+		.text(function(d, i) { return '$'+commas(Math.floor(d.value)); })
+		.style('opacity','1')
 
 	totals.exit().transition()
 		.duration(1000)
