@@ -113,6 +113,8 @@ $.extend(NodeViz.prototype, {
 		$('#masthead').fadeOut(2000);
 		$('#about, #methodology').slideUp();
 
+		$('#legend-text').html('Contributions to the ' + gf.data.properties.state + ' ' + $('#chamber :selected').text() + ' in ' + gf.data.properties.cycle + ', scaled by amount.');
+
 		gf.nodeList = $.map(gf.data.nodes, function(n) { 
 			return {label: n.title, value: n.id, search_label: n.title}
 		});
