@@ -273,11 +273,12 @@ function drawBarChart(data,container) {
 	var x = d3.scale.ordinal().rangeRoundBands([0,width], .05);
 	var y = d3.scale.linear().range([0, height-(padding*2)]);
 
-	var svg = d3.select(container+' svg');
+	var svg = d3.select(container+' svg>g');
 	if (svg.empty()) {
 		svg = d3.select(container).append('svg')
 			.attr('width',width)
 			.attr('height',height)
+			.append('svg:g')
 			.attr('transform', "translate(0, "+(height-padding)+")");
 	}
 	
@@ -351,7 +352,7 @@ function drawBarChart(data,container) {
 		.style('opacity','0')
 
 	amounts.transition()
-		.delay(!rect.exit().empty()*200)
+		.delay(!amounts.exit().empty()*200)
 		.duration(1000)
 		.style('opacity','1')
 		.attr('x',function(d) { return x(d.x) + (x.rangeBand() / 2); })
@@ -381,15 +382,15 @@ function drawBarChart(data,container) {
 	years.enter().append('text')
 		.attr('x',function(d, i) { return x(d.label) + x.rangeBand()/2; })
 		.attr('class','chart-label year')
-		.attr('y',padding)
+		.attr('y',0)
 		.text(function(d, i) { return d.label; })
 		.attr('width',function() { return x.rangeBand(); })
 		.attr('text-anchor','middle')
 		.style('opacity','0')
-		.attr('dominant-baseline', 'text-after-edge')
+		.attr('dominant-baseline', 'text-before-edge')
 
 	years.transition()
-		.delay(!rect.exit().empty()*200)
+		.delay(!years.exit().empty()*200)
 		.duration(1000)
 		.attr('x',function(d, i) { return x(d.label) + x.rangeBand()/2; })
 		.style('opacity','1')
@@ -413,7 +414,7 @@ function drawBarChart(data,container) {
 		.style('opacity','0')
 
 	totals.transition()
-		.delay(!rect.exit().empty()*200)
+		.delay(!totals.exit().empty()*200)
 		.duration(1000)
 		.attr('x',function(d, i) { return x(d.label) + x.rangeBand()/2; })
 		.attr('y', function(d) { return -y(d.value) -(padding); })
@@ -427,6 +428,7 @@ function drawBarChart(data,container) {
 	totals.exit().transition()
 		.duration(200)
 		.style('opacity','0')
+		.remove();
 }
 
 /*	==========================================================================
