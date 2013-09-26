@@ -23,7 +23,7 @@
 	========================================================================== */
 
 	.container { margin: 0 auto; position: relative; }
-	@media screen and (max-width: 480px) { .container { width:100%; padding: 0 1em; }}
+	@media screen and (max-width: 480px) { .container { width:100%; padding: 0 1em; box-sizing: border-box;}}
 	@media screen and (min-width: 768px) { .container { width:740px; }}
 	@media screen and (min-width: 1024px) { .container { width:960px; }}
 	@media screen and (min-width: 1210px) { .container { width:1200px; }}
@@ -195,6 +195,23 @@
 		.close, .more {
 			top: -20px;
 		}
+	}
+}
+
+#about, #methodology {
+	position: absolute;
+	bottom: 40px; left: 0;
+	height: 100%;
+	width: 100%;
+	color: #fff;
+	background: linear-gradient(#93f,fade(#333,90%));
+	z-index: 99;
+	overflow: scroll;
+	.container {
+		padding: 12em 1em 5em;
+		box-sizing: border-box;
+		h2 {font-size: 24px;}
+		p, li { font: 300 18px/1.5 "Helvetica Neue",Helvetica,Arial,sans-serif; }
 	}
 }
 
@@ -424,6 +441,7 @@ text.label { fill: #fff; font-weight: 600; font-family: 'Ubuntu', sans-serif; fo
 	border-top: 1px solid #ddd;
 	line-height: 40px;
 	opacity: 0.5;
+	z-index: 100;
 	&:hover {
 		opacity: 1;
 	}

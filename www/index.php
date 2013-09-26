@@ -120,6 +120,40 @@
 		</select>
 	</div>
 
+	<div id="about" class="page hide">
+		<div class="container">
+			<h2>About</h2>
+			<p>The State Dirty Energy Money website provides an illustration of the network of funding relationships between fossil fuel companies and politicians. It shows which companies are dumping their dirty money into politics and which politicians are receiving it. We offer the best data available on contributions from the fossil fuel industry to decision-makers at the state level.</p>
+			<p>You can use the interactive network map to explore our database of state-level campaign contribution relationships. We currently cover both houses of the state legislature (where applicable) in Alaska, California, Colorado, New York, Ohio, Pennsylvania, and Texas. The site is based on a robust database of contributions from fossil fuel industry employees and Political Action Committees (PACs) going back to 2006.</p>
+			<p>Politicians and companies are positioned by their relationships, with their relative size reflecting the amount of money given or received. The size of the node and the tie indicate the strength of the relationship. (i.e. a company giving $15,000 to politicians will appear bigger than one giving $500). Think of it like a social networking site in which companies and politicians have become 'friends' by giving money.</p>
+		</div>
+	</div>
+	<div id="methodology" class="page hide">
+		<div class="container">
+			<h2>Methodology</h2>
+			<h3>How does the relationship map work?</h3>
+		
+			<p>We add up all the contributions from each filing and run this data through network visualization software to position the companies and politicians according to their ties. The size of the node (i.e. the circle with the company or the square image of a politician) and the strength of the tie (i.e. the line between actors) corresponds to the amount of money given or received. The nodes are then positioned according to the strength of their relationships.</p>
+
+			<h3>Where did you get the data?</h3>
+
+			<p>Anybody who runs for office is required to file reports with their state elections commission, detailing who they have accepted significant amounts of money from and in what amount.  We use data compiled by the National Institute for Money in State Politics (NIMSP) and the Sunlight Foundation which we further refine using our own custom-built software to match our specific expertise in the oil, gas and coal industries. We track all contributions from known employees and Political Action Committees (or PACs) from these companies back to 2006. We only look at the contributions that went to the selected group of elected officials (House/Assembly, Senate, etc.) while they were in office.</p>
+
+			<p>We used tools, data, and information from the following sources:</p>
+
+			<ul>
+				<li>National Institute for Money in State Politics (NIMSP): categorized oil contributions and company names and provided assistance with data interpretation.</li>
+				<li>Sunlight Foundation Projects:
+					<ul>
+						<li>Influence Explorer: provides bulk downloads of reformatted NIMSP data as well as an API for getting legislator information, including photo urls</li>
+						<li>Open States API: provides additional legislator information, including lists of all members of state legislatures </li>
+					</ul>
+				</li>
+				<li>Images of company logos were acquired from company websites without permission or authorization and may be under copyright of the respective companies. They are used here to refer to the companies and do not in any way indicate an endorsement or sponsorship of this project by any of these firms.</li>
+			</ul>
+		</div>
+	</div>
+
 <?php include 'inc/footer.inc';?>
 
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.js"></script>

@@ -12,9 +12,11 @@ $(function(){
 	History.Adapter.bind(window,'statechange',setState);
 	initGraph();
 	
-	$('#infocard').hide();
+	// $('#infocard').hide();
 	$('#infocard .close').click(function() { resetGraph(); });
 	$('#infocard .more').click(function() { $(this).parent().toggleClass('open'); });
+
+	$('.aboutLink, .methodologyLink').click(function() { togglePage(this); });
 
 	$('#pull').click(function(e){
 		$('.navlist').slideToggle();
@@ -108,19 +110,20 @@ $.extend(NodeViz.prototype, {
 			}
 		});
 		$('#infocard').hide();
-		// $('#masthead').fadeIn(2000);
-		
+		$('#masthead').fadeOut(2000);
+		$('#about, #methodology').slideUp();
+
 		gf.nodeList = $.map(gf.data.nodes, function(n) { 
 			return {label: n.title, value: n.id, search_label: n.title}
 		});
 		$("#node_search").keyup(function(e) { //don't submit the form when someone hits enter in search field
-			if ($("#node_search").val() == '') { 
+			if ($("#node_search").val() == '') {
 				$('#no_results_found').hide();
 			}
 		});
 		$("#node_search").keypress(function(e) { //don't submit the form when someone hits enter in search field
 			var code = (e.keyCode ? e.keyCode : e.which);
-		    if(code == 13) { //Enter keycode
+			if(code == 13) { //Enter keycode
 				if ($("#node_search").val().length) { 
 					$('#node_search').autocomplete('search');
 					$('#node_search').autocomplete('close');
@@ -223,9 +226,15 @@ function toggleInfocard(node) {
 	}
 }
 
+function togglePage(el) {
+	var page = $(el).attr('href');
+	$('.page').not(page).slideUp();
+	$(page).slideToggle();
+}
+
 function resetGraph() {
 	current_network = '';
-	if (gf.current.network) { 
+	if (gf.current.network) {
 		gf.unselectNode(1);
 	}
 	$('#infocard').slideUp();
