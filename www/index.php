@@ -84,8 +84,6 @@
 		#close_error { position: absolute; right: 5px; top: 5px; cursor: pointer;}
 		.errorstring { background: transparent !important; }
 
-		#intro_state { font-size: 1.5em; }
-
 	</style>
 </head>
 <body>
@@ -116,8 +114,8 @@
 		</div>
 	</div>
 	<div id="intro_screen" class="container" style='display: none;'>
-		<select id='intro_state'>
-			<option disabled="disabled">Select a state to begin</option>
+		<select id="intro_state">
+			<option selected="selected" disabled="disabled">Select a state to begin</option>
 		</select>
 	</div>
 
