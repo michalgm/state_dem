@@ -29,7 +29,9 @@ $(function(){
 	var url_state = (window.location.search.substr(1)).split('/');
 	if (url_state[0]) { 
 		$('#state').val(url_state[0]);
+		updateOptions();
 		$('#chamber').val('state:'+url_state[1].toLowerCase());
+		updateOptions();
 		$('#cycle').val(url_state[2]);
 		$('#intro_screen').hide();
 		$('#state').change();
@@ -603,23 +605,27 @@ function setupOptions() {
 	});
 	$('#state').val(current_state);
 
-	$('#state').on('change', function(a, e, i , o) { 
-		var state = states[a.target.value];
-		var current_year = $('#cycle').val();
-		var current_chamber = $('#chamber').val();
-
-		$('#chamber').html('');
-		$('#chamber').append($('<option>').attr('value', 'state:upper').html(state.upper_name));
-		if (state.lower_name) { 
-			$('#chamber').append($('<option>').attr('value', 'state:lower').html(state.lower_name));
-		}
-
-		$('#cycle').html('');
-		$(state.years.split(',').reverse()).each(function(i, y) {
-			$('#cycle').append($('<option>').html(y));	
-		});	
-		$('#cycle').val(current_year);
-		$('#chamber').val(current_chamber);
+	$('#state').on('change', function() { 
+		updateOptions();
 	});
 	//$('#state').change();
+}
+
+function updateOptions() {
+	var state = states[$('#state').val()];
+	var current_year = $('#cycle').val();
+	var current_chamber = $('#chamber').val();
+
+	$('#chamber').html('');
+	$('#chamber').append($('<option>').attr('value', 'state:upper').html(state.upper_name));
+	if (state.lower_name) { 
+		$('#chamber').append($('<option>').attr('value', 'state:lower').html(state.lower_name));
+	}
+
+	$('#cycle').html('');
+	$(state.years.split(',').reverse()).each(function(i, y) {
+		$('#cycle').append($('<option>').html(y));	
+	});	
+	$('#cycle').val(current_year);
+	$('#chamber').val(current_chamber);
 }
