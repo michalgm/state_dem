@@ -221,6 +221,15 @@
 	}
 }
 
+#legend {
+	position: absolute;
+	bottom: 40px; left: 0;
+	width: 100%;
+	text-align: left;
+	font: normal 14px/3 "Diavlo","Helvetica Neue",Helvetica,Arial,sans-serif;
+	color: #666;
+}
+
 #highlight.selected, .nhighlight, .nodelist_container .highlight, .nodelist_container .selected, .node_search_list li.selected { background-color: #FFFFCC !important; }
 #svg_overlay .nhighlight { fill-opacity:1 !important;}
 #svg_overlay .selected .nhighlight { fill-opacity: 1 !important; }
@@ -434,6 +443,85 @@ text.label { fill: #fff; font-weight: 600; font-family: 'Ubuntu', sans-serif; fo
 			display: block;
 			overflow: hidden;
 		}
+	}
+}
+
+#navbar #searchfield {
+	position: relative;
+	float: right;
+	padding: 8px;
+	border: none;
+	outline: none;
+
+	.autocomplete {
+		position: absolute;
+		left: 50%;
+		font-size: .8em;
+		margin: 0 0 0 -90px; padding: 0;
+		z-index: 200;
+		width: 180px;
+		background: #fff;
+		box-shadow: none;
+		border: none;
+			
+		ul {
+			list-style: none;
+			margin: 0; padding: 0;
+			border-radius: 5px;
+			z-index: 200;
+			border: 1px solid #ccc;
+		
+			li {
+				list-style-type:none;
+				display:block;
+				margin: 0; padding: 0;
+				cursor:pointer;
+				float: none;
+				width: 100%;
+				text-align: left;
+				border: none;
+			
+				a { 
+					display: block; 
+					padding: 5px 5px 5px 25px;
+					text-align: left;
+					border: none;
+					line-height: 2em;
+					background-position: 5px 50%;
+					background-repeat: no-repeat;
+					&:hover {
+						font-weight: normal;
+						box-shadow: none;
+						color: inherit;
+						background: inherit;
+					}
+					&.ui-state-focus {
+						background-color: #ccbbdd;
+						font-weight: normal;
+					}
+				}
+				&.politician a { background-image: url(../images/politician.png) !important; }
+				&.company a { background-image: url(../images/company.png) !important; }
+			}
+		}
+		.searchdetails { font-size: .8em; }
+	}
+	.autocomplete_img  { position: absolute; margin-left: 10px; }
+	#no_results_found {
+		font-size: 0.8em;
+		color: #600;
+		background: #933;
+		text-shadow: 1px 1px #a44;
+		border-radius: 5px;
+		padding: 1em 0.5em;
+		width: 172px;
+		position: absolute;
+	}
+	.ui-autocomplete .ui-state-focus {
+		// background: none;
+		border:none;
+		color: inherit;
+		padding: none;
 	}
 }
 

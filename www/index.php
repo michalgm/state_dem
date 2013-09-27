@@ -31,53 +31,6 @@
 		svg .carbon { fill: rgb(110,110,110); }
 			
 		#masthead { z-index: 99; }
-		
-		#navbar #searchfield { position: relative; float: right; padding: 8px; border: none; }
-		#searchfield .autocomplete {
-			position: absolute;
-			left: 50%;
-			font-size: .8em;
-			margin: 0 0 0 -90px; padding: 0;
-			z-index: 200;
-			width: 180px;
-			background: #fff;
-			box-shadow: none;
-			border: none;
-		}
-		#searchfield .autocomplete ul {
-			list-style: none;
-			margin: 0; padding: 0;
-			border-radius: 5px;
-			z-index: 200;
-			border: 1px solid #ccc;
-		}
-		#searchfield .autocomplete ul li {
-			list-style-type:none;
-			display:block;
-			margin: 0; padding: 0;
-			cursor:pointer;
-			float: none;
-			width: 100%;
-			text-align: left;
-			border: none;
-		}
-		#searchfield .autocomplete ul li a { 
-			display: block; 
-			padding: 5px 5px 5px 25px;
-			text-align: left;
-			border: none;
-			line-height: 2em;
-			background-position: 5px 50%;
-			background-repeat: no-repeat;
-		}
-		#searchfield .autocomplete ul li a.ui-state-focus { background-color: #ccbbdd; background-repeat: no-repeat; background-position: 5px 50%;}
-		#searchfield .ui-autocomplete .ui-state-focus { background: none; border:none; color: inherit; padding: none; }
-		#searchfield .autocomplete ul li.politician a { background-image: url(images/politician.png); }
-		#searchfield .autocomplete ul li.company a { background-image: url(images/company.png); }
-		#searchfield .autocomplete .bold { font-weight: bold; }
-		#searchfield .autocomplete .searchdetails { font-size: .8em; }
-		#searchfield .autocomplete_img  { position: absolute; margin-left: 10px; }
-		#searchfield #no_results_found { font-size: 0.8em; color: #600; background: #933; text-shadow: 1px 1px #a44; border-radius: 5px; padding: 1em 0.5em; width: 172px; position: absolute;}
 	
 		#error { padding: 15px; margin-top: 170px; text-align: center; background: #eee; padding-top: 1; color: #c33; box-shadow: 0 0 1em rgba(0, 0, 0, 0.5); border: 1px solid #666; border-radius: 10px;}
 		.errordetails { display: none; }
@@ -103,6 +56,7 @@
 	<!-- <div id="lists"></div> -->
 	<div id="graphs"></div>
 
+	<div id="legend"><div id="legend-text" class="container"></div></div>
 	<div id="infocard" data-node="null" class="hide">
 		<a class="close">&times;</a>
 		<a class="more">&#9650;</a>
