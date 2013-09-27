@@ -4,7 +4,6 @@ require_once("$nodeViz_config[application_path]/config.php");
 $global_edges = array();
 $ballot = 0;
 setlocale(LC_MONETARY, 'en_US.UTF-8');
-
 $db = dbconnect();
 
 /*
@@ -30,7 +29,7 @@ class StateDEM extends Graph {
 			'state'=>'AL',
 			'cycle'=>'2006',
 			'chamber'=>'state:upper',
-			'valueMin'=>'1',
+			'valueMin'=>'0',
 			'edgeid'=>'',
 			'candidate_ids'=>'',
 			'company_ids'=>''
@@ -91,11 +90,12 @@ class StateDEM extends Graph {
 		$basicContribQuery = "
 			select transaction_id, company_id, c.name as company_name, sum(amount) as amount, recipient_ext_id, b.name as industry,  c.image_name as image, d.dem_type as sitecode, contributor_type, (d.coal_related + d.oil_related + d.carbon_related) as lifetime_total from contributions_dem a join catcodes b on code = contributor_category join companies c on c.id = a.company_id join companies_state_details d using(company_id) where $cycle $companies recipient_ext_id in (".arrayToInString($cans, 1).") and  company_name != '' group by a.company_id, recipient_name order by sum(amount) desc 
 			";
-		writelog($basicContribQuery);
+		$this->addquery('fetch_donors', $basicContribQuery);
 		writelog('before donor query');
 		$contribs = dbLookupArray($basicContribQuery);
 		writelog('after donor query');
 		foreach ($contribs as $donor) { 
+			$donor['amount'] = round($donor['amount']);
 			$id = 'co-'.trim($donor['company_id']);
 			if (isset($nodes[$id])) {
 				$nodes[$id]['total_dollars'] += $donor['amount'];
@@ -155,7 +155,7 @@ class StateDEM extends Graph {
 
 	function donors_nodeProperties($nodes) {
 		foreach ($nodes as $node) {
-			if ($node['total_dollars'] <= $this->data['properties']['valueMin']) { writelog($node['id']); unset($nodes[$node['id']]); continue; }
+			//if ($node['total_dollars'] <= $this->data['properties']['valueMin']) { writelog($node['id']); unset($nodes[$node['id']]); continue; }
 			$node['title'] = ucwords(trim($node['company_name']));
 			$node['value'] = $node['total_dollars'];
 			$node['dir'] = getcwd();

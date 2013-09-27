@@ -84,7 +84,7 @@ class Graph {
 				$this->data['properties'][$key]  = $request_parameters[$key];
 			}
 		}	
-		if (isset($NodeViz_config['debug'])) {
+		if (isset($nodeViz_config['debug'])) {
 			$this->debug = $nodeViz_config['debug'];
 		}
 		if (isset($request_parameters['graphWidth'])) {

@@ -11,7 +11,6 @@ set_include_path(get_include_path().PATH_SEPARATOR.$nodeViz_config['library_path
 #chdir($nodeViz_config['web_path']);
 #reinterpret_paths();
 
-$nodeViz_config['debug'] = 1;
 #sleep(3);
 
 $response = array('statusCode'=>7, 'statusString'=>'No data was returned');
