@@ -374,7 +374,7 @@ GraphImage("GraphSVG", {}, {
 		var ctm = this.ctm;
 	
   		//get bounding box for node 
-  		var box = $(id).getBBox();
+		var box = $('#'+id).children()[0].getBBox();
   		var svg_p = this.root.createSVGPoint();
   		svg_p.x = box.width /2 + box.x;
 		svg_p.y = box.height /2  + box.y;
@@ -382,30 +382,25 @@ GraphImage("GraphSVG", {}, {
 		//use the transform to move the point to screen coords
 		var dom_p = svg_p.matrixTransform(ctm);
 		//correct for differences in screen coords when page is scrolled
-		var offset = $('svg_overlay').viewportOffset();
-		dom_p.x = dom_p.x -offset[0];
-		dom_p.y = dom_p.y -offset[1];
+		var offset = $('#svg_overlay').offset();
+		dom_p.x = dom_p.x -offset.left;
+		dom_p.y = dom_p.y -offset.top;
 
 		//if no level was passed, default to 'in'
-		level = level !== '' ? level : 'in';
+		level = typeof(level) != 'undefined' ? level : 'in';
   		this.zoom(level,dom_p);
 	},
 
 	getElementCenter: function(id) { 
 		if(!$('#'+id).length) { return; } //should this throw an error?
-  		//get the transform of the svg coords to screen coords
-  		//var ctm = $(id).getScreenCTM();
-		var ctm = this.ctm;
-		var g = $('#graph0')[0];
-		//this.stateTf = $('graph0').getCTM().inverse();
 
-  		//get bounding box for node 
-  		var box = $('#'+id)[0].getBBox();
+		//Chrome doesn't like getting BBox for Groups, so we get the box for the first sub element
+		var box = $('#'+id).children()[0].getBBox();
   		var node_center = this.root.createSVGPoint();
   		node_center.x = box.width /2 + box.x;
 		node_center.y = box.height /2 + box.y;
 		var center = this.calculateCenter();
-		//$('images').insert(new Element('div', {'id': 'centertest', 'style': 'position: absolute; opacity: .2; background: pink; z-index: 1000; top: 0px; left: 0px; width:'+center.x+'px; height: '+center.y+'px;'}));
+		//$('#images').append($('<div>').attr({'id': 'centertest', 'style': 'position: absolute; opacity: .2; background: pink; z-index: 1000; top: 0px; left: 0px; width:'+center.x+'px; height: '+center.y+'px;'}));
 		//convert from dom pixels to svg units
 		center = center.matrixTransform(this.stateTf);
 
