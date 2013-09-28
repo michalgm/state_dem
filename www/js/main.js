@@ -400,7 +400,8 @@ function drawBarChart(data,container) {
 			var i = d3.interpolate(this.textContent.replace(/[^0-9]+/g, ''), d.y);
 			return function(t) { 
 				if (y(d.y) > padding-2) {
-					var label = d.label == 'carbon' ? 'misc.' : d.label;
+					var aliases = {'carbon':'Miscellaneous', 'DEM':'Democrats', 'REP':'Republicans', 'IND':'Independants'};
+					var label = aliases[d.label] ? aliases[d.label] : d.label;
 					this.textContent = toWordCase(label)+': $' + commas(Math.floor(i(t)));
 				} else {
 					this.textContent = "";

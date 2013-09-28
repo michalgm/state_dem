@@ -3,11 +3,11 @@ header('Access-Control-Allow-Origin: *');
 include("../config.php");
 
 $id = isset($_REQUEST['id']) ? str_replace('co-', '', dbEscape($_REQUEST['id'])) : '';
-$id_field = $_REQUEST['type'] == 'candidates' ? 'recipient_ext_id' : 'company_id';
+$id_field = $_REQUEST['type'] == 'candidates' ? 'imsp_candidate_id' : 'company_id';
 $state = dbEscape($_REQUEST['state']);
 $chamber = dbEscape($_REQUEST['chamber']);
 $cycle = isset($_REQUEST['cycle']) ? dbEscape($_REQUEST['cycle']) : '';
-$where = " $id_field = '$id' and cycle >= $min_cycle and t.seat = '$chamber' and recipient_state = '$state' ";
+$where = " $id_field = '$id' and term >= $min_cycle and t.seat = '$chamber' and t.state = '$state' ";
 
 
 switch($_REQUEST['method']) {
@@ -57,12 +57,13 @@ switch($_REQUEST['method']) {
 
 function getContributionsByYear() {
 	global $where;
-	$category = $_REQUEST['type'] == 'candidates' ? 'sitecode' : 'party';
-	$categories = $_REQUEST['type'] == 'candidates' ? array('oil', 'coal', 'carbon') : array('D', 'R', 'I');
+	$type = $_REQUEST['type'];
+	$category = $type == 'candidates' ? 'sitecode' : 'party';
+	$categories = $type == 'candidates' ? array('oil', 'coal', 'carbon') : array('D', 'R', 'I');
 	$category_lookup = array();
 	$aliases = array('D'=> 'DEM', 'R'=>'REP', 'I'=> 'IND');
 	foreach($categories as $cat) {
-		$label = $_REQUEST['type'] == 'candidates' ? $cat : $aliases[$cat];
+		$label = $type == 'candidates' ? $cat : $aliases[$cat];
 		if ($cat == 'I') {  //Include blank as independant
 			$category_lookup[] = "sum(if(($category = '$cat' or $category = '' or $category = 'N'), amount, 0)) as $label";
 		} else {
@@ -70,7 +71,7 @@ function getContributionsByYear() {
 		}
 	}
 
-	return array_values(dbLookupArray("select cycle as label, sum(amount) as value, ".join(', ', $category_lookup)." from contributions_dem c join legislator_terms t on recipient_ext_id = imsp_candidate_id and term = cycle where $where group by cycle order by cycle"));
+	return array_values(dbLookupArray("select term as label, sum(if(amount, amount, 0)) as value, ".join(', ', $category_lookup)." from contributions_dem c right join legislator_terms t on recipient_ext_id = imsp_candidate_id and term = cycle where $where group by term order by term"));
 }
 
 function getContributionsByCategory() {
