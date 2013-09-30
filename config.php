@@ -15,7 +15,7 @@ $dbport = "3306";
 
 set_include_path(get_include_path() . PATH_SEPARATOR . dirname(__FILE__).'/www/NodeViz/library/');
 
-$debug=1;
+$debug=0;
 
 require_once('dbaccess.php');
 
