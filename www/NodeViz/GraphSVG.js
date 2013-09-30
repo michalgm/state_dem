@@ -440,7 +440,7 @@ GraphImage("GraphSVG", {}, {
 		//this.setCTM(g, $('graph0').getCTM().translate(delta.x, delta.y));
 	},
 	setupZoomListeners: function(root){
-		Hammer(document.body, {transform_always_block: true} ).on('dragstart dragend drag transform doubletap', $.proxy(function(e) {
+		Hammer(root, {transform_always_block: true} ).on('dragstart dragend drag transform doubletap', $.proxy(function(e) {
 			e.preventDefault();
 			e.gesture.preventDefault(); 
 			switch(e.type) {
@@ -595,6 +595,7 @@ GraphImage("GraphSVG", {}, {
 
 		evt.returnValue = false;
 
+		console.log(evt);
 		var svgDoc = this.root;
 		//I'm removing this so that we can drag beyond edge of graph. Hopefully it didn't do anything?
 		if (evt.target.id != 'svgscreen' && evt.target.tagName != 'svg_overlay' && evt.target.tagName != 'svg') { 
