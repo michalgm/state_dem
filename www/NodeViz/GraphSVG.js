@@ -440,6 +440,29 @@ GraphImage("GraphSVG", {}, {
 		//this.setCTM(g, $('graph0').getCTM().translate(delta.x, delta.y));
 	},
 	setupZoomListeners: function(root){
+		Hammer(document.body, {transform_always_block: true} ).on('dragstart dragend drag transform doubletap', $.proxy(function(e) {
+			e.preventDefault();
+			e.gesture.preventDefault(); 
+			switch(e.type) {
+				case 'dragstart':
+					this.handleMouseDown(e);
+					break;
+				case 'dragend':
+					this.handleMouseUp(e);
+					break;
+				case 'drag':
+					this.handleMouseMove(e);
+					break;
+				case 'transform':
+					this.handleMouseWheel(e, e.gesture.scale);
+					break;
+				case 'doubletap':
+					this.zoom('in', this.getEventPoint(e));
+					break;
+			}
+			e.stopPropagation();
+		}, this));
+		//Event.observe($('svgscreen'), 'mouseup', function(e) { this.handleMouseUp(e); }.bind(this));
 		$('#svgscreen').mousedown($.proxy(function(e) { this.handleMouseDown(e); }, this));
 		$('#svgscreen').mousemove($.proxy(function(e) { this.handleMouseMove(e); }, this));
 		//Event.observe($('svgscreen'), 'mouseup', function(e) { this.handleMouseUp(e); }.bind(this));
@@ -463,6 +486,8 @@ GraphImage("GraphSVG", {}, {
 	getEventPoint: function(evt) {
 		var p = this.root.createSVGPoint();
 
+		//If this is a gesture event, get the center from the gesture
+		if (evt.gesture) { evt = evt.gesture.center; } 
 		p.x = evt.pageX;
 		p.y = evt.pageY;
 		var offset = [$('#svg_overlay').offset().left, $('#svg_overlay').offset().top];
@@ -536,7 +561,8 @@ GraphImage("GraphSVG", {}, {
 			delta = evt.detail / -9; // Mozilla
 		*/
 		var p = this.getEventPoint(evt);
-		if (delta > 0) { 
+		var threshold = evt.gesture ? 1 : 0;
+		if (delta > threshold) { 
 			this.zoom('in', p);
 		} else { 
 			this.zoom('out', p);
