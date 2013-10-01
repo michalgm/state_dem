@@ -258,7 +258,6 @@ GraphImage("GraphSVG", {}, {
 		}, this));
 	},
 	findParents: function(id,found){
-		
 		$H(this.NodeViz.data.nodes[id].relatedNodes).keys().each(function(index, e) {
 			$H(this.NodeViz.data.nodes[id].relatedNodes[e]).values().each( function(index, edge) { 
 				if(this.NodeViz.data.edges[edge].toId==id){
@@ -286,7 +285,6 @@ GraphImage("GraphSVG", {}, {
 		return foundEdges;
 	},
 	findChildren: function(id,found){
-		
 		$H(this.NodeViz.data.nodes[id].relatedNodes).keys().each(function(index, e) {
 			$H(this.NodeViz.data.nodes[id].relatedNodes[e]).values().each( function(index, edge) { 
 				if(this.NodeViz.data.edges[edge].fromId==id){
@@ -370,7 +368,6 @@ GraphImage("GraphSVG", {}, {
 		if(!$(id)) { return; } //should this throw an error?
 	
   		//get the transform of the svg coords to screen coords
-  		//var ctm = $(id).getScreenCTM();
 		var ctm = this.ctm;
 	
   		//get bounding box for node 
@@ -383,8 +380,8 @@ GraphImage("GraphSVG", {}, {
 		var dom_p = svg_p.matrixTransform(ctm);
 		//correct for differences in screen coords when page is scrolled
 		var offset = $('#svg_overlay').offset();
-		dom_p.x = dom_p.x -offset.left;
-		dom_p.y = dom_p.y -offset.top;
+		dom_p.x -= offset.left;
+		dom_p.y -= offset.top;
 
 		//if no level was passed, default to 'in'
 		level = typeof(level) != 'undefined' ? level : 'in';
@@ -400,6 +397,7 @@ GraphImage("GraphSVG", {}, {
   		node_center.x = box.width /2 + box.x;
 		node_center.y = box.height /2 + box.y;
 		var center = this.calculateCenter();
+		//The following line is for debugging the center point
 		//$('#images').append($('<div>').attr({'id': 'centertest', 'style': 'position: absolute; opacity: .2; background: pink; z-index: 1000; top: 0px; left: 0px; width:'+center.x+'px; height: '+center.y+'px;'}));
 		//convert from dom pixels to svg units
 		center = center.matrixTransform(this.stateTf);
@@ -441,8 +439,7 @@ GraphImage("GraphSVG", {}, {
 	},
 	setupZoomListeners: function(root){
 		Hammer(root, {transform_always_block: true} ).on('dragstart dragend drag transform doubletap', $.proxy(function(e) {
-			e.preventDefault();
-			e.gesture.preventDefault(); 
+			e.gesture ? e.gesture.preventDefault() : e.preventDefault();
 			switch(e.type) {
 				case 'dragstart':
 					this.handleMouseDown(e);
@@ -457,27 +454,16 @@ GraphImage("GraphSVG", {}, {
 					this.handleMouseWheel(e, e.gesture.scale);
 					break;
 				case 'doubletap':
-					this.zoom('in', this.getEventPoint(e));
+					if(! $(e.target).closest('#graph0').length || e.target.id == 'svgscreen') { 
+						this.zoom('in', this.getEventPoint(e));
+					}
 					break;
 			}
 			e.stopPropagation();
 		}, this));
-		//Event.observe($('svgscreen'), 'mouseup', function(e) { this.handleMouseUp(e); }.bind(this));
-		$('#svgscreen').mousedown($.proxy(function(e) { this.handleMouseDown(e); }, this));
-		$('#svgscreen').mousemove($.proxy(function(e) { this.handleMouseMove(e); }, this));
-		//Event.observe($('svgscreen'), 'mouseup', function(e) { this.handleMouseUp(e); }.bind(this));
-		$(root).mousedown($.proxy(function(e) { this.handleMouseDown(e); }, this));
-		$(root).mousemove($.proxy(function(e) { this.handleMouseMove(e); }, this));
-		$(root).mouseup($.proxy(function(e) { this.handleMouseUp(e); }, this));
 		$('#svgscreen').unbind('click');
-		//Event.observe($('svgscreen'), 'mouseup', function(e) { this.handleMouseUp(e); }.bind(this));
 		$('#images').mouseleave($.proxy(function(e) { this.handleMouseUp(e); }, this));
 		$(root).mousewheel($.proxy(function(e, delta) { this.handleMouseWheel(e, delta); }, this));
-		$(root).dblclick($.proxy(function(e) {  // Ignore zoom events on graph elements to avoid conflicts
-			if(! $(e.target).closest('#graph0').length || e.target.id == 'svgscreen') { 
-				this.zoom('in', this.getEventPoint(e)); 
-			} 
-		}, this));
 		this.center = this.calculateCenter();
 	},
 /**
@@ -595,7 +581,6 @@ GraphImage("GraphSVG", {}, {
 
 		evt.returnValue = false;
 
-		console.log(evt);
 		var svgDoc = this.root;
 		//I'm removing this so that we can drag beyond edge of graph. Hopefully it didn't do anything?
 		if (evt.target.id != 'svgscreen' && evt.target.tagName != 'svg_overlay' && evt.target.tagName != 'svg') { 
