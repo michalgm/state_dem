@@ -115,7 +115,14 @@ $.extend(NodeViz.prototype, {
 		$('#masthead').fadeOut(2000);
 		$('#about, #methodology').slideUp();
 
+		$('#graphoptions select').blur();
+	
 		$('#legend-text').html('Contributions to the ' + gf.data.properties.state + ' ' + $('#chamber :selected').text() + ' in ' + gf.data.properties.cycle + ', scaled by amount.');
+
+		$('#csvlink').hide().attr('href',function() {
+			var url = (remotecache ? remotecache + '../' : '')+'request.php';
+			return url+'?method=csv&type=chamber&state='+gf.data.properties.state+'&chamber='+gf.data.properties.chamber+'&cycle='+gf.data.properties.cycle;
+		}).delay(1000).fadeIn();
 
 		gf.nodeList = $.map(gf.data.nodes, function(n) { 
 			return {label: n.title, value: n.id, search_label: n.title}
