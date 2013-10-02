@@ -75,6 +75,7 @@
 	</div>
 
 	<div id="about" class="page hide">
+		<div class="page-close">&times;</div>
 		<div class="container">
 			<h2>About</h2>
 			<p>The State Dirty Energy Money website provides an illustration of the network of funding relationships between fossil fuel companies and politicians. It shows which companies are dumping their dirty money into politics and which politicians are receiving it. We offer the best data available on contributions from the fossil fuel industry to decision-makers at the state level.</p>
@@ -83,6 +84,7 @@
 		</div>
 	</div>
 	<div id="methodology" class="page hide">
+		<div class="page-close">&times;</div>
 		<div class="container">
 			<h2>Methodology</h2>
 			<h3>How does the relationship map work?</h3>

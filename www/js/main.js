@@ -16,7 +16,7 @@ $(function(){
 	$('#infocard .close').click(function() { resetGraph(); });
 	$('#infocard .more').click(function() { toggleMore(); });
 
-	$('.aboutLink, .methodologyLink').click(function() { togglePage(this); });
+	$('.aboutLink, .methodologyLink, .page-close').click(function() { togglePage(this); });
 
 	$('#pull').click(function(e){
 		$('.navlist').slideToggle();
@@ -238,7 +238,7 @@ function toggleMore() {
 }
 
 function togglePage(el) {
-	var page = $(el).attr('href');
+	var page = $(el).attr('href') || '';
 	$('.page').not(page).slideUp();
 	$(page).slideToggle();
 }

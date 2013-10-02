@@ -23,7 +23,7 @@
 	========================================================================== */
 
 	.container { margin: 0 auto; position: relative; }
-	@media screen and (max-width: 480px) { .container { width:100%; padding: 0 1em; box-sizing: border-box;}}
+	@media screen and (max-width: 767px) { .container { width:100%; padding: 0 1em; box-sizing: border-box;}}
 	@media screen and (min-width: 768px) { .container { width:740px; }}
 	@media screen and (min-width: 1024px) { .container { width:960px; }}
 	@media screen and (min-width: 1210px) { .container { width:1200px; }}
@@ -218,6 +218,24 @@
 		box-sizing: border-box;
 		h2 {font-size: 24px;}
 		p, li { font: 300 18px/1.5 "Helvetica Neue",Helvetica,Arial,sans-serif; }
+	}
+	.page-close {
+		position: absolute;
+		top: 160px; right: 15px;
+		height: 36px; width: 36px;
+		font-size: 22px;
+		line-height: 34px;
+		text-align: center;
+		font-weight: bold;
+		color: #93f;
+		background: fade(#fff,25%);
+		border-radius: 50%;
+		cursor: pointer;
+		z-index: 99;
+		&:hover {
+			color: #fff;
+			background: #f90;
+		}
 	}
 }
 
