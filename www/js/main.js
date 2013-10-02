@@ -226,7 +226,7 @@ function toggleInfocard(node) {
 		card.slideDown(500);
 		gf.panToNode(node.id, 4, {y:-50, x:0});
 
-		// $('#masthead').hide();
+		$('#legend').hide();
 	} else {
 		resetGraph();
 	}
@@ -257,6 +257,8 @@ function resetGraph() {
 		gf.zoom('reset');		
 
 	});
+
+	$('#legend').fadeIn(2000);
 
 }
 
@@ -353,7 +355,7 @@ function drawBarChart(data,container) {
 		.attr("y", 0)
 		.attr("height", 0)
 		.attr("width", x.rangeBand())
-		.style('opacity','0')
+		.style('opacity','0');
 
 	rect.transition()
 		.duration(1000)
@@ -362,7 +364,7 @@ function drawBarChart(data,container) {
 		.attr("y", function(d) { return - y(d.y0) - y(d.y); })
 		.attr("height", function(d) { return y(d.y); })
 		.attr("width", x.rangeBand())
-		.style('opacity','1')
+		.style('opacity','1');
 
 	rect.exit().transition()
 		.duration(200)
