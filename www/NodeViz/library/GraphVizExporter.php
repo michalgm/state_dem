@@ -329,9 +329,6 @@ for list of params and dfns. Used as default values but can be overridden in Gra
 			$svg = preg_replace("/^.*fill:(black|white).*\n/m", "", $svg);
 			$svg = str_replace("<polygon style=\"fill:#ffffff", "<polygon id='svgscreen' style=\"fill:#ffffff; opacity:0", $svg);
 		} else {
-			function shiftlabels($matches) { 
-				return 'rx="'.$matches[1].'"'.$matches[2].'start'.$matches[3].(($matches[1])+$matches[4]+15).'"';
-			}
 			$svg = preg_replace_callback("/rx=\"([^\"]+)\"([^<]+<text text-anchor=\")[^\"]+(\" x=\")([^\"]+)\"/", "shiftlabels", $svg);
 			#$svg = str_replace("font-size=\"10.00\"", "font-size=\"16.00\"", $svg);
 			$svg = preg_replace("/^<\!-- .*? -->\n/m", "", $svg); //remove comments
@@ -378,7 +375,7 @@ for list of params and dfns. Used as default values but can be overridden in Gra
 	protected function renderGraphViz() {
 		#require('libgv-php5/gv.php'); //load the graphviz php bindings
 		#/usr/lib/php5/20100525/libgv_php.so
-		require('gv.php'); //load the graphviz php bindings
+		require_once('gv.php'); //load the graphviz php bindings
 		global $nodeViz_config;
 		$filename = $nodeViz_config['nodeViz_path'].$this->graphFileName; //Need to use absolute paths cuz we change to web dir
 
@@ -388,6 +385,7 @@ for list of params and dfns. Used as default values but can be overridden in Gra
 		$gv = gv::readstring($this->dotString);
 		gv::layout($gv, $this->GV_PARAMS['graph']['layoutEngine']);		
 		gv::render($gv, 'svg', $filename.".svg.raw");
+		chdir($nodeViz_config['nodeViz_path']);
 		//FIXME - we should be able to use 'renderresult' to write to string, but it breaks - why?
 		gv::render($gv, 'cmapx', $filename.".imap");
 		if($nodeViz_config['debug']) {
@@ -413,7 +411,7 @@ for list of params and dfns. Used as default values but can be overridden in Gra
 		}
 		ob_end_clean();
 		chdir($nodeViz_config['nodeViz_path']);
-		
+		return;
 
 	}
 
@@ -475,6 +473,7 @@ for list of params and dfns. Used as default values but can be overridden in Gra
 		$im->destroy();
 	}
 
+
 	protected function checkPaths() {
 		//check if cache directory is readable
 		if (! is_dir($this->cachePath) || ! is_readable($this->cachePath)) {
@@ -506,4 +505,8 @@ for list of params and dfns. Used as default values but can be overridden in Gra
 		}		
 	}
 }
+	function shiftlabels($matches) { 
+		return 'rx="'.$matches[1].'"'.$matches[2].'start'.$matches[3].(($matches[1])+$matches[4]+15).'"';
+	}
+
 ?>

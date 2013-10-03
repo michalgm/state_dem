@@ -273,6 +273,7 @@ class Graph {
 				$diff = $max - $min;  //figure out the data range
 			}
 			foreach(array_keys($array) as $id) {
+				if ($array[$id]['type'] != $type) { continue; }
 				if(isset($array[$id]['fromId'])) {
 					$shape = 'edge';
 				} else {
