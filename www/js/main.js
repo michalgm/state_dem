@@ -106,6 +106,8 @@ function initGraph() {
 $.extend(NodeViz.prototype, {
 	graphLoaded: function() {
 		$('.cluster').remove();
+		$('.zerocontribs').remove();
+		if(gf.data.nodes['zerocontribs']) { delete gf.data.nodes['zerocontribs']; }
 		$.each($('.zero'), function(i, e) {
 			if (gf.data.nodes[e.id]) {
 				gf.data.nodes[e.id].relatedNodes = {};

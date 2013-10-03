@@ -15,7 +15,7 @@ class StateDEM extends Graph {
 		parent::__construct();
 			
 		// gives the classes of nodes
-		$this->data['nodetypes'] = array('candidates', 'donors'); //FIXME - add properties for types
+		$this->data['nodetypes'] = array('candidates', 'donors', 'zerocontribs'); //FIXME - add properties for types
 		
 	  	// gives the classes of edges, and which nodes types they will connect
 		$this->data['edgetypes'] = array( 'donations' => array('donors', 'candidates'), 'zeroes'=>array('donors', 'donors'));
@@ -45,7 +45,7 @@ class StateDEM extends Graph {
 				'fontcolor'=>'blue',
 				'start'=>'15',
 				'layoutEngine'=>'neato',
-				'overlap'=>'vpsc'
+				'overlap'=>'vpsc',
 				//'sep'=>"+10"
 				//'maxiter' => '100000', //turning this off speeds things up, but does it mean that some might not converge?
 			),
@@ -133,6 +133,12 @@ class StateDEM extends Graph {
 		return $nodes;
 	}
 
+	function zerocontribs_fetchNodes() {
+		$nodes = array();
+		$nodes['zerocontribs'] = array('id'=>'zerocontribs', 'value'=>0, 'shape'=>'circle', 'size'=>0, 'area'=>0, 'type'=>'companies');
+		return $nodes;
+	}
+
 	function candidates_nodeProperties($nodes) {
 		global $ballot;
 		foreach ($nodes as &$node) {
@@ -179,7 +185,6 @@ class StateDEM extends Graph {
 			$node = null;
 		}
 		//$nodes = $this->scaleSizes($nodes, 'donors', 'value');
-		#$nodes['zerocontribs'] = array('id'=>'zerocontribs', 'value'=>0, 'shape'=>'circle', 'title'=>'Accepted $0', 'tooltip'=>'Accepted $0', 'type'=>'companies');
 
 		return $nodes;	
 	}
@@ -197,27 +202,21 @@ class StateDEM extends Graph {
 	}
 
 	function zeroes_edgeProperties() {
-		$nodes = array();
-		foreach ($this->data['nodes'] as $node) { 
-			if ($node['value'] ==0) { $nodes[] = $node; }
-		}
 		$edges = array();
-		foreach($nodes as $node) {
-			foreach($nodes as $onode) {
-				if ($node['id'] < $onode['id']) {
-					$id = "$onode[id]_$node[id]";
-					$edge = array(
-						'id'=>$id,
-						'toId'=>$node['id'],
-						'fromId'=>$onode['id'],
-						'len'=>3,
-						'value'=>0,
-						'weight'=>0,
-						'style'=>'invis',
-						'type'=>'zeroes'
-					);
-					$edges[$id] = $edge;
-				}
+		foreach ($this->data['nodes'] as $node) { 
+			if ($node['value'] ==0 && $node['type'] == 'candidates') { 
+				$id = "zerocontribs_$node[id]";
+				$edge = array(
+					'id'=>$id,
+					'toId'=>$node['id'],
+					'fromId'=>'zerocontribs',
+					'len'=>'',
+					'value'=>0,
+					'weight'=>0,
+					'style'=>'invis',
+					'type'=>'zeroes'
+				);
+				$edges[$id] = $edge;
 			}
 		}
 		return $edges;
@@ -276,6 +275,7 @@ class StateDEM extends Graph {
 	}
 
 	function getSubgraphs() {
+		return;
 		$nodes = &$this->data['nodes'];
 		$subnodes = array();
 		foreach ($nodes as $node) {
