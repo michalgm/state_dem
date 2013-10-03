@@ -411,9 +411,9 @@ $.Class("NodeViz", {}, {
 )(jQuery);
 
 function format(string) {
-	return string.toString().split( /(?=(?:\d{3})+(?:\.|$))/g ).join( "," );
+	return string ? string.toString().split( /(?=(?:\d{3})+(?:\.|$))/g ).join( "," ) : '';
 }
 
 function toWordCase(string){
-	return string.toLowerCase().replace( /(^|\s)([a-z])/g , function(m,p1,p2){ return p1+p2.toUpperCase(); } );
+	return string ? string.toLowerCase().replace( /(^|\s)([a-z])/g , function(m,p1,p2){ return p1+p2.toUpperCase(); } ) : '';
 }
