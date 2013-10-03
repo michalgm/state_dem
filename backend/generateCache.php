@@ -3,8 +3,8 @@ require_once("../config.php");
 chdir("../www/NodeViz/");
 require_once("NodeVizUtils.php");
 set_include_path(get_include_path().PATH_SEPARATOR.$nodeViz_config['library_path'].PATH_SEPARATOR.$nodeViz_config['application_path']);
-require("StateDEM.php");
-require("GraphVizExporter.php");
+require_once("StateDEM.php");
+require_once("GraphVizExporter.php");
 require_once('cacheGenerationUtils.php');
 
 $sections = array('summaries', 'infographics', 'races', 'companies', 'candidates', 'dollars', 'votes');
