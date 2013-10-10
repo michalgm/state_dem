@@ -56,7 +56,7 @@ switch($_REQUEST['method']) {
 }
 
 function getContributionsByYear() {
-	global $where;
+	global $id, $min_cycle, $chamber, $state;
 	$type = $_REQUEST['type'];
 	$category = $type == 'candidates' ? 'sitecode' : 'party';
 	$categories = $type == 'candidates' ? array('oil', 'coal', 'carbon') : array('D', 'R', 'I');
@@ -70,8 +70,20 @@ function getContributionsByYear() {
 			$category_lookup[] = "sum(if($category = '$cat', amount, 0)) as $label";
 		}
 	}
-
-	return array_values(dbLookupArray("select term as label, sum(if(amount, amount, 0)) as value, ".join(', ', $category_lookup)." from contributions_dem c right join legislator_terms t on recipient_ext_id = imsp_candidate_id and term = cycle where $where group by term order by term"));
+	if ($type == 'candidates') { 
+		$query = "select term as label, sum(if(amount, amount, 0)) as value, ".join(', ', $category_lookup)." 
+			from legislator_terms t 
+			left join contributions_dem c on recipient_ext_id = imsp_candidate_id and term = cycle 
+			where imsp_candidate_id = '$id' and term >= $min_cycle and t.seat = '$chamber' and t.state = '$state'
+			group by term order by term";
+	} else {
+		$query = "select year as label, sum(if(amount, amount, 0)) as value, ".join(', ', $category_lookup)." 
+			from years y left join 
+			legislator_terms t on year = term and t.seat = '$chamber' and t.state = '$state'
+			left join contributions_dem c on recipient_ext_id = imsp_candidate_id and term = cycle and company_id = '$id'
+			group by year order by year";
+	}
+	return array_values(dbLookupArray($query));
 }
 
 function getContributionsByCategory() {
