@@ -15,7 +15,7 @@ switch($_REQUEST['method']) {
 		header('Content-type: application/json');
 		$response = array();
 		$response['contributionsByYear'] = getContributionsByYear();
-		$response['contributionsByCategory'] = getContributionsByCategory();
+		#$response['contributionsByCategory'] = getContributionsByCategory();
 
 		print json_encode($response);
 		break;
