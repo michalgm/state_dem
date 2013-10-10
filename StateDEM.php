@@ -135,7 +135,7 @@ class StateDEM extends Graph {
 
 	function zerocontribs_fetchNodes() {
 		$nodes = array();
-		$nodes['zerocontribs'] = array('id'=>'zerocontribs', 'value'=>0, 'shape'=>'circle', 'size'=>0, 'area'=>0, 'type'=>'companies');
+		$nodes['zerocontribs'] = array('id'=>'zerocontribs', 'label'=>'','value'=>0, 'shape'=>'circle', 'size'=>0, 'area'=>0, 'type'=>'companies');
 		return $nodes;
 	}
 
