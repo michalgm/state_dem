@@ -201,15 +201,15 @@ $.extend(GraphList.prototype, {
 		}
 		var info = '';
 		var chip = "<span class='chip "+ (typeof(node.party) != 'undefined' ? node.party : ('contrib_'+node.contributor_type))+"'></span>";
-		var image = (typeof(node.image) != 'undefined' && node.image != 'null') ?  "<img src='"+node.image+"' style='width: 20px; border: 1px solid #666;'/>" : "";
+		var image = (typeof(node.image) != 'undefined' && node.image != 'null') ? "<img src='"+node.image+"'>" : "";
 
 		if (node.type == 'candidates') {
 			if (node.party) { 
 				info = "<span class='info'>"+node.party+"</span>";
-				info += "<div class='details'>\
-					<a class='profile_link' href='?candidate_ids="+node['id']+"'><img class='link_icon' src='images/go-next.png'/>Profile</a>\
-					<a class='nimsp_link' href='http://www.followthemoney.org/database/uniquecandidate.phtml?uc="+node['unique_candidate_id']+"' target='_new'><img class='link_icon' src='images/go-next.png'/>NIMSP Profile</a>\
-				</div>";
+				// info += "<div class='details'>\
+				// 	<a class='profile_link' href='?candidate_ids="+node['id']+"'><img class='link_icon' src='images/go-next.png'/>Profile</a>\
+				// 	<a class='nimsp_link' href='http://www.followthemoney.org/database/uniquecandidate.phtml?uc="+node['unique_candidate_id']+"' target='_new'><img class='link_icon' src='images/go-next.png'/>NIMSP Profile</a>\
+				// </div>";
 
 			}
 		} else {
@@ -221,8 +221,8 @@ $.extend(GraphList.prototype, {
 			if (node.industry != '--') { 
 				industry = node.industry;
 			}
-			info += "<a class='profile_link' href='?company_ids="+node['id']+"'><img class='link_icon' src='images/go-next.png'/>Profile</a>";
-			info += "<span class='industry'>"+industry+"</span><br style='clear:both'/>";
+			// info += "<a class='profile_link' href='?company_ids="+node['id']+"'><img class='link_icon' src='images/go-next.png'/>Profile</a>";
+			// info += "<span class='industry'>"+industry+"</span>";
 		}
 		return image+"<span class='label'>"+label+"</span><span class='amount'>$"+format(Math.round(node['total_dollars']))+'</span><br/>'+chip+info;
 	},
@@ -244,7 +244,7 @@ $.extend(GraphList.prototype, {
 		}
 		info = "<span class='info'>"+info+"</span>";
 		var chip = "<span class='chip "+ (typeof(node.party) != 'undefined' ? node.party : ('contrib_'+node.contributor_type))+"'></span>";
-		var link = "<span class='details_link'><img src='NodeViz/icons/magnifier.png' alt='View Details' title='View Details'/></span>";
+		var link = "";//"<span class='details_link'><img src='NodeViz/icons/magnifier.png' alt='View Details' title='View Details'/></span>";
 		return "<span class='"+node_class+" label' onclick=\"gf.selectNode('"+node.id+"'); gf.panToNode('"+node.id+"');\">"+label+"</span><span class='amount'>$"+format(Math.round(edge['value']))+'</span><br/>'+chip+info+link;
 	},
 	listHeader: function(nodetype) {

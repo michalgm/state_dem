@@ -2,10 +2,10 @@
 	Setup
 	========================================================================== */
 
-	@import '../../../oilchange/style'; // Imports normalize, fonts, header, footer, etc.
+	@import 'oilchange-base'; // Imports normalize, fonts, header, footer, etc.
 
-	@import "../NodeViz/style.css";
-	@import "../NodeViz/jquery.svg/jquery.svg.css";
+	@assetsBaseURL: '//dirtyenergymoney-states.dev/';
+	@siteColor: #93f;
 
 /*	==========================================================================
 	Main
@@ -36,7 +36,6 @@
 	Elements
 	========================================================================== */
 
-	#lists {  height: 99%; }
 	#graphs { height: 99%; width: 100%; margin-top: -75px; max-height: 80%; background: transparent;}
 
 	#infocard {
@@ -248,45 +247,96 @@
 	color: #666;
 }
 
+/*	==========================================================================
+	Lists
+	========================================================================== */
+
+	#lists {
+		position: absolute;
+		top: 102px; left: 0;
+		max-width: 320px;
+		height: 100%;
+		z-index: 100;
+		background: fade(#fff,80%);
+
+		#list_menu {
+			position: relative;
+			margin: 0; padding: 0;
+			
+			li {
+				margin: 0; padding: 0;
+				display: inline-block;
+				width: 50%;
+				text-align: center;
+				line-height: 3em;
+				color: #999;
+				&.selected {
+					color: #333;
+					background: lighten(@siteColor,25%);
+				}
+			}
+			#candidates_menu {}
+			#donors_menu {}
+			#zerocontribs_menu { display: none; }
+		}
+		.nodelist_container {
+			clear: both;
+			.nodelist_header {
+				display: none; // Hide for now
+			}
+			.nodelist {
+				margin: 0; padding: 0;
+				height: 100%;
+				li {
+					padding: 0.5em;
+					box-sizing: border-box;
+					background: linear-gradient(#fff,fade(#fff,0%));
+					img { margin: 0 0.5em 0 0; }
+					.chip { display: none; }
+					.details {
+						display: none;
+						.nimsp_link {
+							text-decoration: none; color: #666; background: #fff; padding: 3px; display: inline-block;
+						}
+						.link_icon { border: none; margin-bottom: -5px; margin-right: 2px; }
+					}
+					.sublists_container {
+						font-size: 0.8em;
+						.nodesublist {
+							margin: 0; padding: 0;
+							list-style: none;
+							li {
+								background: transparent;
+							}
+						}
+						.to_list, .from_list { }
+					} 
+				}
+				.label { display: inline-block; max-width: 195px; font-size: 1em; font-weight: 500; margin-bottom: 3px;}
+				.amount { float: right; font-size: 1em; font-weight:500; }
+			}
+		}
+
+	}
+
 #highlight.selected, .nhighlight, .nodelist_container .highlight, .nodelist_container .selected, .node_search_list li.selected { background-color: #FFFFCC !important; }
+
 #svg_overlay .nhighlight { fill-opacity:1 !important;}
 #svg_overlay .selected .nhighlight { fill-opacity: 1 !important; }
 
 #image .selected, #image .oselected { opacity: 1; }
 #svg_overlay path, #svg_overlay .edge polygon { stroke: #999 !important; fill: #999 !important; }
 
-.details { display: none; }
-.details .nimsp_link { text-decoration: none; color: #666; border-radius: 1em; border: 1px solid #85B2CC; background: #fff; padding: 3px; display: inline-block; }
-.details .nimsp_link:hover {background: rgba(255,255,255, 0.7); }
-.details .link_icon { border: none; margin-bottom: -5px; margin-right: 2px; }
-.nodelist .selected .details { display: block;  background: none; margin-top: 3px; text-align: right;}
-.nodelist { padding: 0px; margin: 0px;}
-#list_menu { padding: 0px; padding-top: 5px; margin: 0px; position: relative; background-color: #fff; font-size: 1.2em; height: 1.5em; }
-#list_menu li { padding: 5px 0px; width: 148px; border: 1px solid #999; border-radius: 1em 1em 0px 0px; background-color: #eee; display: inline-block; border-bottom: none; color: #999; }
-#list_menu li.selected { background-color: #f90; color: #666;}
-#lists { width: 300px; float: right; right: 0px;z-index: 1;  }
 
-.nodelist_container { border-left: 1px solid #999; border-bottom: 1px solid #999; clear: both;  background: #ddd;}
-.nodelist .amount { float: right; font-size: 1em; font-weight:500; }
-.sublists_container { margin-right: -5px; margin-left: 15px;  font-size: .9em; background:transparent;}
-.sublists_container ul { margin: 0px; padding: 0px; }
-.sublists_container span.label { font-weight: normal; max-width: 176px; cursor: pointer;}
-.sublists_container span.label:hover { text-decoration: underline;}
-.nodelist_container div.sublists_container {background: transparent; }
-.selected div.sublist_header { background: transparent; font-size: 1.2em; border-radius: 10px 10px 0px 0px; background: #ddd; border: 1px solid; border-color: #999; border-right: none; border-bottom: none;  margin-top: 5px; padding: 3px; text-align: center; }
-#lists .nodelist .sublists_container li { padding: 5px 5px 5px; }
-#lists .nodelist .sublists_container li.highlight { padding: 4px 5px 4px; }
-.details_link { float: right; cursor: pointer; margin-top: -3px; }
+.selected div.sublist_header { margin-top: 5px; padding: 3px; text-align: center; }
+
 .to_node_item, .from_node_item { color: #727780; }
 .info { font-size: .8em; display: inline-block; vertical-align: top; padding-top: 3px; width: 75px;}
 .industry, .total { font-size: .8em; display: inline-block; vertical-align: top; padding-top: 3px; text-align: right; max-width: 185px; color: #999; float: right;  }
 .chip { display: inline-block; width: 11px; height: 11px; background-color: #999; margin-right: 3px; border:1px solid;}
 #candidates_list .info { width: auto; }
 .status.Won { font-weight: 500; }
-.nodelist .label { display: inline-block; max-width: 195px; font-size: 1em; font-weight: 500; margin-bottom: 3px;}
-li#candidates_menu { float: left; }
-li#donors_menu { position: absolute; right: 0px; width: 149px; }
-.to_list, .from_list { border: 1px solid #999; border-right: none; }
+
 .node_search_container { border-bottom: 1px solid #999; }
 .node_search { font-size: .8em; border: 1px solid #999; }
 .node_search_list strong { font-weight: bold; }
