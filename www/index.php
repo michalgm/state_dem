@@ -16,6 +16,8 @@
 		#svg_overlay path, #svg_overlay .edge polygon { stroke: none !important; fill: #9933ff !important; }		
 		#svg_overlay .nhighlight, #svg_overlay .selected polygon.nhighlight, #svg_overlay .selected ellipse.nhighlight { fill: #ccbbdd !important; fill-opacity: 0.5 !important; }
 
+
+		#lists { position: absolute; top: 100px; height: 250px; }
 		.REP, .R {color:#c66;}
 		.DEM, .D, .DFL {color:#69c;}
 		.IND, .I { color: #cc3; }
@@ -53,8 +55,8 @@
 	<div id='error' style='display: none;'>
 		<img id='close_error' src='images/close.png'/>
 	</div>
-	<!-- <div id="lists"></div> -->
 	<div id="graphs"></div>
+	<div id="lists"></div>
 
 	<div id="legend"><div id="legend-text" class="container"></div></div>
 	<div id="infocard" data-node="null" class="hide">
