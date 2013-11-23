@@ -7,8 +7,10 @@
 	
 	<title>Dirty Energy Money - States</title>
 
-	<link rel="stylesheet" href="css/style.min.css"/>
 	<link rel='stylesheet' href="//ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/themes/ui-lightness/jquery-ui.css"/>
+	<link rel="stylesheet" href="/NodeViz/style.css">
+	<link rel="stylesheet" href="/NodeViz/jquery.svg/jquery.svg.css">
+	<link rel="stylesheet" href="/css/style.min.css"/>
 	<style type="text/css">
 
 		#svg_overlay .oselected polygon, #svg_overlay .oselected ellipse { fill: none; }
@@ -16,8 +18,6 @@
 		#svg_overlay path, #svg_overlay .edge polygon { stroke: none !important; fill: #9933ff !important; }		
 		#svg_overlay .nhighlight, #svg_overlay .selected polygon.nhighlight, #svg_overlay .selected ellipse.nhighlight { fill: #ccbbdd !important; fill-opacity: 0.5 !important; }
 
-
-		#lists { position: absolute; top: 100px; height: 250px; }
 		.REP, .R {color:#c66;}
 		.DEM, .D, .DFL {color:#69c;}
 		.IND, .I { color: #cc3; }
