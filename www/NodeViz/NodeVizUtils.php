@@ -59,7 +59,7 @@ function writelog($string, $loglevel = 1) {
 				trigger_error("Unable to write log to log directory '$logdir'", E_USER_ERROR);
 			}
 		}
-		fwrite($logfile, time()." - ".number_format(memory_get_usage())." - $string\n");
+		fwrite($logfile, date('M d H:i:s', time())." - ".number_format(memory_get_usage())." - $string\n");
 	}
 }
 
