@@ -24,7 +24,7 @@ class StateDEM extends Graph {
 		$this->data['properties'] = array(
 			//sets the scaling of the elements in the gui
 			'minSize' => array('donors'=>'.5', 'candidates' => '.5', 'donations'=>'10'),
-			'maxSize' => array('donors'=>'4', 'candidates' => '4', 'donations' =>'150'),
+			'maxSize' => array('donors'=>'4', 'candidates' => '4', 'donations' =>'90'),
 			'log_scaling' => 0,
 			'state'=>'AL',
 			'cycle'=>'2006',
@@ -268,11 +268,6 @@ class StateDEM extends Graph {
 		$edges = $this->scaleSizes($edges, 'donations', 'value');
 		uasort($edges, function($a, $b) { return $a['value'] > $b['value']; }) ;
 		$this->data['edges'] = $edges;
-		foreach($this->data['nodes'] as &$node) {
-			unset($node['area']);
-			$node['width'] = $node['size'];
-			$node['height'] = $node['size'];
-		}
 
 		global $edgestore_tag;
 		if($edgestore_tag != '') { 
