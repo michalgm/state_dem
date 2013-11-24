@@ -363,15 +363,15 @@ for list of params and dfns. Used as default values but can be overridden in Gra
 		if(! $nodeViz_config['debug']) {
 			unset($data['properties']['graphvizProperties']);
 			unset($data['queries']);
-		}
-		foreach (array_keys($data['nodes']) as $node) {
-			foreach(array('mouseout', 'size', 'max', 'min', 'color', 'fillcolor', 'weight') as $key) { 
-				unset($data['nodes'][$node][$key]); 
+			foreach (array_keys($data['nodes']) as $node) {
+				foreach(array('mouseout', 'size', 'max', 'min', 'color', 'fillcolor', 'weight') as $key) { 
+					unset($data['nodes'][$node][$key]); 
+				}
 			}
-		}
-		foreach (array_keys($data['edges']) as $edge) {
-			foreach(array('mouseout', 'size', 'max', 'min', 'color', 'fillcolor', 'weight', 'width') as $key) { 
-				unset($data['edges'][$edge][$key]); 
+			foreach (array_keys($data['edges']) as $edge) {
+				foreach(array('mouseout', 'size', 'max', 'min', 'color', 'fillcolor', 'weight', 'width') as $key) { 
+					unset($data['edges'][$edge][$key]); 
+				}
 			}
 		}
 	}
