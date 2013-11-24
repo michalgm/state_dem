@@ -23,8 +23,8 @@ class StateDEM extends Graph {
 		// graph level properties
 		$this->data['properties'] = array(
 			//sets the scaling of the elements in the gui
-			'minSize' => array('donors'=>'.5', 'candidates' => '.5', 'donations'=>'5'),
-			'maxSize' => array('donors'=>'4', 'candidates' => '4', 'donations' =>'60'),
+			'minSize' => array('donors'=>'.5', 'candidates' => '.5', 'donations'=>'10'),
+			'maxSize' => array('donors'=>'4', 'candidates' => '4', 'donations' =>'150'),
 			'log_scaling' => 0,
 			'state'=>'AL',
 			'cycle'=>'2006',
@@ -66,7 +66,7 @@ class StateDEM extends Graph {
 		$props = $this->data['properties'];
 
 		$where = "a.state='".$props['state']."'";
-		if ($props['chamber'] != 'state:all' && $props['chamber'] != 'state:governor') { 
+		if ($props['chamber'] != 'state:all') { 
 			$where .= " and a.seat = '$props[chamber]'";
 		}
 		if ($props['cycle'] != 'all') { $where .= " and a.term=".$props['cycle']; }
@@ -75,11 +75,7 @@ class StateDEM extends Graph {
 			$canids = arrayToInString(explode(',', $props['candidate_ids']));
 			$where = "a.imsp_candidate_id in ($canids)";
 		}
-		if ($props['chamber'] == 'state:governor') { 
-			$query = "select nimsp_candidate_id as id, a.state, '' as term, a.district, a.party, full_name candidate_name, image, lifetime_total from governors a where $where";
-		} else { 
-			$query = "select imsp_candidate_id as id, a.state, a.term, a.district, a.party, full_name candidate_name, image, lifetime_total from legislator_terms a join legislators b on imsp_candidate_id = nimsp_candidate_id where $where";
-		}
+		$query = "select imsp_candidate_id as id, a.state, a.term, a.district, a.party, full_name candidate_name, image, lifetime_total from legislator_terms a join legislators b on imsp_candidate_id = nimsp_candidate_id where $where";
 		writelog($query);
 		$this->addquery('fetch_candidates', $query);
 		foreach(dbLookupArray($query) as $can) {
@@ -261,6 +257,7 @@ class StateDEM extends Graph {
 	}
 
 	function postProcessGraph() {
+		writelog("Process");
 		$nodes = $this->data['nodes'];
 		#print "post ".memory_get_usage()."\n";
 		$nodes = $this->scaleSizes($nodes, 'donors', 'value');
@@ -271,6 +268,11 @@ class StateDEM extends Graph {
 		$edges = $this->scaleSizes($edges, 'donations', 'value');
 		uasort($edges, function($a, $b) { return $a['value'] > $b['value']; }) ;
 		$this->data['edges'] = $edges;
+		foreach($this->data['nodes'] as &$node) {
+			unset($node['area']);
+			$node['width'] = $node['size'];
+			$node['height'] = $node['size'];
+		}
 
 		global $edgestore_tag;
 		if($edgestore_tag != '') { 
