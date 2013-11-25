@@ -56,7 +56,10 @@
 		<img id='close_error' src='images/close.png'/>
 	</div>
 	<div id="graphs"></div>
-	<div id="lists"></div>
+	<div id="lists-container">
+		<div id="lists"></div>
+		<a class="toggle"></a>
+	</div>
 
 	<div id="legend"><div id="legend-text" class="container"></div></div>
 	<div id="infocard" data-node="null" class="hide">

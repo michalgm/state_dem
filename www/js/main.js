@@ -15,7 +15,9 @@ $(function(){
 	// $('#infocard').hide();
 	$('#infocard .close').click(function() { resetGraph(); });
 	$('#infocard .more').click(function() { toggleMore(); });
-
+	$('#lists-container .toggle').click(function() { toggleLists(); });
+		$('#lists-container').css('height',function(){ return $(window).height() - 142; });
+		$('#candidates_list_container').css('height',function(){ return $(window).height() - 166; });
 	$('.aboutLink, .methodologyLink, .page-close').click(function() { togglePage(this); });
 
 	$('#pull').click(function(e){
@@ -192,41 +194,36 @@ $.extend(NodeViz.prototype, {
 
 $.extend(GraphList.prototype, {
 	listNodeEntry: function(node) {
+
+		var title = node.title ? node.title : node.id;
+		var thumb = (typeof(node.image) != 'undefined' && node.image != 'null') ? "<img src='"+node.image+"'>" : "";
+		var amount = (node.total_dollars > 0) ? '$'+format(Math.round(node.total_dollars)) : 'none';
 		var label;
-		var content = "";
-		if (node.title) { 
-			label = node.title;
-		} else { 
-			label = node.id;
-		}
-		var info = '';
-		var chip = "<span class='chip "+ (typeof(node.party) != 'undefined' ? node.party : ('contrib_'+node.contributor_type))+"'></span>";
-		var image = (typeof(node.image) != 'undefined' && node.image != 'null') ? "<img src='"+node.image+"'>" : "";
 
 		if (node.type == 'candidates') {
-			if (node.party) { 
-				info = "<span class='info'>"+node.party+"</span>";
-				// info += "<div class='details'>\
-				// 	<a class='profile_link' href='?candidate_ids="+node['id']+"'><img class='link_icon' src='images/go-next.png'/>Profile</a>\
-				// 	<a class='nimsp_link' href='http://www.followthemoney.org/database/uniquecandidate.phtml?uc="+node['unique_candidate_id']+"' target='_new'><img class='link_icon' src='images/go-next.png'/>NIMSP Profile</a>\
-				// </div>";
-
-			}
+			label = node.party ? node.party : '';
 		} else {
-			//if (node.contributor_type == 'I') { info = 'Individual'; }
-			//else if (node.contributor_type == 'C') { info = 'PAC'; }
-			//else { info = 'Uncategorized'; }
-			//info = "<span class='info'>"+info+"</span>";
-			var industry = 'Unknown';
-			if (node.industry != '--') { 
-				industry = node.industry;
-			}
-			// info += "<a class='profile_link' href='?company_ids="+node['id']+"'><img class='link_icon' src='images/go-next.png'/>Profile</a>";
-			// info += "<span class='industry'>"+industry+"</span>";
+			label = node.sitecode ? node.sitecode : ''; //(node.industry != '--') ? node.industry : 'unknown';
 		}
-		return image+"<span class='label'>"+label+"</span><span class='amount'>$"+format(Math.round(node['total_dollars']))+'</span><br/>'+chip+info;
+
+		var entry =  '<div class="thumb">'+thumb+'</div>';
+			entry += '<div class="title">'+title+' <span class="label '+label+'">'+label+'</span></div>';
+			entry += '<div class="amount">'+amount+'</div>';
+
+		return entry;
 	},
-	listSubNodeEntry: function(node, parentNode, edgetype, direction) { 
+	listSubNodeEntry: function(node, parentNode, edgetype, direction) {
+
+		var title = node.title ? node.title : node.id;
+		var edge = this.NodeViz.data.edges[node.relatedNodes[parentNode.id][0]];
+
+		var amount = (node.total_dollars > 0) ? '$'+format(Math.round(edge.value)) : 'none';
+
+		var subEntry =  '<div class="title">'+title+'</div>';
+			subEntry += '<div class="amount">'+amount+'</div>';
+
+		return subEntry;
+
 		var label;
 		var node_class = direction == 'to' ? 'to_node_item' : 'from_node_item'; 
 		if (node.title) { 
@@ -324,6 +321,16 @@ function togglePage(el) {
 	var page = $(el).attr('href') || '';
 	$('.page').not(page).slideUp();
 	$(page).slideToggle();
+}
+
+function toggleLists() {
+	var lists = $('#lists-container');
+	if (parseInt(lists.css('left')) == 0) {
+		lists.animate({left: '-320px'},500);
+	} else {
+		lists.animate({left: '0px'},500);
+	}
+	lists.toggleClass('open');
 }
 
 function resetGraph() {

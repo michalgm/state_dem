@@ -251,14 +251,46 @@
 	Lists
 	========================================================================== */
 
-	#lists {
+	#lists-container {
 		position: absolute;
-		top: 102px; left: 0;
-		max-width: 320px;
-		height: 100%;
+		top: 102px; left: -320px;
+		width: 320px; height: 100%;
+		box-shadow: 0 0 25px fade(#000,25%);
+		background: #fff;
 		z-index: 100;
-		background: fade(#fff,80%);
-
+		.toggle {
+			position: absolute;
+			top: 50%;
+			right: -32px;
+			height: 64px;
+			margin-top: -32px;
+			width: 32px;
+			line-height: 64px;
+			text-align: center;
+			font-weight: bold;
+			border-radius: 0 10px 10px 0;
+			color: @siteColor;
+			background: #fff;
+			box-shadow: 0 0 25px fade(#000,25%);
+			z-index: -1;
+			&:before {
+				content: "▶";
+			}
+			&:hover {
+				color: #fff;
+				background: #f90;
+			}
+		}
+		&.open {
+			.toggle:before {
+				content: "◀";
+			}
+		}
+	}
+	#lists {
+		width: 100%;
+		height: 100%;
+		background: #fff;
 		#list_menu {
 			position: relative;
 			margin: 0; padding: 0;
@@ -268,11 +300,13 @@
 				display: inline-block;
 				width: 50%;
 				text-align: center;
-				line-height: 3em;
+				line-height: 24px;
 				color: #999;
+				background: #ccc;
 				&.selected {
 					color: #333;
-					background: lighten(@siteColor,25%);
+					background: #fff;
+					font-weight: normal;
 				}
 			}
 			#candidates_menu {}
@@ -281,45 +315,71 @@
 		}
 		.nodelist_container {
 			clear: both;
+			height: 97%;
 			.nodelist_header {
 				display: none; // Hide for now
 			}
 			.nodelist {
 				margin: 0; padding: 0;
 				height: 100%;
+				list-style: none;
 				li {
-					padding: 0.5em;
+					padding: 0.5em 0.5em 0;
 					box-sizing: border-box;
-					background: linear-gradient(#fff,fade(#fff,0%));
-					img { margin: 0 0.5em 0 0; }
-					.chip { display: none; }
-					.details {
-						display: none;
-						.nimsp_link {
-							text-decoration: none; color: #666; background: #fff; padding: 3px; display: inline-block;
+					overflow: hidden;
+
+					.thumb {
+						float: left;
+						width: 10%;
+						img {
+							width: 100%;
+							height: auto;
 						}
-						.link_icon { border: none; margin-bottom: -5px; margin-right: 2px; }
 					}
+					.title {
+						float: left;
+						width: 65%;
+						margin-left: 1%;
+						white-space: nowrap;
+						overflow: hidden;
+						text-overflow: ellipsis;
+						line-height: 32px;
+						.label {
+							font-size: 0.8em;
+							text-transform: uppercase;
+						}
+					}
+					.amount {
+						float: right;
+						width: 20%;
+						font-family: "Diavlo","Helvetica Neue",Helvetica,sans-serif;
+						color: green;
+						line-height: 32px;
+						text-align: right;
+					}
+
 					.sublists_container {
+						clear: both;
 						font-size: 0.8em;
 						.nodesublist {
 							margin: 0; padding: 0;
 							list-style: none;
 							li {
 								background: transparent;
+								.title, .amount {
+									line-height: 1em;
+								}
 							}
 						}
 						.to_list, .from_list { }
 					} 
 				}
-				.label { display: inline-block; max-width: 195px; font-size: 1em; font-weight: 500; margin-bottom: 3px;}
-				.amount { float: right; font-size: 1em; font-weight:500; }
 			}
 		}
-
 	}
 
 #highlight.selected, .nhighlight, .nodelist_container .highlight, .nodelist_container .selected, .node_search_list li.selected { background-color: #FFFFCC !important; }
+.nodelist_container.selected div { background: transparent; }
 
 #svg_overlay .nhighlight { fill-opacity:1 !important;}
 #svg_overlay .selected .nhighlight { fill-opacity: 1 !important; }
