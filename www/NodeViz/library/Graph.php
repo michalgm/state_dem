@@ -255,7 +255,10 @@ class Graph {
 		if (key($array)) { 
 			$scale = $maxSize - $minSize;  //the range we actually want
 			//load all the cash into an array
-			foreach($array as $node) { $vals[] =  $node[$key]; }
+			foreach($array as $node) { 
+				if ($type && $node['type'] != $type) { continue; }
+				$vals[] =  $node[$key]; 
+			}
 			//This code was for reseting values < 0 to zero
 			/*foreach($array as $node) { 
 				if ($node[$key] > 0) { 
@@ -273,29 +276,32 @@ class Graph {
 				$diff = $max - $min;  //figure out the data range
 			}
 			foreach(array_keys($array) as $id) {
-				if ($array[$id]['type'] != $type) { continue; }
+				if ($type && $array[$id]['type'] != $type) { continue; }
 				if(isset($array[$id]['fromId'])) {
 					$shape = 'edge';
 				} else {
 					$shape = $array[$id]['shape'];
 				}
-				if ($diff == 0) {  // if all nodes are the same size, use max
-					$array[$id]['size']	= $maxSize;
-				} else {
-					$value = $array[$id][$key];
-					//This code was for reseting values < 0 to zero
-					//if ($value <= $min) { $normed = 0; } 
+				$value = $array[$id][$key];
+				//This code was for reseting values < 0 to zero
+				//if ($value <= $min) { $normed = 0; } 
+				if ($diff == 0) {
+					$normed = 1;
+				} else {	
 					if ($log) { 
 						$normed = (log($value+abs($min)+1) - log($adj_min)) / $diff; //normalize it to the range 0-1
 					} else {
 						$normed = ($value - $min) / $diff; //normalize it to the range 0-1
 					}
-					//print "$value $min $diff $normed $scale\n";
-					$area = $normed*$scale + $minSize;
-					//now calculate appropriate with from area depending on shape
-					if ($shape == 'edge') { 
-						$size = $area;  //adjust to value we want
-					} else if ($shape == 'circle' || $shape == 'octagon' || $shape == 'polygon') { 
+				}
+				//print "$value $min $diff $normed $scale\n";
+				$area = $normed*$scale + $minSize;
+				//now calculate appropriate with from area depending on shape
+				if ($shape == 'edge') { 
+					//$size = $area;  //adjust to value we want
+					$array[$id]['penwidth'] = $area;
+				} else {
+					if ($shape == 'circle' || $shape == 'octagon' || $shape == 'polygon') { 
 						//$area = ($normed * $scale) + pow($minSize,2)*pi();  //adjust to value we want
 						$size = sqrt(abs($area)/pi())*2;  //get radius and multiple by 2 for diameter
 					} else if ($shape == 'triangle') { 
@@ -310,8 +316,8 @@ class Graph {
 						//$area = ($normed * $scale) + pow($minSize,2);  //adjust to value we want
 						$size = sqrt(abs($area));
 					}
-					$array[$id]['area']	= $area;
-					$array[$id]['size']	= $size;
+					$array[$id]['scaled_area']	= $area;
+					$array[$id]['width'] = $size;
 				}
 			}
 		}

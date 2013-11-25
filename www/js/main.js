@@ -700,15 +700,13 @@ function setupOptions() {
 	});
 	$('#state').val(current_state);
 
-	$('#state').on('change', function() { 
-		updateOptions();
-	});
+	$('#state').on('change', function() { updateOptions(); });
+	$('#chamber').on('change', function() { updateCycle(); });
 	//$('#state').change();
 }
 
 function updateOptions() {
 	var state = states[$('#state').val()];
-	var current_year = $('#cycle').val();
 	var current_chamber = $('#chamber').val();
 
 	$('#chamber').html('');
@@ -716,11 +714,30 @@ function updateOptions() {
 	if (state.lower_name) { 
 		$('#chamber').append($('<option>').attr('value', 'state:lower').html(state.lower_name));
 	}
+	$('#chamber').append($('<option>').attr('value', 'state:all').html('All'));
+	$('#chamber').append($('<option>').attr('value', 'state:governor').html('Governor'));
+
+	$('#chamber').val(current_chamber);
+	updateCycle();
+}
+
+function updateCycle() {
+	var state = states[$('#state').val()];
+	var current_year = $('#cycle').val();
+	var current_chamber = $('#chamber').val();
 
 	$('#cycle').html('');
 	$(state.years.split(',').reverse()).each(function(i, y) {
 		$('#cycle').append($('<option>').html(y));	
 	});	
-	$('#cycle').val(current_year);
-	$('#chamber').val(current_chamber);
+	if (current_chamber != 'state:all') {
+		$('#cycle').append($('<option>').attr('value', 'all').html('All'));	
+	}
+	if (current_chamber == 'state:governor') {
+		$('#cycle').val('all');
+		$('#cycle').hide();
+	} else {
+		$('#cycle').show();
+		$('#cycle').val(current_year);
+	}
 }

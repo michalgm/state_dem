@@ -23,8 +23,8 @@ class StateDEM extends Graph {
 		// graph level properties
 		$this->data['properties'] = array(
 			//sets the scaling of the elements in the gui
-			'minSize' => array('donors'=>'.5', 'candidates' => '.5', 'donations'=>'5'),
-			'maxSize' => array('donors'=>'4', 'candidates' => '4', 'donations' =>'60'),
+			'minSize' => array('donors'=>'.5', 'candidates' => '.5', 'donations'=>'10'),
+			'maxSize' => array('donors'=>'4', 'candidates' => '4', 'donations' =>'90'),
 			'log_scaling' => 0,
 			'state'=>'AL',
 			'cycle'=>'2006',
@@ -65,13 +65,19 @@ class StateDEM extends Graph {
 		$nodes = array();
 		$props = $this->data['properties'];
 
-		$where = "a.state='".$props['state']."' and a.term=".$props['cycle']." and a.seat = '$props[chamber]'";
+		$where = "a.state='".$props['state']."'";
+		if ($props['chamber'] != 'state:all') { 
+			$where .= " and a.seat = '$props[chamber]'";
+		}
+		if ($props['cycle'] != 'all') { $where .= " and a.term=".$props['cycle']; }
+
 		if ($props['candidate_ids']) {
 			$canids = arrayToInString(explode(',', $props['candidate_ids']));
 			$where = "a.imsp_candidate_id in ($canids)";
 		}
 		$query = "select imsp_candidate_id as id, a.state, a.term, a.district, a.party, full_name candidate_name, image, lifetime_total from legislator_terms a join legislators b on imsp_candidate_id = nimsp_candidate_id where $where";
 		writelog($query);
+		$this->addquery('fetch_candidates', $query);
 		foreach(dbLookupArray($query) as $can) {
 			$can['total_dollars'] = 0;
 			$nodes[$can['id']] = $can;
@@ -85,7 +91,7 @@ class StateDEM extends Graph {
 		global $ballot;
 		$props = $this->data['properties'];
 		$cans = $this->getNodesByType('candidates');
-		$cycle = $props['candidate_ids'] ? "" : "cycle='$props[cycle]' and";
+		$cycle = ($props['candidate_ids'] || $props['cycle'] == 'all') ? "" : "cycle='$props[cycle]' and";
 		$companies = $props['company_ids'] ?  "company_id in (".arrayToInString(explode(',', $props['company_ids'])).") and" : "";
 		$basicContribQuery = "
 			select transaction_id, company_id, c.name as company_name, sum(amount) as amount, recipient_ext_id, b.name as industry,  c.image_name as image, d.dem_type as sitecode, contributor_type, (d.coal_related + d.oil_related + d.carbon_related) as lifetime_total from contributions_dem a join catcodes b on code = contributor_category join companies c on c.id = a.company_id join companies_state_details d using(company_id) where $cycle $companies recipient_ext_id in (".arrayToInString($cans, 1).") and  company_name != '' group by a.company_id, recipient_name order by sum(amount) desc 
@@ -251,6 +257,7 @@ class StateDEM extends Graph {
 	}
 
 	function postProcessGraph() {
+		writelog("Process");
 		$nodes = $this->data['nodes'];
 		#print "post ".memory_get_usage()."\n";
 		$nodes = $this->scaleSizes($nodes, 'donors', 'value');

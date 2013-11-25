@@ -7,7 +7,7 @@ $fields = "cycle,transaction_id,is_amendment,amount,date,contributor_name,contri
 dbwrite("delete from contributions_dem");
 dbwrite("ALTER TABLE contributions_dem DISABLE KEYS");
 
-$restrictions = " and recipient_type = 'P' and cycle between $min_cycle and $max_cycle and (recipient_ext_id in (select nimsp_candidate_id from legislators) or (seat = 'state:governor'))";
+$restrictions = " and recipient_type = 'P' and cycle between $min_cycle and $max_cycle and recipient_ext_id in (select nimsp_candidate_id from legislators)";
 foreach(array('parent_organization_name', 'organization_name', 'contributor_employer', 'contributor_occupation') as $type) { 
 	print "matching on $type\n";
 	dbwrite("insert ignore into contributions_dem ($fields, company_name, company_id, sitecode) select a.*, name, match_id, dem_type from contributions a join $companies_table b on $type = name where $type != '' and contributor_category not like 'e11%' and  contributor_category != 'e1210' and ignore_all_contribs = 0 and non_company_name = 0 and match_contribs_on_name=1 $restrictions");
@@ -39,8 +39,8 @@ print "Copying records for all candidates into new table before deleteing losers
 dbwrite("create table contributions_dem_all_candidates like contributions_dem");
 dbwrite("insert into contributions_dem_all_candidates select * from contributions_dem");
 print "Removing contributions for unknown candidates, or old contribs to non-current legislators\n";
-dbwrite("delete contributions_dem from contributions_dem join (select imsp_candidate_id, term from legislator_terms a group by term, imsp_candidate_id having group_concat(distinct a.seat) not like '%upper%' and group_concat(distinct a.seat) not like '%lower%') b on imsp_candidate_id = recipient_ext_id and term = cycle");
-dbwrite("delete from contributions_dem where transaction_id in (select * from (select transaction_id from contributions_dem a left join legislator_terms b on recipient_ext_id = imsp_candidate_id and cycle = term and recipient_state = state where imsp_candidate_id is null) a ) or (recipient_ext_id not in (select imsp_candidate_id from legislator_terms where term = $max_cycle) and cycle < $min_cycle) or recipient_type != 'P' or company_id = 1");
+dbwrite("delete contributions_dem from contributions_dem join (select imsp_candidate_id, term from legislator_terms a group by term, imsp_candidate_id having group_concat(distinct a.seat) not like '%upper%' and group_concat(distinct a.seat) not like '%lower%' and group_concat(distinct a.seat) not like '%governor%') b on imsp_candidate_id = recipient_ext_id and term = cycle");
+dbwrite("delete from contributions_dem where transaction_id in (select * from (select transaction_id from contributions_dem a left join legislator_terms b on recipient_ext_id = imsp_candidate_id and cycle = term and recipient_state = state where imsp_candidate_id is null) a ) or (recipient_ext_id not in (select imsp_candidate_id from legislator_terms where term = $max_cycle or seat='state:governor') and cycle < $min_cycle) or recipient_type != 'P' or company_id = 1");
 print "Removing contributions that total to negative numbers\n";
 dbwrite("delete contributions_dem from contributions_dem join (select recipient_state, cycle, recipient_ext_id, company_id, sum(amount)  from contributions_dem a  group by recipient_state, cycle, recipient_ext_id, company_id having sum(amount) < 0) b using (recipient_state, cycle, recipient_ext_id, company_id) ");
 
