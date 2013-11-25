@@ -17,7 +17,6 @@ $(function(){
 	$('#infocard .more').click(function() { toggleMore(); });
 	$('#lists-container .toggle').click(function() { toggleLists(); });
 		$('#lists-container').css('height',function(){ return $(window).height() - 142; });
-		$('#candidates_list_container').css('height',function(){ return $(window).height() - 166; });
 	$('.aboutLink, .methodologyLink, .page-close').click(function() { togglePage(this); });
 
 	$('#pull').click(function(e){
@@ -122,6 +121,7 @@ $.extend(NodeViz.prototype, {
 		$('#infocard').hide();
 		$('#masthead').fadeOut(2000);
 		$('#about, #methodology').slideUp();
+		$('#lists-container').show();
 
 		$('#graphoptions select').blur();
 	
