@@ -398,6 +398,7 @@ GraphImage("GraphSVG", {}, {
 		node_center.y = box.height /2 + box.y;
 		var center = this.calculateCenter();
 		//The following line is for debugging the center point
+		//$('#centertest').remove();
 		//$('#images').append($('<div>').attr({'id': 'centertest', 'style': 'position: absolute; opacity: .2; background: pink; z-index: 1000; top: 0px; left: 0px; width:'+center.x+'px; height: '+center.y+'px;'}));
 		//convert from dom pixels to svg units
 		center = center.matrixTransform(this.stateTf);
@@ -715,6 +716,7 @@ GraphImage("GraphSVG", {}, {
 		this._parent_resize = this._super;
 		this.resize_event = window.setTimeout($.proxy(function() {
 			var old_dim = this.graphDimensions;
+			var old_center = this.getElementCenter('graph0');
 			this._parent_resize();
 			$('#svg_overlay, #image').each($.proxy(function(index, e) {
 				if (e) { 
@@ -722,20 +724,24 @@ GraphImage("GraphSVG", {}, {
 					e.childNodes[0].setAttribute('width', this.graphDimensions.width);
 				}
 			}, this));
-			if ($('#graph0').length) {
-				this.updateCTM();
-			}
-			var center = this.getElementCenter('graph0');
-			this.setCTM(this.ctm.translate(center.x, center.y));
-			var p = this.getElementCenter('graph0');
+
+			var testcenter = this.calculateCenter();
+			//$('#centertest').remove();
+			//$('#images').append($('<div>').attr({'id': 'centertest', 'style': 'position: absolute; opacity: .2; background: pink; z-index: 1000; top: 0px; left: 0px; width:'+testcenter.x+'px; height: '+testcenter.y+'px;'}));
+
+			if ($('#graph0').length) { this.updateCTM(); }
+
 			var new_dim = this.graphDimensions;
+			var old_min = old_dim.width < old_dim.height ? 'width' : 'height';
 			var new_min = new_dim.width < new_dim.height ? 'width' : 'height';
-			var scale = new_dim[new_min]/old_dim[new_min]
-			if (isFinite(scale)) { 
-				this.setCTM(this.ctm.translate(p.x, p.y).scale(scale).translate(-p.x, -p.y));
-				var center = this.getElementCenter('graph0');
-				this.setCTM(this.ctm.translate(center.x, center.y));
-			}
+			var scale = new_dim[new_min]/old_dim[old_min]
+
+			var p = this.getElementCenter('graph0');
+			var k = this.setCTM(this.ctm.translate(p.x, p.y).scale(scale).translate(-p.x, -p.y));
+
+			var new_center = this.getElementCenter('graph0');
+			this.setCTM(this.ctm.translate(new_center.x - old_center.x, new_center.y - old_center.y))
+
 			this.state = '';
 			delete this._parent_resize;
 		}, this), 200);
