@@ -253,15 +253,15 @@ $.extend(GraphList.prototype, {
 	},
 	pre_render: function() {
 		$.each(this.NodeViz.data.nodes, function(i, node) { 
-			if (node.image) { 
-				node.image = node.image.replace(/..\/www\//, '');
-			}
+			if (node.image) { node.image = node.image.replace(/..\/www\//, ''); }
 		});
 	}
 });
 
 GraphImage.prototype.pre_render= function(responseData) {
-	responseData.overlay = responseData.overlay.replace(/com_images/g, 'http://dirtyenergymoney.com/com_images');
+	$.each(this.NodeViz.data.nodes, function(i, node) { 
+		if (node.image) { node.image = node.image.replace(/..\/www\//, ''); }
+	});
 }
 
 NodeViz.prototype.default_events.edge.click = null;
