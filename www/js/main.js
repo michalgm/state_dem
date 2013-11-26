@@ -252,6 +252,13 @@ $.extend(GraphList.prototype, {
 		}
 		return "<div class='sublist_header'>"+header+"</div>"
 	},
+	pre_render: function() {
+		$.each(this.NodeViz.data.nodes, function(i, node) { 
+			if (node.image) { 
+				node.image = node.image.replace(/..\/www\//, '');
+			}
+		});
+	}
 });
 
 
