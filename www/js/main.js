@@ -16,7 +16,6 @@ $(function(){
 	$('#infocard .close').click(function() { resetGraph(); });
 	$('#infocard .more').click(function() { toggleMore(); });
 	$('#lists-container .toggle').click(function() { toggleLists(); });
-		$('#lists-container').css('height',function(){ return $(window).height() - 142; });
 	$('.aboutLink, .methodologyLink, .page-close').click(function() { togglePage(this); });
 
 	$('#pull').click(function(e){
@@ -322,11 +321,15 @@ function togglePage(el) {
 }
 
 function toggleLists() {
-	var lists = $('#lists-container');
-	if (parseInt(lists.css('left')) == 0) {
-		lists.animate({left: '-320px'},500);
+	var lists = $('#lists-container'),
+		graphs = $('#graphs-container');
+		console.log( 'width: '+lists.css('width') );
+	if (parseInt(lists.css('width')) > 0) {
+		lists.animate({width: '0%'},500);
+		graphs.animate({width: '100%'},500,function() { gf.resize(); });
 	} else {
-		lists.animate({left: '0px'},500);
+		lists.animate({width: '33%'},500);
+		graphs.animate({width: '67%'},500,function() { gf.resize(); });
 	}
 	lists.toggleClass('open');
 }

@@ -36,8 +36,26 @@
 	Elements
 	========================================================================== */
 
-	#graphs { height: 99%; width: 100%; margin-top: -75px; max-height: 80%; background: transparent;}
+	#content {
+		position: relative;
+		height: 100%;
+		margin-top: -102px;
+		padding-top: 102px;
+		box-sizing: border-box;
+	}
 
+	#graphs-container {
+		position: relative;
+		float: right;
+		height: 100%;
+		width: 100%;
+	
+		#graphs {
+			height: 100%;
+			width: 100%;
+			background: transparent;
+		}
+	}
 	#infocard {
 		position: absolute;
 		bottom: 40px; left: 0;
@@ -144,6 +162,24 @@
 			font: normal 1em "Diavlo","Helvetica Neue",Helvetica,sans-serif;
 			color: #999;
 		}
+		#node-actions {
+			position: absolute;
+			top: 45px; left: 15px;
+			a {
+				display: inline-block;
+				height: 32px; width: 32px;
+				text-indent: -100%;
+				overflow: hidden;
+				background: #ccc;
+				border-radius: 10px;
+				&.twitter {
+					background-image: url('../img/icon-tw.png');
+				}
+				&.facebook {
+					background-image: url('../img/icon-fb.png');
+				}
+			}
+		}
 		#node-csvlink {
 			position: absolute;
 			bottom: 15px; right: 15px;
@@ -210,7 +246,7 @@
 	width: 100%;
 	color: #fff;
 	background: linear-gradient(#93f,fade(#333,90%));
-	z-index: 99;
+	z-index: 100;
 	overflow: scroll;
 	.container {
 		padding: 12em 1em 5em;
@@ -220,7 +256,7 @@
 	}
 	.page-close {
 		position: absolute;
-		top: 160px; right: 15px;
+		top: 115px; right: 15px;
 		height: 36px; width: 36px;
 		font-size: 22px;
 		line-height: 34px;
@@ -253,15 +289,15 @@
 
 	#lists-container {
 		display: none;
-		position: absolute;
-		top: 102px; left: -320px;
-		width: 320px; height: 100%;
+		position: relative;
+		float: left;
+		width: 0%; height: 100%;
 		box-shadow: 0 0 25px fade(#000,25%);
 		background: #fff;
 		z-index: 100;
 		.toggle {
 			position: absolute;
-			top: 50%;
+			top: 33%;
 			right: -32px;
 			height: 64px;
 			margin-top: -32px;
@@ -292,6 +328,7 @@
 		width: 100%;
 		height: 100%;
 		background: #fff;
+		overflow: hidden;
 		#list_menu {
 			position: relative;
 			margin: 0; padding: 0;
@@ -492,7 +529,7 @@ text.label { fill: #fff; font-weight: 600; font-family: 'Ubuntu', sans-serif; fo
 #help { position: absolute; }
 
 #loading {
-	padding-top: 60%;
+	padding-top: 33%;
 	background: fade(#fff,75%);
 	z-index: 999;
 	span {
@@ -509,7 +546,7 @@ text.label { fill: #fff; font-weight: 600; font-family: 'Ubuntu', sans-serif; fo
 	height: 50px;
 	max-width: 320px;
 	text-align: center;
-	z-index: 999;
+	z-index: 99;
 }
 #intro_state {
 	display: block;
@@ -523,7 +560,11 @@ text.label { fill: #fff; font-weight: 600; font-family: 'Ubuntu', sans-serif; fo
 // Header
 
 #masthead {
-	margin-top: 1.5em;
+	position: absolute;
+	top: 120px;
+	.site-tagline {
+		line-height: 1.6;
+	}
 }
 
 #navbar {
@@ -677,12 +718,21 @@ text.label { fill: #fff; font-weight: 600; font-family: 'Ubuntu', sans-serif; fo
 	position: absolute;
 	bottom: 0; left: 0;
 	width: 100%;
-	background: #eee;
-	border-top: 1px solid #ddd;
+	color: #999;
+	background: #f8f8f8;
+	font-size: 10px;
 	line-height: 40px;
-	opacity: 0.5;
-	z-index: 100;
+	z-index: 99;
 	&:hover {
 		opacity: 1;
+	}
+	.site-links {
+		text-align: right;
+		a {
+			color: #999;
+			&:hover {
+				color: #f90;
+			}
+		}
 	}
 }
