@@ -524,7 +524,12 @@ function createThumbnails($image, $type) {
 	//system("/usr/bin/convert -bordercolor white -border 1x1 -fuzz 1% -trim +repage -thumbnail $large_size -bordercolor white -border 50 -gravity center -crop $large_size+0+0 +repage  -quality 92 -format jpg $image $output_path/$id.jpg");
 	system("/usr/bin/convert -bordercolor white -border 1x1 -fuzz 1% -trim +repage -thumbnail $small_size -bordercolor white -border 50 -gravity center -crop $small_size+0+0 +repage  -quality 92 -format jpg $image $output_path/s$id.jpg");
 	if ($type == 'com') { 
-		system("/usr/bin/convert -bordercolor white -border 1x1 -fuzz 1% -trim +repage -thumbnail 43x43 -bordercolor white -border 50 -gravity center -crop 43x43+0+0 +repage  -quality 92 -format jpg $image $output_path/t$id.png");
+		$large_size_single = preg_replace("/x.*/", "", $large_size);
+		$half_large_size = $large_size_single/2;
+		system("/usr/bin/convert -size $large_size canvas:none -fill white -draw 'circle $half_large_size,$half_large_size $half_large_size,1' $orig_path[com]circle.png");
+		$square_size = sqrt(pow($large_size_single, 2)/2);
+		$square_size = $square_size . "x".$square_size;
+		system("/usr/bin/convert -bordercolor white -border 1x1 -fuzz 1% -trim +repage -thumbnail $square_size -bordercolor white -border 50 -gravity center -crop $square_size+0+0 +repage  -quality 92 -format jpg $image $output_path/t$id.png");
 		system("/usr/bin/composite -gravity center -compose atop $output_path/t$id.png $orig_path[com]/circle.png $output_path/c$id.png");
 		unlink("$output_path/t$id.png");
 		system("optipng -quiet $output_path/c$id.png");
