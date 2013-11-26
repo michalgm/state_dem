@@ -9,6 +9,8 @@ $.Class("GraphImage", {}, {
 		$('#'+this.graphdiv).html("<div id='images'></div><div id='imagescreen' style='display:none;'></div>");
 		this.graphDimensions = this.getDimensions();
 		$('#imagescreen').clonePosition($('#'+this.graphdiv));
+		if(typeof(this.tooltipOffsetY) == 'undefined') { this.tooltipOffsetY = -5; }
+		if(typeof(this.tooltipOffsetX) == 'undefined') { this.tooltipOffsetX = 5; }
 	},
 	reset: function() {
 		$('#image').unbind();
@@ -25,10 +27,6 @@ $.Class("GraphImage", {}, {
 		if ($('#image')) {
 			this.offsetX = $('#image').offset().left || 0;
 			this.offsetY = $('#image').offset().top;
-			//this.tooltipOffsetX = Position.cumulativeOffset(this.graphdiv)[0] - 15;
-			//tooltipOffsetY = Position.cumulativeOffset($('graphs'))[1];
-			this.tooltipOffsetX = 5;
-			this.tooltipOffsetY = -5;
 		}
 		$('#imagescreen').css({top: $('#'+this.graphdiv).offset().top, left: $('#'+this.graphdiv).offset().left});
 	},
@@ -56,8 +54,13 @@ $.Class("GraphImage", {}, {
 	},
 	moveTooltip: function(mousepos) { 
 		if(this.tooltip.html() == '') { this.tooltip.html('1'); } //if it's empty, it won't be positioned right
-		if(typeof(this.tooltipOffsetY) == 'undefined') { this.setOffsets(); }
-		this.tooltip.css({'top': (mousepos['y']+ this.tooltipOffsetY - this.tooltip.outerHeight()) + 'px', 'left': (mousepos['x']  + this.tooltipOffsetX) + 'px'});
+		if(typeof(this.offsetX) == 'undefined') { this.setOffsets(); }
+		var x = mousepos['x'] + this.tooltipOffsetX;
+		var y = mousepos['y'] + this.tooltipOffsetY - this.tooltip.outerHeight();
+		if (this.center_tooltip) { 
+			x -= this.tooltip.outerWidth()/2;
+		}
+		this.tooltip.css({'top': y + 'px', 'left': x + 'px'});
 
 	},
 	showTooltip: function(label) {
@@ -75,20 +78,23 @@ $.Class("GraphImage", {}, {
 		$('#images').css('cursor','default');	
 	},
 	highlightNode: function(id, noshowtooltip, renderer) {
-		if(typeof(this.tooltipOffsetY) == 'undefined') { this.setOffsets(); }
+		if(typeof(this.offsetY) == 'undefined') { this.setOffsets(); }
 		if (! noshowtooltip) { 
 			id = id.toString();
+			this.showTooltip(this.NodeViz.data.nodes[id].tooltip); //Set the tooltip contents
 			if (renderer == 'list') { 
 				if (this.NodeViz.options.useSVG == 1) { 
 					var elem = $('#'+id).children('polygon, ellipse')[0];
-					var box = elem.getBBox();
-					var svgp = this.root.createSVGPoint();
-					svgp.x = box.x + box.width;
-					svgp.y = box.y;
-					var point = svgp.matrixTransform(this.ctm);
-					point.x += this.offsetX;
-					point.y += this.offsetY;
-					this.moveTooltip(point);
+					var box = elem.getBoundingClientRect();
+					var svgp = { 
+						x: box.right - this.tooltipOffsetX, 
+						y: box.top - this.tooltipOffsetY
+					};
+
+					if (this.center_tooltip) { 
+						svgp.x -= box.width/2;
+					}
+					this.moveTooltip(svgp);
 				} else {
 					var elem = $('#'+id);
 					var coords = elem.attr('coords').split(',');
@@ -96,7 +102,6 @@ $.Class("GraphImage", {}, {
 					this.moveTooltip({'x': parseInt(coords[2]) + offset.left, 'y': parseInt(coords[1])});
 				}
 			}
-			this.showTooltip(this.NodeViz.data.nodes[id].tooltip); //Set the tooltip contents
 		}
 	},
 	unhighlightNode: function(id) { 
