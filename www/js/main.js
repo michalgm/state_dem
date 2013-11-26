@@ -77,7 +77,7 @@ function initGraph() {
 			fadeTo: .2,
 			center_tooltip: 1,
 			tooltipOffsetY: -21,
-			tooltipOffsetX: 5,
+			tooltipOffsetX: 0,
 			//zoom_delta:  
 
 		},
@@ -251,6 +251,13 @@ $.extend(GraphList.prototype, {
 		}
 		return "<div class='sublist_header'>"+header+"</div>"
 	},
+	pre_render: function() {
+		$.each(this.NodeViz.data.nodes, function(i, node) { 
+			if (node.image) { 
+				node.image = node.image.replace(/..\/www\//, '');
+			}
+		});
+	}
 });
 
 
@@ -301,7 +308,8 @@ function toggleInfocard(node) {
 		var url = (remotecache ? remotecache + '../' : '')+'request.php';
 		$('#node-csvlink a').attr('href',url+'?method=csv&type='+node.type+'&id='+node.id+'&state='+gf.data.properties.state+'&chamber='+gf.data.properties.chamber);
 		card.slideDown(500);
-		gf.panToNode(node.id, 4, {y:-50, x:0});
+		//gf.panToNode(node.id, 4, {y:-50, x:0});
+		gf.panToNode(node.id, 4, {y:0, x:0});
 
 		$('#legend').hide();
 	} else {

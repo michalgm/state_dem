@@ -67,12 +67,14 @@ $.Class("GraphImage", {}, {
 		if (typeof(this.state) != 'undefined' && this.state !== '') { return; }
 		if(label != '') { 
 			if (this.tooltip.position().left) {
-				this.tooltip.html(label);
+				this.setTooltip(label);
 				this.tooltip.css({visibility:'visible'}); //show the tooltip
 			}
 		}
 	},
-
+	setTooltip: function(label) { 
+		this.tooltip.html(label);
+	},
 	hideTooltip: function() { 
 		this.tooltip.css('visibility','hidden'); //hide the tooltip first - somehow this makes it faster
 		$('#images').css('cursor','default');	
@@ -87,8 +89,8 @@ $.Class("GraphImage", {}, {
 					var elem = $('#'+id).children('polygon, ellipse')[0];
 					var box = elem.getBoundingClientRect();
 					var svgp = { 
-						x: box.right - this.tooltipOffsetX, 
-						y: box.top - this.tooltipOffsetY
+						x: box.right,
+						y: box.top
 					};
 
 					if (this.center_tooltip) { 
