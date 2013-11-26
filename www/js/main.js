@@ -75,7 +75,10 @@ function initGraph() {
 			graphdiv: 'graphs',
 			zoomlevels: '8',
 			zoomSliderAxis: 'vertical',
-			fadeTo: .2
+			fadeTo: .2,
+			center_tooltip: 1,
+			tooltipOffsetY: -21,
+			tooltipOffsetX: 5,
 			//zoom_delta:  
 
 		},
@@ -92,11 +95,6 @@ function initGraph() {
 			//renderer: the render type that triggered the event (svg, raster, or list)
 			
 			//pre_click: "console.log('pre_click:'+element_type+' '+renderer)", //this is an example using the eval method, which is lame
-			post_mouseenter: function(evt, dom_element, graph_element, element_type, renderer) { 
-				var offset = this.renderers.GraphImage.tooltip.outerWidth() /2;
-				this.renderers.GraphImage.tooltipOffsetX = -offset;
-				this.renderers.GraphImage.tooltipOffsetY = -20;
-			},
 		}
 	};
 	if (remotecache) { 
