@@ -260,7 +260,6 @@ $.extend(GraphList.prototype, {
 	}
 });
 
-
 GraphImage.prototype.pre_render= function(responseData) {
 	responseData.overlay = responseData.overlay.replace(/com_images/g, 'http://dirtyenergymoney.com/com_images');
 }
@@ -307,9 +306,9 @@ function toggleInfocard(node) {
 		var url = (remotecache ? remotecache + '../' : '')+'request.php';
 		$('#node-csvlink a').attr('href',url+'?method=csv&type='+node.type+'&id='+node.id+'&state='+gf.data.properties.state+'&chamber='+gf.data.properties.chamber);
 
-		var nodeLinks  = node.twitterURL	? '<a class="twitter" href="'+node.twitterURL+'">Twitter</a>' : '';
-			nodeLinks += node.facebookURL	? '<a class="facebook" href="'+node.facebookURL+'">Facebook</a>' : '';
-			nodeLinks += node.actionURL		? '<a class="facebook" href="'+node.actionURL+'">Take Action</a>' : '';
+		var nodeLinks  = node.twitter		? '<a class="twitter" href="'+node.twitter+'">Twitter</a>' : '';
+			nodeLinks += node.facebook		? '<a class="facebook" href="'+node.facebook+'">Facebook</a>' : '';
+			nodeLinks += node.action_link	? '<a class="action" href="'+node.action_link+'">Take Action</a>' : '';
 
 		$('#node-links').html(nodeLinks);
 
