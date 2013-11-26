@@ -79,7 +79,11 @@
 				<h3 id="node-title"></h3>
 				<h4 id="node-amount"></h4>
 				<div class="node-more hide">
-					<div id="node-links"></div>
+					<div id="node-links">
+						<a class="twitter" href="">Twitter</a>
+						<a class="facebook" href="">Facebook</a>
+						<a class="action" href="">Take Action</a>
+					</div>
 					<div id="node-barchart"></div>
 					<div id="node-total"></div>
 					<div id="node-csvlink"><a href="">Download .CSV</a></div>

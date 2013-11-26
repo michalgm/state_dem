@@ -272,8 +272,7 @@ NodeViz.prototype.default_events.node.click = function(evt, dom_element, graph_e
 
 function updateInfocardData(node) { 
 	var url = (remotecache ? remotecache + '../' : '')+'request.php';
-	$.getJSON(url, {'method': 'chartData','type': node.type, 'id': node.id, 'state': gf.data.properties.state, 'chamber': gf.data.properties.chamber}, function(data, status, jxqhr) { 
-		// drawPieChart(data.contributionsByCategory,'#node-piechart');
+	$.getJSON(url, {'method': 'chartData','type': node.type, 'id': node.id, 'state': gf.data.properties.state, 'chamber': gf.data.properties.chamber}, function(data, status, jxqhr) {
 		drawBarChart(data.contributionsByYear,'#node-barchart');
 	});
 }
@@ -307,9 +306,17 @@ function toggleInfocard(node) {
 		$('#node-total').html('Total: $' + commas(node.lifetime_total));
 		var url = (remotecache ? remotecache + '../' : '')+'request.php';
 		$('#node-csvlink a').attr('href',url+'?method=csv&type='+node.type+'&id='+node.id+'&state='+gf.data.properties.state+'&chamber='+gf.data.properties.chamber);
+
+		var nodeLinks  = node.twitterURL	? '<a class="twitter" href="'+node.twitterURL+'">Twitter</a>' : '';
+			nodeLinks += node.facebookURL	? '<a class="facebook" href="'+node.facebookURL+'">Facebook</a>' : '';
+			nodeLinks += node.actionURL		? '<a class="facebook" href="'+node.actionURL+'">Take Action</a>' : '';
+
+		$('#node-links').html(nodeLinks);
+
+		console.log( node );
+
 		card.slideDown(500);
-		//gf.panToNode(node.id, 4, {y:-50, x:0});
-		gf.panToNode(node.id, 4, {y:0, x:0});
+		gf.panToNode(node.id, 4, {y:-50, x:0});
 
 		$('#legend').hide();
 	} else {
@@ -331,7 +338,6 @@ function togglePage(el) {
 function toggleLists() {
 	var lists = $('#lists-container'),
 		graphs = $('#graphs-container');
-		console.log( 'width: '+lists.css('width') );
 	if (parseInt(lists.css('width')) > 0) {
 		lists.animate({width: '0%'},500);
 		graphs.animate({width: '100%'},500,function() { gf.resize(); });
