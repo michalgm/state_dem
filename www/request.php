@@ -15,6 +15,7 @@ switch($_REQUEST['method']) {
 		header('Content-type: application/json');
 		$response = array();
 		$response['contributionsByYear'] = getContributionsByYear();
+		//$response['averagesByYear'] = getAveragesByYear();
 		#$response['contributionsByCategory'] = getContributionsByCategory();
 
 		print json_encode($response);
@@ -57,6 +58,24 @@ switch($_REQUEST['method']) {
 
 function getContributionsByYear() {
 	global $id, $min_cycle, $chamber, $state;
+	$entity_where = $chamber == 'state:all' ? " entity_id = '$id"."state:upper' or entity_id = '$id"."state:lower' " : " entity_id = '$id$chamber' ";
+	$results = dbLookupArray("select concat(label, category) as id, label, category, value from reports where ($entity_where) and report = 'year_report' order by label");
+
+	$type = dbEscape($_REQUEST['type']);
+	$type = $type == 'donors' ? 'companies' : $type;
+	$averages = dbLookupArray("select label, value from reports where entity_id='$state$chamber' and report = 'congress_average_$type' order by label");
+
+	$data = array();
+	foreach($results as $result) { 
+		if (! isset($data[$result['label']])) { 
+			$data[$result['label']] = array('value'=>0, 'label'=>$result['label'], 'average'=>$averages[$result['label']]['value']);
+		}
+		$data[$result['label']];
+		$data[$result['label']][$result['category']] = $result['value']+0;
+		$data[$result['label']]['value'] += $result['value'];		
+	}
+	return array_values($data);
+	
 	$type = $_REQUEST['type'];
 	$category = $type == 'candidates' ? 'sitecode' : 'party';
 	$categories = $type == 'candidates' ? array('oil', 'coal', 'carbon') : array('D', 'R', 'I');
@@ -84,6 +103,22 @@ function getContributionsByYear() {
 			group by year order by year";
 	}
 	return array_values(dbLookupArray($query));
+}
+
+function getAveragesByYear() {
+	global $id, $min_cycle, $chamber, $state;
+	$type = dbEscape($_REQUEST['type']);
+	$type = $type == 'donors' ? 'companies' : $type;
+	$results = dbLookupArray("select label, value from reports where entity_id='$state$chamber' and report = 'congress_average_$type'");
+	return array_values($results);
+	print "select label, value from reports where entity_id='$state$chamber' and report = 'congress_average_$type'";
+	$data = array();
+
+	print_r($results);
+	foreach($results as $result) { 
+	
+	}
+
 }
 
 function getContributionsByCategory() {

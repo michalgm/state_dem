@@ -22,6 +22,13 @@ $(function(){
 		$('.navlist').slideToggle();
 		e.preventDefault();
 	});
+	
+	showDotTooltip = function(e) { 
+		console.log(e);
+		gf.renderers.GraphImage.showTooltip($(e.target).attr('average'));
+		gf.renderers.GraphImage.mousemove(e);
+	};
+
 	$(window).resize(function(){
 		if ($(window).width() > 320 && $('.navlist').is(':hidden')) { $('.navlist').removeAttr('style'); }
 	});
@@ -312,8 +319,6 @@ function toggleInfocard(node) {
 
 		$('#node-links').html(nodeLinks);
 
-		console.log( node );
-
 		card.slideDown(500);
 		gf.panToNode(node.id, 4, {y:-50, x:0});
 
@@ -430,7 +435,7 @@ function drawBarChart(data,container) {
 		$(container+ ' svg').remove();
 		return;
 	}
-	var cats = $(data[0]).keys().map(function(i, d) { if (d != 'value' && d != 'label') { return d; }}).toArray();
+	var cats = $(data[0]).keys().map(function(i, d) { if (d != 'value' && d != 'label' && d!= 'average') { return d; }}).toArray();
 	var categories = d3.layout.stack().offset('zero')(cats.map(function(cat) {
 		return data.map(function(d) { 
 			return {x: d.label, y: +d[cat], label: cat};
@@ -438,7 +443,7 @@ function drawBarChart(data,container) {
 	}));
 
 	x.domain(categories[0].map(function(d) { return d.x; }));
-	y.domain([0, d3.max(data, function(d) { return parseInt(d.value); })]);
+	y.domain([0, d3.max(data, function(d) { return parseInt(d.value) > parseInt(d.average) ? parseInt(d.value) : parseInt(d.average); })]);
 
 	//The category groups
 	var category = svg.selectAll("g.category")
@@ -520,6 +525,50 @@ function drawBarChart(data,container) {
 		.attr('y', function(d) { return 0+(y(d.y)/2); } )
 		.style('opacity','0')
 		.remove();
+	
+	//The average lines
+	var lines = svg.selectAll("path")
+		.data(data, function(d) { return d.label; });
+
+	var line = d3.svg.line()
+		.x(function(d, i) { return x(d.label) + x.rangeBand()/2; })
+		.y(function(d) { return -y(d.average); })
+	
+	lines.enter().append('svg:path')
+		.attr('class', 'average-line')
+
+	lines.transition()
+		.duration(1000)
+		.attr('d', line(data))
+		.style('opacity','1')
+
+	lines.exit().transition()
+		.duration(200)
+		.style('opacity','0')
+		.remove();
+
+	var dots = svg.selectAll(".dot")
+		.data(data, function(d) { return d.label; })
+	
+	dots.enter().append('circle')
+		.attr('class', 'dot')
+		.attr("cx", line.x())
+	    .attr("cy", line.y())
+		.attr("r", 6.0)
+		.on("mouseover", function(d, e) { gf.renderers.GraphImage.showTooltip('Average: $'+format(d.average)); gf.renderers.GraphImage.mousemove(d3.event); })
+		.on("mouseout", function() { gf.renderers.GraphImage.hideTooltip(); })
+
+	dots.transition()
+		.duration(1000)
+		.attr("cx", line.x())
+	    .attr("cy", line.y())
+		.attr("average", function(d) { return d.average; })
+
+	dots.exit().transition()
+		.duration(200)
+		.style('opacity','0')
+		.remove();
+	
 
 	//The year labels below the bars
 	var years = svg.selectAll('.year')

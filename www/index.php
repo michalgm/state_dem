@@ -40,6 +40,8 @@
 		.errorstring { background: transparent !important; }
 
 		.zero { opacity: .5; }
+		.average-line { fill: none; stroke: blue;  stroke-width: 5;}
+		.dot { fill: white; stroke: green; stroke-width: 3px; } 
 	</style>
 </head>
 <body>
