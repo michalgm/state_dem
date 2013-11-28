@@ -23,14 +23,11 @@ $(function(){
 		e.preventDefault();
 	});
 	
-	showDotTooltip = function(e) { 
-		console.log(e);
-		gf.renderers.GraphImage.showTooltip($(e.target).attr('average'));
-		gf.renderers.GraphImage.mousemove(e);
-	};
-
 	$(window).resize(function(){
 		if ($(window).width() > 320 && $('.navlist').is(':hidden')) { $('.navlist').removeAttr('style'); }
+		if ($('#node-barchart svg').length) { 
+			drawBarChart('#node-barchart', 1);
+		}	
 	});
 	
 	var url_state = (window.location.search.substr(1)).split('/');
@@ -279,7 +276,8 @@ NodeViz.prototype.default_events.node.click = function(evt, dom_element, graph_e
 function updateInfocardData(node) { 
 	var url = (remotecache ? remotecache + '../' : '')+'request.php';
 	$.getJSON(url, {'method': 'chartData','type': node.type, 'id': node.id, 'state': gf.data.properties.state, 'chamber': gf.data.properties.chamber}, function(data, status, jxqhr) {
-		drawBarChart(data.contributionsByYear,'#node-barchart');
+		chartData = data.contributionsByYear;
+		drawBarChart('#node-barchart');
 	});
 }
 
@@ -342,12 +340,19 @@ function togglePage(el) {
 function toggleLists() {
 	var lists = $('#lists-container'),
 		graphs = $('#graphs-container');
+	var callback = function() { 
+		if ($('#node-barchart svg').length) { 
+			drawBarChart('#node-barchart', 1);
+		}	
+		gf.resize(); 
+	};
+		
 	if (parseInt(lists.css('width')) > 0) {
 		lists.animate({width: '0%'},500);
-		graphs.animate({width: '100%'},500,function() { gf.resize(); });
+		graphs.animate({width: '100%'},500,callback);
 	} else {
 		lists.animate({width: '33%'},500);
-		graphs.animate({width: '67%'},500,function() { gf.resize(); });
+		graphs.animate({width: '67%'},500,callback);
 	}
 	lists.toggleClass('open');
 }
@@ -414,22 +419,27 @@ function setState() {
 	BAR CHART
 	========================================================================== */
 
-function drawBarChart(data,container) {
-	var padding = 15;
-	var width = $(window).width(),
-		height = $(window).height() / 2 - 150;
+function drawBarChart(container, refresh) {
+	if (refresh) { $(container).html(''); }
+	var data = chartData;
 
-	var x = d3.scale.ordinal().rangeRoundBands([0,width], .05);
-	var y = d3.scale.linear().range([0, height-(padding*2)]);
+	var padding = 24;
+	var width = $('#graphs-container').width(),
+		height = ($(window).height() *.45) - 144;
 
 	var svg = d3.select(container+' svg>g');
 	if (svg.empty()) {
 		svg = d3.select(container).append('svg')
 			.attr('width',width)
 			.attr('height',height)
+			///.attr('viewBox', '0 0 '+width+' '+height)
+			//.attr('perserveAspectRatio', "xMinYMid")
 			.append('svg:g')
 			.attr('transform', "translate(0, "+(height-padding)+")");
 	}
+
+	var x = d3.scale.ordinal().rangeRoundBands([0,width], .05);
+	var y = d3.scale.linear().range([0, height-(padding*2)]);
 	
 	if (typeof(data[0]) == 'undefined') { // If there's no data, delete the svg and exit function
 		$(container+ ' svg').remove();
@@ -459,21 +469,31 @@ function drawBarChart(data,container) {
 	var rect = category.selectAll("rect")
 		.data(function(d) { return d; }, function(d) { return d.x; })
 
-	rect.enter().append("svg:rect")
-		.attr("x", function(d) { return x(d.x); })
-		.attr("y", 0)
-		.attr("height", 0)
-		.attr("width", x.rangeBand())
-		.style('opacity','0');
 
-	rect.transition()
-		.duration(1000)
-		.delay(!rect.exit().empty()*200)
+	var rect_enter = rect.enter().append("svg:rect")
 		.attr("x", function(d) { return x(d.x); })
-		.attr("y", function(d) { return - y(d.y0) - y(d.y); })
-		.attr("height", function(d) { return y(d.y); })
 		.attr("width", x.rangeBand())
-		.style('opacity','1');
+
+	if (refresh) { 
+		rect_enter
+			.attr("height", function(d) { return y(d.y); })
+			.style('opacity','1')
+			.attr("y", function(d) { return - y(d.y0) - y(d.y); })
+	} else {
+		rect_enter
+			.attr("y", 0)
+			.attr("height", 0)
+			.style('opacity','0');
+
+		rect.transition()
+			.duration(1000)
+			.delay(!rect.exit().empty()*200)
+			.attr("x", function(d) { return x(d.x); })
+			.attr("y", function(d) { return - y(d.y0) - y(d.y); })
+			.attr("height", function(d) { return y(d.y); })
+			.attr("width", x.rangeBand())
+			.style('opacity','1');
+	}
 
 	rect.exit().transition()
 		.duration(200)
@@ -492,33 +512,52 @@ function drawBarChart(data,container) {
 	var amounts = amounts_group.selectAll('.amount')
 		.data(function(d) { return d; }, function(d) { return d.x; });
 
-	amounts.enter().append('text')
+	var amounts_enter = amounts.enter().append('text')
 		.attr('class','chart-label amount')
 		.attr('dominant-baseline', 'middle')
 		.attr('text-anchor','middle')
-		.attr('y', function(d) { return 0+(y(d.y)/2); } )
 		.style('fill','#fff')
-		.style('opacity','0')
 
-	amounts.transition()
-		.delay(!amounts.exit().empty()*200)
-		.duration(1000)
-		.style('opacity','1')
-		.attr('x',function(d) { return x(d.x) + (x.rangeBand() / 2); })
-		.attr('y',function(d) { return - y(d.y0) - y(d.y) + (y(d.y)/2); })
-		.attr('width',function() { return x.rangeBand(); })
-		.tween('text', function(d) { 
-			var i = d3.interpolate(this.textContent.replace(/[^0-9]+/g, ''), d.y);
-			return function(t) { 
-				if (y(d.y) > padding-2) {
-					var aliases = {'carbon':'Miscellaneous', 'DEM':'Democrats', 'REP':'Republicans', 'IND':'Independants'};
-					var label = aliases[d.label] ? aliases[d.label] : d.label;
-					this.textContent = toWordCase(label)+': $' + commas(Math.floor(i(t)));
-				} else {
-					this.textContent = "";
+	if (refresh) { 
+		amounts_enter
+			.style('opacity','1')
+			.attr('x',function(d) { return x(d.x) + (x.rangeBand() / 2); })
+			.attr('y',function(d) { return - y(d.y0) - y(d.y) + (y(d.y)/2); })
+			.attr('width',function() { return x.rangeBand(); })
+			.attr('text', function(d) { 
+					if (y(d.y) > padding-2) {
+						var aliases = {'carbon':'Miscellaneous', 'DEM':'Democrats', 'REP':'Republicans', 'IND':'Independants'};
+						var label = aliases[d.label] ? aliases[d.label] : d.label;
+						this.textContent = toWordCase(label)+': $' + commas(Math.floor(d.y));
+					} else {
+						this.textContent = "";
+					}
+				});
+
+	} else {
+		amounts_enter.style('opacity','0')
+			.attr('y', function(d) { return 0+(y(d.y)/2); } )
+
+		amounts.transition()
+			.delay(!amounts.exit().empty()*200)
+			.duration(1000)
+			.style('opacity','1')
+			.attr('x',function(d) { return x(d.x) + (x.rangeBand() / 2); })
+			.attr('y',function(d) { return - y(d.y0) - y(d.y) + (y(d.y)/2); })
+			.attr('width',function() { return x.rangeBand(); })
+			.tween('text', function(d) { 
+				var i = d3.interpolate(this.textContent.replace(/[^0-9]+/g, ''), d.y);
+				return function(t) { 
+					if (y(d.y) > padding-2) {
+						var aliases = {'carbon':'Miscellaneous', 'DEM':'Democrats', 'REP':'Republicans', 'IND':'Independants'};
+						var label = aliases[d.label] ? aliases[d.label] : d.label;
+						this.textContent = toWordCase(label)+': $' + commas(Math.floor(i(t)));
+					} else {
+						this.textContent = "";
+					}
 				}
-			}
-		});
+			});
+	}
 
 	amounts.exit().transition()
 		.duration(200)
@@ -534,8 +573,10 @@ function drawBarChart(data,container) {
 		.x(function(d, i) { return x(d.label) + x.rangeBand()/2; })
 		.y(function(d) { return -y(d.average); })
 	
-	lines.enter().append('svg:path')
-		.attr('class', 'average-line')
+	if ($('.average-line').length == 0) { 
+		lines.enter().append('svg:path')
+			.attr('class', 'average-line')
+	}
 
 	lines.transition()
 		.duration(1000)
@@ -599,27 +640,38 @@ function drawBarChart(data,container) {
 	var totals = svg.selectAll('.total')
 		.data(data, function(d) { return d.label; })
 
-	totals.enter().append('text')
+	var totals_enter = totals.enter().append('text')
 		.attr('x',function(d, i) { return x(d.label) + x.rangeBand()/2; })
 		.attr('class','chart-label total')
 		.attr('y', function(d) { return -y(d.value) -(padding); })
 		.attr('dominant-baseline', 'text-before-edge')
 		.attr('width',function() { return x.rangeBand(); })
 		.attr('text-anchor','middle')
-		.style('opacity','0')
 
-	totals.transition()
-		.delay(!totals.exit().empty()*200)
-		.duration(1000)
-		.attr('x',function(d, i) { return x(d.label) + x.rangeBand()/2; })
-		.attr('y', function(d) { return -y(d.value) -(padding); })
-		.style('opacity','1')
-		.tween('text', function(d) { 
-			var i = d3.interpolate(this.textContent.replace(/[^0-9]+/g, ''), d.value);
-			return function(t) { 
-				this.textContent = '$' + commas(Math.floor(i(t)));
-			}
-		});
+	if(refresh) { 
+		totals_enter
+			.style('opacity','1')
+			.attr('text', function(d) {
+				this.textContent = '$'+commas(Math.floor(d.value));
+			})
+			
+	} else {
+		totals_enter
+			.style('opacity','0')
+
+		totals.transition()
+			.delay(!totals.exit().empty()*200)
+			.duration(1000)
+			//.attr('x',function(d, i) { return x(d.label) + x.rangeBand()/2; })
+			//.attr('y', function(d) { return -y(d.value) -(padding); })
+			.style('opacity','1')
+			.tween('text', function(d) { 
+				var i = d3.interpolate(this.textContent.replace(/[^0-9]+/g, ''), d.value);
+				return function(t) { 
+					this.textContent = '$' + commas(Math.floor(i(t)));
+				}
+			});
+	}
 	totals.exit().transition()
 		.duration(200)
 		.style('opacity','0')
