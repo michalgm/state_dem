@@ -8,8 +8,7 @@ GraphImage("GraphSVG", {}, {
 		this.fadeTo = .3
 		this._super(NodeViz);
 		if (this.NodeViz.options.useSVG != 1 ) { return; } 
-
-
+		
 		$('#'+this.graphdiv).append(this.zoomControlsHTML);
 		$('#zoomin').click($.proxy(function(e) { this.zoom('in'); }, this));
 		$('#zoomout').click($.proxy(function(e) { this.zoom('out'); }, this));
@@ -44,6 +43,8 @@ GraphImage("GraphSVG", {}, {
 				this.setZoomValue(ui.value);
 			}, this)
 		});
+
+		this.initial_scale = '';
 	},
 	reset: function() {
 		this._super();
@@ -106,6 +107,7 @@ GraphImage("GraphSVG", {}, {
 		//Center the svg images (using the original graph dimensions)
 		this.root = $('#svg_overlay')[0].childNodes[0];
 		this.updateCTM();
+
 		var delta = this.root.createSVGPoint();
 		delta.x = (this.graphDimensions.width - this.graphWidth)/2;
 		delta.y = (this.graphDimensions.height - this.graphHeight)/2;
@@ -117,6 +119,7 @@ GraphImage("GraphSVG", {}, {
 		$('#graph0').attr('transform', s);
 		$('#underlay_graph0').attr('transform', s);
 		this.updateCTM();
+		this.updateDefaultScale();
 
 		//Show the Graphs
 		$('#svg_overlay').css('position','absolute');
@@ -649,8 +652,7 @@ GraphImage("GraphSVG", {}, {
 			this.previous_zoom = this.current_zoom;
 			this.current_zoom = value;
 			this.zoomSlider.value = value;
-			var zoom_amount = value - this.previous_zoom;
-			var scale = Math.pow(this.zoom_delta, zoom_amount);
+			var scale = (Math.pow(this.zoom_delta, value - this.default_zoom)*this.initial_scale) /this.ctm.a;
 			this.SVGzoom(scale, zoom_point);
 		},this), 100);
 	},
@@ -666,6 +668,7 @@ GraphImage("GraphSVG", {}, {
 				this.setZoomFilters();
 				$('#'+this.graphdiv).removeClass('zooming');
 				this.updateCTM();
+				this.updateDefaultScale();
 				if(this.NodeViz.afterZoom) {
 					this.NodeViz.afterZoom();
 				}
@@ -725,7 +728,7 @@ GraphImage("GraphSVG", {}, {
 				}
 			}, this));
 
-			var testcenter = this.calculateCenter();
+			//var testcenter = this.calculateCenter();
 			//$('#centertest').remove();
 			//$('#images').append($('<div>').attr({'id': 'centertest', 'style': 'position: absolute; opacity: .2; background: pink; z-index: 1000; top: 0px; left: 0px; width:'+testcenter.x+'px; height: '+testcenter.y+'px;'}));
 
@@ -752,6 +755,11 @@ GraphImage("GraphSVG", {}, {
 			this.ctm = ctm;
 			this.stateTf = ctm.inverse();
 		}
+	},
+	updateDefaultScale: function() {
+		var original_size = $(gf.renderers.GraphImage.root).children('g')[0].getBBox();
+		var sizing_dimension = this.graphDimensions.width > this.graphDimensions.height ? 'height' : 'width';
+		this.initial_scale = this.graphDimensions[sizing_dimension] / original_size[sizing_dimension];
 	},
 	matrixToTransform: function(matrix) {
 		return "matrix(" + matrix.a + "," + matrix.b + "," + matrix.c + "," + matrix.d + "," + matrix.e + "," + matrix.f + ")";
