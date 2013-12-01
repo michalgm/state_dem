@@ -159,6 +159,7 @@
 	<script src="js/jquery.history.js"></script>
 	<script src="js/d3.v3.js"></script>
 
+	<script src="js/dem_charts.js"></script>
 	<script src="js/main.js"></script>
 	<script>
 		var states = <?php 
