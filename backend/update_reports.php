@@ -9,15 +9,15 @@ dbwrite("create table reports_temp like reports");
 foreach(array("candidates","companies") as $type) { 
 	//Year queries
 	$category = $type == 'candidates' ? 'sitecode' : 'party';
-	$entity_id = $type == 'candidates' ? 'imsp_candidate_id' : 'company_id';
+	$entity_id = $type == 'candidates' ? 'imsp_candidate_id' : "company_id";
 	$category_table = $type == 'candidates' ? "contributions_dem" : "legislator_terms";	
 	$entity_table = $type == 'candidates' ? "legislator_terms t" : " (select distinct company_id from contributions_dem) d join (select year as term from years) y join (select distinct seat from legislator_terms) t ";
 	$category_lookup = "if($category='' or $category='I' or $category='N', 'I', $category)";
 
-	$populate_query = "select 'year_report', term as label, 0 as value, concat($entity_id,t.seat) as entity_id, category as category from $entity_table  join (select distinct $category_lookup as category from $category_table) b where term >=$min_cycle";
-	$update_query = "select 'year_report' as report, term as label, sum(if(amount, amount, 0)) as value, concat($entity_id, t.seat) as entity_id, $category_lookup as category
+	$populate_query = "select 'year_report_$type', term as label, 0 as value, concat($entity_id,t.seat) as entity_id, category as category from $entity_table  join (select distinct $category_lookup as category from $category_table) b where term  between $min_cycle and $max_cycle ";
+	$update_query = "select 'year_report_$type' as report, term as label, sum(if(amount, amount, 0)) as value, concat($entity_id, t.seat) as entity_id, $category_lookup as category
 		from legislator_terms  t 
-		join contributions_dem c on recipient_ext_id = imsp_candidate_id and term = cycle where t.term >=$min_cycle
+		join contributions_dem c on recipient_ext_id = imsp_candidate_id and term = cycle where t.term between $min_cycle and $max_cycle
 		group by entity_id, term, category";
 	update_reports($populate_query, $update_query);
 

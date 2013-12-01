@@ -58,11 +58,12 @@ switch($_REQUEST['method']) {
 
 function getContributionsByYear() {
 	global $id, $min_cycle, $chamber, $state;
-	$entity_where = $chamber == 'state:all' ? " entity_id = '$id"."state:upper' or entity_id = '$id"."state:lower' " : " entity_id = '$id$chamber' ";
-	$results = dbLookupArray("select concat(label, category) as id, label, category, value from reports where ($entity_where) and report = 'year_report' order by label");
-
 	$type = dbEscape($_REQUEST['type']);
 	$type = $type == 'donors' ? 'companies' : $type;
+
+	$entity_where = $chamber == 'state:all' ? " entity_id = '$id"."state:upper' or entity_id = '$id"."state:lower' " : " entity_id = '$id$chamber' ";
+	$results = dbLookupArray("select concat(label, category) as id, label, category, value from reports where ($entity_where) and report = 'year_report_$type' order by label");
+
 	$averages = dbLookupArray("select label, value from reports where entity_id='$state$chamber' and report = 'congress_average_$type' order by label");
 
 	$data = array();
