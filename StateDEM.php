@@ -2,7 +2,6 @@
 include_once('Graph.php');
 require_once("$nodeViz_config[application_path]/config.php");
 $global_edges = array();
-$ballot = 0;
 setlocale(LC_MONETARY, 'en_US.UTF-8');
 $db = dbconnect();
 
@@ -62,6 +61,9 @@ class StateDEM extends Graph {
 	**/
 
 	function candidates_fetchNodes() {
+		global $min_cycle;
+		global $max_cycle;
+
 		$nodes = array();
 		$props = $this->data['properties'];
 
@@ -69,7 +71,11 @@ class StateDEM extends Graph {
 		if ($props['chamber'] != 'state:all') { 
 			$where .= " and a.seat = '$props[chamber]'";
 		}
-		if ($props['cycle'] != 'all') { $where .= " and a.term=".$props['cycle']; }
+		if ($props['cycle'] != 'all') { 
+			$where .= " and a.term=".$props['cycle']; 
+		} else { 
+			$where .= " and a.term between $min_cycle and $max_cycle ";
+		}
 
 		if ($props['candidate_ids']) {
 			$canids = arrayToInString(explode(',', $props['candidate_ids']));
@@ -88,13 +94,17 @@ class StateDEM extends Graph {
 	function donors_fetchNodes() {
 		$nodes = array();
 		global $global_edges;
-		global $ballot;
+		global $min_cycle;
+		global $max_cycle;
+
 		$props = $this->data['properties'];
 		$cans = $this->getNodesByType('candidates');
-		$cycle = ($props['candidate_ids'] || $props['cycle'] == 'all') ? "" : "cycle='$props[cycle]' and";
+		$cycle = ($props['candidate_ids'] || $props['cycle'] == 'all') ? " cycle between $min_cycle and $max_cycle and a.seat='$props[chamber]' and " : "cycle='$props[cycle]' and";
 		$companies = $props['company_ids'] ?  "company_id in (".arrayToInString(explode(',', $props['company_ids'])).") and" : "";
+		$trim_terms = $props['cycle'] == 'all' ? " join legislator_terms l on l.seat = a.seat and recipient_ext_id = imsp_candidate_id and cycle = term and l.seat='$props[chamber]' " : "";
+
 		$basicContribQuery = "
-			select transaction_id, company_id, c.name as company_name, sum(amount) as amount, recipient_ext_id, b.name as industry,  c.image_name as image, d.dem_type as sitecode, contributor_type, (d.coal_related + d.oil_related + d.carbon_related) as lifetime_total, action_link from contributions_dem a join catcodes b on code = contributor_category join companies c on c.id = a.company_id join companies_state_details d using(company_id) left join action_links on entity_id = company_id and company = 1 where $cycle $companies recipient_ext_id in (".arrayToInString($cans, 1).") and  company_name != '' group by a.company_id, recipient_name order by sum(amount) desc 
+			select transaction_id, company_id, c.name as company_name, sum(amount) as amount, recipient_ext_id, b.name as industry,  c.image_name as image, d.dem_type as sitecode, contributor_type, (d.coal_related + d.oil_related + d.carbon_related) as lifetime_total, action_link from contributions_dem a join catcodes b on code = contributor_category join companies c on c.id = a.company_id join companies_state_details d using(company_id) $trim_terms left join action_links on entity_id = company_id and company = 1 where $cycle $companies recipient_ext_id in (".arrayToInString($cans, 1).") and  company_name != '' group by a.company_id, recipient_name order by sum(amount) desc 
 			";
 		$this->addquery('fetch_donors', $basicContribQuery);
 		writelog('before donor query');
@@ -146,7 +156,6 @@ class StateDEM extends Graph {
 	}
 
 	function candidates_nodeProperties($nodes) {
-		global $ballot;
 		foreach ($nodes as &$node) {
 			//if ($node['total_dollars'] <= $this->data['properties']['valueMin']) { writelog($node['id']); unset($nodes[$node['id']]); continue; }
 			$node['value'] = $node['total_dollars'];
