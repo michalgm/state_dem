@@ -7,32 +7,59 @@ DEMBarChart = function(element) {
 	var self = this;
 	this.container = element;
 	this.padding = 24;
+	this.x = d3.scale.ordinal();
+	this.y = d3.scale.linear();
 
-	this.width = $('#graphs-container').width();
-	this.height = ($(window).height() *.45) - 144;
+//	this.width = $('#graphs-container').width();
+//	this.height = ($(window).height() *.45) - 144;
 
 	this.svg = d3.select(this.container+' svg>g');
 	if (this.svg.empty()) {
 		this.svg = d3.select(this.container).append('svg')
-			.style('height', this.height  + 'px')
-			.style('width', this.width + 'px')
+			//.style('height', this.height  + 'px')
+			//.style('width', this.width + 'px')
 			//.attr('width',width)
 			//.attr('height',height)
 			///.attr('viewBox', '0 0 '+width+' '+height)
 			//.attr('perserveAspectRatio', "xMinYMid")
 			.append('svg:g')
-			.attr('transform', "translate(0, "+(this.height-this.padding)+")");
+			//.attr('transform', "translate(0, "+(this.height-this.padding)+")");
 	}
 
 	this.line = d3.svg.line()
 		.x(function(d, i) { return self.x(d.label) + self.x.rangeBand()/2; })
 		.y(function(d) { return -self.y(d.average); })
 	
-	this.x = d3.scale.ordinal().rangeRoundBands([0,this.width], .05);
-	this.y = d3.scale.linear().range([0, this.height-(this.padding*2)]);
+	this.amountText = function(d, value) { 
+		var text = '';
+		if (self.y(d.y) > 14) {
+			var aliases = {'carbon':'Miscellaneous', 'DEM':'Democrats', 'REP':'Republicans', 'IND':'Independants'};
+			var label = aliases[d.label] ? aliases[d.label] : d.label;
+			text = toWordCase(label)+': $' + commas(Math.floor(value));
+		} 
+		return text;
+	}
 	
-	this.data = null;
+	this.setSize = function() {
+		this.width = $('#graphs-container').width(),
+		this.height = ($(window).height() *.45) - 144,
 
+		this.x.rangeRoundBands([0,this.width], .05);
+
+		var maxHeight = this.height - (this.padding*2);
+		maxHeight = maxHeight > 0 ? maxHeight : 0;
+		this.y.range([0, maxHeight]);
+
+		this.svg.attr('transform', "translate(0, "+(this.height-this.padding)+")");
+
+		d3.select(this.svg.node().parentNode)
+			.style('height', this.height  + 'px')
+			.style('width', this.width + 'px');
+	}
+
+	this.setSize();
+
+	this.data = null;
 }
 
 DEMBarChart.prototype.draw = function (data) {
@@ -108,9 +135,9 @@ DEMBarChart.prototype.draw = function (data) {
 		.attr('class','chart-label amount')
 		.attr('dominant-baseline', 'middle')
 		.attr('text-anchor','middle')
+		.attr('y', function(d) { return 0+(y(d.y)/2); } )
 		.style('fill','#fff')
 		.style('opacity','0')
-		.attr('y', function(d) { return 0+(y(d.y)/2); } )
 
 	amounts.transition()
 		.delay(!amounts.exit().empty()*200)
@@ -122,13 +149,7 @@ DEMBarChart.prototype.draw = function (data) {
 		.tween('text', function(d) { 
 			var i = d3.interpolate(this.textContent.replace(/[^0-9]+/g, ''), d.y);
 			return function(t) { 
-				if (y(d.y) > this.padding-2) {
-					var aliases = {'carbon':'Miscellaneous', 'DEM':'Democrats', 'REP':'Republicans', 'IND':'Independants'};
-					var label = aliases[d.label] ? aliases[d.label] : d.label;
-					this.textContent = toWordCase(label)+': $' + commas(Math.floor(i(t)));
-				} else {
-					this.textContent = "";
-				}
+				this.textContent = self.amountText(d, i(t));
 			}
 		});
 
@@ -237,24 +258,11 @@ DEMBarChart.prototype.draw = function (data) {
 		.remove();
 }
 
-
 DEMBarChart.prototype.resize = function() { 
+	this.setSize();
+
 	var self = this;
-
-	self.width = $('#graphs-container').width(),
-	self.height = ($(window).height() *.45) - 144,
-
-	self.x.rangeRoundBands([0,self.width], .05);
-	self.y.range([0, self.height-(self.padding*2)]);
-
 	var x = self.x, y=self.y, svg = self.svg;
-
-	var svg = d3.select(self.container+' svg>g')
-		.attr('transform', "translate(0, "+(self.height-self.padding)+")");
-	
-	d3.select(svg.node().parentNode)
-		.style('height', self.height  + 'px')
-		.style('width', self.width + 'px');
 
 	svg.selectAll('rect')
 		.attr("height", function(d) { return y(d.y); })
@@ -266,7 +274,8 @@ DEMBarChart.prototype.resize = function() {
 		.attr('x',function(d) { return x(d.x) + (x.rangeBand() / 2); })
 		.attr('y',function(d) { return - y(d.y0) - y(d.y) + (y(d.y)/2); })
 		.attr('width',function() { return x.rangeBand(); })
-		
+		.text(function(d) { return self.amountText(d, d.y); })
+	
 	svg.selectAll('.average-line')
 		.attr('d', self.line(self.data))
 
