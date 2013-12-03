@@ -55,15 +55,22 @@ function cache_races() {
 		system("rm -rf $nodeViz_config[cache_path]/*;");
 	}
 	$_REQUEST = array('candidateLimit' => 250, 'companyLimit'=>250, 'graphWidth'=>600, 'graphHeight'=>600);
-	$count = (((($max_cycle - $min_cycle) /2)+1) *2 *(count($states)));
+	$count = (((($max_cycle - $min_cycle) /2)+2) *3 * (count($states)));
 	$x = 0;
 	foreach ($states as $_REQUEST['state']) {
-		foreach (array('state:upper', 'state:lower') as $_REQUEST['chamber']) {
-			$_REQUEST['cycle'] = $min_cycle;
-			while ($_REQUEST['cycle'] <= $max_cycle) {
+		foreach (array('state:upper', 'state:lower', 'state:all', 'state:governor') as $_REQUEST['chamber']) {
+			if ($_REQUEST['chamber'] != 'state:governor') { 
+				$_REQUEST['cycle'] = $min_cycle;
+				while ($_REQUEST['cycle'] <= $max_cycle) {
+					$x = showProgress($x, $count);
+					fork_work('graph', 'StateDEM');
+					$_REQUEST['cycle'] += 2;
+				}
+			}
+			if ($_REQUEST['chamber'] != 'state:all') { 
+				$_REQUEST['cycle'] = 'all';
 				$x = showProgress($x, $count);
 				fork_work('graph', 'StateDEM');
-				$_REQUEST['cycle'] += 2;
 			}
 		}
 	}
