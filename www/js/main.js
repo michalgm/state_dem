@@ -23,10 +23,12 @@ $(function(){
 		e.preventDefault();
 	});
 	
-	$(window).resize(function(){
-		if ($(window).width() > 320 && $('.navlist').is(':hidden')) { $('.navlist').removeAttr('style'); }
-		barChart.resize();
-	});
+	$(window).resize(
+		$.debounce(100, function(){
+			if ($(window).width() > 320 && $('.navlist').is(':hidden')) { $('.navlist').removeAttr('style'); }
+			barChart.resize();
+		})
+	);
 	
 	var url_state = (window.location.search.substr(1)).split('/');
 	if (url_state[0]) { 

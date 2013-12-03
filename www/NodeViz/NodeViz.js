@@ -51,7 +51,7 @@ $.Class("NodeViz", {}, {
 			}
 			this.reloadGraph();
 		}
-		$(window).resize($.proxy(this.resize, this));
+		$(window).resize($.proxy($.debounce(200, this.resize), this));
 	},
 	checkResponse: function(response) {
 		var statusCode = null;
