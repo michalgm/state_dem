@@ -320,7 +320,7 @@ function toggleInfocard(node) {
 		$('#node-links').html(nodeLinks);
 
 		card.slideDown(500);
-		gf.panToNode(node.id, 4, {y:-50, x:0});
+		gf.panToNode(node.id, null, {y:-50, x:0});
 
 		$('#legend').hide();
 	} else {
