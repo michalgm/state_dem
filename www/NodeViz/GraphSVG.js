@@ -427,7 +427,7 @@ GraphImage("GraphSVG", {}, {
 		$('#graph0, #underlay_graph0').animate({svgTransform:k}, 1000, 
 			$.proxy(function() {
 				this.updateCTM();
-				if (typeof(zoom) != 'undefined') {
+				if (typeof(zoom) != 'undefined' && zoom != null) {
 					if (offset && typeof(offset.x) != 'undefined') { 
 						var center = this.calculateCenter();
 						center.x += offset.x;
