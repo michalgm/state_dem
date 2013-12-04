@@ -9,6 +9,7 @@ DEMBarChart = function(element) {
 	this.padding = 24;
 	this.x = d3.scale.ordinal();
 	this.y = d3.scale.linear();
+	this.bar_width = .8;
 
 //	this.width = $('#graphs-container').width();
 //	this.height = ($(window).height() *.45) - 144;
@@ -40,6 +41,10 @@ DEMBarChart = function(element) {
 		return text;
 	}
 	
+	this.getWeight = function(x) { 
+		return x == $('#cycle').val() ? 'bold' : 'normal';
+	}
+
 	this.setSize = function() {
 		this.width = $('#graphs-container').width(),
 		this.height = ($(window).height() *.45) - 144,
@@ -82,6 +87,42 @@ DEMBarChart.prototype.draw = function (data) {
 	self.y.domain([0, d3.max(data, function(d) { return parseInt(d.value) > parseInt(d.average) ? parseInt(d.value) : parseInt(d.average); })]);
 
 	var x = self.x, y=self.y, svg = self.svg;
+	
+	//The average lines
+	if (! $('.averages').length) { 
+		svg.append('g').attr('class', 'averages');
+	}
+	var averages = svg.selectAll('.averages');
+
+	var lines = averages.selectAll("line")
+		.data(data, function(d) { return d.label; })
+		///.data(function(d) { return d; }, function(d) { return d.x; });
+
+	//if ($('.average-line').length == 0) { 
+	lines.enter().append('line')
+		.attr('class', 'average-line')
+		.style('opacity','0')
+		.attr('x1', function(d) { return x(d.label); })
+		.attr('x2', function(d) { return x(d.label) + x.rangeBand(); })
+		.attr("y1", 0)
+		.attr("y2", 0)
+		.on("mouseover", function(d, e) { gf.renderers.GraphImage.showTooltip('Average: $'+format(d.average)); gf.renderers.GraphImage.mousemove(d3.event); })
+		.on("mouseout", function() { gf.renderers.GraphImage.hideTooltip(); })
+	//}
+
+	lines.transition()
+		.duration(1000)
+		.attr('x1', function(d) { return x(d.label); })
+		.attr('x2', function(d) { return x(d.label) + x.rangeBand(); })
+		.attr("y1", function(d) { return - y(d.average); })
+		.attr("y2", function(d) { return - y(d.average); })
+		.style('opacity','1')
+
+	lines.exit().transition()
+		.duration(200)
+		.style('opacity','0')
+		.remove();
+
 
 	//The category groups
 	var category = svg.selectAll("g.category")
@@ -97,10 +138,9 @@ DEMBarChart.prototype.draw = function (data) {
 	var rect = category.selectAll("rect")
 		.data(function(d) { return d; }, function(d) { return d.x; })
 
-
 	rect.enter().append("svg:rect")
-		.attr("x", function(d) { return x(d.x); })
-		.attr("width", x.rangeBand())
+		.attr("x", function(d) { return x(d.x) + (x.rangeBand()*(1-self.bar_width))/2; })
+		.attr("width", x.rangeBand()*self.bar_width)
 		.attr("y", 0)
 		.attr("height", 0)
 		.style('opacity','0');
@@ -108,10 +148,10 @@ DEMBarChart.prototype.draw = function (data) {
 	rect.transition()
 		.duration(1000)
 		.delay(!rect.exit().empty()*200)
-		.attr("x", function(d) { return x(d.x); })
+		.attr("x", function(d) { return x(d.x) + (x.rangeBand()*(1-self.bar_width))/2; })
 		.attr("y", function(d) { return - y(d.y0) - y(d.y); })
 		.attr("height", function(d) { return y(d.y); })
-		.attr("width", x.rangeBand())
+		.attr("width", x.rangeBand() *self.bar_width)
 		.style('opacity','1');
 
 	rect.exit().transition()
@@ -151,7 +191,7 @@ DEMBarChart.prototype.draw = function (data) {
 			return function(t) { 
 				this.textContent = self.amountText(d, i(t));
 			}
-		});
+		})
 
 	amounts.exit().transition()
 		.duration(200)
@@ -159,48 +199,6 @@ DEMBarChart.prototype.draw = function (data) {
 		.style('opacity','0')
 		.remove();
 	
-	//The average lines
-	var lines = svg.selectAll("path")
-		.data(data, function(d) { return d.label; });
-
-	if ($('.average-line').length == 0) { 
-		lines.enter().append('svg:path')
-			.attr('class', 'average-line')
-	}
-
-	lines.transition()
-		.duration(1000)
-		.attr('d', self.line(data))
-		.style('opacity','1')
-
-	lines.exit().transition()
-		.duration(200)
-		.style('opacity','0')
-		.remove();
-
-	var dots = svg.selectAll(".dot")
-		.data(data, function(d) { return d.label; })
-	
-	dots.enter().append('circle')
-		.attr('class', 'dot')
-		.attr("cx", self.line.x())
-	    .attr("cy", self.line.y())
-		.attr("r", 6.0)
-		.on("mouseover", function(d, e) { gf.renderers.GraphImage.showTooltip('Average: $'+format(d.average)); gf.renderers.GraphImage.mousemove(d3.event); })
-		.on("mouseout", function() { gf.renderers.GraphImage.hideTooltip(); })
-
-	dots.transition()
-		.duration(1000)
-		.attr("cx", self.line.x())
-	    .attr("cy", self.line.y())
-		.attr("average", function(d) { return d.average; })
-
-	dots.exit().transition()
-		.duration(200)
-		.style('opacity','0')
-		.remove();
-	
-
 	//The year labels below the bars
 	var years = svg.selectAll('.year')
 		.data(data, function(d) { return d.label; })
@@ -220,6 +218,7 @@ DEMBarChart.prototype.draw = function (data) {
 		.duration(1000)
 		.attr('x',function(d, i) { return x(d.label) + x.rangeBand()/2; })
 		.style('opacity','1')
+		.style('font-weight', function(d) { return self.getWeight(d.label)});
 
 	years.exit().transition()
 		.duration(200)
@@ -250,7 +249,8 @@ DEMBarChart.prototype.draw = function (data) {
 			return function(t) { 
 				this.textContent = '$' + commas(Math.floor(i(t)));
 			}
-		});
+		})
+		.style('font-weight', function(d) { return self.getWeight(d.label)});
 
 	totals.exit().transition()
 		.duration(200)
@@ -266,9 +266,9 @@ DEMBarChart.prototype.resize = function() {
 
 	svg.selectAll('rect')
 		.attr("height", function(d) { return y(d.y); })
-		.attr("width", x.rangeBand())
+		.attr("width", x.rangeBand() *self.bar_width)
 		.attr("y", function(d) { return - y(d.y0) - y(d.y); })
-		.attr("x", function(d) { return x(d.x); })
+		.attr("x", function(d) { return x(d.x) + (x.rangeBand()*(1-self.bar_width))/2; })
 
 	svg.selectAll('.amount')
 		.attr('x',function(d) { return x(d.x) + (x.rangeBand() / 2); })
@@ -277,12 +277,11 @@ DEMBarChart.prototype.resize = function() {
 		.text(function(d) { return self.amountText(d, d.y); })
 	
 	svg.selectAll('.average-line')
-		.attr('d', self.line(self.data))
+		.attr('x1', function(d) { return x(d.label); })
+		.attr('x2', function(d) { return x(d.label) + x.rangeBand(); })
+		.attr("y1", function(d) { return - y(d.average); })
+		.attr("y2", function(d) { return - y(d.average); })
 
-	svg.selectAll(".dot")
-		.attr("cx", self.line.x())
-	    .attr("cy", self.line.y())
-	
 	svg.selectAll('.year')
 		.attr('x',function(d, i) { return x(d.label) + x.rangeBand()/2; })
 		.attr('width',function() { return x.rangeBand(); })
