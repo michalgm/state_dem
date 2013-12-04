@@ -280,6 +280,11 @@ function updateInfocardData(node) {
 	var url = (remotecache ? remotecache + '../' : '')+'request.php';
 	$.getJSON(url, {'method': 'chartData','type': node.type, 'id': node.id, 'state': gf.data.properties.state, 'chamber': gf.data.properties.chamber}, function(data, status, jxqhr) {
 		barChart.draw(data.contributionsByYear);
+		var total = 0;
+		$.each(data.contributionsByYear, function(i, c) {
+			total += c.value;
+		});
+		$('#node-total').html('Total: $' + commas(total));
 	});
 }
 
@@ -309,7 +314,6 @@ function toggleInfocard(node) {
 				$('#node-amount').html('Contributed $'+commas(Math.floor(node.value))+' to the '+gf.data.properties.state+' '+ $('#chamber :selected').text() +' in '+gf.data.properties.cycle);
 				break;
 		}
-		$('#node-total').html('Total: $' + commas(node.lifetime_total));
 		var url = (remotecache ? remotecache + '../' : '')+'request.php';
 		$('#node-csvlink a').attr('href',url+'?method=csv&type='+node.type+'&id='+node.id+'&state='+gf.data.properties.state+'&chamber='+gf.data.properties.chamber);
 
