@@ -93,12 +93,23 @@ DEMBarChart.prototype.draw = function (data) {
 		svg.append('g').attr('class', 'averages');
 	}
 	var averages = svg.selectAll('.averages');
-
-	var lines = averages.selectAll("line")
+	
+	var average_rects = averages.selectAll('rect')
 		.data(data, function(d) { return d.label; })
-		///.data(function(d) { return d; }, function(d) { return d.x; });
+		
+	var lines = averages.selectAll(".average-line")
+		.data(data, function(d) { return d.label; })
 
-	//if ($('.average-line').length == 0) { 
+	average_rects.enter().append('rect')
+		.attr('x', function(d) { return x(d.label); })
+		.attr('y', 0)
+		.attr('width', function(d) { return x.rangeBand(); })
+		.attr('height', '5')
+		.attr('fill', '#fff')
+		.on("mouseover", function(d, e) { gf.renderers.GraphImage.showTooltip('Average: $'+format(d.average)); gf.renderers.GraphImage.mousemove(d3.event); })
+		.on("mouseout", function() { gf.renderers.GraphImage.hideTooltip(); })
+		.on("mousemove", function() { gf.renderers.GraphImage.mousemove(d3.event); })
+
 	lines.enter().append('line')
 		.attr('class', 'average-line')
 		.style('opacity','0')
@@ -108,7 +119,13 @@ DEMBarChart.prototype.draw = function (data) {
 		.attr("y2", 0)
 		.on("mouseover", function(d, e) { gf.renderers.GraphImage.showTooltip('Average: $'+format(d.average)); gf.renderers.GraphImage.mousemove(d3.event); })
 		.on("mouseout", function() { gf.renderers.GraphImage.hideTooltip(); })
-	//}
+		.on("mousemove", function() { gf.renderers.GraphImage.mousemove(d3.event); })
+
+	average_rects.transition()
+		.duration(1000)
+		.attr('x', function(d) { return x(d.label); })
+		.attr('y', function(d) { return - y(d.average) - 2.5; })
+		.attr('width', function(d) { return x.rangeBand(); })
 
 	lines.transition()
 		.duration(1000)
@@ -117,6 +134,11 @@ DEMBarChart.prototype.draw = function (data) {
 		.attr("y1", function(d) { return - y(d.average); })
 		.attr("y2", function(d) { return - y(d.average); })
 		.style('opacity','1')
+
+	average_rects.exit().transition()
+		.duration(200)
+		.style('opacity','0')
+		.remove();
 
 	lines.exit().transition()
 		.duration(200)
@@ -135,10 +157,11 @@ DEMBarChart.prototype.draw = function (data) {
 		.attr('class', function(d) { return 'category '+d[0].label;})
 
 	//The filled rectangles
-	var rect = category.selectAll("rect")
+	var rect = category.selectAll(".barrect")
 		.data(function(d) { return d; }, function(d) { return d.x; })
 
 	rect.enter().append("svg:rect")
+		.attr('class', 'barrect')
 		.attr("x", function(d) { return x(d.x) + (x.rangeBand()*(1-self.bar_width))/2; })
 		.attr("width", x.rangeBand()*self.bar_width)
 		.attr("y", 0)
@@ -264,7 +287,7 @@ DEMBarChart.prototype.resize = function() {
 	var self = this;
 	var x = self.x, y=self.y, svg = self.svg;
 
-	svg.selectAll('rect')
+	svg.selectAll('.barrect')
 		.attr("height", function(d) { return y(d.y); })
 		.attr("width", x.rangeBand() *self.bar_width)
 		.attr("y", function(d) { return - y(d.y0) - y(d.y); })
@@ -276,6 +299,11 @@ DEMBarChart.prototype.resize = function() {
 		.attr('width',function() { return x.rangeBand(); })
 		.text(function(d) { return self.amountText(d, d.y); })
 	
+	svg.selectAll('.averages rect')
+		.attr('x', function(d) { return x(d.label); })
+		.attr('y', function(d) { return - y(d.average) - 2.5; })
+		.attr('width', function(d) { return x.rangeBand(); })
+		
 	svg.selectAll('.average-line')
 		.attr('x1', function(d) { return x(d.label); })
 		.attr('x2', function(d) { return x(d.label) + x.rangeBand(); })
