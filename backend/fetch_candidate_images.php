@@ -1,7 +1,7 @@
 <?php
 include_once('../config.php');
 $force = $argv[1];
-$candidates = dbLookupArray("select nimsp_candidate_id,url, photo_url, photo_url2, state, votesmart_id from legislators where (photo_url != '' || votesmart_id != '') and image = '' and nimsp_candidate_id != 0");
+$candidates = dbLookupArray("select nimsp_candidate_id,url, photo_url, photo_url2, state, votesmart_id from legislators where (photo_url != '' || votesmart_id != '') and ( image = '' or image is null)  and nimsp_candidate_id != 0");
 $bad_urls = array(); 
 print "Need to fetch ".count($candidates)." missing candidate images\n";
 print "V=Votesmart, 1=photo_url,2=photo_url2, C=colorado, .=not found\n";
@@ -45,14 +45,14 @@ if ($bad_urls) {
 	print_r($bad_urls);
 }
 
-$candidates = dbLookupArray("select nimsp_candidate_id,url, full_name, photo_url, photo_url2, state, votesmart_id from governors where (photo_url != '' || votesmart_id != '') and image = '' and nimsp_candidate_id != 0");
+/*$candidates = dbLookupArray("select nimsp_candidate_id,url, full_name, photo_url, photo_url2, state, votesmart_id from governors where (photo_url != '' || votesmart_id != '') and image = '' and nimsp_candidate_id != 0");
 foreach ($candidates as $leg) { 
 	if ($leg['nimsp_candidate_id']) { 
 		if (! copyImage($leg['photo_url'], $leg['nimsp_candidate_id'])) {
 			print "missing image for $leg[nimsp_candidate_id] ($leg[full_name])\n";
 		}
 	}
-}
+}*/
 
 print "creating thumbnails and copying to webdir\n";
 include "../oc_utils.php";
@@ -94,7 +94,7 @@ function copyImage($url, $id) {
 	}
 	if ($photo) { 
 		dbwrite("update legislators set image='$photo' where nimsp_candidate_id = '$id'");
-		dbwrite("update governors set image='$photo' where nimsp_candidate_id = '$id'");
+//		dbwrite("update governors set image='$photo' where nimsp_candidate_id = '$id'");
 		return true;
 	} else {
 		return false;
