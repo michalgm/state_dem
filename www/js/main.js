@@ -136,62 +136,12 @@ $.extend(NodeViz.prototype, {
 			return url+'?method=csv&type=chamber&state='+gf.data.properties.state+'&chamber='+gf.data.properties.chamber+'&cycle='+gf.data.properties.cycle;
 		}).delay(1000).fadeIn();
 
-		gf.nodeList = $.map(gf.data.nodes, function(n) { 
-			return {label: n.title, value: n.id, search_label: n.title}
-		});
-		$("#node_search").keyup(function(e) { //don't submit the form when someone hits enter in search field
-			if ($("#node_search").val() == '') {
-				$('#no_results_found').hide();
-			}
-		});
-		$("#node_search").keypress(function(e) { //don't submit the form when someone hits enter in search field
-			var code = (e.keyCode ? e.keyCode : e.which);
-			if(code == 13) { //Enter keycode
-				if ($("#node_search").val().length) { 
-					$('#node_search').autocomplete('search');
-					$('#node_search').autocomplete('close');
-				}
-				return false;
-			}
-			if ($("#node_search").val() == '') { 
-				$('#no_results_found').hide();
-			}
-		});
-		$('#node_search').autocomplete({
-			source: gf.nodeList, 
-			autoFocus: true, 
-			appendTo:'#node_search_list', 
-			select: function(e, ui) {
-				$('#node_search').val(ui.item.search_label);
-				selectNode(gf.data.nodes[ui.item.value]);
-				$('#node_search').autocomplete('close');
-				return false;
-			},
-			response: function(e, ui) { 
-				if (ui.content.length == 0 && $("#node_search").val().length ) {
-					$('#no_results_found').show();
-				} else {
-					$('#no_results_found').hide();
-				}	
-			}
-		})
-		.data("ui-autocomplete")._renderItem = function(ul, item) {
-			var n = gf.data.nodes[item.value];
-			var label;
-			var li = $("<li>");
-			if(n.type == 'candidates') {
-				li.addClass('politician');
-				label = n.title+" <span class='"+n.party+" searchdetails'>("+n.party+' '+n.district+")</span>";
-			} else {
-				li.addClass('company');
-				label = "<span>"+n.title+" <span class='"+n.sitecode+" searchdetails'>("+toWordCase(n.sitecode)+")</span></span>";
-			}
-			return li
-			.append( "<a>" + label+ "</a>" )
-			.appendTo( ul );
-		};
+		setupAutocomplete(); 
+
 		if (current_network && gf.data.nodes[current_network]) { 
 			$('#'+current_network).click();
+		} else if($('#chamber').val() == 'state:governor') {
+			$('#'+gf.data.nodetypesindex.candidates[0]).click();
 		}
 	},
 });
@@ -469,4 +419,61 @@ function updateCycle() {
 		$('#cycle').show();
 		$('#cycle').val(current_year);
 	}
+}
+
+function setupAutocomplete() {
+	gf.nodeList = $.map(gf.data.nodes, function(n) { 
+		return {label: n.title, value: n.id, search_label: n.title}
+	});
+	$("#node_search").keyup(function(e) { //don't submit the form when someone hits enter in search field
+		if ($("#node_search").val() == '') {
+			$('#no_results_found').hide();
+		}
+	});
+	$("#node_search").keypress(function(e) { //don't submit the form when someone hits enter in search field
+		var code = (e.keyCode ? e.keyCode : e.which);
+		if(code == 13) { //Enter keycode
+			if ($("#node_search").val().length) { 
+				$('#node_search').autocomplete('search');
+				$('#node_search').autocomplete('close');
+			}
+			return false;
+		}
+		if ($("#node_search").val() == '') { 
+			$('#no_results_found').hide();
+		}
+	});
+	$('#node_search').autocomplete({
+		source: gf.nodeList, 
+		autoFocus: true, 
+		appendTo:'#node_search_list', 
+		select: function(e, ui) {
+			$('#node_search').val(ui.item.search_label);
+			selectNode(gf.data.nodes[ui.item.value]);
+			$('#node_search').autocomplete('close');
+			return false;
+		},
+		response: function(e, ui) { 
+			if (ui.content.length == 0 && $("#node_search").val().length ) {
+				$('#no_results_found').show();
+			} else {
+				$('#no_results_found').hide();
+			}	
+		}
+	})
+	.data("ui-autocomplete")._renderItem = function(ul, item) {
+		var n = gf.data.nodes[item.value];
+		var label;
+		var li = $("<li>");
+		if(n.type == 'candidates') {
+			li.addClass('politician');
+			label = n.title+" <span class='"+n.party+" searchdetails'>("+n.party+' '+n.district+")</span>";
+		} else {
+			li.addClass('company');
+			label = "<span>"+n.title+" <span class='"+n.sitecode+" searchdetails'>("+toWordCase(n.sitecode)+")</span></span>";
+		}
+		return li
+		.append( "<a>" + label+ "</a>" )
+		.appendTo( ul );
+	};
 }
