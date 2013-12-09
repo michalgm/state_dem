@@ -81,7 +81,7 @@ class StateDEM extends Graph {
 			$canids = arrayToInString(explode(',', $props['candidate_ids']));
 			$where = "a.imsp_candidate_id in ($canids)";
 		}
-		$query = "select imsp_candidate_id as id, a.state, a.term, a.district, a.party, full_name candidate_name, image, lifetime_total, twitter, facebook, action_link from legislator_terms a join legislators b on imsp_candidate_id = nimsp_candidate_id left join action_links on entity_id = nimsp_candidate_id and company=0 where $where";
+		$query = "select imsp_candidate_id as id, a.state, a.term, a.district, a.party, full_name candidate_name, concat(last_name, ', ', first_name) as lastfirst, image, lifetime_total, twitter, facebook, action_link from legislator_terms a join legislators b on imsp_candidate_id = nimsp_candidate_id left join action_links on entity_id = nimsp_candidate_id and company=0 where $where";
 		writelog($query);
 		$this->addquery('fetch_candidates', $query);
 		foreach(dbLookupArray($query) as $can) {

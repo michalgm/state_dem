@@ -90,6 +90,10 @@ function initGraph() {
 		},
 		list: {
 			listdiv: 'lists',
+			sort: {
+				'candidates': [{label: 'Name', sort_values: ['lastfirst']}, {label:'Amount', sort_values:['value']}], 
+				'donors': [{label: 'Name', sort_values: ['title']}, {label:'Amount', sort_values:['value']}], 
+			},
 			scrollList: 1
 		},
 		functions: {
@@ -137,6 +141,10 @@ $.extend(NodeViz.prototype, {
 		}).delay(1000).fadeIn();
 
 		setupAutocomplete(); 
+
+		//FIXME -this should be done with css
+		$('.node_search_container').hide();
+		$('.nodelist_header').show();
 
 		if (current_network && gf.data.nodes[current_network]) { 
 			$('#'+current_network).click();
