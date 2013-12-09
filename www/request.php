@@ -49,8 +49,10 @@ switch($_REQUEST['method']) {
 		if ($debug) { 
 			print '<pre>'; 
 		} else {
-		header('Content-type: text/csv');
-		header("Content-disposition: attachment; filename=\"$filename.csv\"");
+			header('Content-Encoding: UTF-8');
+			header('Content-type: text/csv; charset=UTF-8');
+			header("Content-disposition: attachment; filename=\"$filename.csv\"");
+			echo "\xEF\xBB\xBF"; // UTF-8 BOM
 		}
 		print $csv;
 		break;
