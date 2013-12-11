@@ -24,7 +24,7 @@ $.Class("GraphImage", {}, {
 		this.NodeViz.appendParam('graphHeight', this.graphDimensions.height);
 	},
 	setOffsets: function() { 
-		if ($('#image')) {
+		if ($('#image') && $('#image').offset()) {
 			this.offsetX = $('#image').offset().left || 0;
 			this.offsetY = $('#image').offset().top;
 		}
