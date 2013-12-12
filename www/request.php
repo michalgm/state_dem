@@ -35,7 +35,6 @@ switch($_REQUEST['method']) {
 		} else {
 			$query = "SELECT transaction_id, full_name as Legislator, recipient_state as State, if(c.seat='state:lower', s.lower_name, 'Senate') as Chamber, c.District as District, t.Party, contributor_name as Contributor, if(Contributor_type = 'C', 'PAC', 'Individual') as 'Contributor Type', companies.name as Company, if(c.sitecode = 'oil', 'Oil', if(c.sitecode='coal', 'Coal', 'Misc')) as 'Company Industry', date_format(Date, '%m/%d/%Y') as Date, Cycle, Amount FROM contributions_dem c join companies on company_id = id join legislators l on recipient_ext_id = nimsp_candidate_id join legislator_terms t on recipient_ext_id = imsp_candidate_id and cycle = term join states s on recipient_state = s.state where $where order by c.date asc";
 		}
-		print $query;
 		$contribs = dbLookupArray($query, 1);
 		$csv = array2CSV(array_keys(reset($contribs)));
 		foreach($contribs as $contrib) { 
