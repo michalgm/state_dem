@@ -84,17 +84,6 @@ print "Setting up Legislator Totals\n";
 dbwrite("update legislators set lifetime_total = 0, lifetime_oil = 0, lifetime_coal = 0, lifetime_carbon = 0");
 dbwrite("update legislators a join (select recipient_ext_id, sum(amount) as total, sum(if(sitecode='oil', amount, 0)) as oil, sum(if(sitecode='coal', amount, 0)) as coal, sum(if(sitecode='carbon', amount, 0)) as carbon from contributions_dem a join legislator_terms on recipient_ext_id = imsp_candidate_id and term = cycle group by recipient_ext_id) b on recipient_ext_id = nimsp_candidate_id set lifetime_total = total, lifetime_oil = oil, lifetime_coal=coal, lifetime_carbon = carbon");
 
-print "Testing data accuracy\n";
-$bad = fetchValue("select count(*) from legislators a join (select graphname, toId, sum(value) as val from edgestore a join (SELECT max(tag) as tag FROM edgestore e) b using (tag) group by toId) b on toId = nimsp_candidate_id where abs(val - lifetime_total) >1");
-if ($bad) { 
-	print "\n\n
-		   *BAD NEWS!*
-	Verification query failed:
-	select count(*) from legislators a join (select graphname, toId, sum(value) as val from edgestore a join (SELECT max(tag) as tag FROM edgestore e) b using (tag) group by toId) b on toId = nimsp_candidate_id where abs(val - lifetime_total) >1\n
-	Aborting...\n";
-	exit;
-}
-
 print "Cleaning company names\n";
 $names = fetchCol("select name from oilchange.companies where cast(name as binary) rlike '^[^a-z]*$'");
 foreach ($names as $name) {

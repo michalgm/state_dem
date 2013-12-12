@@ -99,13 +99,21 @@ class StateDEM extends Graph {
 
 		$props = $this->data['properties'];
 		$cans = $this->getNodesByType('candidates');
-		$cycle = ($props['candidate_ids'] || $props['cycle'] == 'all') ? " cycle between $min_cycle and $max_cycle and a.seat='$props[chamber]' and " : "cycle='$props[cycle]' and";
+		$cycle = "cycle = '$props[cycle]' and ";
+		if ($props['cycle'] == 'all') { 
+			$cycle = " cycle between $min_cycle and $max_cycle and ";
+			//if ($props['chamber'] != 'state:governor') { 
+			//	$cycle .= "a.seat='$props[chamber]' and ";
+			//}
+		}
+			//($props['candidate_ids'] || ($props['cycle'] == 'all' && $props['chamber'] != 'state:governor')) ? " cycle between $min_cycle and $max_cycle and a.seat='$props[chamber]' and " : "cycle='$props[cycle]' and";
 		$companies = $props['company_ids'] ?  "company_id in (".arrayToInString(explode(',', $props['company_ids'])).") and" : "";
-		$trim_terms = $props['cycle'] == 'all' ? " join legislator_terms l on l.seat = a.seat and recipient_ext_id = imsp_candidate_id and cycle = term and l.seat='$props[chamber]' " : "";
+		$trim_terms = $props['cycle'] == 'all' ? " join legislator_terms l on recipient_ext_id = imsp_candidate_id and cycle = term and l.seat='$props[chamber]' " : "";
 
 		$basicContribQuery = "
 			select transaction_id, company_id, c.name as company_name, sum(amount) as amount, recipient_ext_id, b.name as industry,  c.image_name as image, d.dem_type as sitecode, contributor_type, (d.coal_related + d.oil_related + d.carbon_related) as lifetime_total, action_link from contributions_dem a join catcodes b on code = contributor_category join companies c on c.id = a.company_id join companies_state_details d using(company_id) $trim_terms left join action_links on entity_id = company_id and company = 1 where $cycle $companies recipient_ext_id in (".arrayToInString($cans, 1).") and  company_name != '' group by a.company_id, recipient_name order by sum(amount) desc 
 			";
+
 		$this->addquery('fetch_donors', $basicContribQuery);
 		writelog('before donor query');
 		$contribs = dbLookupArray($basicContribQuery);

@@ -11,11 +11,11 @@ foreach(array("candidates","companies") as $type) {
 	$category = $type == 'candidates' ? 'sitecode' : 'party';
 	$entity_id = $type == 'candidates' ? 'imsp_candidate_id' : "company_id";
 	$category_table = $type == 'candidates' ? "contributions_dem" : "legislator_terms";	
-	$entity_table = $type == 'candidates' ? "legislator_terms t" : " (select distinct company_id, seat, recipient_state as state from contributions_dem) t join (select year as term from years) y ";
-	$category_lookup = "if($category='' or $category='I' or $category='N', 'I', $category)";
+	$entity_table = $type == 'candidates' ? "legislator_terms t" : " (select distinct company_id, recipient_state as state, b.seat from contributions_dem a join (select distinct seat from legislator_terms) b ) t join (select year as term from years) y ";
+	$category_lookup = "if($category='' or $category='I' or $category='N', 'INDEPENDENT', $category)";
 
-	$populate_query = "select 'year_report_$type', term as label, 0 as value, concat($entity_id,t.state,t.seat) as entity_id, category as category from $entity_table  join (select distinct $category_lookup as category from $category_table) b where term  between $min_cycle and $max_cycle ";
-	$update_query = "select 'year_report_$type' as report, term as label, sum(if(amount, amount, 0)) as value, concat($entity_id, t.state,t.seat) as entity_id, $category_lookup as category
+	$populate_query = "select 'year_report_$type', term as label, 0 as value, concat($entity_id,'|',t.state,'|',t.seat) as entity_id, category as category from $entity_table  join (select distinct $category_lookup as category from $category_table) b where term  between $min_cycle and $max_cycle ";
+	$update_query = "select 'year_report_$type' as report, term as label, sum(if(amount, amount, 0)) as value, concat($entity_id, '|',t.state,'|',t.seat) as entity_id, $category_lookup as category
 		from legislator_terms  t 
 		join contributions_dem c on recipient_ext_id = imsp_candidate_id and term = cycle and c.recipient_state = t.state where t.term between $min_cycle and $max_cycle
 		group by entity_id, term, category";
@@ -26,8 +26,8 @@ foreach(array("candidates","companies") as $type) {
 	$company_count = $type == 'candidates' ? '' : ", count(distinct company_id) as count ";
 	$seat_join = $type == 'candidates' ? ', seat' : "";
 
-	$populate_query = "select 'congress_average_$type', year as label, 0 as value, concat(state, seat) as entity_id, '' as category from states a join years b join (select distinct seat from legislator_terms) c";
-	$update_query = "select 'congress_average_$type' as report, year as label, amount/count as value, concat(state, seat) as entity_id, '' as category from 
+	$populate_query = "select 'congress_average_$type', year as label, 0 as value, concat(state, '|',seat) as entity_id, '' as category from states a join years b join (select distinct seat from legislator_terms) c";
+	$update_query = "select 'congress_average_$type' as report, year as label, amount/count as value, concat(state, '|',seat) as entity_id, '' as category from 
 		states a join years b join $person_count
 		(select sum(amount) as amount , seat, cycle as year, recipient_state as state $company_count from contributions_dem c group by cycle, seat, recipient_state) d using (state, year $seat_join)";
 	update_reports($populate_query, $update_query);
@@ -37,8 +37,8 @@ foreach(array("candidates","companies") as $type) {
 	$company_count = $type == 'candidates' ? '' : ", count(distinct company_id) as count ";
 	$seat_join = $type == 'candidates' ? ', seat' : "";
 
-	$populate_query = "select 'congress_average_$type', year as label, 0 as value, concat(state, 'state:all') as entity_id, '' as category from states a join years b";
-	$update_query = "select 'congress_average_$type' as report, year as label, amount/count as value, concat(state, 'state:all') as entity_id, '' as category from 
+	$populate_query = "select 'congress_average_$type', year as label, 0 as value, concat(state, '|','state:all') as entity_id, '' as category from states a join years b";
+	$update_query = "select 'congress_average_$type' as report, year as label, amount/count as value, concat(state, '|','state:all') as entity_id, '' as category from 
 		states a join years b join $person_count
 		(select sum(amount) as amount , cycle as year, recipient_state as state $company_count from contributions_dem c where seat in ('state:upper', 'state:lower') group by cycle, recipient_state) d using (state, year)";
 	update_reports($populate_query, $update_query);
@@ -47,7 +47,7 @@ dbwrite("drop table if exists reports_temp");
 
 
 function update_reports($populate_query, $update_query) {
-	dbwrite("insert into reports $populate_query");
+	dbwrite("insert ignore into reports $populate_query");
 	dbwrite("delete from reports_temp");
 	dbwrite("insert into reports_temp $update_query");
 	dbwrite("update reports a join reports_temp b using(report, label, entity_id, category) set a.value = b.value ");

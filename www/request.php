@@ -22,18 +22,21 @@ switch($_REQUEST['method']) {
 		break;
 	case 'csv':
 		$csv = "";
-
+		$query = "";
 		if ($_REQUEST['type'] == 'chamber') { 
-			$contribs = dbLookupArray("select imsp_candidate_id, term as Cycle, full_name as Name, if(t.seat='state:lower', s.lower_name, 'Senate') as Chamber, t.Party, t.District, concat('http://states.dirtyenergymoney.com/?',t.state, '/', if(t.seat='state:lower', s.lower_name, 'Senate'), '/', term, '/', imsp_candidate_id) as 'Profile Link', Lifetime_total as 'Lifetime Total', Lifetime_Oil as 'Lifetime Oil', Lifetime_Coal as 'Lifetime Coal', Lifetime_Carbon as 'Lifetime Misc',
+			$cycle_where = $cycle == 'all' ? '' : " and term = '$cycle'";
+			$query = "select imsp_candidate_id, term as Cycle, full_name as Name, if(t.seat='state:lower', s.lower_name, 'Senate') as Chamber, t.Party, t.District, concat('http://states.dirtyenergymoney.com/?',t.state, '/', if(t.seat='state:lower', s.lower_name, 'Senate'), '/', term, '/', imsp_candidate_id) as 'Profile Link', Lifetime_total as 'Lifetime Total', Lifetime_Oil as 'Lifetime Oil', Lifetime_Coal as 'Lifetime Coal', Lifetime_Carbon as 'Lifetime Misc',
 				round(sum(if(sitecode = 'oil', amount, 0))) as '$cycle Oil',
 				round(sum(if(sitecode = 'coal', amount, 0))) as '$cycle Coal',
 				round(sum(if(sitecode = 'carbon', amount, 0))) as '$cycle Misc' 
 				from legislator_terms t join legislators l on nimsp_candidate_id = imsp_candidate_id join states s on t.state = s.state
-				left join contributions_dem a on  recipient_ext_id = nimsp_candidate_id and t.state = recipient_state and t.term = cycle and cycle = '$cycle' and recipient_state = '$state' and a.seat = '$chamber'
-				where t.state = '$state' and term = '$cycle' and t.seat='$chamber' and s.state = '$state' group by imsp_candidate_id order by cast(substring(t.District, 4) as unsigned)", 1);
+				left join contributions_dem a on  recipient_ext_id = nimsp_candidate_id and t.state = recipient_state and t.term = cycle and recipient_state = '$state' and a.seat = '$chamber'
+				where t.state = '$state' $cycle_where and t.seat='$chamber' and s.state = '$state' group by imsp_candidate_id order by cast(substring(t.District, 4) as unsigned)";
 		} else {
-			$contribs = dbLookupArray("SELECT transaction_id, full_name as Legislator, recipient_state as State, if(c.seat='state:lower', s.lower_name, 'Senate') as Chamber, c.District as District, t.Party, contributor_name as Contributor, if(Contributor_type = 'C', 'PAC', 'Individual') as 'Contributor Type', companies.name as Company, if(c.sitecode = 'oil', 'Oil', if(c.sitecode='coal', 'Coal', 'Misc')) as 'Company Industry', date_format(Date, '%m/%d/%Y') as Date, Cycle, Amount FROM contributions_dem c join companies on company_id = id join legislators l on recipient_ext_id = nimsp_candidate_id join legislator_terms t on recipient_ext_id = imsp_candidate_id and cycle = term join states s on recipient_state = s.state where $where order by c.date asc", 1);
+			$query = "SELECT transaction_id, full_name as Legislator, recipient_state as State, if(c.seat='state:lower', s.lower_name, 'Senate') as Chamber, c.District as District, t.Party, contributor_name as Contributor, if(Contributor_type = 'C', 'PAC', 'Individual') as 'Contributor Type', companies.name as Company, if(c.sitecode = 'oil', 'Oil', if(c.sitecode='coal', 'Coal', 'Misc')) as 'Company Industry', date_format(Date, '%m/%d/%Y') as Date, Cycle, Amount FROM contributions_dem c join companies on company_id = id join legislators l on recipient_ext_id = nimsp_candidate_id join legislator_terms t on recipient_ext_id = imsp_candidate_id and cycle = term join states s on recipient_state = s.state where $where order by c.date asc";
 		}
+		print $query;
+		$contribs = dbLookupArray($query, 1);
 		$csv = array2CSV(array_keys(reset($contribs)));
 		foreach($contribs as $contrib) { 
 			$csv .= array2CSV($contrib);
@@ -63,10 +66,10 @@ function getContributionsByYear() {
 	$type = dbEscape($_REQUEST['type']);
 	$type = $type == 'donors' ? 'companies' : $type;
 
-	$entity_where = $chamber == 'state:all' ? " entity_id = '$id$state"."state:upper' or entity_id = '$id$state"."state:lower' " : " entity_id = '$id$state$chamber' ";
+	$entity_where = $chamber == 'state:all' ? " entity_id = '$id|$state|state:upper' or entity_id = '$id|$state|state:lower' " : " entity_id = '$id|$state|$chamber' ";
 	$results = dbLookupArray("select concat(label, category) as id, label, category, value from reports where ($entity_where) and report = 'year_report_$type' order by label");
 
-	$averages = dbLookupArray("select label, value from reports where entity_id='$state$chamber' and report = 'congress_average_$type' order by label");
+	$averages = dbLookupArray("select label, value from reports where entity_id='$state|$chamber' and report = 'congress_average_$type' order by label");
 
 	$data = array();
 	foreach($results as $result) { 
@@ -112,9 +115,9 @@ function getAveragesByYear() {
 	global $id, $min_cycle, $chamber, $state;
 	$type = dbEscape($_REQUEST['type']);
 	$type = $type == 'donors' ? 'companies' : $type;
-	$results = dbLookupArray("select label, value from reports where entity_id='$state$chamber' and report = 'congress_average_$type'");
+	$results = dbLookupArray("select label, value from reports where entity_id='$state|$chamber' and report = 'congress_average_$type'");
 	return array_values($results);
-	print "select label, value from reports where entity_id='$state$chamber' and report = 'congress_average_$type'";
+	print "select label, value from reports where entity_id='$state|$chamber' and report = 'congress_average_$type'";
 	$data = array();
 
 	print_r($results);
