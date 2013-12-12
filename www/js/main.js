@@ -91,8 +91,8 @@ function initGraph() {
 		list: {
 			listdiv: 'lists',
 			sort: {
-				'candidates': [{label: 'Name', sort_values: ['lastfirst']}, {label:'Amount', sort_values:['value']}], 
-				'donors': [{label: 'Name', sort_values: ['title']}, {label:'Amount', sort_values:['value']}], 
+				'candidates': [{label: 'Name', sort_values: ['lastfirst']}, {label:'Amount', sort_values:['value'], default:true, desc:true}], 
+				'donors': [{label: 'Name', sort_values: ['title']}, {label:'Amount', sort_values:['value'], default:true, desc:true}], 
 			},
 			scrollList: 1
 		},
