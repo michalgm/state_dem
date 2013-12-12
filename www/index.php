@@ -44,6 +44,8 @@
 
 		#graphoptions { text-align: left !important; }
 		#options_container { overflow: hidden; display: inline-block; margin-bottom: -3px;}
+		#loading { padding-top: 0px; }
+		#loading .loading { text-align: center; position: absolute; top: 0px; left: 0px; right: 0px; bottom: 0px; margin: auto !important; height: 0px; }
 	</style>
 </head>
 <body>
