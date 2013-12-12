@@ -18,16 +18,16 @@
 		#svg_overlay path, #svg_overlay .edge polygon { stroke: none !important; fill: #9933ff !important; }		
 		#svg_overlay .nhighlight, #svg_overlay .selected polygon.nhighlight, #svg_overlay .selected ellipse.nhighlight { fill: #ccbbdd !important; fill-opacity: 0.5 !important; }
 
-		.REP, .R {color:#c66;}
-		.DEM, .D, .DFL {color:#69c;}
-		.IND, .I { color: #cc3; }
+		.REP, .R, .REPUBLICAN {color:#c66;}
+		.DEM, .D, .DFL, .DEMOCRAT {color:#69c;}
+		.IND, .I, .INDEPENDENT { color: #cc3; }
 		.coal { color: rgb(149,141,99);}
 		.oil { color: rgb(109,143,157); }
 		.carbon { color: rgb(110,110,110); }
 	
-		svg .REP, svg .R {fill:#c66;}
-		svg .DEM, svg .D, .DFL {fill:#69c;}
-		svg .IND, svg .I { fill: #cc3; }
+		svg .REP, svg .R, .REPUBLICAN {fill:#c66;}
+		svg .DEM, svg .D, .DFL, .DEMOCRAT {fill:#69c;}
+		svg .IND, svg .I, .INDEPENDENT { fill: #cc3; }
 		svg .coal { fill: rgb(149,141,99);}
 		svg .oil { fill: rgb(109,143,157); }
 		svg .carbon { fill: rgb(110,110,110); }
