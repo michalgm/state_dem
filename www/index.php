@@ -54,7 +54,7 @@
 
 		<div id="masthead"><div class="container">
 			<h1 class="site-title"><a href="/">Dirty Energy Money</a></h1>
-			<p class="site-tagline">is an interactive tool that tracks the flow of oil, gas and coal industry contributions to your state congress.</p>
+			<p class="site-tagline">is an interactive tool that tracks the flow of oil, gas and coal industry contributions to your state legislature.</p>
 		</div></div>
 
 		<div id="intro_screen" class="container" style='display: none;'>
@@ -118,12 +118,12 @@
 
 				<h3>Where did you get the data?</h3>
 
-				<p>Anybody who runs for office is required to file reports with their state elections commission, detailing who they have accepted significant amounts of money from and in what amount.  We use data compiled by the National Institute for Money in State Politics (NIMSP) and the Sunlight Foundation which we further refine using our own custom-built software to match our specific expertise in the oil, gas and coal industries. We track all contributions from known employees and Political Action Committees (or PACs) from these companies back to 2006. We only look at the contributions that went to the selected group of elected officials (House/Assembly, Senate, etc.) while they were in office.</p>
+				<p>Anybody who runs for office is required to file reports with their state elections commission, detailing who they have accepted significant amounts of money from and in what amount.  We use data compiled by the National Institute on Money in State Politics (NIMSP) and the Sunlight Foundation which we further refine using our own custom-built software to match our specific expertise in the oil, gas and coal industries. We track all contributions from known employees and Political Action Committees (or PACs) from these companies back to 2006. We only look at the contributions that went to the selected group of elected officials (House/Assembly, Senate, etc.) while they were in office.</p>
 
 				<p>We used tools, data, and information from the following sources:</p>
 
 				<ul>
-					<li>National Institute for Money in State Politics (NIMSP): categorized oil contributions and company names and provided assistance with data interpretation.</li>
+					<li>National Institute on Money in State Politics (NIMSP): categorized oil contributions and company names and provided assistance with data interpretation.</li>
 					<li>Sunlight Foundation Projects:
 						<ul>
 							<li>Influence Explorer: provides bulk downloads of reformatted NIMSP data as well as an API for getting legislator information, including photo urls</li>
