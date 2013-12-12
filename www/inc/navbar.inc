@@ -9,7 +9,7 @@
 				<option value="state:lower">Assembly</option>
 			</select>
 			<select name="cycle" id="cycle" class="navitem"> </select>
-			<a href="#" id="csvlink" class="hide">CSV</a>
+			<a href="#" id="csvlink" class="hide">Download data</a>
 			<div id="searchfield" class="navitem">
 				<input class="node_search" id="node_search" autocomplete="off" size="20" type="text" value="" />
 				<div id="no_results_found" class="hide">No Results Found</div>

@@ -87,7 +87,7 @@
 					</div>
 					<div id="node-barchart"></div>
 					<div id="node-total"></div>
-					<div id="node-csvlink"><a href="">Download .CSV</a></div>
+					<div id="node-csvlink"><a href="">Download data for this <span></span></a></div>
 				</div>
 			</div>
 		</div>

@@ -610,15 +610,16 @@ text.label { fill: #fff; font-weight: 600; font-family: 'Ubuntu', sans-serif; fo
 		float: left;
 		width: auto;
 		padding: 5px;
-		color: #ccc;
+		color: #666;
 		background: #aaa;
 		border: 1px solid #999;
 		border-radius: 5px;
 		font-size: 0.8em;
-		box-shadow: 0 1px 1px fade(#fff,25%), 0 1px 1px fade(#000,25%) inset;
+		box-shadow: 0 1px 1px fade(#fff,25%) inset, 0 1px 1px fade(#000,25%);
 		&:hover {
 			color: #fff;
 			background: #93f;
+			box-shadow: 0 1px 1px fade(#000,25%) inset, 0 1px 1px fade(#fff,25%);
 		}
 	}
 }
