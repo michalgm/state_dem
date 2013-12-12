@@ -44,8 +44,8 @@ $.Class("GraphList", {}, {
 							.html(label)
 							.click($.proxy(function(e) { 
 								var target = $(e.target);
-								var reverse = target.hasClass('current_sort') && ! $(e.target).hasClass('reverse');
-								$('.node_sort_trigger').removeClass('current_sort').removeClass('reverse');
+								var reverse = (target.hasClass('current_sort') || sort_options.desc) && ! $(e.target).hasClass('reverse');
+								$('#'+nodetype+'_sort_container .node_sort_trigger').removeClass('current_sort').removeClass('reverse');
 								if (reverse) { target.addClass('reverse'); }
 								target.addClass('current_sort');
 								this.sortList(nodetype, sort_options.sort_values, reverse); 
@@ -100,6 +100,21 @@ $.Class("GraphList", {}, {
 				});
 			}
 		}, this));
+			
+		//Set the default sort order (if it exists)
+		$.each(data.nodetypes, $.proxy(function(i, nodetype) {
+			if (this.sort && this.sort[nodetype]) {
+				var sort_index = 0;
+				$.each(this.sort[nodetype], function(i, s) { 
+					if(s.default) { 
+						sort = i; 
+						return false;
+					}
+				})
+				$('#'+nodetype+'_sort_container .node_sort_trigger')[sort].click();
+			}
+		}, this));
+	
 		this.displayList(data.nodetypes[0]);
 		$('#'+this.listdiv).show();
 		//console.timeEnd('renderList');
