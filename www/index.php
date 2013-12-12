@@ -41,6 +41,9 @@
 
 		.zero { opacity: .5; }
 		.average-line { fill: none; stroke: #999;  stroke-width: 5; stroke-dasharray:5;}
+
+		#graphoptions { text-align: left !important; }
+		#options_container { overflow: hidden; display: inline-block; margin-bottom: -3px;}
 	</style>
 </head>
 <body>
