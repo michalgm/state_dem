@@ -305,6 +305,7 @@
 		position: relative;
 		float: left;
 		width: 0%; height: 100%;
+		max-width: 320px;
 		box-shadow: 0 0 25px fade(#000,25%);
 		background: #fff;
 		z-index: 100;
@@ -381,9 +382,11 @@
 		}
 		.nodelist_container {
 			clear: both;
-			height: 97%;
+			height: 95%;
 			.nodelist_header {
-				display: none; // Hide for now
+				.node_search_container {
+					display: none;
+				}
 			}
 			.nodelist {
 				clear: left;
@@ -594,6 +597,7 @@ text.label { fill: #fff; font-weight: 600; font-family: 'Ubuntu', sans-serif; fo
 	top: 120px;
 	width: 100%;
 	.site-title {
+		font-family: "Diavlo","Helvetica Neue",Helvetica,Arial,sans-serif;
 		text-shadow: none;
 	}
 	.site-tagline {

@@ -131,7 +131,8 @@ $.extend(NodeViz.prototype, {
 		$('#masthead').fadeOut(2000);
 		$('#about, #methodology').slideUp();
 		$('#navbar').slideDown();
-		$('#lists-container, #searchfield').show();
+		$('#searchfield').fadeIn(500);
+		if( $(window).width() > 639 ) { $('#lists-container').fadeIn(500); }
 
 		$('#graphoptions select').blur();
 	
@@ -143,10 +144,6 @@ $.extend(NodeViz.prototype, {
 		}).delay(1000).fadeIn();
 
 		setupAutocomplete(); 
-
-		//FIXME -this should be done with css
-		$('.node_search_container').hide();
-		$('.nodelist_header').show();
 
 		if (current_network && gf.data.nodes[current_network]) { 
 			$('#'+current_network).click();
@@ -307,17 +304,17 @@ function toggleLists() {
 	var lists = $('#lists-container'),
 		graphs = $('#graphs-container');
 
-	var callback = function() { 
+	var callback = function() {
 		barChart.resize();
-		gf.resize(); 
+		gf.resize();
 	};
-		
+
 	if (parseInt(lists.css('width')) > 0) {
 		lists.animate({width: '0%'},500);
 		graphs.animate({width: '100%'},500,callback);
 	} else {
-		lists.animate({width: '33%'},500);
-		graphs.animate({width: '67%'},500,callback);
+		lists.animate({width: 320},500);
+		graphs.animate({width: ($(window).width() - 320)},500,callback);
 	}
 	lists.toggleClass('open');
 }
