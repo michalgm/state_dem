@@ -118,6 +118,7 @@ function initGraph() {
 
 $.extend(NodeViz.prototype, {
 	graphLoaded: function() {
+		$('#content').removeClass('initial');
 		$('.cluster').remove();
 		$('.zerocontribs').remove();
 		if(gf.data.nodes['zerocontribs']) { delete gf.data.nodes['zerocontribs']; }
@@ -129,6 +130,7 @@ $.extend(NodeViz.prototype, {
 		$('#infocard').hide();
 		$('#masthead').fadeOut(2000);
 		$('#about, #methodology').slideUp();
+		$('#navbar').slideDown();
 		$('#lists-container, #searchfield').show();
 
 		$('#graphoptions select').blur();

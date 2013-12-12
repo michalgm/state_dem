@@ -48,7 +48,7 @@
 <?php include 'inc/header.inc';?>
 <?php include 'inc/navbar.inc';?>
 
-	<div id="content">
+	<div id="content" class="initial">
 
 		<!-- Intro Screen -->
 
