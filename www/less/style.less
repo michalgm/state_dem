@@ -364,6 +364,21 @@
 			#donors_menu {}
 			#zerocontribs_menu { display: none; }
 		}
+		.node_sort_container {
+			float: left;
+			width: 100%;
+			.node_sort_trigger {
+				padding: 0.5em 0;
+				text-align: center;
+				display: inline-block;
+				width: 50%;
+				font-size: 10px;
+				color: #999;
+				text-transform: uppercase;
+				height: 1em;
+				border-bottom: 1px solid #ccc;
+			}
+		}
 		.nodelist_container {
 			clear: both;
 			height: 97%;
@@ -371,6 +386,7 @@
 				display: none; // Hide for now
 			}
 			.nodelist {
+				clear: left;
 				margin: 0; padding: 0;
 				height: 100%;
 				list-style: none;
