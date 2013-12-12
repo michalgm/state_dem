@@ -130,10 +130,11 @@ function arrayToInString($array, $assoc=0) {
 	return "'".join("','", $array2)."'";
 }
 
-function arrayToUpdateString($array, $keys) {
+function arrayToUpdateString($array, $keys='', $ignore_empty=0) {
 	if (! $keys) { $keys = array_keys($array); }
 	$values = Array();
 	foreach ($keys as $key) { 
+		if ($ignore_empty && (! isset($array[$key]) || $array[$key] == '')) { continue; }
 		$values[] = "$key='".dbEscape($array[$key])."'";
 	}
 	return implode(",", $values);	
