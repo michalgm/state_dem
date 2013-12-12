@@ -129,7 +129,7 @@ $.extend(NodeViz.prototype, {
 		$('#infocard').hide();
 		$('#masthead').fadeOut(2000);
 		$('#about, #methodology').slideUp();
-		$('#lists-container').show();
+		$('#lists-container, #searchfield').show();
 
 		$('#graphoptions select').blur();
 	
