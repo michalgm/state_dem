@@ -70,6 +70,8 @@ class StateDEM extends Graph {
 		$where = "a.state='".$props['state']."'";
 		if ($props['chamber'] != 'state:all') { 
 			$where .= " and a.seat = '$props[chamber]'";
+		} else {
+			$where .= " and a.seat != 'state:governor' ";
 		}
 		if ($props['cycle'] != 'all') { 
 			$where .= " and a.term=".$props['cycle']; 
