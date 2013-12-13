@@ -30,14 +30,14 @@ if (isset($args['cache'])) {
 	require_once("./publish/publish_config.php");
 	print "Updating company images";
 	passthru("php update_company_images.php");
-	print "Dumping Local DB\n";
-	passthru("mysqldump -u oilchange -poilchange $localdb $live_db_tables > publish/db.sql;");
-	passthru("mysqldump -u oilchange -poilchange oilchange companies >> publish/db.sql;");
 	passthru("php generateCache.php 1 races");
 	print "Caching Reports\n";
 	passthru("php update_reports.php");
 	print "Running consistency tests\n";
 	passthru("php data_consistency_tests.php");
+	print "Dumping Local DB\n";
+	passthru("mysqldump -u oilchange -poilchange $localdb $live_db_tables > publish/db.sql;");
+	passthru("mysqldump -u oilchange -poilchange oilchange companies >> publish/db.sql;");
 }
 if (isset($args['publish'])) { 
 	$check = isset($args['skipcheck']) ? 'skipcheck' : 'check';
