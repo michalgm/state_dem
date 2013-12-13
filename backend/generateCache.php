@@ -81,11 +81,21 @@ function cache_races() {
 function cache_race() { 
 	global $_REQUEST;
 	$success = 0;
+	$count = 0;
 	while (! $success) { 
 		$graph = buildCache('StateDEM');
+		$com_nodes = count($graph->data['nodetypesindex']['donors']);
+		$leg_nodes = count($graph->data['nodetypesindex']['candidates']);
 		$name = $graph->data['name'];
 		$file = file_get_contents("../cache/$name/$name.svg");
-		$success = preg_match("/com_image/", $file);
+		$com_count = substr_count($file, 'com_image');
+		$leg_count = substr_count($file, 'can_image');
+		if($com_nodes == $com_count && $leg_nodes = $leg_count) {
+			$success = 1;
+		} else {
+			print "\n$name missing images (coms: $com_nodes v $com_count, legs: $leg_nodes v $leg_count)\n";
+		}
+		$count++;
 	}
 }
 
