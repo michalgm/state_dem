@@ -52,7 +52,8 @@ function cache_races() {
 	global $nodeViz_config;
 
 	if ($force && $nodeViz_config['cache_path']) {
-		system("rm -rf $nodeViz_config[cache_path]/*;");
+		print "deleting old cache\n";
+		system("rm -rf $nodeViz_config[cache_path]/*");
 	}
 	$_REQUEST = array('candidateLimit' => 250, 'companyLimit'=>250, 'graphWidth'=>600, 'graphHeight'=>600);
 	$count = (((($max_cycle - $min_cycle) /2)+2) *3 * (count($states)));
@@ -63,18 +64,29 @@ function cache_races() {
 				$_REQUEST['cycle'] = $min_cycle;
 				while ($_REQUEST['cycle'] <= $max_cycle) {
 					$x = showProgress($x, $count);
-					fork_work('graph', 'StateDEM');
+					cache_race();
 					$_REQUEST['cycle'] += 2;
 				}
 			}
 			if ($_REQUEST['chamber'] != 'state:all') { 
 				$_REQUEST['cycle'] = 'all';
 				$x = showProgress($x, $count);
-				fork_work('graph', 'StateDEM');
+				cache_race();
 			}
 		}
 	}
 	print "\n";
+}
+
+function cache_race() { 
+	global $_REQUEST;
+	$success = 0;
+	while (! $success) { 
+		$graph = buildCache('StateDEM');
+		$name = $graph->data['name'];
+		$file = file_get_contents("../cache/$name/$name.svg");
+		$success = preg_match("/com_image/", $file);
+	}
 }
 
 function cache_candidates() {
