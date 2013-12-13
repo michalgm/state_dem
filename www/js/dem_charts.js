@@ -92,7 +92,7 @@ DEMBarChart.prototype.draw = function (data) {
 	if (! $('.averages').length) { 
 		svg.append('g').attr('class', 'averages');
 	}
-	var averages = svg.selectAll('.averages');
+	var averages = svg.selectAll('.averages').style('opacity', ($('#chamber').val() != 'state:governor' || gf.data.nodes[current_network].type == 'donors') ? 1 : 0);
 	
 	var average_rects = averages.selectAll('rect')
 		.data(data, function(d) { return d.label; })
