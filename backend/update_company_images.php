@@ -3,7 +3,7 @@ include_once('../config.php');
 include "../oc_utils.php";
 chdir("../");
 $pics_dir = "www/com_images/";
-$force = $argv[1];
+$force = isset($argv[1]);
 if ($force) {
 	system("rm -rf $pics_dir/*");
 }

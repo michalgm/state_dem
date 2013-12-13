@@ -34,6 +34,7 @@ if (isset($args['cache'])) {
 	passthru("mysqldump -u oilchange -poilchange $localdb $live_db_tables > publish/db.sql;");
 	passthru("mysqldump -u oilchange -poilchange oilchange companies >> publish/db.sql;");
 	passthru("php generateCache.php 1 races");
+	print "Caching Reports\n";
 	passthru("php update_reports.php");
 	print "Running consistency tests\n";
 	passthru("php data_consistency_tests.php");
