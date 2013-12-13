@@ -253,7 +253,8 @@ function toggleInfocard(node) {
 				break;
 		}
 		var url = (remotecache ? remotecache + '../' : '')+'request.php';
-		$('#node-csvlink a').attr('href',url+'?method=csv&type='+node.type+'&id='+node.id+'&state='+gf.data.properties.state+'&chamber='+gf.data.properties.chamber).find('span').html(node.type.slice(0,-1));
+		var label = node.type == 'donors' ? 'company' : ($('#chamber').val() != 'state:governor' ? 'legislator' : 'governor');
+		$('#node-csvlink a').attr('href',url+'?method=csv&type='+node.type+'&id='+node.id+'&state='+gf.data.properties.state+'&chamber='+gf.data.properties.chamber).find('span').html(label);
 
 		var nodeLinks  = node.twitter		? '<a class="twitter" href="'+node.twitter+'">Twitter</a>' : '';
 			nodeLinks += node.facebook		? '<a class="facebook" href="'+node.facebook+'">Facebook</a>' : '';
