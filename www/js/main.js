@@ -118,6 +118,7 @@ function initGraph() {
 
 $.extend(NodeViz.prototype, {
 	graphLoaded: function() {
+		$('#content').toggleClass('governor', gf.data.properties.chamber == 'state:governor');
 		$('#content').removeClass('initial');
 		$('.cluster').remove();
 		$('.zerocontribs').remove();
@@ -184,26 +185,6 @@ $.extend(GraphList.prototype, {
 			subEntry += '<div class="amount">'+amount+'</div>';
 
 		return subEntry;
-
-		var label;
-		var node_class = direction == 'to' ? 'to_node_item' : 'from_node_item'; 
-		if (node.title) { 
-			label = node.title;
-		} else { 
-			label = node.id;
-		}
-		var info = 'Uncategorized';
-		var edge = this.NodeViz.data.edges[node.relatedNodes[parentNode.id][0]];
-		if (node.type == 'candidates') {
-			if (node.party) { info = node.party; }
-		} else if (node.contributor_type) {
-			if (node.contributor_type == 'I') { info = 'Individual'; }
-			else if (node.contributor_type == 'C') { info = 'PAC'; }
-		}
-		info = "<span class='info'>"+info+"</span>";
-		var chip = "<span class='chip "+ (typeof(node.party) != 'undefined' ? node.party : ('contrib_'+node.contributor_type))+"'></span>";
-		var link = "";//"<span class='details_link'><img src='NodeViz/icons/magnifier.png' alt='View Details' title='View Details'/></span>";
-		return "<span class='"+node_class+" label' onclick=\"gf.selectNode('"+node.id+"'); gf.panToNode('"+node.id+"');\">"+label+"</span><span class='amount'>$"+format(Math.round(edge['value']))+'</span><br/>'+chip+info+link;
 	},
 	listHeader: function(nodetype) {
 		return '';
@@ -320,7 +301,6 @@ function toggleLists() {
 }
 
 function resetGraph() {
-
 	// Reset infocard
 	$('#infocard').removeClass('open').slideUp(500,function(){
 		$('#node-amount').show();
@@ -335,7 +315,6 @@ function resetGraph() {
 	});
 
 	$('#legend').fadeIn(2000);
-
 }
 
 function writeHash(network) {
@@ -388,7 +367,6 @@ function setupOptions() {
 
 	$('#state').on('change', function() { updateOptions(); });
 	$('#chamber').on('change', function() { updateCycle(); });
-	//$('#state').change();
 }
 
 function updateOptions() {

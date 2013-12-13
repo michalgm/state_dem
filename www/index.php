@@ -46,6 +46,10 @@
 		#options_container { overflow: hidden; display: inline-block; margin-bottom: -3px;}
 		#loading { padding-top: 0px; }
 		#loading .loading { text-align: center; position: absolute; top: 0px; left: 0px; right: 0px; bottom: 0px; margin: auto !important; height: 0px; }
+
+		.governor .sublists_container, .governor #candidates_menu, .governor #candidates_list_container { display: none !important; }
+		.governor #donors_list_container { display: block !important; }
+		.governor #donors_menu { color: #333 !important; background: #fff !important; font-weight: 400 !important; }
 	</style>
 </head>
 <body>
