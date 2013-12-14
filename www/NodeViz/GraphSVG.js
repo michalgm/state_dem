@@ -138,6 +138,8 @@ GraphImage("GraphSVG", {}, {
 	},
 	setupListeners: function() {
 		this._super();
+		$(this.root).mousedown($.proxy(this.handleMouseDown, this));
+		$(this.root).mouseup($.proxy(this.handleMouseUp, this));
 		//Event.observe($('svgscreen'),'click', this.NodeViz.unselectNode.bind(this.NodeViz));
 		$('#svg_overlay').mousemove($.proxy(this.mousemove, this));
 		$('#graphs').mousemove($.proxy(this.mousemove, this));
@@ -332,7 +334,6 @@ GraphImage("GraphSVG", {}, {
 				}, this));
 			}, this));
 			this.hideSVGElement(node);
-			this.unhighlightNode(id);
 			$('#svg_overlay').css('opacity',1);
 		}, this);
 		if (fade) {
@@ -341,6 +342,7 @@ GraphImage("GraphSVG", {}, {
 		} else {
 			realunselectNode();
 		}
+		this.unhighlightNode(id);
 	},
 	hasClassName: function(element, className) {
 		var elementClassName = element.getAttribute('class') || '';
@@ -465,7 +467,7 @@ GraphImage("GraphSVG", {}, {
 			}
 			e.stopPropagation();
 		}, this));
-		$('#svgscreen').unbind('click');
+		//$('#svgscreen').unbind('click');
 		$('#images').mouseleave($.proxy(function(e) { this.handleMouseUp(e); }, this));
 		$(root).mousewheel($.proxy(function(e, delta) { this.handleMouseWheel(e, delta); }, this));
 		this.center = this.calculateCenter();
@@ -611,7 +613,7 @@ GraphImage("GraphSVG", {}, {
 		evt.returnValue = false;
 
 		var origin = this.getEventPoint(evt);
-		if (this.clickPoint.x == origin.x & this.clickPoint.y == origin.y & (evt.target.id == 'svgscreen' || evt.target.tagName == 'svg_overlay' || evt.target.tagName == 'svg')) { 
+		if (Math.abs(this.clickPoint.x - origin.x) <= 5  & Math.abs(this.clickPoint.y - origin.y) <= 5  & (evt.target.id == 'svgscreen' || evt.target.tagName == 'svg_overlay' || evt.target.tagName == 'svg')) { 
 			this.NodeViz.unselectNode(1);
 		}
 
