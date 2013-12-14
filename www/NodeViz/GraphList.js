@@ -106,7 +106,7 @@ $.Class("GraphList", {}, {
 			if (this.sort && this.sort[nodetype]) {
 				var sort_index = 0;
 				$.each(this.sort[nodetype], function(i, s) { 
-					if(s.default) { 
+					if(s['default']) { 
 						sort = i; 
 						return false;
 					}

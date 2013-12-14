@@ -251,7 +251,7 @@ $.Class("NodeViz", {}, {
 				if (responseData) {
 					callback(responseData);
 				}
-			},
+			}
 		});
 		this.requests.push(request);
 	},
