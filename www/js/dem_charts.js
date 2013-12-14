@@ -374,7 +374,7 @@ function drawPieChart(data, container) {
 		'G':['Green', '#33cc33'],
 		'L':['Libertarian', '#cc33cc'],
 		'I':['Independant', '#cccc33'],
-		'N':['Non-Partisan', '#cccccc'],
+		'N':['Non-Partisan', '#cccccc']
 	}
 
 	var width = $(window).width() / 2 * 0.9,

@@ -84,15 +84,15 @@ function initGraph() {
 			fadeTo: .2,
 			center_tooltip: 1,
 			tooltipOffsetY: -21,
-			tooltipOffsetX: 0,
+			tooltipOffsetX: 0
 			//zoom_delta:  
 
 		},
 		list: {
 			listdiv: 'lists',
 			sort: {
-				'candidates': [{label: 'Name', sort_values: ['lastfirst']}, {label:'Amount', sort_values:['value'], default:true, desc:true}], 
-				'donors': [{label: 'Name', sort_values: ['title']}, {label:'Amount', sort_values:['value'], default:true, desc:true}], 
+				'candidates': [{label: 'Name', sort_values: ['lastfirst']}, {label:'Amount', sort_values:['value'], 'default':true, desc:true}], 
+				'donors': [{label: 'Name', sort_values: ['title']}, {label:'Amount', sort_values:['value'], 'default':true, desc:true}] 
 			},
 			scrollList: 1
 		},
@@ -151,7 +151,7 @@ $.extend(NodeViz.prototype, {
 		} else if($('#chamber').val() == 'state:governor') {
 			$('#'+gf.data.nodetypesindex.candidates[0]).click();
 		}
-	},
+	}
 });
 
 $.extend(GraphList.prototype, {
@@ -322,7 +322,7 @@ function writeHash(network) {
 	var hash_state = {
 		state: $('#state').val(),
 		chamber: toWordCase($('#chamber').val().replace('state:', '')),
-		cycle: $('#cycle').val(),
+		cycle: $('#cycle').val()
 	}
 	var states = [hash_state.state, hash_state.chamber, hash_state.cycle];
 	if (network == 1) { 
