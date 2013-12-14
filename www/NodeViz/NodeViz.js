@@ -193,17 +193,17 @@ $.Class("NodeViz", {}, {
 		if (typeof(id) == 'object') { id = this.current.node; }
 		id = id.toString();
 		if (id == this.current['network']) { 
-			this.unselectNode(1);
+			this.unselectNode(1, noscroll);
 			return;
 		}
 		this.unselectNode();
 		if(typeof this.data.nodes[id] == 'undefined') { id = this.current['node']; }
-		this.invokeRenderers('selectNode', [id]);
+		this.invokeRenderers('selectNode', [id, noscroll]);
 		this.current.network = id;
 	},
-	unselectNode: function(fade) {
+	unselectNode: function(fade, noscroll) {
 		if (this.current.network == '') { return; }
-		this.invokeRenderers('unselectNode', [this.current.network, fade]);
+		this.invokeRenderers('unselectNode', [this.current.network, fade, noscroll]);
 		//this.highlightNode(this.current.network);
 		this.current.network = '';
 	},
