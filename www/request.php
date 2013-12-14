@@ -24,6 +24,7 @@ switch($_REQUEST['method']) {
 		$csv = "";
 		$query = "";
 		if ($_REQUEST['type'] == 'chamber') { 
+			$chamber_where = $chamber == 'state:all' ? " and t.seat != 'state:governor' " : " and t.seat = '$chamber' ";
 			$cycle_where = $cycle == 'all' ? '' : " and term = '$cycle'";
 			$query = "select imsp_candidate_id, term as Cycle, full_name as Name, if(t.seat='state:lower', s.lower_name, 'Senate') as Chamber, t.Party, t.District, concat('http://states.dirtyenergymoney.com/?',t.state, '/', if(t.seat='state:lower', s.lower_name, 'Senate'), '/', term, '/', imsp_candidate_id) as 'Profile Link', Lifetime_total as 'Lifetime Total', Lifetime_Oil as 'Lifetime Oil', Lifetime_Coal as 'Lifetime Coal', Lifetime_Carbon as 'Lifetime Misc',
 				round(sum(if(sitecode = 'oil', amount, 0))) as '$cycle Oil',
@@ -31,7 +32,7 @@ switch($_REQUEST['method']) {
 				round(sum(if(sitecode = 'carbon', amount, 0))) as '$cycle Misc' 
 				from legislator_terms t join legislators l on nimsp_candidate_id = imsp_candidate_id join states s on t.state = s.state
 				left join contributions_dem a on  recipient_ext_id = nimsp_candidate_id and t.state = recipient_state and t.term = cycle and recipient_state = '$state' and a.seat = '$chamber'
-				where t.state = '$state' $cycle_where and t.seat='$chamber' and s.state = '$state' group by imsp_candidate_id order by cast(substring(t.District, 4) as unsigned)";
+				where t.state = '$state' $cycle_where $chamber_where and s.state = '$state' group by imsp_candidate_id order by Chamber, if(s.state='AK', ascii(max(substring(t.district, 4))) - 64, cast(substring(t.District, 4) as unsigned))";
 		} else {
 			$query = "SELECT transaction_id, full_name as Legislator, t.state as State, if(t.seat='state:lower', s.lower_name, 'Senate') as Chamber, t.District as District, t.Party, contributor_name as Contributor, if(Contributor_type = 'C', 'PAC', 'Individual') as 'Contributor Type', companies.name as Company, if(c.sitecode = 'oil', 'Oil', if(c.sitecode='coal', 'Coal', 'Misc')) as 'Company Industry', date_format(Date, '%m/%d/%Y') as Date, Cycle, Amount FROM contributions_dem c join companies on company_id = id join legislators l on recipient_ext_id = nimsp_candidate_id join legislator_terms t on recipient_ext_id = imsp_candidate_id and cycle = term join states s on recipient_state = s.state where $where order by c.date asc";
 		}
