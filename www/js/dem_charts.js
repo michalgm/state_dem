@@ -133,7 +133,7 @@ DEMBarChart.prototype.draw = function (data) {
 		.attr('x2', function(d) { return x(d.label) + x.rangeBand(); })
 		.attr("y1", function(d) { return - y(d.average); })
 		.attr("y2", function(d) { return - y(d.average); })
-		.style('opacity','1')
+		.style('opacity', function(d) { return (d.label == $('#cycle').val() || $('#cycle').val() == 'all') ? 1 : .6;})
 
 	average_rects.exit().transition()
 		.duration(200)
@@ -143,6 +143,40 @@ DEMBarChart.prototype.draw = function (data) {
 	lines.exit().transition()
 		.duration(200)
 		.style('opacity','0')
+		.remove();
+	
+	//empty rectangle
+	if (! $('.barbacks').length) { 
+		svg.append('g').attr('class', 'barbacks');
+	}
+	var barbacks = svg.selectAll("g.barbacks");
+
+	var barback = barbacks.selectAll(".barback")
+		.data(data, function(d) { return d.label; })
+		//.data(function(d) { return d; }, function(d) { return d.x; })
+
+	barback.enter().append("svg:rect")
+		.attr('class', 'barback')
+		.attr('x',function(d, i) { return x(d.label) + self.bar_width/2; })
+		.attr("width", x.rangeBand()*self.bar_width)
+		.attr("y", function(d) { return -y(d.value); })
+		.attr("height", 0)
+		.attr('fill', '#ffffff')
+		.style('opacity','1');
+
+	barback.transition()
+		.duration(1000)
+		.delay(!barback.exit().empty()*200)
+		//.attr('x',function(d, i) { return x(d.label) + x.rangeBand()/2; })
+		.attr("x", function(d) { return x(d.label) + (x.rangeBand()*(1-self.bar_width))/2; })
+		.attr("y", function(d) { return -y(d.value); })
+		.attr("height", function(d) { return y(d.value); })
+		.attr("width", x.rangeBand() *self.bar_width)
+
+	barback.exit().transition()
+		.duration(200)
+		.attr('height', 0)
+		.attr('y', 0)
 		.remove();
 
 
@@ -175,7 +209,7 @@ DEMBarChart.prototype.draw = function (data) {
 		.attr("y", function(d) { return - y(d.y0) - y(d.y); })
 		.attr("height", function(d) { return y(d.y); })
 		.attr("width", x.rangeBand() *self.bar_width)
-		.style('opacity','1');
+		.style('opacity', function(d) { return (d.x == $('#cycle').val() || $('#cycle').val() == 'all') ? 1 : .6;})
 
 	rect.exit().transition()
 		.duration(200)
@@ -286,6 +320,12 @@ DEMBarChart.prototype.resize = function() {
 
 	var self = this;
 	var x = self.x, y=self.y, svg = self.svg;
+
+	svg.selectAll('.barback')
+		.attr("x", function(d) { return x(d.label) + (x.rangeBand()*(1-self.bar_width))/2; })
+		.attr("y", function(d) { return -y(d.value); })
+		.attr("height", function(d) { return y(d.value); })
+		.attr("width", x.rangeBand() *self.bar_width)
 
 	svg.selectAll('.barrect')
 		.attr("height", function(d) { return y(d.y); })
