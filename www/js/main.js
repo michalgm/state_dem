@@ -256,9 +256,9 @@ function toggleInfocard(node) {
 		var label = node.type == 'donors' ? 'company' : ($('#chamber').val() != 'state:governor' ? 'legislator' : 'governor');
 		$('#node-csvlink a').attr('href',url+'?method=csv&type='+node.type+'&id='+node.id+'&state='+gf.data.properties.state+'&chamber='+gf.data.properties.chamber).find('span').html(label);
 
-		var nodeLinks  = node.twitter		? '<a class="twitter" href="'+node.twitter+'">Twitter</a>' : '';
-			nodeLinks += node.facebook		? '<a class="facebook" href="'+node.facebook+'">Facebook</a>' : '';
-			nodeLinks += node.action_link	? '<a class="action" href="'+node.action_link+'">Take Action</a>' : '';
+		var nodeLinks  = node.twitter		? '<a target="_blank" class="twitter" href="http://twitter.com/'+node.twitter+'">Twitter</a>' : '';
+			nodeLinks += node.facebook		? '<a target="_blank" class="facebook" href="'+node.facebook+'">Facebook</a>' : '';
+			nodeLinks += node.action_link	? '<a target="_blank" class="action" href="'+node.action_link+'">Take Action</a>' : '';
 
 		$('#node-links').html(nodeLinks);
 
