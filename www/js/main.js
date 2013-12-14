@@ -266,7 +266,7 @@ function toggleInfocard(node) {
 		gf.panToNode(node.id, null, {y:-50, x:0});
 
 		$('#legend').hide();
-	} else {
+	} else if (node_id !== node.id) {
 		resetGraph();
 	}
 }
