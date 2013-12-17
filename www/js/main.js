@@ -256,7 +256,7 @@ function toggleInfocard(node) {
 		var label = node.type == 'donors' ? 'company' : ($('#chamber').val() != 'state:governor' ? 'legislator' : 'governor');
 		$('#node-csvlink a').attr('href',url+'?method=csv&type='+node.type+'&id='+node.id+'&state='+gf.data.properties.state+'&chamber='+gf.data.properties.chamber).find('span').html(label);
 
-		var nodeLinks  = node.twitter		? '<a target="_blank" class="twitter" href="http://twitter.com/'+node.twitter+'">Twitter</a>' : '';
+		var nodeLinks  = '<a target="_blank" class="twitter" href="'+tweetLink(node)+'">Twitter</a>';
 			nodeLinks += node.facebook		? '<a target="_blank" class="facebook" href="'+node.facebook+'">Facebook</a>' : '';
 			nodeLinks += node.action_link	? '<a target="_blank" class="action" href="'+node.action_link+'">Take Action</a>' : '';
 
@@ -462,4 +462,18 @@ function setupAutocomplete() {
 		.append( "<a>" + label+ "</a>" )
 		.appendTo( ul );
 	};
+}
+
+function tweetLink(node) {
+	var tweet,
+		target = node.twitter ? node.twitter : node.title,
+		year = (gf.data.properties.cycle != 'all') ? ' in ' + gf.data.properties.cycle : '';
+		total = $('#node-total').html().split(' ');
+		console.log( total );
+	if (node.type == 'candidates') {
+		tweet = 'Did you know ' + target + ' accepted $' + format(Math.round(node.total_dollars)) + ' from dirty energy companies' + year + '? ' + window.location;
+	} else {
+		tweet = 'Did you know ' + target + ' paid $' + format(Math.round(node.total_dollars)) + ' to ' + gf.data.properties.state + ' legislators' + year + ' alone? ' + window.location;
+	}
+	return 'https://twitter.com/intent/tweet?&text=' + encodeURIComponent(tweet);
 }
