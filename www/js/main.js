@@ -466,9 +466,10 @@ function setupAutocomplete() {
 
 function tweetLink(node) {
 	var tweet,
-		target = (node.twitter != '') ? node.twitter : node.title,
+		target = (node.twitter && node.twitter.replace(/\s+/g,'') !== '') ? node.twitter : node.title,
 		year = (gf.data.properties.cycle != 'all') ? ' in ' + gf.data.properties.cycle : '';
 		amount = (node.total_dollars > 0) ? '$' + format(Math.round(node.total_dollars)) : 'no contributions';
+
 	if (node.type == 'candidates') {
 
 		tweet = 'Did you know ' + target + ' accepted ' + amount + ' from dirty energy companies' + year + '? ' + window.location;
