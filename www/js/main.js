@@ -466,14 +466,14 @@ function setupAutocomplete() {
 
 function tweetLink(node) {
 	var tweet,
-		target = node.twitter ? node.twitter : node.title,
+		target = (node.twitter != '') ? node.twitter : node.title,
 		year = (gf.data.properties.cycle != 'all') ? ' in ' + gf.data.properties.cycle : '';
-		total = $('#node-total').html().split(' ');
-		console.log( total );
+		amount = (node.total_dollars > 0) ? '$' + format(Math.round(node.total_dollars)) : 'no contributions';
 	if (node.type == 'candidates') {
-		tweet = 'Did you know ' + target + ' accepted $' + format(Math.round(node.total_dollars)) + ' from dirty energy companies' + year + '? ' + window.location;
+
+		tweet = 'Did you know ' + target + ' accepted ' + amount + ' from dirty energy companies' + year + '? ' + window.location;
 	} else {
-		tweet = 'Did you know ' + target + ' paid $' + format(Math.round(node.total_dollars)) + ' to ' + gf.data.properties.state + ' legislators' + year + ' alone? ' + window.location;
+		tweet = 'Did you know ' + target + ' paid ' + amount + ' to ' + gf.data.properties.state + ' legislators' + year + ' alone? ' + window.location;
 	}
-	return 'https://twitter.com/intent/tweet?&text=' + encodeURIComponent(tweet);
+	return 'https://twitter.com/intent/tweet?&text=' + encodeURIComponent(tweet) + '&via=priceofoil';
 }
