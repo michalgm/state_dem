@@ -132,7 +132,7 @@ $.extend(NodeViz.prototype, {
 		$('#masthead').fadeOut(2000);
 		$('#about, #methodology').slideUp();
 		$('#navbar').slideDown();
-		$('#searchfield').fadeIn(500);
+		$('#searchfield, .addthis_toolbox').fadeIn(500);
 		if( $(window).width() > 639 ) { $('#lists-container').fadeIn(500); }
 
 		$('#graphoptions select').blur();

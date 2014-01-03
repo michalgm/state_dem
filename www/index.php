@@ -144,6 +144,18 @@
 			</div>
 		</div>
 
+		<!-- AddThis Button BEGIN -->
+		<div class="addthis_toolbox addthis_floating_style addthis_32x32_style" style="right:50px;top:40%;">
+			<a class="addthis_button_preferred_1"></a>
+			<a class="addthis_button_preferred_2"></a>
+			<a class="addthis_button_preferred_3"></a>
+			<a class="addthis_button_preferred_4"></a>
+			<a class="addthis_button_compact"></a>
+		</div>
+		<script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
+		<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f0dd9067d9d625e"></script>
+		<!-- AddThis Button END -->
+
 	</div>
 
 <?php include 'inc/footer.inc';?>
