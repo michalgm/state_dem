@@ -198,7 +198,7 @@ $.Class("NodeViz", {}, {
 		}
 		this.unselectNode();
 		if(typeof this.data.nodes[id] == 'undefined') { id = this.current['node']; }
-		this.invokeRenderers('selectNode', [id]);
+		this.invokeRenderers('selectNode', [id, noscroll]);
 		this.current.network = id;
 	},
 	unselectNode: function(fade) {

@@ -226,7 +226,7 @@ $.Class("GraphList", {}, {
 			$('#list_'+id).removeClass('highlight');
 		}
 	},
-	selectNode: function(id) { 
+	selectNode: function(id, noscroll) { 
 		this.displayList(this.NodeViz.data.nodes[id].type);
 		var elem = $('#list_'+id);
 		elem.addClass('selected');
