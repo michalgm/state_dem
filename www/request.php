@@ -7,7 +7,8 @@ $id_field = $_REQUEST['type'] == 'candidates' ? 'imsp_candidate_id' : 'company_i
 $state = dbEscape($_REQUEST['state']);
 $chamber = dbEscape($_REQUEST['chamber']);
 $cycle = isset($_REQUEST['cycle']) ? dbEscape($_REQUEST['cycle']) : '';
-$where = " $id_field = '$id' and term >= $min_cycle and t.seat = '$chamber' and t.state = '$state' ";
+$chamber_where = $chamber == 'state:all' ? " and t.seat != 'state:governor' " : " and t.seat = '$chamber' ";
+$where = " $id_field = '$id' and term >= $min_cycle $chamber_where and t.state = '$state' ";
 
 
 switch($_REQUEST['method']) {
@@ -23,18 +24,18 @@ switch($_REQUEST['method']) {
 	case 'csv':
 		$csv = "";
 		$query = "";
+		$chamber_lookup = "if(t.seat='state:lower', s.lower_name, if(t.seat='state:upper', 'Senate', 'Governor')) as Chamber";
 		if ($_REQUEST['type'] == 'chamber') { 
-			$chamber_where = $chamber == 'state:all' ? " and t.seat != 'state:governor' " : " and t.seat = '$chamber' ";
-			$cycle_where = $cycle == 'all' ? '' : " and term = '$cycle'";
-			$query = "select imsp_candidate_id, term as Cycle, full_name as Name, if(t.seat='state:lower', s.lower_name, 'Senate') as Chamber, t.Party, t.District, concat('http://states.dirtyenergymoney.com/?',t.state, '/', if(t.seat='state:lower', s.lower_name, 'Senate'), '/', term, '/', imsp_candidate_id) as 'Profile Link', Lifetime_total as 'Lifetime Total', Lifetime_Oil as 'Lifetime Oil', Lifetime_Coal as 'Lifetime Coal', Lifetime_Carbon as 'Lifetime Misc',
+			$cycle_where = $cycle == 'all' ? " and term >=$min_cycle" : " and term = '$cycle'";
+			$query = "select imsp_candidate_id, term as Cycle, full_name as Name, $chamber_lookup, t.Party, t.District, concat('http://states.dirtyenergymoney.com/?',t.state, '/', if(t.seat='state:lower', s.lower_name, 'Senate'), '/', term, '/', imsp_candidate_id) as 'Profile Link', Lifetime_total as 'Lifetime Total', Lifetime_Oil as 'Lifetime Oil', Lifetime_Coal as 'Lifetime Coal', Lifetime_Carbon as 'Lifetime Misc',
 				round(sum(if(sitecode = 'oil', amount, 0))) as '$cycle Oil',
 				round(sum(if(sitecode = 'coal', amount, 0))) as '$cycle Coal',
 				round(sum(if(sitecode = 'carbon', amount, 0))) as '$cycle Misc' 
 				from legislator_terms t join legislators l on nimsp_candidate_id = imsp_candidate_id join states s on t.state = s.state
-				left join contributions_dem a on  recipient_ext_id = nimsp_candidate_id and t.state = recipient_state and t.term = cycle and recipient_state = '$state' and a.seat = '$chamber'
+				left join contributions_dem a on  recipient_ext_id = nimsp_candidate_id and t.state = recipient_state and t.term = cycle and recipient_state = '$state' and a.seat = t.seat
 				where t.state = '$state' $cycle_where $chamber_where and s.state = '$state' group by imsp_candidate_id order by Chamber, if(s.state='AK', ascii(max(substring(t.district, 4))) - 64, cast(substring(t.District, 4) as unsigned))";
 		} else {
-			$query = "SELECT transaction_id, full_name as Legislator, t.state as State, if(t.seat='state:lower', s.lower_name, 'Senate') as Chamber, t.District as District, t.Party, contributor_name as Contributor, if(Contributor_type = 'C', 'PAC', 'Individual') as 'Contributor Type', companies.name as Company, if(c.sitecode = 'oil', 'Oil', if(c.sitecode='coal', 'Coal', 'Misc')) as 'Company Industry', date_format(Date, '%m/%d/%Y') as Date, Cycle, Amount FROM contributions_dem c join companies on company_id = id join legislators l on recipient_ext_id = nimsp_candidate_id join legislator_terms t on recipient_ext_id = imsp_candidate_id and cycle = term join states s on recipient_state = s.state where $where order by c.date asc";
+			$query = "SELECT transaction_id, full_name as Legislator, t.state as State, $chamber_lookup, t.District as District, t.Party, contributor_name as Contributor, if(Contributor_type = 'C', 'PAC', 'Individual') as 'Contributor Type', companies.name as Company, if(c.sitecode = 'oil', 'Oil', if(c.sitecode='coal', 'Coal', 'Misc')) as 'Company Industry', date_format(Date, '%m/%d/%Y') as Date, Cycle, Amount FROM contributions_dem c join companies on company_id = id join legislators l on recipient_ext_id = nimsp_candidate_id join legislator_terms t on recipient_ext_id = imsp_candidate_id and cycle = term join states s on recipient_state = s.state where $where order by c.date asc";
 		}
 		$contribs = dbLookupArray($query, 1);
 		$csv = array2CSV(array_keys(reset($contribs)));
@@ -50,6 +51,7 @@ switch($_REQUEST['method']) {
 
 		}
 		if ($debug) { 
+			print "$query<br/><hr/>";
 			print '<pre>'; 
 		} else {
 			header('Content-Encoding: UTF-8');
@@ -117,14 +119,6 @@ function getAveragesByYear() {
 	$type = $type == 'donors' ? 'companies' : $type;
 	$results = dbLookupArray("select label, value from reports where entity_id='$state|$chamber' and report = 'congress_average_$type'");
 	return array_values($results);
-	print "select label, value from reports where entity_id='$state|$chamber' and report = 'congress_average_$type'";
-	$data = array();
-
-	print_r($results);
-	foreach($results as $result) { 
-	
-	}
-
 }
 
 function getContributionsByCategory() {

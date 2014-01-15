@@ -231,15 +231,15 @@ $.Class("GraphList", {}, {
 		var elem = $('#list_'+id);
 		elem.addClass('selected');
 		$('#'+id+'_sublists').css({'display': 'block'});
-		if (this.scrollList) { 
+		if (this.scrollList && ! noscroll) { 
 			elem.parent().scrollTop(elem.position().top);
 		}
 	},
-	unselectNode: function(id, fade) { 
+	unselectNode: function(id, fade, noscroll) { 
 		var elem = $('#list_'+id);
 		elem.removeClass('selected');
 		$('#'+id+'_sublists').css({'display': 'none'});
-		if (this.scrollList) { 
+		if (this.scrollList && ! noscroll) { 
 			elem.parent().scrollTop(elem.position().top-10);
 		}
 	},
