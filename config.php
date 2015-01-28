@@ -27,6 +27,9 @@ $max_cycle = 2012;
 #$remotecache = "http://states.styrotopia.net/NodeViz/";
 $remotecache = "";
 
+$orig_path = array('com'=>"backend/com_originals/", 'can'=>'backend/pics/');
+
+
 function xml2array($xml) {
         $object = new SimpleXMLElement($xml);
         $array = array();
