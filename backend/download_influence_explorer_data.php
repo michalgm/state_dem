@@ -9,6 +9,7 @@ chdir('data');
 $db = dbconnect();
 if ($command != 'quick' && $command != 'reprocess') {
 	$url = $argv[1];
+	unlink("contributions.nimsp.csv.zip");
 	passthru("wget '$url'");
 }
 if ($command != 'quick') { 
