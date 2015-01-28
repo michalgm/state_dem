@@ -22,8 +22,10 @@ class StateDEM extends Graph {
 		// graph level properties
 		$this->data['properties'] = array(
 			//sets the scaling of the elements in the gui
-			'minSize' => array('donors'=>'.5', 'candidates' => '.5', 'donations'=>'10'),
-			'maxSize' => array('donors'=>'4', 'candidates' => '4', 'donations' =>'90'),
+			//'minSize' => array('donors'=>'.5', 'candidates' => '.5', 'donations'=>'10'),
+			//'maxSize' => array('donors'=>'4', 'candidates' => '4', 'donations' =>'90'),
+			'minSize' => array('donors'=>'1', 'candidates' => '1', 'donations'=>'10'),
+			'maxSize' => array('donors'=>'5', 'candidates' => '5', 'donations' =>'90'),
 			'log_scaling' => 0,
 			'state'=>'AL',
 			'cycle'=>'2006',
@@ -38,17 +40,18 @@ class StateDEM extends Graph {
 		$this->data['graphvizProperties'] = array(
 			'graph'=> array(
 				'bgcolor'=>'#FFFFFF',
-#				'size' => '6.52,6.52!',
+				'size' => '6.52,6.52!',
 				'fontsize'=>2,
 				'splines'=>'curved',
 				'fontcolor'=>'blue',
 				'start'=>'15',
 				'layoutEngine'=>'neato',
-				'overlap'=>'vpsc',
+				'overlap'=>'false',
+				//'overlap'=>'vpsc', //It's complaining about this for some reason
 				//'sep'=>"+10"
 				//'maxiter' => '100000', //turning this off speeds things up, but does it mean that some might not converge?
 			),
-			'node'=> array('imagescale'=>'true','fixedsize'=>1, 'style'=> 'setlinewidth(4), filled', 'regular'=>'true','fontsize'=>2),
+			'node'=> array('imagescale'=>'true','fixedsize'=>1, 'style'=> 'setlinewidth(4), filled', 'regular'=>'true','fontsize'=>2, 'margin'=>0,0),
 			'edge'=>array('arrowhead'=>'none', 'color'=>'#99999966', 'len'=>4, 'minlen'=>4, 'style'=>'tapered', 'tailclip'=>'false')
 		);
 		srand(20); //Don't copy this - this just makes sure that we are generating the same 'random' values each time
