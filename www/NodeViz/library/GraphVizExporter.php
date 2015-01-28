@@ -72,7 +72,7 @@ for list of params and dfns. Used as default values but can be overridden in Gra
 			$graph->data['graphvizProperties']['graph']['size'] = $size;
 		}
 
-		$graph->data['graphvizProperties']['graph']['size'] = "1000,1000!";
+		$graph->data['graphvizProperties']['graph']['size'] = "10,10!";
 
 		//Merge any properties set in graphSetup into GV_PARAMS
 		if (isset($graph->data['graphvizProperties'])) {
@@ -382,7 +382,6 @@ for list of params and dfns. Used as default values but can be overridden in Gra
 		require_once('gv.php'); //load the graphviz php bindings
 		global $nodeViz_config;
 		$filename = $nodeViz_config['nodeViz_path'].$this->graphFileName; //Need to use absolute paths cuz we change to web dir
-
 		//use gv.php to process dot string, apply layout, and generate outputs
 		chdir($nodeViz_config['web_path']);
 		ob_start();
@@ -425,9 +424,9 @@ for list of params and dfns. Used as default values but can be overridden in Gra
 		$width = $this->graph->width;
 		$height = $this->graph->height;
 		$size = $width > $height ? $height : $width;
-		$ratio = $size / (1000*96);
-		$svg = preg_replace('/<svg width="(\d+)px" height="(\d+)px"/em', "'<svg width=\"'.($1*$ratio).'px\" height=\"'.($2*$ratio).'px\"'", $svg);
-		$svg = preg_replace("/transform=\"scale\(([\d\.]+) ([\d\.]+)\) /me", "'transform=\"scale('.($1* $ratio).' '.($2*$ratio).') '", $svg);
+		$ratio = $size / (10*96);
+		$svg = preg_replace_callback('/<svg width="(\d+)px" height="(\d+)px"/m', function($matches) use($ratio) { return '<svg width="'.($matches[1]*$ratio).'px" height="'.($matches[2]*$ratio).'px"';}, $svg);
+		$svg = preg_replace_callback("/transform=\"scale\(([\d\.]+) ([\d\.]+)\) /m", function($matches) use ($ratio) { return 'transform="scale('.($matches[1]* $ratio).' '.($matches[2]*$ratio).') ';}, $svg);
 
 		$svgout = fopen($this->renderFileName.".svg", 'w');
 		fwrite($svgout, $svg);
@@ -440,7 +439,7 @@ for list of params and dfns. Used as default values but can be overridden in Gra
 		$width = $this->graph->width;
 		$height = $this->graph->height;
 		$size = $width > $height ? $height : $width;
-		$ratio = $size / (1000*96);
+		$ratio = $size / (10*96);
 		$newimap = "";
 		foreach (explode("\n", $imap) as $line) {
 			if (preg_match("/coords=\"([\d, \.]+)\"/", $line, $coords)) {

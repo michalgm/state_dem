@@ -294,12 +294,13 @@ class Graph {
 						$normed = ($value - $min) / $diff; //normalize it to the range 0-1
 					}
 				}
+				$decimals = 2;
 				//print "$value $min $diff $normed $scale\n";
 				$area = $normed*$scale + $minSize;
 				//now calculate appropriate with from area depending on shape
 				if ($shape == 'edge') { 
 					//$size = $area;  //adjust to value we want
-					$array[$id]['penwidth'] = $area;
+					$array[$id]['penwidth'] = round($area, $decimals);
 				} else {
 					if ($shape == 'circle' || $shape == 'octagon' || $shape == 'polygon') { 
 						//$area = ($normed * $scale) + pow($minSize,2)*pi();  //adjust to value we want
@@ -316,8 +317,8 @@ class Graph {
 						//$area = ($normed * $scale) + pow($minSize,2);  //adjust to value we want
 						$size = sqrt(abs($area));
 					}
-					$array[$id]['scaled_area']	= $area;
-					$array[$id]['width'] = $size;
+					$array[$id]['scaled_area']	= round($area,$decimals);
+					$array[$id]['width'] = round($size,$decimals);
 				}
 			}
 		}

@@ -22,15 +22,15 @@ function niceName($name, $lastfirst = 0) {
 			}
 		} 
 		if (strlen($part) == 1) { $part .= "."; }
-		$part = preg_replace("/^([\"'\(]?)(.*)([\"'\)]?)$/e", '"$1".ucwords(strtolower("$2"))."$3"', $part); 
+		$part = preg_replace_callback("/^([\"'\(]?)(.*)([\"'\)]?)$/e", '"$1".ucwords(strtolower("$2"))."$3"', $part); 
 		$part = trim(str_replace("\'", "'", $part));
 		if ($part != '') { 
 			$newname[] = $part;
 		}
 	}
 	$lastname = ucwords(strtolower($lastname));
-	$lastname = preg_replace('/^mc(.)/ie', "'Mc'.strtoupper('$1')", $lastname);
-	$lastname = preg_replace('/^(.*)-(.*)$/ie', "ucwords(strtolower('$1')).'-'.ucwords(strtolower('$2'))", $lastname);
+	$lastname = preg_replace_callback('/^mc(.)/ie', "'Mc'.strtoupper('$1')", $lastname);
+	$lastname = preg_replace_callback('/^(.*)-(.*)$/ie', "ucwords(strtolower('$1')).'-'.ucwords(strtolower('$2'))", $lastname);
 	#if ($suff != '') { $lastname .= " $suff"; }
 	if($lastfirst) { 
 		return trim($lastname). ", ".join(' ', $newname). " ".trim($suff);
